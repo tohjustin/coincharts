@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import InfoBox from './components/InfoBox';
 
 const INITIAL_STATE = {
-  label: 'BITCOIN PRICE',
+  label: 'bitcoin price',
   value: '$2,719.91',
 };
 

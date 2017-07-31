@@ -1,0 +1,35 @@
+.infobox {
+  color: #4E5C6E;
+  font-family: "Avenir Next",  -apple-system,  BlinkMacSystemFont,  "Segoe UI",  "Roboto",  "Oxygen",  "Ubuntu",  "Cantarell",  "Fira Sans",  "Droid Sans",  "Helvetica Neue",  sans-serif;
+  font-size: 48px;
+  font-weight: normal;
+  line-height: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+.infobox .value {
+  text-align: center;
+}
+
+.large-font {
+  font-size: 48px;
+  font-weight: normal;
+  vertical-align: baseline;
+}
+
+.small-font {
+  font-size: 30px;
+  font-weight: 500;
+  top: -13px;
+  position: relative;
+}
+
+.infobox .label {
+  color: #7D95B6;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-align: center;
+  text-transform: uppercase;
+}
