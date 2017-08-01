@@ -3,8 +3,8 @@ import PropTypes from 'prop-types';
 
 import './index.css';
 
-const PERCENTAGE_FORMAT_REGEX = /^(\+?)()([\d+][.?][\d{0,2}]+)(%)$/;
-const PRICE_FORMAT_REGEX = /^(\+?)(\$?)([\d|,]+)(.*)$/;
+const PERCENTAGE_FORMAT_REGEX = /^(\+?)(-?)([\d+][.?][\d{0,2}]+)(%)$/;
+const PRICE_FORMAT_REGEX = /^(\+?)(-?\$?)([\d|,]+)(.*)$/;
 
 function formatValue(str) {
   const regex = PERCENTAGE_FORMAT_REGEX.test(str) ? PERCENTAGE_FORMAT_REGEX : PRICE_FORMAT_REGEX;
