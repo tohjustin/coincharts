@@ -8,7 +8,7 @@ const PRICE_FORMAT_REGEX = /^(\+?)(-?\$?)([\d|,]+)(.*)$/;
 
 function formatValue(str) {
   const regex = PERCENTAGE_FORMAT_REGEX.test(str) ? PERCENTAGE_FORMAT_REGEX : PRICE_FORMAT_REGEX;
-  const [, plusChar, dollarChar, mainValue, superscriptValue] = regex.exec(str);
+  const [, plusChar, dollarChar, mainValue, superscriptValue] = regex.exec(str) || [];
   return [plusChar, dollarChar, mainValue, superscriptValue];
 }
 
