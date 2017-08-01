@@ -8,7 +8,16 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.infobox .value {
+.label {
+  color: #7D95B6;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.value {
   text-align: center;
 }
 
@@ -18,18 +27,13 @@
   vertical-align: baseline;
 }
 
+.plus-char {
+  color: #61CA00;
+}
+
 .small-font {
   font-size: 30px;
   font-weight: 500;
   top: -13px;
   position: relative;
-}
-
-.infobox .label {
-  color: #7D95B6;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 2px;
-  text-align: center;
-  text-transform: uppercase;
 }
