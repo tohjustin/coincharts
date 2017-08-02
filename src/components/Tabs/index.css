@@ -1,0 +1,38 @@
+.tabs {
+  color: #4E5C6E;
+  font-family: "Avenir Next",  -apple-system,  BlinkMacSystemFont,  "Segoe UI",  "Roboto",  "Oxygen",  "Ubuntu",  "Cantarell",  "Fira Sans",  "Droid Sans",  "Helvetica Neue",  sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+
+  display: flex;
+  flex-direction: row; 
+  height: 54px;
+}
+
+.tabItem {
+  align-items: center;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  height: inherit;
+  margin: 0 10px;
+  transition: all 0.25s ease
+}
+
+.selected {
+  color: #0667d0;
+  position: relative;
+}
+
+.selected:after {
+  bottom: -1px;
+  border-bottom: 1px solid #0667D0;
+  content: '';
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  width: 100%;
+}
