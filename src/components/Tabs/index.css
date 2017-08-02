@@ -19,15 +19,33 @@
   flex-direction: row;
   height: inherit;
   margin: 0 10px;
+  position: relative;
   transition: all 0.25s ease
 }
 
-.selected {
-  color: #0667d0;
-  position: relative;
+.tabItem:hover {
+  color: #7D95B6;
 }
 
-.selected:after {
+.tabItem:hover:after {
+  border-bottom-color: #7D95B6;
+}
+
+.tabItem:after {
+  bottom: -1px;
+  border-bottom: 1px solid transparent;
+  content: '';
+  height: 1px;
+  left: 0px;
+  position: absolute;
+  width: 100%;
+}
+
+.tabItem.selected {
+  color: #0667d0;
+}
+
+.tabItem.selected:after {
   bottom: -1px;
   border-bottom: 1px solid #0667D0;
   content: '';
