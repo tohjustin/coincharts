@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 
-import InfoBox from './components/InfoBox';
-import Tabs from './components/Tabs';
+import InfoBox from './../../components/InfoBox';
+import Tabs from './../../components/Tabs';
 
-import './App.css';
+import './index.css';
 
 const INITIAL_STATE = {
   info: [
@@ -19,7 +19,7 @@ const INITIAL_STATE = {
   selectedCurrencyIndex: 0,
 };
 
-class App extends Component {
+class CoinbaseChart extends Component {
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
@@ -33,7 +33,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
+      <div className="coinbase-chart">
         <div>
           <Tabs
             options={this.state.currency}
@@ -53,4 +53,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default CoinbaseChart;
