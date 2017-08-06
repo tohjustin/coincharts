@@ -53,6 +53,16 @@ class CoinbaseChart extends Component {
     this.setState({ selectedDurationIndex: nextIndex });
   }
 
+  renderDurationTabs() {
+    return (
+      <Tabs
+        options={DURATION_LIST.map(e => e.codename)}
+        selectedIndex={this.state.selectedDurationIndex}
+        onChange={this.handleDurationChange}
+      />
+    );
+  }
+
   render() {
     return (
       <div className="coinbase-chart">
@@ -62,11 +72,7 @@ class CoinbaseChart extends Component {
             selectedIndex={this.state.selectedCryptocurrencyIndex}
             onChange={this.handleCryptocurrencyChange}
           />
-          <Tabs
-            options={DURATION_LIST.map(e => e.codename)}
-            selectedIndex={this.state.selectedDurationIndex}
-            onChange={this.handleDurationChange}
-          />
+          { this.renderDurationTabs() }
         </div>
         <div>
           {
