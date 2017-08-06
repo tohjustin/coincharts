@@ -6,10 +6,12 @@ import Tabs from './../../components/Tabs';
 
 import {
   fetchPriceData,
+  humanizeDuration,
 } from './utils';
 
 import './index.css';
 
+const CURRENCY = 'USD';
 const INITIAL_STATE = {
   currency: [
     'Bitcoin · $2,730.75',
@@ -28,11 +30,11 @@ class CoinbaseChart extends Component {
   componentWillMount() {
     fetchPriceData('btc', 'spot')
       .then((data) => {
-        const btcPrice = currencyFormatter.format(data.amount, { code: 'USD' });
+        const btcPrice = currencyFormatter.format(data.amount, { code: CURRENCY });
         const info = [
           { label: 'bitcoin price', value: btcPrice },
-          { label: 'SINCE AN HOUR AGO (USD)', value: '+$17.83' },
-          { label: 'SINCE AN HOUR AGO (%)', value: '+0.91%' },
+          { label: `${humanizeDuration('hour')} (${CURRENCY})`, value: '+$17.83' },
+          { label: `${humanizeDuration('hour')} (%)`, value: '+0.91%' },
         ];
         this.setState({ info });
       })

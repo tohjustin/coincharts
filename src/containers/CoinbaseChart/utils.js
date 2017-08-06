@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const PRICE_DATA_PATH = './priceData';
+import {
+  DURATION,
+  PRICE_DATA_PATH,
+} from './constants';
 
 function getPriceDataUrl(currency, type) {
   switch (currency) {
@@ -27,6 +30,24 @@ function fetchPriceData(currency, type) {
   });
 }
 
+function humanizeDuration(duration) {
+  switch (duration) {
+    case DURATION.HOUR:
+      return 'since an hour ago';
+    case DURATION.DAY:
+      return 'since yesterday';
+    case DURATION.WEEK:
+      return 'since last week';
+    case DURATION.MONTH:
+      return 'since last month';
+    case DURATION.YEAR:
+      return 'since last year';
+    default:
+      return '';
+  }
+}
+
 export {
   fetchPriceData,
+  humanizeDuration,
 };
