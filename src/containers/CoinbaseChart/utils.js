@@ -18,6 +18,12 @@ function fetchPriceData(cryptocurrency, currency, type) {
   });
 }
 
+function fetchSpotPrices(cryptocurrencyList, currency) {
+  const promises = cryptocurrencyList.map(e => fetchPriceData(e.key, currency, 'spot'));
+  return Promise.all(promises);
+}
+
 export {
   fetchPriceData,
+  fetchSpotPrices,
 };
