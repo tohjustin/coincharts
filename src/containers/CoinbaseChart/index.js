@@ -6,7 +6,7 @@ import InfoBox from './../../components/InfoBox';
 import Tabs from './../../components/Tabs';
 
 import { CRYPTOCURRENCY, DURATION } from './constants';
-import { fetchPriceData } from './utils';
+import { fetchPriceData, fetchSpotPrices } from './utils';
 
 import './index.css';
 
@@ -14,6 +14,8 @@ const ACTIVE_CURRENCY = 'USD';
 const CRYPTOCURRENCY_LIST = _.toArray(CRYPTOCURRENCY);
 const DURATION_LIST = _.toArray(DURATION);
 const INITIAL_STATE = {
+  cryptocurrencySpotPrices: [],
+  info: [],
   selectedCryptocurrencyIndex: 0,
   selectedDurationIndex: 0,
 };
@@ -24,7 +26,7 @@ class CoinbaseChart extends Component {
     this.state = INITIAL_STATE;
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const {
       selectedCryptocurrencyIndex,
       selectedDurationIndex,
@@ -43,6 +45,14 @@ class CoinbaseChart extends Component {
         this.setState({ info });
       })
       .catch((err) => { console.log(err); });
+
+    fetchSpotPrices(CRYPTOCURRENCY_LIST, ACTIVE_CURRENCY)
+      .then((spotPrices) => {
+        this.setState({ cryptocurrencySpotPrices: spotPrices });
+      })
+      .catch((err) => {
+        console.log('[CoinbaseChart.componentDidMount] Unable to fetchSpotPrices(): ', err);
+      });
   }
 
   handleCryptocurrencyChange = (nextIndex) => {
@@ -54,11 +64,22 @@ class CoinbaseChart extends Component {
   }
 
   renderCryptocurrencyTabs() {
+    const { cryptocurrencySpotPrices } = this.state;
+    const tabOptions = CRYPTOCURRENCY_LIST.map((e, index) => {
+      if (cryptocurrencySpotPrices[index]) {
+        const price = cryptocurrencySpotPrices[index].amount;
+        const formattedPrice = currencyFormatter.format(price, { code: ACTIVE_CURRENCY });
+        return `${e.name} · ${formattedPrice}`;
+      }
+
+      return `${e.name}`;
+    });
+
     return (
       <Tabs
-        options={CRYPTOCURRENCY_LIST.map(e => e.name)}
-        selectedIndex={this.state.selectedCryptocurrencyIndex}
         onChange={this.handleCryptocurrencyChange}
+        options={tabOptions}
+        selectedIndex={this.state.selectedCryptocurrencyIndex}
       />
     );
   }
@@ -66,9 +87,9 @@ class CoinbaseChart extends Component {
   renderDurationTabs() {
     return (
       <Tabs
+        onChange={this.handleDurationChange}
         options={DURATION_LIST.map(e => e.codename)}
         selectedIndex={this.state.selectedDurationIndex}
-        onChange={this.handleDurationChange}
       />
     );
   }
