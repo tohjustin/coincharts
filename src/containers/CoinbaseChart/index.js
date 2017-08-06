@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
+import currencyFormatter from 'currency-formatter';
 
 import InfoBox from './../../components/InfoBox';
 import Tabs from './../../components/Tabs';
 
+import {
+  fetchPriceData,
+} from './utils';
+
 import './index.css';
 
 const INITIAL_STATE = {
-  info: [
-    { label: 'bitcoin price', value: '$2,857.01' },
-    { label: 'SINCE AN HOUR AGO (USD)', value: '+$17.83' },
-    { label: 'SINCE AN HOUR AGO (%)', value: '+0.91%' },
-  ],
   currency: [
     'Bitcoin · $2,730.75',
     'Ethereum · $225.19',
@@ -23,6 +23,20 @@ class CoinbaseChart extends Component {
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
+  }
+
+  componentWillMount() {
+    fetchPriceData('btc', 'spot')
+      .then((data) => {
+        const btcPrice = currencyFormatter.format(data.amount, { code: 'USD' });
+        const info = [
+          { label: 'bitcoin price', value: btcPrice },
+          { label: 'SINCE AN HOUR AGO (USD)', value: '+$17.83' },
+          { label: 'SINCE AN HOUR AGO (%)', value: '+0.91%' },
+        ];
+        this.setState({ info });
+      })
+      .catch((err) => { console.log(err); });
   }
 
   handleOptionClick = (nextIndex) => {
@@ -43,7 +57,7 @@ class CoinbaseChart extends Component {
         </div>
         <div>
           {
-            this.state.info.map(e => (
+            this.state.info && this.state.info.map(e => (
               <InfoBox key={e.label} label={e.label} value={e.value} />
             ))
           }
