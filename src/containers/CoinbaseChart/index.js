@@ -73,6 +73,14 @@ class CoinbaseChart extends Component {
     );
   }
 
+  renderInfoBoxes() {
+    return (
+      this.state.info && this.state.info.map(e => (
+        <InfoBox key={e.label} label={e.label} value={e.value} />
+      ))
+    );
+  }
+
   render() {
     return (
       <div className="coinbase-chart">
@@ -81,11 +89,7 @@ class CoinbaseChart extends Component {
           { this.renderDurationTabs() }
         </div>
         <div>
-          {
-            this.state.info && this.state.info.map(e => (
-              <InfoBox key={e.label} label={e.label} value={e.value} />
-            ))
-          }
+          { this.renderInfoBoxes() }
         </div>
       </div>
     );
