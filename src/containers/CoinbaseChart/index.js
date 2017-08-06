@@ -15,6 +15,7 @@ const CRYPTOCURRENCY_LIST = _.toArray(CRYPTOCURRENCY);
 const DURATION_LIST = _.toArray(DURATION);
 const INITIAL_STATE = {
   cryptocurrencySpotPrices: [],
+  selectedCryptocurrencyPriceHistory: [],
   info: [],
   selectedCryptocurrencyIndex: 0,
   selectedDurationIndex: 0,
@@ -34,17 +35,13 @@ class CoinbaseChart extends Component {
     const activeCryptocurrency = CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex];
     const activeDuration = DURATION_LIST[selectedDurationIndex];
 
-    fetchPriceData(activeCryptocurrency.key, ACTIVE_CURRENCY, 'spot')
+    fetchPriceData(activeCryptocurrency.key, ACTIVE_CURRENCY, activeDuration.key)
       .then((data) => {
-        const price = currencyFormatter.format(data.amount, { code: ACTIVE_CURRENCY });
-        const info = [
-          { label: `${activeCryptocurrency.name} price`, value: price },
-          { label: `${activeDuration.humanize} (${ACTIVE_CURRENCY})`, value: '+$17.83' },
-          { label: `${activeDuration.humanize} (%)`, value: '+0.91%' },
-        ];
-        this.setState({ info });
+        this.setState({ selectedCryptocurrencyPriceHistory: data.prices });
       })
-      .catch((err) => { console.log(err); });
+      .catch((err) => {
+        console.log(err);
+      });
 
     fetchSpotPrices(CRYPTOCURRENCY_LIST, ACTIVE_CURRENCY)
       .then((spotPrices) => {
@@ -94,23 +91,12 @@ class CoinbaseChart extends Component {
     );
   }
 
-  renderInfoBoxes() {
-    return (
-      this.state.info && this.state.info.map(e => (
-        <InfoBox key={e.label} label={e.label} value={e.value} />
-      ))
-    );
-  }
-
   render() {
     return (
       <div className="coinbase-chart">
         <div>
           { this.renderCryptocurrencyTabs() }
           { this.renderDurationTabs() }
-        </div>
-        <div>
-          { this.renderInfoBoxes() }
         </div>
       </div>
     );
