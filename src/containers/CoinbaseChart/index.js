@@ -91,12 +91,51 @@ class CoinbaseChart extends Component {
     );
   }
 
+  renderInfoBoxes() {
+    const {
+      cryptocurrencySpotPrices,
+      selectedCryptocurrencyIndex,
+      selectedCryptocurrencyPriceHistory,
+      selectedDurationIndex,
+    } = this.state;
+
+    if (cryptocurrencySpotPrices.length === 0 ||
+        selectedCryptocurrencyPriceHistory.length === 0) {
+      return null;
+    }
+
+    const activeCryptocurrency = CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex];
+    const activeDuration = DURATION_LIST[selectedDurationIndex];
+    const currentPrice = cryptocurrencySpotPrices[selectedCryptocurrencyIndex].amount;
+    const previousPrice = _.last(selectedCryptocurrencyPriceHistory).price;
+    const priceDifference = currentPrice - previousPrice;
+    const pricePercentageDifference = _.round((currentPrice / previousPrice - 1) * 100, 2);
+
+    const formattedCurrentPrice = currencyFormatter.format(currentPrice, { code: ACTIVE_CURRENCY });
+    const formattedPriceDifference = currencyFormatter.format(priceDifference, { code: ACTIVE_CURRENCY });
+
+    const info = [
+      { label: `${activeCryptocurrency.name} price`, value: formattedCurrentPrice },
+      { label: `${activeDuration.humanize} (${ACTIVE_CURRENCY})`, value: formattedPriceDifference },
+      { label: `${activeDuration.humanize} (%)`, value: `${pricePercentageDifference}%` },
+    ];
+
+    return (
+      info && info.map(e => (
+        <InfoBox key={e.label} label={e.label} value={e.value} />
+      ))
+    );
+  }
+
   render() {
     return (
       <div className="coinbase-chart">
         <div>
           { this.renderCryptocurrencyTabs() }
           { this.renderDurationTabs() }
+        </div>
+        <div>
+          { this.renderInfoBoxes() }
         </div>
       </div>
     );
