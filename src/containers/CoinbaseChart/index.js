@@ -19,6 +19,15 @@ const INITIAL_STATE = {
     'Litecoin · $42.93',
   ],
   selectedCurrencyIndex: 0,
+  duration: [
+    '1D',
+    '1H',
+    '1M',
+    '1W',
+    '1Y',
+    'ALL',
+  ],
+  selectedDurationIndex: 0,
 };
 
 class CoinbaseChart extends Component {
@@ -41,10 +50,12 @@ class CoinbaseChart extends Component {
       .catch((err) => { console.log(err); });
   }
 
-  handleOptionClick = (nextIndex) => {
-    this.setState({
-      selectedCurrencyIndex: nextIndex,
-    });
+  handleCurrencyChange = (nextIndex) => {
+    this.setState({ selectedCurrencyIndex: nextIndex });
+  }
+
+  handleDurationChange = (nextIndex) => {
+    this.setState({ selectedDurationIndex: nextIndex });
   }
 
   render() {
@@ -54,7 +65,12 @@ class CoinbaseChart extends Component {
           <Tabs
             options={this.state.currency}
             selectedIndex={this.state.selectedCurrencyIndex}
-            handleOptionClick={this.handleOptionClick}
+            onChange={this.handleCurrencyChange}
+          />
+          <Tabs
+            options={this.state.duration}
+            selectedIndex={this.state.selectedDurationIndex}
+            onChange={this.handleDurationChange}
           />
         </div>
         <div>

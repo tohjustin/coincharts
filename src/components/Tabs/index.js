@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './index.css';
 
-const Tabs = ({ options, selectedIndex, handleOptionClick }) => (
+const Tabs = ({ options, selectedIndex, onChange }) => (
   <div className="tabs">
     {
       options.map((option, index) => {
@@ -12,7 +12,7 @@ const Tabs = ({ options, selectedIndex, handleOptionClick }) => (
           <div
             className={computedClass}
             key={option}
-            onClick={() => handleOptionClick(index)}
+            onClick={() => onChange(index)}
           >
             <div>{option}</div>
           </div>
@@ -25,7 +25,7 @@ const Tabs = ({ options, selectedIndex, handleOptionClick }) => (
 Tabs.propTypes = {
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectedIndex: PropTypes.number.isRequired,
-  handleOptionClick: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
 
 export default Tabs;
