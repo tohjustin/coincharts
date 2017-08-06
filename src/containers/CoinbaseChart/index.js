@@ -1,32 +1,20 @@
 import React, { Component } from 'react';
 import currencyFormatter from 'currency-formatter';
+import _ from 'lodash';
 
 import InfoBox from './../../components/InfoBox';
 import Tabs from './../../components/Tabs';
 
-import {
-  fetchPriceData,
-  humanizeDuration,
-} from './utils';
+import { CRYPTOCURRENCY, DURATION } from './constants';
+import { fetchPriceData } from './utils';
 
 import './index.css';
 
-const CURRENCY = 'USD';
+const ACTIVE_CURRENCY = 'USD';
+const CRYPTOCURRENCY_LIST = _.toArray(CRYPTOCURRENCY);
+const DURATION_LIST = _.toArray(DURATION);
 const INITIAL_STATE = {
-  currency: [
-    'Bitcoin · $2,730.75',
-    'Ethereum · $225.19',
-    'Litecoin · $42.93',
-  ],
-  selectedCurrencyIndex: 0,
-  duration: [
-    '1D',
-    '1H',
-    '1M',
-    '1W',
-    '1Y',
-    'ALL',
-  ],
+  selectedCryptocurrencyIndex: 0,
   selectedDurationIndex: 0,
 };
 
@@ -37,21 +25,28 @@ class CoinbaseChart extends Component {
   }
 
   componentWillMount() {
-    fetchPriceData('btc', 'spot')
+    const {
+      selectedCryptocurrencyIndex,
+      selectedDurationIndex,
+    } = this.state;
+    const activeCryptocurrency = CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex];
+    const activeDuration = DURATION_LIST[selectedDurationIndex];
+
+    fetchPriceData(activeCryptocurrency.key, ACTIVE_CURRENCY, 'spot')
       .then((data) => {
-        const btcPrice = currencyFormatter.format(data.amount, { code: CURRENCY });
+        const price = currencyFormatter.format(data.amount, { code: ACTIVE_CURRENCY });
         const info = [
-          { label: 'bitcoin price', value: btcPrice },
-          { label: `${humanizeDuration('hour')} (${CURRENCY})`, value: '+$17.83' },
-          { label: `${humanizeDuration('hour')} (%)`, value: '+0.91%' },
+          { label: `${activeCryptocurrency.name} price`, value: price },
+          { label: `${activeDuration.humanize} (${ACTIVE_CURRENCY})`, value: '+$17.83' },
+          { label: `${activeDuration.humanize} (%)`, value: '+0.91%' },
         ];
         this.setState({ info });
       })
       .catch((err) => { console.log(err); });
   }
 
-  handleCurrencyChange = (nextIndex) => {
-    this.setState({ selectedCurrencyIndex: nextIndex });
+  handleCryptocurrencyChange = (nextIndex) => {
+    this.setState({ selectedCryptocurrencyIndex: nextIndex });
   }
 
   handleDurationChange = (nextIndex) => {
@@ -63,12 +58,12 @@ class CoinbaseChart extends Component {
       <div className="coinbase-chart">
         <div>
           <Tabs
-            options={this.state.currency}
-            selectedIndex={this.state.selectedCurrencyIndex}
-            onChange={this.handleCurrencyChange}
+            options={CRYPTOCURRENCY_LIST.map(e => e.name)}
+            selectedIndex={this.state.selectedCryptocurrencyIndex}
+            onChange={this.handleCryptocurrencyChange}
           />
           <Tabs
-            options={this.state.duration}
+            options={DURATION_LIST.map(e => e.codename)}
             selectedIndex={this.state.selectedDurationIndex}
             onChange={this.handleDurationChange}
           />
