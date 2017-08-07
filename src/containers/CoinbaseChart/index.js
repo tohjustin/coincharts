@@ -20,7 +20,6 @@ const DURATION_LIST = _.toArray(DURATION);
 const INITIAL_STATE = {
   cryptocurrencySpotPrices: [],
   selectedCryptocurrencyPriceHistory: [],
-  info: [],
   selectedCryptocurrencyIndex: 0,
   selectedDurationIndex: 0,
 };
@@ -36,32 +35,38 @@ class CoinbaseChart extends Component {
       selectedCryptocurrencyIndex,
       selectedDurationIndex,
     } = this.state;
-    const activeCryptocurrency = CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex];
-    const activeDuration = DURATION_LIST[selectedDurationIndex];
+    this.fetchPriceMetrics(selectedCryptocurrencyIndex, selectedDurationIndex);
+  }
 
-    fetchPriceData(activeCryptocurrency.key, ACTIVE_CURRENCY, activeDuration.key)
-      .then((data) => {
-        this.setState({ selectedCryptocurrencyPriceHistory: data.prices });
+  fetchPriceMetrics(cryptocurrencyIndex, durationIndex) {
+    const activeCryptocurrency = CRYPTOCURRENCY_LIST[cryptocurrencyIndex];
+    const activeDuration = DURATION_LIST[durationIndex];
+
+    const promises = [
+      fetchPriceData(activeCryptocurrency.key, ACTIVE_CURRENCY, activeDuration.key),
+      fetchSpotPrices(CRYPTOCURRENCY_LIST, ACTIVE_CURRENCY),
+    ];
+
+    Promise.all(promises)
+      .then(([priceHistory, spotPrices]) => {
+        this.setState({
+          cryptocurrencySpotPrices: spotPrices,
+          selectedCryptocurrencyPriceHistory: priceHistory.prices,
+        });
       })
       .catch((err) => {
         console.log(err);
-      });
-
-    fetchSpotPrices(CRYPTOCURRENCY_LIST, ACTIVE_CURRENCY)
-      .then((spotPrices) => {
-        this.setState({ cryptocurrencySpotPrices: spotPrices });
-      })
-      .catch((err) => {
-        console.log('[CoinbaseChart.componentDidMount] Unable to fetchSpotPrices(): ', err);
       });
   }
 
   handleCryptocurrencyChange = (nextIndex) => {
     this.setState({ selectedCryptocurrencyIndex: nextIndex });
+    this.fetchPriceMetrics(nextIndex, this.state.selectedDurationIndex);
   }
 
   handleDurationChange = (nextIndex) => {
     this.setState({ selectedDurationIndex: nextIndex });
+    this.fetchPriceMetrics(this.state.selectedCryptocurrencyIndex, nextIndex);
   }
 
   renderCryptocurrencyTabs() {
