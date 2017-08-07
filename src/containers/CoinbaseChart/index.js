@@ -115,25 +115,35 @@ class CoinbaseChart extends Component {
 
     const activeCryptocurrency = CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex];
     const activeDuration = DURATION_LIST[selectedDurationIndex];
+
     const currentPrice = cryptocurrencySpotPrices[selectedCryptocurrencyIndex].amount;
+    const formattedCurrentPrice = currencyFormatter.format(currentPrice, { code: ACTIVE_CURRENCY });
+
     const previousPrice = _.last(selectedCryptocurrencyPriceHistory).price;
     const priceDifference = currentPrice - previousPrice;
-    const percentageDifference = _.round((currentPrice / previousPrice - 1) * 100, 2);
-
-    const formattedCurrentPrice = currencyFormatter.format(currentPrice, { code: ACTIVE_CURRENCY });
     const formattedPriceDifference = appendPlusSignIfPositive(currencyFormatter.format(priceDifference, { code: ACTIVE_CURRENCY }), priceDifference);
+
+    const percentageDifference = _.round((currentPrice / previousPrice - 1) * 100, 2);
     const formattedPercentageDifference = appendPlusSignIfPositive(percentageDifference, priceDifference);
 
-    const info = [
+    const priceMetrics = [
       { label: `${activeCryptocurrency.name} price`, value: formattedCurrentPrice },
       { label: `${activeDuration.humanize} (${ACTIVE_CURRENCY})`, value: formattedPriceDifference },
       { label: `${activeDuration.humanize} (%)`, value: `${formattedPercentageDifference}%` },
     ];
 
+    // Display only the cryptocurrency's spot price (i.e. `priceMetrics[0]`)
+    // when duration 'ALL' is selected
     return (
-      info && info.map(e => (
-        <InfoBox key={e.label} label={e.label} value={e.value} />
-      ))
+      priceMetrics &&
+      priceMetrics
+        .filter((e, index) => (
+          (activeDuration !== DURATION.ALL) ||
+          (activeDuration === DURATION.ALL && index === 0)
+        ))
+        .map(e => (
+          <InfoBox key={e.label} label={e.label} value={e.value} />
+        ))
     );
   }
 
