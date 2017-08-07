@@ -6,7 +6,11 @@ import InfoBox from './../../components/InfoBox';
 import Tabs from './../../components/Tabs';
 
 import { CRYPTOCURRENCY, DURATION } from './constants';
-import { fetchPriceData, fetchSpotPrices } from './utils';
+import {
+  appendPlusSignIfPositive,
+  fetchPriceData,
+  fetchSpotPrices,
+} from './utils';
 
 import './index.css';
 
@@ -109,15 +113,16 @@ class CoinbaseChart extends Component {
     const currentPrice = cryptocurrencySpotPrices[selectedCryptocurrencyIndex].amount;
     const previousPrice = _.last(selectedCryptocurrencyPriceHistory).price;
     const priceDifference = currentPrice - previousPrice;
-    const pricePercentageDifference = _.round((currentPrice / previousPrice - 1) * 100, 2);
+    const percentageDifference = _.round((currentPrice / previousPrice - 1) * 100, 2);
 
     const formattedCurrentPrice = currencyFormatter.format(currentPrice, { code: ACTIVE_CURRENCY });
-    const formattedPriceDifference = currencyFormatter.format(priceDifference, { code: ACTIVE_CURRENCY });
+    const formattedPriceDifference = appendPlusSignIfPositive(currencyFormatter.format(priceDifference, { code: ACTIVE_CURRENCY }), priceDifference);
+    const formattedPercentageDifference = appendPlusSignIfPositive(percentageDifference, priceDifference);
 
     const info = [
       { label: `${activeCryptocurrency.name} price`, value: formattedCurrentPrice },
       { label: `${activeDuration.humanize} (${ACTIVE_CURRENCY})`, value: formattedPriceDifference },
-      { label: `${activeDuration.humanize} (%)`, value: `${pricePercentageDifference}%` },
+      { label: `${activeDuration.humanize} (%)`, value: `${formattedPercentageDifference}%` },
     ];
 
     return (
