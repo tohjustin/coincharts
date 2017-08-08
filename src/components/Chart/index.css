@@ -1,0 +1,11 @@
+svg {
+  width: 800px;
+  height: 400px;
+}
+
+.line {
+  stroke: #FFB119;
+  stroke-width: 1.7;
+  fill: none;
+  pointer-events: none;
+}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import currencyFormatter from 'currency-formatter';
 import _ from 'lodash';
 
+import Chart from './../../components/Chart';
 import InfoBox from './../../components/InfoBox';
 import Tabs from './../../components/Tabs';
 
@@ -147,6 +148,12 @@ class CoinbaseChart extends Component {
     );
   }
 
+  renderPriceHistoryChart() {
+    return (
+      <Chart data={this.state.selectedCryptocurrencyPriceHistory}/>
+    );
+  }
+
   render() {
     return (
       <div className="coinbase-chart">
@@ -156,6 +163,9 @@ class CoinbaseChart extends Component {
         </div>
         <div>
           { this.renderInfoBoxes() }
+        </div>
+        <div>
+          { this.renderPriceHistoryChart() }
         </div>
       </div>
     );
