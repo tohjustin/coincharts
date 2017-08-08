@@ -5,6 +5,9 @@
   "dependencies": {
     "axios": "^0.16.2",
     "currency-formatter": "^1.2.1",
+    "d3-array": "^1.2.0",
+    "d3-scale": "^1.0.6",
+    "d3-shape": "^1.2.0",
     "lodash": "^4.17.4",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
