@@ -1,11 +1,17 @@
 svg {
-  width: 800px;
-  height: 400px;
+  height: 221px;
+  width: 1060px;
+}
+
+.area {
+  fill: #FFEBC5;
+  pointer-events: none;
+  stroke: none;
 }
 
 .line {
-  stroke: #FFB119;
-  stroke-width: 1.7;
   fill: none;
   pointer-events: none;
+  stroke: #FFB119;
+  stroke-width: 2;
 }

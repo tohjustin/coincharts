@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import { extent } from 'd3-array';
-import { curveLinear, line as d3line } from 'd3-shape';
+import {
+  area as d3area,
+  line as d3line,
+} from 'd3-shape';
 
 import './index.css';
 
@@ -22,8 +25,8 @@ class Chart extends Component {
         price: +d.price,
         time: new Date(d.time),
       }));
-    const height = 200;
-    const width = 800;
+    const height = 221;
+    const width = 1060;
 
     const x = scaleTime()
       .range([0, width])
@@ -35,14 +38,20 @@ class Chart extends Component {
 
     const line = d3line()
       .x(d => x(d.time))
-      .y(d => y(d.price))
-      .curve(curveLinear);
+      .y(d => y(d.price));
+
+    const area = d3area()
+      .x(d => x(d.time))
+      .y0(height)
+      .y1(d => y(d.price));
 
     const priceHistoryLine = line(data);
+    const priceHistoryArea = area(data);
 
     return (
-      <svg>
+      <svg viewBox="0 0 1060 221" preserveAspectRatio="none">
         <g>
+          <path className="area" d={priceHistoryArea} />
           <path className="line" d={priceHistoryLine} />
         </g>
       </svg>
