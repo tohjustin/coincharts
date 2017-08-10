@@ -8,7 +8,7 @@ import Tabs from './../../components/Tabs';
 
 import { CRYPTOCURRENCY, DURATION } from './constants';
 import {
-  appendPlusSignIfPositive,
+  prependPlusSymbol,
   fetchPriceData,
   fetchSpotPrices,
   formatCurrency,
@@ -76,7 +76,7 @@ class CoinbaseChart extends Component {
     const tabOptions = CRYPTOCURRENCY_LIST.map((e, index) => {
       if (spotPrices[index]) {
         const price = spotPrices[index].amount;
-        const formattedPrice = formatCurrency(price, ACTIVE_CURRENCY);
+        const formattedPrice = formatCurrency(price, ACTIVE_CURRENCY, { prependPlusSymbol: false });
         return `${e.name} · ${formattedPrice}`;
       }
 
@@ -110,8 +110,7 @@ class CoinbaseChart extends Component {
       spotPrices,
     } = this.state;
 
-    if (spotPrices.length === 0 ||
-        priceHistory.length === 0) {
+    if (priceHistory.length === 0 || spotPrices.length === 0) {
       return null;
     }
 
@@ -119,14 +118,14 @@ class CoinbaseChart extends Component {
     const duration = DURATION_LIST[selectedDurationIndex];
 
     const currentPrice = spotPrices[selectedCryptocurrencyIndex].amount;
+    const oldPrice = _.last(priceHistory).price;
+    const percentageDifference = _.round(((currentPrice / oldPrice) - 1) * 100, 2);
+    const priceDifference = currentPrice - oldPrice;
+
     const formattedCurrentPrice = formatCurrency(currentPrice, ACTIVE_CURRENCY);
-
-    const previousPrice = _.last(priceHistory).price;
-    const priceDifference = currentPrice - previousPrice;
-    const formattedPriceDifference = appendPlusSignIfPositive(formatCurrency(priceDifference, ACTIVE_CURRENCY), priceDifference);
-
-    const percentageDifference = _.round((currentPrice / previousPrice - 1) * 100, 2);
-    const formattedPercentageDifference = appendPlusSignIfPositive(percentageDifference, priceDifference);
+    const formattedPercentageDifference = prependPlusSymbol(percentageDifference, priceDifference);
+    let formattedPriceDifference = formatCurrency(priceDifference, ACTIVE_CURRENCY);
+    formattedPriceDifference = prependPlusSymbol(formattedPriceDifference, priceDifference);
 
     const priceMetrics = [
       { label: `${cryptocurrency.name} price`, value: formattedCurrentPrice },
@@ -151,7 +150,7 @@ class CoinbaseChart extends Component {
 
   renderPriceHistoryChart() {
     return (
-      <Chart data={this.state.priceHistory}/>
+      <Chart data={this.state.priceHistory} />
     );
   }
 

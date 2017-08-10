@@ -24,11 +24,8 @@ function fetchSpotPrices(cryptocurrencyList, currency) {
   return Promise.all(promises);
 }
 
-
 /**
- * Wrapper method for the `currency-formatter` package used to enhance readability
- *   - Adds the appropriate symbol & separators to `rawCurrencyString` based on the input
- *     `currencyCode`
+ * Adds the appropriate symbol & separators to `rawCurrencyString` based on the input `currencyCode`
  * @param {string} rawCurrencyString
  * @param {string} currencyCode
  * @returns Formatted currency string
@@ -37,12 +34,18 @@ function formatCurrency(rawCurrencyString, currencyCode) {
   return currencyFormatter.format(rawCurrencyString, { code: currencyCode });
 }
 
-function appendPlusSignIfPositive(string, numericValue) {
-  return (numericValue > 0) ? `+${string}` : string;
+ /**
+ * Returns `rawString`, prepended with a `+` symbol if `numericValue` is a positive number
+ * @param {string} rawNumericString
+ * @param {number} numericValue
+ * @returns Formatted string
+ */
+function prependPlusSymbol(rawString, numericValue) {
+  return (numericValue > 0) ? `+${rawString}` : rawString;
 }
 
 export {
-  appendPlusSignIfPositive,
+  prependPlusSymbol,
   fetchPriceData,
   fetchSpotPrices,
   formatCurrency,
