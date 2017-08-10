@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import currencyFormatter from 'currency-formatter';
+
 import _ from 'lodash';
 
 import Chart from './../../components/Chart';
@@ -11,6 +11,7 @@ import {
   appendPlusSignIfPositive,
   fetchPriceData,
   fetchSpotPrices,
+  formatCurrency,
 } from './utils';
 
 import './index.css';
@@ -75,7 +76,7 @@ class CoinbaseChart extends Component {
     const tabOptions = CRYPTOCURRENCY_LIST.map((e, index) => {
       if (spotPrices[index]) {
         const price = spotPrices[index].amount;
-        const formattedPrice = currencyFormatter.format(price, { code: ACTIVE_CURRENCY });
+        const formattedPrice = formatCurrency(price, ACTIVE_CURRENCY);
         return `${e.name} · ${formattedPrice}`;
       }
 
@@ -118,11 +119,11 @@ class CoinbaseChart extends Component {
     const duration = DURATION_LIST[selectedDurationIndex];
 
     const currentPrice = spotPrices[selectedCryptocurrencyIndex].amount;
-    const formattedCurrentPrice = currencyFormatter.format(currentPrice, { code: ACTIVE_CURRENCY });
+    const formattedCurrentPrice = formatCurrency(currentPrice, ACTIVE_CURRENCY);
 
     const previousPrice = _.last(priceHistory).price;
     const priceDifference = currentPrice - previousPrice;
-    const formattedPriceDifference = appendPlusSignIfPositive(currencyFormatter.format(priceDifference, { code: ACTIVE_CURRENCY }), priceDifference);
+    const formattedPriceDifference = appendPlusSignIfPositive(formatCurrency(priceDifference, ACTIVE_CURRENCY), priceDifference);
 
     const percentageDifference = _.round((currentPrice / previousPrice - 1) * 100, 2);
     const formattedPercentageDifference = appendPlusSignIfPositive(percentageDifference, priceDifference);

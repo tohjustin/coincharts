@@ -1,4 +1,5 @@
 import axios from 'axios';
+import currencyFormatter from 'currency-formatter';
 
 import {
   PRICE_DATA_PATH,
@@ -23,6 +24,19 @@ function fetchSpotPrices(cryptocurrencyList, currency) {
   return Promise.all(promises);
 }
 
+
+/**
+ * Wrapper method for the `currency-formatter` package used to enhance readability
+ *   - Adds the appropriate symbol & separators to `rawCurrencyString` based on the input
+ *     `currencyCode`
+ * @param {string} rawCurrencyString
+ * @param {string} currencyCode
+ * @returns Formatted currency string
+ */
+function formatCurrency(rawCurrencyString, currencyCode) {
+  return currencyFormatter.format(rawCurrencyString, { code: currencyCode });
+}
+
 function appendPlusSignIfPositive(string, numericValue) {
   return (numericValue > 0) ? `+${string}` : string;
 }
@@ -31,4 +45,5 @@ export {
   appendPlusSignIfPositive,
   fetchPriceData,
   fetchSpotPrices,
+  formatCurrency,
 };
