@@ -19,10 +19,10 @@ const ACTIVE_CURRENCY = 'USD';
 const CRYPTOCURRENCY_LIST = _.toArray(CRYPTOCURRENCY);
 const DURATION_LIST = _.toArray(DURATION);
 const INITIAL_STATE = {
-  cryptocurrencySpotPrices: [],
-  selectedCryptocurrencyPriceHistory: [],
+  priceHistory: [],
   selectedCryptocurrencyIndex: 0,
   selectedDurationIndex: 0,
+  spotPrices: [],
 };
 
 class CoinbaseChart extends Component {
@@ -40,19 +40,19 @@ class CoinbaseChart extends Component {
   }
 
   fetchPriceMetrics(cryptocurrencyIndex, durationIndex) {
-    const activeCryptocurrency = CRYPTOCURRENCY_LIST[cryptocurrencyIndex];
-    const activeDuration = DURATION_LIST[durationIndex];
+    const cryptocurrency = CRYPTOCURRENCY_LIST[cryptocurrencyIndex];
+    const duration = DURATION_LIST[durationIndex];
 
     const promises = [
-      fetchPriceData(activeCryptocurrency.key, ACTIVE_CURRENCY, activeDuration.key),
+      fetchPriceData(cryptocurrency.key, ACTIVE_CURRENCY, duration.key),
       fetchSpotPrices(CRYPTOCURRENCY_LIST, ACTIVE_CURRENCY),
     ];
 
     Promise.all(promises)
       .then(([priceHistory, spotPrices]) => {
         this.setState({
-          cryptocurrencySpotPrices: spotPrices,
-          selectedCryptocurrencyPriceHistory: priceHistory.prices,
+          spotPrices,
+          priceHistory: priceHistory.prices,
         });
       })
       .catch((err) => {
@@ -71,10 +71,10 @@ class CoinbaseChart extends Component {
   }
 
   renderCryptocurrencyTabs() {
-    const { cryptocurrencySpotPrices } = this.state;
+    const { spotPrices } = this.state;
     const tabOptions = CRYPTOCURRENCY_LIST.map((e, index) => {
-      if (cryptocurrencySpotPrices[index]) {
-        const price = cryptocurrencySpotPrices[index].amount;
+      if (spotPrices[index]) {
+        const price = spotPrices[index].amount;
         const formattedPrice = currencyFormatter.format(price, { code: ACTIVE_CURRENCY });
         return `${e.name} · ${formattedPrice}`;
       }
@@ -103,24 +103,24 @@ class CoinbaseChart extends Component {
 
   renderInfoBoxes() {
     const {
-      cryptocurrencySpotPrices,
+      priceHistory,
       selectedCryptocurrencyIndex,
-      selectedCryptocurrencyPriceHistory,
       selectedDurationIndex,
+      spotPrices,
     } = this.state;
 
-    if (cryptocurrencySpotPrices.length === 0 ||
-        selectedCryptocurrencyPriceHistory.length === 0) {
+    if (spotPrices.length === 0 ||
+        priceHistory.length === 0) {
       return null;
     }
 
-    const activeCryptocurrency = CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex];
-    const activeDuration = DURATION_LIST[selectedDurationIndex];
+    const cryptocurrency = CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex];
+    const duration = DURATION_LIST[selectedDurationIndex];
 
-    const currentPrice = cryptocurrencySpotPrices[selectedCryptocurrencyIndex].amount;
+    const currentPrice = spotPrices[selectedCryptocurrencyIndex].amount;
     const formattedCurrentPrice = currencyFormatter.format(currentPrice, { code: ACTIVE_CURRENCY });
 
-    const previousPrice = _.last(selectedCryptocurrencyPriceHistory).price;
+    const previousPrice = _.last(priceHistory).price;
     const priceDifference = currentPrice - previousPrice;
     const formattedPriceDifference = appendPlusSignIfPositive(currencyFormatter.format(priceDifference, { code: ACTIVE_CURRENCY }), priceDifference);
 
@@ -128,9 +128,9 @@ class CoinbaseChart extends Component {
     const formattedPercentageDifference = appendPlusSignIfPositive(percentageDifference, priceDifference);
 
     const priceMetrics = [
-      { label: `${activeCryptocurrency.name} price`, value: formattedCurrentPrice },
-      { label: `${activeDuration.humanize} (${ACTIVE_CURRENCY})`, value: formattedPriceDifference },
-      { label: `${activeDuration.humanize} (%)`, value: `${formattedPercentageDifference}%` },
+      { label: `${cryptocurrency.name} price`, value: formattedCurrentPrice },
+      { label: `${duration.humanize} (${ACTIVE_CURRENCY})`, value: formattedPriceDifference },
+      { label: `${duration.humanize} (%)`, value: `${formattedPercentageDifference}%` },
     ];
 
     // Display only the cryptocurrency's spot price (i.e. `priceMetrics[0]`)
@@ -139,8 +139,8 @@ class CoinbaseChart extends Component {
       priceMetrics &&
       priceMetrics
         .filter((e, index) => (
-          (activeDuration !== DURATION.ALL) ||
-          (activeDuration === DURATION.ALL && index === 0)
+          (duration !== DURATION.ALL) ||
+          (duration === DURATION.ALL && index === 0)
         ))
         .map(e => (
           <InfoBox key={e.label} label={e.label} value={e.value} />
@@ -150,7 +150,7 @@ class CoinbaseChart extends Component {
 
   renderPriceHistoryChart() {
     return (
-      <Chart data={this.state.selectedCryptocurrencyPriceHistory}/>
+      <Chart data={this.state.priceHistory}/>
     );
   }
 
