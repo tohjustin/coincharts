@@ -20,7 +20,8 @@ const ACTIVE_CURRENCY = 'USD';
 const CRYPTOCURRENCY_LIST = _.toArray(CRYPTOCURRENCY);
 const DURATION_LIST = _.toArray(DURATION);
 const INITIAL_STATE = {
-  priceHistory: [],
+  activePriceHistory: [],
+  activeSpotPrice: 0,
   selectedCryptocurrencyIndex: 0,
   selectedDurationIndex: 0,
   spotPrices: [],
@@ -50,10 +51,11 @@ class CoinbaseChart extends Component {
     ];
 
     Promise.all(promises)
-      .then(([priceHistory, spotPrices]) => {
+      .then(([activePriceHistory, spotPrices]) => {
         this.setState({
+          activeSpotPrice: spotPrices[cryptocurrencyIndex],
+          activePriceHistory: activePriceHistory.prices,
           spotPrices,
-          priceHistory: priceHistory.prices,
         });
       })
       .catch((err) => {
@@ -104,21 +106,21 @@ class CoinbaseChart extends Component {
 
   renderInfoBoxes() {
     const {
-      priceHistory,
+      activePriceHistory,
+      activeSpotPrice,
       selectedCryptocurrencyIndex,
       selectedDurationIndex,
-      spotPrices,
     } = this.state;
 
-    if (priceHistory.length === 0 || spotPrices.length === 0) {
+    if (activePriceHistory.length === 0) {
       return null;
     }
 
     const cryptocurrency = CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex];
     const duration = DURATION_LIST[selectedDurationIndex];
 
-    const currentPrice = spotPrices[selectedCryptocurrencyIndex].amount;
-    const oldPrice = _.last(priceHistory).price;
+    const currentPrice = activeSpotPrice.amount;
+    const oldPrice = _.last(activePriceHistory).price;
     const percentageDifference = _.round(((currentPrice / oldPrice) - 1) * 100, 2);
     const priceDifference = currentPrice - oldPrice;
 
@@ -150,7 +152,7 @@ class CoinbaseChart extends Component {
 
   renderPriceHistoryChart() {
     return (
-      <Chart data={this.state.priceHistory} />
+      <Chart data={this.state.activePriceHistory} />
     );
   }
 
