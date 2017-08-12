@@ -110,6 +110,7 @@ class CoinbaseChart extends Component {
       activeSpotPrice,
       selectedCryptocurrencyIndex,
       selectedDurationIndex,
+      spotPrices,
     } = this.state;
 
     if (activePriceHistory.length === 0) {
@@ -119,24 +120,26 @@ class CoinbaseChart extends Component {
     const cryptocurrency = CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex];
     const duration = DURATION_LIST[selectedDurationIndex];
 
+    const spotPrice = spotPrices[selectedCryptocurrencyIndex].amount;
     const currentPrice = activeSpotPrice.amount;
     const oldPrice = _.last(activePriceHistory).price;
+
+    // Compute the price metric values
     const percentageDifference = _.round(((currentPrice / oldPrice) - 1) * 100, 2);
     const priceDifference = currentPrice - oldPrice;
 
-    const formattedCurrentPrice = formatCurrency(currentPrice, ACTIVE_CURRENCY);
+    const formattedSpotPrice = formatCurrency(spotPrice, ACTIVE_CURRENCY);
     const formattedPercentageDifference = prependPlusSymbol(percentageDifference, priceDifference);
     let formattedPriceDifference = formatCurrency(priceDifference, ACTIVE_CURRENCY);
     formattedPriceDifference = prependPlusSymbol(formattedPriceDifference, priceDifference);
 
     const priceMetrics = [
-      { label: `${cryptocurrency.name} price`, value: formattedCurrentPrice },
+      { label: `${cryptocurrency.name} price`, value: formattedSpotPrice },
       { label: `${duration.humanize} (${ACTIVE_CURRENCY})`, value: formattedPriceDifference },
       { label: `${duration.humanize} (%)`, value: `${formattedPercentageDifference}%` },
     ];
 
-    // Display only the cryptocurrency's spot price (i.e. `priceMetrics[0]`)
-    // when duration 'ALL' is selected
+    // Display only the cryptocurrency's spot price when duration 'ALL' is selected
     return (
       priceMetrics &&
       priceMetrics
