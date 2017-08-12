@@ -9,6 +9,8 @@ import {
 
 import './index.css';
 
+const CHART_HEIGHT = 221;
+const CHART_WIDTH = 1060;
 const INITIAL_STATE = {
   name: 'Chart Component',
 };
@@ -25,15 +27,13 @@ class Chart extends Component {
         price: +d.price,
         time: new Date(d.time),
       }));
-    const height = 221;
-    const width = 1060;
 
     const x = scaleTime()
-      .range([0, width])
+      .range([0, CHART_WIDTH])
       .domain(extent(data, d => d.time));
 
     const y = scaleLinear()
-      .range([height, 0])
+      .range([CHART_HEIGHT, 0])
       .domain(extent(data, d => d.price));
 
     const line = d3line()
@@ -42,7 +42,7 @@ class Chart extends Component {
 
     const area = d3area()
       .x(d => x(d.time))
-      .y0(height)
+      .y0(CHART_HEIGHT)
       .y1(d => y(d.price));
 
     const priceHistoryLine = line(data);
