@@ -12,13 +12,19 @@ import './index.css';
 const CHART_HEIGHT = 221;
 const CHART_WIDTH = 1060;
 const INITIAL_STATE = {
-  name: 'Chart Component',
+  hoverPositionX: undefined,
 };
 
 class Chart extends Component {
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
+  }
+
+  updateHoverPosition = (e) => {
+    const svgPosition = this.chartSvgComponent.getBoundingClientRect();
+    const hoverPositionX = e.clientX - svgPosition.left;
+    this.setState({ hoverPositionX });
   }
 
   render() {
@@ -49,7 +55,10 @@ class Chart extends Component {
     const priceHistoryArea = area(data);
 
     return (
-      <svg viewBox="0 0 1060 221" preserveAspectRatio="none">
+      <svg
+        ref={(svg) => { this.chartSvgComponent = svg; }}
+        onMouseMove={this.updateHoverPosition}
+        >
         <g>
           <path className="area" d={priceHistoryArea} />
           <path className="line" d={priceHistoryLine} />
