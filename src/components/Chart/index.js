@@ -27,6 +27,19 @@ class Chart extends Component {
     this.setState({ hoverPositionX });
   }
 
+  renderCursorLine() {
+    const { hoverPositionX } = this.state;
+    return (
+      <line
+        className="cursorLine"
+        x1={hoverPositionX}
+        x2={hoverPositionX}
+        y1={0}
+        y2={CHART_HEIGHT}
+      />
+    );
+  }
+
   render() {
     const data = this.props.data
       .map(d => ({
@@ -58,10 +71,11 @@ class Chart extends Component {
       <svg
         ref={(svg) => { this.chartSvgComponent = svg; }}
         onMouseMove={this.updateHoverPosition}
-        >
+      >
         <g>
           <path className="area" d={priceHistoryArea} />
           <path className="line" d={priceHistoryLine} />
+          {this.state.hoverPositionX && this.renderCursorLine()}
         </g>
       </svg>
     );

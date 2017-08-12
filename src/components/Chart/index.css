@@ -16,3 +16,8 @@ svg {
   stroke: #FFB119;
   stroke-width: 2;
 }
+
+.cursorLine {
+  stroke: #B8C5D8;
+  stroke-width: 1;
+}
