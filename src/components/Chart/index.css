@@ -1,7 +1,30 @@
-svg {
-  height: 221px;
-  width: 1060px;
+.chartContainer {
   cursor: crosshair;
+  height: 221px;
+  position: relative;
+  width: 1060px;
+}
+
+.hoverContainer {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: -12px;
+  width: 200px;
+}
+
+.hoverContent {
+  background: #7D95B6;
+  border-radius: 5px;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 1px 6px;
+}
+
+svg {
+  height: 100%;
+  width: 100%;
 }
 
 .area {
@@ -23,7 +46,7 @@ svg {
 }
 
 .activePoint{
+  fill: white;
   stroke: #7D95B6;
   stroke-width: 2;
-  fill: white;
 }

@@ -10,6 +10,7 @@ import {
 import './index.css';
 
 const ACTIVE_POINT_RADIUS = 4;
+const HOVER_CONTAINER_WIDTH = 200;
 const CHART_HEIGHT = 221;
 const CHART_WIDTH = 1060;
 const INITIAL_STATE = {
@@ -43,10 +44,23 @@ class Chart extends Component {
     this.setState({ hoverPositionX });
   }
 
+  renderPriceHoverContainer = () => {
+    const { data, hoverPositionX } = this.state;
+    const containerLeftPosition = hoverPositionX - (HOVER_CONTAINER_WIDTH / 2);
+    const index = data.length - Math.round((hoverPositionX / CHART_WIDTH) * data.length);
+    const dataPoint = data[index] || {};
+
+    return (
+      <div className="hoverContainer" style={{ left: containerLeftPosition }}>
+        <div className="hoverContent">{dataPoint.price}</div>
+      </div>
+    );
+  }
+
   renderActivePoint() {
     const { data, hoverPositionX } = this.state;
     const index = data.length - Math.round((hoverPositionX / CHART_WIDTH) * data.length);
-    const dataPoint = data[index];
+    const dataPoint = data[index] || {};
 
     const y = scaleLinear()
       .range([CHART_HEIGHT, 0])
@@ -108,15 +122,18 @@ class Chart extends Component {
 
   render() {
     return (
-      <svg
-        ref={(svg) => { this.chartSvgComponent = svg; }}
-        onMouseMove={this.updateHoverPosition}
-        onMouseLeave={this.removeHoverCursor}
-      >
-        {this.renderLineGraph()}
-        {this.state.hoverPositionX && this.renderCursorLine()}
-        {this.state.hoverPositionX && this.renderActivePoint()}
-      </svg>
+      <div className="chartContainer">
+        {this.state.hoverPositionX && this.renderPriceHoverContainer()}
+        <svg
+          ref={(svg) => { this.chartSvgComponent = svg; }}
+          onMouseMove={this.updateHoverPosition}
+          onMouseLeave={this.removeHoverCursor}
+        >
+          {this.renderLineGraph()}
+          {this.state.hoverPositionX && this.renderCursorLine()}
+          {this.state.hoverPositionX && this.renderActivePoint()}
+        </svg>
+      </div>
     );
   }
 }
