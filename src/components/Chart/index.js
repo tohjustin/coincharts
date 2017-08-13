@@ -14,7 +14,7 @@ const CHART_HEIGHT = 221;
 const CHART_WIDTH = 1060;
 const INITIAL_STATE = {
   data: [],
-  hoverPositionX: undefined,
+  hoverPositionX: null,
 };
 
 class Chart extends Component {
@@ -31,6 +31,10 @@ class Chart extends Component {
       }));
 
     this.setState({ data });
+  }
+
+  removeHoverCursor = () => {
+    this.setState({ hoverPositionX: null });
   }
 
   updateHoverPosition = (e) => {
@@ -107,6 +111,7 @@ class Chart extends Component {
       <svg
         ref={(svg) => { this.chartSvgComponent = svg; }}
         onMouseMove={this.updateHoverPosition}
+        onMouseLeave={this.removeHoverCursor}
       >
         {this.renderLineGraph()}
         {this.state.hoverPositionX && this.renderCursorLine()}
