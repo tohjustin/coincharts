@@ -44,15 +44,20 @@ class Chart extends Component {
     this.setState({ hoverPositionX });
   }
 
-  renderPriceHoverContainer = () => {
+  renderHoverContainers = () => {
     const { data, hoverPositionX } = this.state;
     const containerLeftPosition = hoverPositionX - (HOVER_CONTAINER_WIDTH / 2);
     const index = data.length - Math.round((hoverPositionX / CHART_WIDTH) * data.length);
     const dataPoint = data[index] || {};
 
     return (
-      <div className="hoverContainer" style={{ left: containerLeftPosition }}>
-        <div className="hoverContent">{dataPoint.price}</div>
+      <div>
+        <div className="hoverContainer price" style={{ left: containerLeftPosition }}>
+          <div className="hoverContent price">{dataPoint.price}</div>
+        </div>
+        <div className="hoverContainer time" style={{ left: containerLeftPosition }}>
+          <div className="hoverContent time">{dataPoint.time && dataPoint.time.toLocaleString()}</div>
+        </div>
       </div>
     );
   }
@@ -123,7 +128,7 @@ class Chart extends Component {
   render() {
     return (
       <div className="chartContainer">
-        {this.state.hoverPositionX && this.renderPriceHoverContainer()}
+        {this.state.hoverPositionX && this.renderHoverContainers()}
         <svg
           ref={(svg) => { this.chartSvgComponent = svg; }}
           onMouseMove={this.updateHoverPosition}

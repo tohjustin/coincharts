@@ -9,17 +9,33 @@
   display: flex;
   justify-content: center;
   position: absolute;
-  top: -12px;
   width: 200px;
 }
 
+.hoverContainer.price {
+  top: -12px;
+}
+
+.hoverContainer.time {
+  bottom: -12px;
+}
+
 .hoverContent {
-  background: #7D95B6;
   border-radius: 5px;
-  color: #FFFFFF;
   font-size: 14px;
   font-weight: 500;
   padding: 1px 6px;
+}
+
+.hoverContent.price {
+  background: #7D95B6;
+  color: #FFFFFF;
+}
+
+.hoverContent.time {
+  background: #FFFFFF;
+  border: 1px solid #7D95B6;
+  color: #7D95B6;
 }
 
 svg {
