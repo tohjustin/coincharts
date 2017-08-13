@@ -12,6 +12,7 @@ import './index.css';
 const CHART_HEIGHT = 221;
 const CHART_WIDTH = 1060;
 const INITIAL_STATE = {
+  data: [],
   hoverPositionX: undefined,
 };
 
@@ -19,6 +20,16 @@ class Chart extends Component {
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const data = nextProps.data
+      .map(d => ({
+        price: +d.price,
+        time: new Date(d.time),
+      }));
+
+    this.setState({ data });
   }
 
   updateHoverPosition = (e) => {
@@ -41,11 +52,7 @@ class Chart extends Component {
   }
 
   renderLineGraph() {
-    const data = this.props.data
-      .map(d => ({
-        price: +d.price,
-        time: new Date(d.time),
-      }));
+    const { data } = this.state;
 
     const x = scaleTime()
       .range([0, CHART_WIDTH])
