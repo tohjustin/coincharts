@@ -18,6 +18,12 @@ svg {
 }
 
 .cursorLine {
-  stroke: #B8C5D8;
+  stroke: #7D95B6;
   stroke-width: 1;
+}
+
+.activePoint{
+  stroke: #7D95B6;
+  stroke-width: 2;
+  fill: white;
 }

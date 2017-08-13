@@ -9,6 +9,7 @@ import {
 
 import './index.css';
 
+const ACTIVE_POINT_RADIUS = 4;
 const CHART_HEIGHT = 221;
 const CHART_WIDTH = 1060;
 const INITIAL_STATE = {
@@ -36,6 +37,25 @@ class Chart extends Component {
     const svgPosition = this.chartSvgComponent.getBoundingClientRect();
     const hoverPositionX = e.clientX - svgPosition.left;
     this.setState({ hoverPositionX });
+  }
+
+  renderActivePoint() {
+    const { data, hoverPositionX } = this.state;
+    const index = data.length - Math.round((hoverPositionX / CHART_WIDTH) * data.length);
+    const dataPoint = data[index];
+
+    const y = scaleLinear()
+      .range([CHART_HEIGHT, 0])
+      .domain(extent(data, d => d.price));
+
+    return (
+      <circle
+        className="activePoint"
+        r={ACTIVE_POINT_RADIUS}
+        cx={hoverPositionX}
+        cy={y(dataPoint.price)}
+      />
+    );
   }
 
   renderCursorLine() {
@@ -90,6 +110,7 @@ class Chart extends Component {
       >
         {this.renderLineGraph()}
         {this.state.hoverPositionX && this.renderCursorLine()}
+        {this.state.hoverPositionX && this.renderActivePoint()}
       </svg>
     );
   }
