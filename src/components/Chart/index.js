@@ -71,7 +71,7 @@ class Chart extends Component {
     const dataPoint = data[index] || {};
 
     const y = scaleLinear()
-      .range([CHART_HEIGHT, 0])
+      .range([CHART_HEIGHT - 20, 20])
       .domain(extent(data, d => d.price));
 
     return (
@@ -105,7 +105,7 @@ class Chart extends Component {
       .domain(extent(data, d => d.time));
 
     const y = scaleLinear()
-      .range([CHART_HEIGHT, 0])
+      .range([CHART_HEIGHT - 20, 20])
       .domain(extent(data, d => d.price));
 
     const line = d3line()
