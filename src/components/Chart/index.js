@@ -40,7 +40,7 @@ class Chart extends Component {
     );
   }
 
-  render() {
+  renderLineGraph() {
     const data = this.props.data
       .map(d => ({
         price: +d.price,
@@ -68,15 +68,21 @@ class Chart extends Component {
     const priceHistoryArea = area(data);
 
     return (
+      <g>
+        <path className="area" d={priceHistoryArea} />
+        <path className="line" d={priceHistoryLine} />
+      </g>
+    );
+  }
+
+  render() {
+    return (
       <svg
         ref={(svg) => { this.chartSvgComponent = svg; }}
         onMouseMove={this.updateHoverPosition}
       >
-        <g>
-          <path className="area" d={priceHistoryArea} />
-          <path className="line" d={priceHistoryLine} />
-          {this.state.hoverPositionX && this.renderCursorLine()}
-        </g>
+        {this.renderLineGraph()}
+        {this.state.hoverPositionX && this.renderCursorLine()}
       </svg>
     );
   }
