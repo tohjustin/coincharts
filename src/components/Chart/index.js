@@ -29,6 +29,7 @@ class Chart extends Component {
 
   componentWillReceiveProps(nextProps) {
     const data = nextProps.data
+      .sort((a, b) => new Date(a.time) - new Date(b.time))
       .map(d => ({
         price: +d.price,
         time: new Date(d.time),
@@ -50,7 +51,7 @@ class Chart extends Component {
   renderHoverContainers = () => {
     const { data, hoverPositionX } = this.state;
     const containerLeftPosition = hoverPositionX - (HOVER_CONTAINER_WIDTH / 2);
-    const index = data.length - Math.round((hoverPositionX / CHART_WIDTH) * data.length);
+    const index = Math.round((hoverPositionX / CHART_WIDTH) * (data.length - 1));
     const dataPoint = data[index] || {};
 
     return (
@@ -67,18 +68,22 @@ class Chart extends Component {
 
   renderActivePoint() {
     const { data, hoverPositionX } = this.state;
-    const index = data.length - Math.round((hoverPositionX / CHART_WIDTH) * data.length);
+    const index = Math.round((hoverPositionX / CHART_WIDTH) * (data.length - 1));
     const dataPoint = data[index] || {};
 
     const y = scaleLinear()
       .range([CHART_HEIGHT - 20, 20])
       .domain(extent(data, d => d.price));
 
+    const x = scaleTime()
+      .range([0, CHART_WIDTH])
+      .domain(extent(data, d => d.time));
+
     return (
       <circle
         className="activePoint"
         r={ACTIVE_POINT_RADIUS}
-        cx={hoverPositionX}
+        cx={x(dataPoint.time)}
         cy={y(dataPoint.price)}
       />
     );
