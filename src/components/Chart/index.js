@@ -16,9 +16,12 @@ const ACTIVE_POINT_RADIUS = 4;
 const HOVER_CONTAINER_WIDTH = 200;
 const CHART_HEIGHT = 221;
 const CHART_WIDTH = 1060;
+const IDENTITY_FUNCTION = arg => arg;
 const INITIAL_STATE = {
   data: [],
   hoverPositionX: null,
+  scaleTimeToPositionX: IDENTITY_FUNCTION,
+  scalePriceToPositionY: IDENTITY_FUNCTION,
 };
 
 class Chart extends Component {
@@ -35,7 +38,18 @@ class Chart extends Component {
         time: new Date(d.time),
       }));
 
-    this.setState({ data });
+    const scaleTimeToPositionX = scaleTime()
+      .range([0, CHART_WIDTH])
+      .domain(extent(data, d => d.time));
+    const scalePriceToPositionY = scaleLinear()
+      .range([CHART_HEIGHT - 20, 20])
+      .domain(extent(data, d => d.price));
+
+    this.setState({
+      data,
+      scaleTimeToPositionX,
+      scalePriceToPositionY,
+    });
   }
 
   removeHoverCursor = () => {
@@ -67,24 +81,16 @@ class Chart extends Component {
   }
 
   renderActivePoint() {
-    const { data, hoverPositionX } = this.state;
+    const { data, hoverPositionX, scaleTimeToPositionX, scalePriceToPositionY } = this.state;
     const index = Math.round((hoverPositionX / CHART_WIDTH) * (data.length - 1));
     const dataPoint = data[index] || {};
-
-    const y = scaleLinear()
-      .range([CHART_HEIGHT - 20, 20])
-      .domain(extent(data, d => d.price));
-
-    const x = scaleTime()
-      .range([0, CHART_WIDTH])
-      .domain(extent(data, d => d.time));
 
     return (
       <circle
         className="activePoint"
         r={ACTIVE_POINT_RADIUS}
-        cx={x(dataPoint.time)}
-        cy={y(dataPoint.price)}
+        cx={scaleTimeToPositionX(dataPoint.time)}
+        cy={scalePriceToPositionY(dataPoint.price)}
       />
     );
   }
@@ -103,24 +109,15 @@ class Chart extends Component {
   }
 
   renderLineGraph() {
-    const { data } = this.state;
-
-    const x = scaleTime()
-      .range([0, CHART_WIDTH])
-      .domain(extent(data, d => d.time));
-
-    const y = scaleLinear()
-      .range([CHART_HEIGHT - 20, 20])
-      .domain(extent(data, d => d.price));
+    const { data, scaleTimeToPositionX, scalePriceToPositionY } = this.state;
 
     const line = d3line()
-      .x(d => x(d.time))
-      .y(d => y(d.price));
-
+      .x(d => scaleTimeToPositionX(d.time))
+      .y(d => scalePriceToPositionY(d.price));
     const area = d3area()
-      .x(d => x(d.time))
+      .x(d => scaleTimeToPositionX(d.time))
       .y0(CHART_HEIGHT)
-      .y1(d => y(d.price));
+      .y1(d => scalePriceToPositionY(d.price));
 
     const priceHistoryLine = line(data);
     const priceHistoryArea = area(data);
