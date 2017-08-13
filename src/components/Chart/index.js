@@ -7,8 +7,11 @@ import {
   line as d3line,
 } from 'd3-shape';
 
+import { formatCurrency } from './../../containers/CoinbaseChart/utils';
+
 import './index.css';
 
+const ACTIVE_CURRENCY = 'USD';
 const ACTIVE_POINT_RADIUS = 4;
 const HOVER_CONTAINER_WIDTH = 200;
 const CHART_HEIGHT = 221;
@@ -53,7 +56,7 @@ class Chart extends Component {
     return (
       <div>
         <div className="hoverContainer price" style={{ left: containerLeftPosition }}>
-          <div className="hoverContent price">{dataPoint.price}</div>
+          <div className="hoverContent price">{dataPoint.price && formatCurrency(dataPoint.price, ACTIVE_CURRENCY)}</div>
         </div>
         <div className="hoverContainer time" style={{ left: containerLeftPosition }}>
           <div className="hoverContent time">{dataPoint.time && dataPoint.time.toLocaleString()}</div>
