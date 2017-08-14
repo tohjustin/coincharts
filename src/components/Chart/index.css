@@ -14,12 +14,6 @@
   flex-direction: column;
 }
 
-.chartAxisContainer {
-  color: #7D95B6;
-  padding: 7px;
-  z-index: 1;
-}
-
 .chartContainer {
   cursor: crosshair;
   height: 221px;

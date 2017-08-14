@@ -33,13 +33,7 @@ class Chart extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const data = nextProps.data
-      .sort((a, b) => new Date(a.time) - new Date(b.time))
-      .map(d => ({
-        price: +d.price,
-        time: new Date(d.time),
-      }));
-
+    const { data } = nextProps;
     const scaleTimeToPositionX = scaleTime()
       .range([0, CHART_WIDTH])
       .domain(extent(data, d => d.time));
@@ -102,15 +96,6 @@ class Chart extends Component {
     );
   }
 
-  renderChartAxis() {
-    return (
-      <div className="chartAxisContainer containerFlex">
-        <div className="chartAxis">$4,099</div>
-        <div className="chartAxis">$4,050</div>
-      </div>
-    );
-  }
-
   renderCursorLine() {
     const { hoverPositionX, showContainers } = this.state;
     const displayClass = classNames({ show: showContainers, hidden: !showContainers });
@@ -149,24 +134,20 @@ class Chart extends Component {
 
   render() {
     return (
-      <div className="chart">
-        {this.renderChartAxis()}
-        <div className="containerFlex">
-          <div className="chartContainer">
-            {this.renderHoverContainers()}
-            <svg
-              ref={(svg) => { this.chartSvgComponent = svg; }}
-              onMouseEnter={this.showHoverContainers}
-              onMouseLeave={this.hideHoverContainers}
-              onMouseMove={this.updateHoverPosition}
-            >
-              {this.renderLineGraph()}
-              {this.renderCursorLine()}
-              {this.renderActivePoint()}
-            </svg>
-          </div>
+      <div className="containerFlex">
+        <div className="chartContainer">
+          {this.renderHoverContainers()}
+          <svg
+            ref={(svg) => { this.chartSvgComponent = svg; }}
+            onMouseEnter={this.showHoverContainers}
+            onMouseLeave={this.hideHoverContainers}
+            onMouseMove={this.updateHoverPosition}
+          >
+            {this.renderLineGraph()}
+            {this.renderCursorLine()}
+            {this.renderActivePoint()}
+          </svg>
         </div>
-        {this.renderChartAxis()}
       </div>
     );
   }
