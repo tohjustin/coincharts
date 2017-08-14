@@ -1,8 +1,15 @@
 .containerFlex {
-  align-items: flex-start;
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+}
+
+.containerFlex.left {
+  align-items: flex-start;
+}
+
+.containerFlex.right {
+  align-items: flex-end;
 }
 
 .chartVerticalAxisContainer {

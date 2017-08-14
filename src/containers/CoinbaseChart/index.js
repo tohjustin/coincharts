@@ -168,9 +168,9 @@ class CoinbaseChart extends Component {
     return (
       <div>
         <div className="chart">
-          <VerticalChartAxis data={activePriceHistory} />
+          <VerticalChartAxis data={activePriceHistory} textAlign="left" />
           <Chart data={activePriceHistory} />
-          <VerticalChartAxis data={activePriceHistory} />
+          <VerticalChartAxis data={activePriceHistory} textAlign="right" />
         </div>
         <HorizontalChartAxis data={activePriceHistory} duration={durationType} />
       </div>
