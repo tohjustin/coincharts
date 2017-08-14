@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { scan } from 'd3-array';
-import _ from 'lodash';
 
 import Chart from './../../components/Chart';
 import HorizontalChartAxis from './../../components/HorizontalChartAxis';
@@ -19,13 +18,13 @@ import {
 import './index.css';
 
 const ACTIVE_CURRENCY = 'USD';
-const CRYPTOCURRENCY_LIST = _.toArray(CRYPTOCURRENCY);
-const DURATION_LIST = _.toArray(DURATION);
+const CRYPTOCURRENCY_LIST = Object.values(CRYPTOCURRENCY);
+const DURATION_LIST = Object.values(DURATION);
 const INITIAL_STATE = {
   activePriceHistory: [],
   activeSpotPrice: 0,
   selectedCryptocurrencyIndex: 0,
-  selectedDurationIndex: 0,
+  selectedDurationIndex: 2,
   spotPrices: [],
 };
 
@@ -135,7 +134,7 @@ class CoinbaseChart extends Component {
     const oldPrice = activePriceHistory[oldPriceIndex].price;
 
     // Compute the price metric values
-    const percentageDifference = _.round(((currentPrice / oldPrice) - 1) * 100, 2);
+    const percentageDifference = Number(((currentPrice / oldPrice) - 1) * 100).toFixed(2);
     const priceDifference = currentPrice - oldPrice;
 
     const formattedSpotPrice = formatCurrency(spotPrice, ACTIVE_CURRENCY);
