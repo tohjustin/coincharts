@@ -180,15 +180,17 @@ class CoinbaseChart extends Component {
   render() {
     return (
       <div className="coinbase-chart">
-        <div className="chart-tabs">
-          { this.renderCryptocurrencyTabs() }
-          { this.renderDurationTabs() }
-        </div>
-        <div className="chart-infoboxes">
-          { this.renderInfoBoxes() }
-        </div>
-        <div>
-          { this.renderPriceHistoryChart() }
+        <div className="coinbase-chart-content">
+          <div className="chart-tabs">
+            { this.renderCryptocurrencyTabs() }
+            { this.renderDurationTabs() }
+          </div>
+          <div className="chart-infoboxes">
+            { this.renderInfoBoxes() }
+          </div>
+          <div>
+            { this.renderPriceHistoryChart() }
+          </div>
         </div>
       </div>
     );
