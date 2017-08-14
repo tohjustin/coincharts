@@ -1,0 +1,12 @@
+.HorizontalChartAxis {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 10px 40px;
+}
+
+.HorizontalChartAxis .chartAxis {
+  font-size: 14px;
+  font-weight: 500;
+  color: #7D95B6;
+}
