@@ -102,6 +102,15 @@ class Chart extends Component {
     );
   }
 
+  renderChartAxis() {
+    return (
+      <div className="chartAxisContainer containerFlex">
+        <div className="chartAxis">$4,099</div>
+        <div className="chartAxis">$4,050</div>
+      </div>
+    );
+  }
+
   renderCursorLine() {
     const { hoverPositionX, showContainers } = this.state;
     const displayClass = classNames({ show: showContainers, hidden: !showContainers });
@@ -140,18 +149,24 @@ class Chart extends Component {
 
   render() {
     return (
-      <div className="chartContainer">
-        {this.renderHoverContainers()}
-        <svg
-          ref={(svg) => { this.chartSvgComponent = svg; }}
-          onMouseEnter={this.showHoverContainers}
-          onMouseLeave={this.hideHoverContainers}
-          onMouseMove={this.updateHoverPosition}
-        >
-          {this.renderLineGraph()}
-          {this.renderCursorLine()}
-          {this.renderActivePoint()}
-        </svg>
+      <div className="chart">
+        {this.renderChartAxis()}
+        <div className="containerFlex">
+          <div className="chartContainer">
+            {this.renderHoverContainers()}
+            <svg
+              ref={(svg) => { this.chartSvgComponent = svg; }}
+              onMouseEnter={this.showHoverContainers}
+              onMouseLeave={this.hideHoverContainers}
+              onMouseMove={this.updateHoverPosition}
+            >
+              {this.renderLineGraph()}
+              {this.renderCursorLine()}
+              {this.renderActivePoint()}
+            </svg>
+          </div>
+        </div>
+        {this.renderChartAxis()}
       </div>
     );
   }
