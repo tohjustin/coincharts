@@ -3,8 +3,10 @@ import React, { Component } from 'react';
 import _ from 'lodash';
 
 import Chart from './../../components/Chart';
+import HorizontalChartAxis from './../../components/HorizontalChartAxis';
 import InfoBox from './../../components/InfoBox';
 import Tabs from './../../components/Tabs';
+import VerticalChartAxis from './../../components/VerticalChartAxis';
 
 import { CRYPTOCURRENCY, DURATION } from './constants';
 import {
@@ -51,10 +53,17 @@ class CoinbaseChart extends Component {
     ];
 
     Promise.all(promises)
-      .then(([activePriceHistory, spotPrices]) => {
+      .then(([priceHistoryData, spotPrices]) => {
+        const activePriceHistory = priceHistoryData.prices
+          .sort((a, b) => new Date(a.time) - new Date(b.time))
+          .map(d => ({
+            price: +d.price,
+            time: new Date(d.time),
+          }));
+
         this.setState({
           activeSpotPrice: spotPrices[cryptocurrencyIndex],
-          activePriceHistory: activePriceHistory.prices,
+          activePriceHistory,
           spotPrices,
         });
       })
@@ -154,19 +163,28 @@ class CoinbaseChart extends Component {
   }
 
   renderPriceHistoryChart() {
+    const { activePriceHistory, selectedDurationIndex } = this.state;
+    const durationType = DURATION_LIST[selectedDurationIndex].key;
     return (
-      <Chart data={this.state.activePriceHistory} />
+      <div>
+        <div className="chart">
+          <VerticalChartAxis data={activePriceHistory} />
+          <Chart data={activePriceHistory} />
+          <VerticalChartAxis data={activePriceHistory} />
+        </div>
+        <HorizontalChartAxis data={activePriceHistory} duration={durationType} />
+      </div>
     );
   }
 
   render() {
     return (
       <div className="coinbase-chart">
-        <div>
+        <div className="chart-tabs">
           { this.renderCryptocurrencyTabs() }
           { this.renderDurationTabs() }
         </div>
-        <div>
+        <div className="chart-infoboxes">
           { this.renderInfoBoxes() }
         </div>
         <div>

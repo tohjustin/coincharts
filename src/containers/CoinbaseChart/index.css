@@ -5,10 +5,20 @@
   -webkit-font-smoothing: antialiased;
 }
 
-.coinbase-chart > div {
+.chart-tabs {
+  border-bottom: 1px solid #DAE1E9;
   display: flex;
   flex-direction: row;
-  justify-content: space-around;
+  flex-shrink: 0;
+  height: 54px;
+  justify-content: space-between;
+  padding: 0px 20px;
+}
+
+.chart-infoboxes {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
   width: 100%;
   margin: 20px 0px;
 }
