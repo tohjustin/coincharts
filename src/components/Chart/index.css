@@ -5,37 +5,39 @@
   width: 1060px;
 }
 
-.hoverContainer {
+.hoverPriceContainer {
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  top: -12px;
+  width: 200px;
+}
+
+.hoverPriceContainer .content {
+  background: #7D95B6;
+  border-radius: 5px;
+  color: #FFFFFF;
+  font-size: 14px;
+  font-weight: 500;
+  padding: 1px 6px;
+}
+
+.hoverTimeContainer {
+  bottom: -12px;
   display: flex;
   justify-content: center;
   position: absolute;
   width: 200px;
 }
 
-.hoverContainer.price {
-  top: -12px;
-}
-
-.hoverContainer.time {
-  bottom: -12px;
-}
-
-.hoverContent {
+.hoverTimeContainer .content {
+  background: #FFFFFF;
+  border: 1px solid #7D95B6;
   border-radius: 5px;
+  color: #7D95B6;
   font-size: 14px;
   font-weight: 500;
   padding: 1px 6px;
-}
-
-.hoverContent.price {
-  background: #7D95B6;
-  color: #FFFFFF;
-}
-
-.hoverContent.time {
-  background: #FFFFFF;
-  border: 1px solid #7D95B6;
-  color: #7D95B6;
 }
 
 svg {
@@ -65,4 +67,14 @@ svg {
   fill: white;
   stroke: #7D95B6;
   stroke-width: 2;
+}
+
+.show {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.hidden {
+  opacity: 0;
+  transition: opacity 300ms;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import classNames from 'classnames';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import { extent } from 'd3-array';
 import {
@@ -20,6 +21,7 @@ const IDENTITY_FUNCTION = arg => arg;
 const INITIAL_STATE = {
   data: [],
   hoverPositionX: null,
+  showContainers: false,
   scaleTimeToPositionX: IDENTITY_FUNCTION,
   scalePriceToPositionY: IDENTITY_FUNCTION,
 };
@@ -52,8 +54,11 @@ class Chart extends Component {
     });
   }
 
-  removeHoverCursor = () => {
-    this.setState({ hoverPositionX: null });
+  showHoverContainers = () => {
+    this.setState({ showContainers: true });
+  }
+  hideHoverContainers = () => {
+    this.setState({ showContainers: false });
   }
 
   updateHoverPosition = (e) => {
@@ -63,31 +68,33 @@ class Chart extends Component {
   }
 
   renderHoverContainers = () => {
-    const { data, hoverPositionX } = this.state;
+    const { data, hoverPositionX, showContainers } = this.state;
     const containerLeftPosition = hoverPositionX - (HOVER_CONTAINER_WIDTH / 2);
     const index = Math.round((hoverPositionX / CHART_WIDTH) * (data.length - 1));
     const dataPoint = data[index] || {};
+    const displayClass = classNames({ show: showContainers, hidden: !showContainers });
 
     return (
       <div>
-        <div className="hoverContainer price" style={{ left: containerLeftPosition }}>
-          <div className="hoverContent price">{dataPoint.price && formatCurrency(dataPoint.price, ACTIVE_CURRENCY)}</div>
+        <div className={`hoverPriceContainer ${displayClass}`} style={{ left: containerLeftPosition }}>
+          <div className="content">{dataPoint.price && formatCurrency(dataPoint.price, ACTIVE_CURRENCY)}</div>
         </div>
-        <div className="hoverContainer time" style={{ left: containerLeftPosition }}>
-          <div className="hoverContent time">{dataPoint.time && dataPoint.time.toLocaleString()}</div>
+        <div className={`hoverTimeContainer ${displayClass}`} style={{ left: containerLeftPosition }}>
+          <div className="content">{dataPoint.time && dataPoint.time.toLocaleString()}</div>
         </div>
       </div>
     );
   }
 
   renderActivePoint() {
-    const { data, hoverPositionX, scaleTimeToPositionX, scalePriceToPositionY } = this.state;
+    const { data, hoverPositionX, scaleTimeToPositionX, scalePriceToPositionY, showContainers } = this.state;
     const index = Math.round((hoverPositionX / CHART_WIDTH) * (data.length - 1));
     const dataPoint = data[index] || {};
+    const displayClass = classNames({ show: showContainers, hidden: !showContainers });
 
     return (
       <circle
-        className="activePoint"
+        className={`activePoint ${displayClass}`}
         r={ACTIVE_POINT_RADIUS}
         cx={scaleTimeToPositionX(dataPoint.time)}
         cy={scalePriceToPositionY(dataPoint.price)}
@@ -96,10 +103,11 @@ class Chart extends Component {
   }
 
   renderCursorLine() {
-    const { hoverPositionX } = this.state;
+    const { hoverPositionX, showContainers } = this.state;
+    const displayClass = classNames({ show: showContainers, hidden: !showContainers });
     return (
       <line
-        className="cursorLine"
+        className={`cursorLine ${displayClass}`}
         x1={hoverPositionX}
         x2={hoverPositionX}
         y1={0}
@@ -133,15 +141,16 @@ class Chart extends Component {
   render() {
     return (
       <div className="chartContainer">
-        {this.state.hoverPositionX && this.renderHoverContainers()}
+        {this.renderHoverContainers()}
         <svg
           ref={(svg) => { this.chartSvgComponent = svg; }}
+          onMouseEnter={this.showHoverContainers}
+          onMouseLeave={this.hideHoverContainers}
           onMouseMove={this.updateHoverPosition}
-          onMouseLeave={this.removeHoverCursor}
         >
           {this.renderLineGraph()}
-          {this.state.hoverPositionX && this.renderCursorLine()}
-          {this.state.hoverPositionX && this.renderActivePoint()}
+          {this.renderCursorLine()}
+          {this.renderActivePoint()}
         </svg>
       </div>
     );
