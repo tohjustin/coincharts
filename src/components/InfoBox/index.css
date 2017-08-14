@@ -2,6 +2,16 @@
   color: #4E5C6E;
   font-size: 48px;
   line-height: normal;
+  width: 250px;
+}
+
+.infobox:not(:last-child) {
+  border-right: 1px solid #DAE1E9;
+  padding-right: 48px;
+}
+
+.infobox:not(:first-child) {
+  margin-left: 48px;
 }
 
 .label {
