@@ -5,7 +5,7 @@ import './index.css';
 
 const BIG_MINUS_SIGN = '\u2212';
 const MINUS_SIGN = '-';
-const PERCENTAGE_FORMAT_REGEX = /^(\+?)(-?)([\d+][.?][\d{0,2}]+)(%)$/;
+const PERCENTAGE_FORMAT_REGEX = /^(\+?)(-?)([\d+.?\d{0,2}]+)(%)$/;
 const PRICE_FORMAT_REGEX = /^(\+?)(-?\$?)([\d|,]+)(.*)$/;
 
 const useBigMinusChar = (str = '') => str.replace(RegExp(MINUS_SIGN, 'g'), BIG_MINUS_SIGN);
