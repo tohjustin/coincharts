@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import { scan } from 'd3-array';
 import _ from 'lodash';
 
 import Chart from './../../components/Chart';
@@ -131,7 +131,8 @@ class CoinbaseChart extends Component {
 
     const spotPrice = spotPrices[selectedCryptocurrencyIndex].amount;
     const currentPrice = activeSpotPrice.amount;
-    const oldPrice = _.last(activePriceHistory).price;
+    const oldPriceIndex = scan(activePriceHistory, (a, b) => a.time - b.time);
+    const oldPrice = activePriceHistory[oldPriceIndex].price;
 
     // Compute the price metric values
     const percentageDifference = _.round(((currentPrice / oldPrice) - 1) * 100, 2);
