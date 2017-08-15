@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { scaleLinear, scaleTime } from 'd3-scale';
+import { select } from 'd3-selection';
 import { extent } from 'd3-array';
+import { transition } from 'd3-transition';
 import {
   area as d3area,
   line as d3line,
@@ -48,69 +50,8 @@ class Chart extends Component {
     });
   }
 
-  showHoverContainers = () => {
-    this.setState({ showContainers: true });
-  }
-  hideHoverContainers = () => {
-    this.setState({ showContainers: false });
-  }
-
-  updateHoverPosition = (e) => {
-    const svgPosition = this.chartSvgComponent.getBoundingClientRect();
-    const hoverPositionX = e.clientX - svgPosition.left;
-    this.setState({ hoverPositionX });
-  }
-
-  renderHoverContainers = () => {
-    const { data, hoverPositionX, showContainers } = this.state;
-    const containerLeftPosition = hoverPositionX - (HOVER_CONTAINER_WIDTH / 2);
-    const index = Math.round((hoverPositionX / CHART_WIDTH) * (data.length - 1));
-    const dataPoint = data[index] || {};
-    const displayClass = classNames({ show: showContainers, hidden: !showContainers });
-
-    return (
-      <div>
-        <div className={`hoverPriceContainer ${displayClass}`} style={{ left: containerLeftPosition }}>
-          <div className="content">{dataPoint.price && formatCurrency(dataPoint.price, ACTIVE_CURRENCY)}</div>
-        </div>
-        <div className={`hoverTimeContainer ${displayClass}`} style={{ left: containerLeftPosition }}>
-          <div className="content">{dataPoint.time && dataPoint.time.toLocaleString()}</div>
-        </div>
-      </div>
-    );
-  }
-
-  renderActivePoint() {
-    const { data, hoverPositionX, scaleTimeToPositionX, scalePriceToPositionY, showContainers } = this.state;
-    const index = Math.round((hoverPositionX / CHART_WIDTH) * (data.length - 1));
-    const dataPoint = data[index] || {};
-    const displayClass = classNames({ show: showContainers, hidden: !showContainers });
-
-    return (
-      <circle
-        className={`activePoint ${displayClass}`}
-        r={ACTIVE_POINT_RADIUS}
-        cx={scaleTimeToPositionX(dataPoint.time)}
-        cy={scalePriceToPositionY(dataPoint.price)}
-      />
-    );
-  }
-
-  renderCursorLine() {
-    const { hoverPositionX, showContainers } = this.state;
-    const displayClass = classNames({ show: showContainers, hidden: !showContainers });
-    return (
-      <line
-        className={`cursorLine ${displayClass}`}
-        x1={hoverPositionX}
-        x2={hoverPositionX}
-        y1={0}
-        y2={CHART_HEIGHT}
-      />
-    );
-  }
-
-  renderLineGraph() {
+  componentDidUpdate() {
+    console.log('componentDidUpdate!');
     const { data, scaleTimeToPositionX, scalePriceToPositionY } = this.state;
 
     const line = d3line()
@@ -121,31 +62,127 @@ class Chart extends Component {
       .y0(CHART_HEIGHT)
       .y1(d => scalePriceToPositionY(d.price));
 
-    const priceHistoryLine = line(data);
-    const priceHistoryArea = area(data);
+    const chartSvgNode = select(this.chartSvgComponent);
 
-    return (
-      <g>
-        <path className="area" d={priceHistoryArea} />
-        <path className="line" d={priceHistoryLine} />
-      </g>
-    );
+    const t = transition().duration(2000);
+
+    chartSvgNode
+        .append('path')
+        .attr('class', 'area')
+        .data([data])
+        .attr('d', area)
+        .style('fill-opacity', 0)
+      .transition(t)
+        .style('fill-opacity', 1);
+
+    chartSvgNode.append('path')
+        .attr('class', 'line')
+        .data([data])
+        .attr('d', line)
+        .style('opacity', 0)
+      .transition(t)
+        .style('opacity', 1);
   }
+
+  // showHoverContainers = () => {
+  //   this.setState({ showContainers: true });
+  // }
+  // hideHoverContainers = () => {
+  //   this.setState({ showContainers: false });
+  // }
+
+  // updateHoverPosition = (e) => {
+  //   const svgPosition = this.chartSvgComponent.getBoundingClientRect();
+  //   const hoverPositionX = e.clientX - svgPosition.left;
+  //   this.setState({ hoverPositionX });
+  // }
+
+  // renderHoverContainers = () => {
+  //   const { data, hoverPositionX, showContainers } = this.state;
+  //   const containerLeftPosition = hoverPositionX - (HOVER_CONTAINER_WIDTH / 2);
+  //   const index = Math.round((hoverPositionX / CHART_WIDTH) * (data.length - 1));
+  //   const dataPoint = data[index] || {};
+  //   const displayClass = classNames({ show: showContainers, hidden: !showContainers });
+
+  //   return (
+  //     <div>
+  //       <div className={`hoverPriceContainer ${displayClass}`} style={{ left: containerLeftPosition }}>
+  //         <div className="content">{dataPoint.price && formatCurrency(dataPoint.price, ACTIVE_CURRENCY)}</div>
+  //       </div>
+  //       <div className={`hoverTimeContainer ${displayClass}`} style={{ left: containerLeftPosition }}>
+  //         <div className="content">{dataPoint.time && dataPoint.time.toLocaleString()}</div>
+  //       </div>
+  //     </div>
+  //   );
+  // }
+
+  // renderActivePoint() {
+  //   const { data, hoverPositionX, scaleTimeToPositionX, scalePriceToPositionY, showContainers } = this.state;
+  //   const index = Math.round((hoverPositionX / CHART_WIDTH) * (data.length - 1));
+  //   const dataPoint = data[index] || {};
+  //   const displayClass = classNames({ show: showContainers, hidden: !showContainers });
+
+  //   return (
+  //     <circle
+  //       className={`activePoint ${displayClass}`}
+  //       r={ACTIVE_POINT_RADIUS}
+  //       cx={scaleTimeToPositionX(dataPoint.time)}
+  //       cy={scalePriceToPositionY(dataPoint.price)}
+  //     />
+  //   );
+  // }
+
+  // renderCursorLine() {
+  //   const { hoverPositionX, showContainers } = this.state;
+  //   const displayClass = classNames({ show: showContainers, hidden: !showContainers });
+  //   return (
+  //     <line
+  //       className={`cursorLine ${displayClass}`}
+  //       x1={hoverPositionX}
+  //       x2={hoverPositionX}
+  //       y1={0}
+  //       y2={CHART_HEIGHT}
+  //     />
+  //   );
+  // }
+
+  // renderLineGraph() {
+
+  //   const { data, scaleTimeToPositionX, scalePriceToPositionY } = this.state;
+
+  //   const line = d3line()
+  //     .x(d => scaleTimeToPositionX(d.time))
+  //     .y(d => scalePriceToPositionY(d.price));
+  //   const area = d3area()
+  //     .x(d => scaleTimeToPositionX(d.time))
+  //     .y0(CHART_HEIGHT)
+  //     .y1(d => scalePriceToPositionY(d.price));
+
+  //   const priceHistoryLine = line(data);
+  //   const priceHistoryArea = area(data);
+
+  //   return (
+  //     <g>
+  //       <path className="area" d={priceHistoryArea} />
+  //       <path className="line" d={priceHistoryLine} />
+  //     </g>
+  //   );
+  // }
 
   render() {
     return (
       <div className="containerFlex">
         <div className="chartContainer">
-          {this.renderHoverContainers()}
+          {/* {this.renderHoverContainers()} */}
           <svg
             ref={(svg) => { this.chartSvgComponent = svg; }}
-            onMouseEnter={this.showHoverContainers}
-            onMouseLeave={this.hideHoverContainers}
-            onMouseMove={this.updateHoverPosition}
+            /* onMouseEnter={this.showHoverContainers} */
+            /* onMouseLeave={this.hideHoverContainers} */
+            /* onMouseMove={this.updateHoverPosition} */
           >
-            {this.renderLineGraph()}
-            {this.renderCursorLine()}
-            {this.renderActivePoint()}
+            {/* {this.renderLineGraph()} */}
+            {/* {this.renderCursorLine()}
+            {this.renderActivePoint()} */}
           </svg>
         </div>
       </div>
