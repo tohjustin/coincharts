@@ -22,6 +22,7 @@ const CHART_WIDTH = 1060;
 const IDENTITY_FUNCTION = arg => arg;
 const INITIAL_STATE = {
   data: [],
+  oldData: [],
   hoverPositionX: null,
   showContainers: false,
   scaleTimeToPositionX: IDENTITY_FUNCTION,
@@ -35,6 +36,9 @@ class Chart extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
+    const {
+      data: oldData, // already transformed
+    } = this.state;
     const { data } = nextProps;
     const scaleTimeToPositionX = scaleTime()
       .range([0, CHART_WIDTH])
@@ -43,8 +47,16 @@ class Chart extends Component {
       .range([CHART_HEIGHT - 20, 20])
       .domain(extent(data, d => d.price));
 
+    const data2 = data.map(({ price, time }) => ({
+      price: scalePriceToPositionY(price),
+      time: scaleTimeToPositionX(time),
+    }));
+
+    console.log(data2.length);
+
     this.setState({
-      data,
+      data: data2,
+      oldData,
       scaleTimeToPositionX,
       scalePriceToPositionY,
     });
@@ -52,7 +64,7 @@ class Chart extends Component {
 
   componentDidUpdate() {
     console.log('componentDidUpdate!');
-    const { data, scaleTimeToPositionX, scalePriceToPositionY } = this.state;
+    const { data, oldData, scaleTimeToPositionX, scalePriceToPositionY } = this.state;
 
     const line = d3line()
       .x(d => scaleTimeToPositionX(d.time))
@@ -62,26 +74,40 @@ class Chart extends Component {
       .y0(CHART_HEIGHT)
       .y1(d => scalePriceToPositionY(d.price));
 
+    const area2 = d3area()
+      .x(d => d.time)
+      .y0(CHART_HEIGHT)
+      .y1(d => d.price);
+
+    const line2 = d3line()
+      .x(d => d.time)
+      .y(d => d.price);
+
     const chartSvgNode = select(this.chartSvgComponent);
 
-    const t = transition().duration(2000);
+    chartSvgNode
+      .selectAll('path')
+      .remove();
 
     chartSvgNode
-        .append('path')
+      .append('path')
         .attr('class', 'area')
-        .data([data])
-        .attr('d', area)
-        .style('fill-opacity', 0)
-      .transition(t)
-        .style('fill-opacity', 1);
+        .style('fill', '#FFEBC5')
+        .attr('d', area2(oldData))
+      .transition()
+        .duration(800)
+        .style('fill', '#F0F1F8')
+        .attr('d', area2(data));
 
-    chartSvgNode.append('path')
+    chartSvgNode
+      .append('path')
         .attr('class', 'line')
-        .data([data])
-        .attr('d', line)
-        .style('opacity', 0)
-      .transition(t)
-        .style('opacity', 1);
+        .style('stroke', '#FFB119')
+        .attr('d', line2(oldData))
+      .transition()
+        .duration(800)
+        .style('stroke', '#6F7CBA')
+        .attr('d', line2(data));
   }
 
   // showHoverContainers = () => {

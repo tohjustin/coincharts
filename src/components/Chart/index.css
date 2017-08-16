@@ -62,7 +62,7 @@ svg {
 }
 
 .area {
-  fill: #FFEBC5;
+  /* fill: #FFEBC5; */
   pointer-events: none;
   stroke: none;
 }
@@ -70,7 +70,7 @@ svg {
 .line {
   fill: none;
   pointer-events: none;
-  stroke: #FFB119;
+  /* stroke: #FFB119; */
   stroke-width: 2;
 }
 
