@@ -5,6 +5,7 @@ import { scaleLinear, scaleTime } from 'd3-scale';
 import { select } from 'd3-selection';
 import { extent } from 'd3-array';
 import { transition } from 'd3-transition';
+import { easeExp } from 'd3-ease';
 import {
   area as d3area,
   line as d3line,
@@ -96,8 +97,12 @@ class Chart extends Component {
         .attr('d', area2(oldData))
       .transition()
         .duration(800)
+        .ease(easeExp)
         .style('fill', '#F0F1F8')
-        .attr('d', area2(data));
+        .attr('d', area2(data))
+      .transition()
+        .duration(1)
+        .style('fill', '#FFEBC5');
 
     chartSvgNode
       .append('path')
@@ -106,8 +111,12 @@ class Chart extends Component {
         .attr('d', line2(oldData))
       .transition()
         .duration(800)
+        .ease(easeExp)
         .style('stroke', '#6F7CBA')
-        .attr('d', line2(data));
+        .attr('d', line2(data))
+      .transition()
+        .duration(1)
+        .style('stroke', '#FFB119');
   }
 
   // showHoverContainers = () => {
