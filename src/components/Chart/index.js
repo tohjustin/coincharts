@@ -5,7 +5,7 @@ import { scaleLinear, scaleTime } from 'd3-scale';
 import { select } from 'd3-selection';
 import { extent } from 'd3-array';
 import { transition } from 'd3-transition';
-import { easeExp } from 'd3-ease';
+import { easeCubicOut } from 'd3-ease';
 import {
   area as d3area,
   line as d3line,
@@ -64,16 +64,11 @@ class Chart extends Component {
   }
 
   componentDidUpdate() {
-    console.log('componentDidUpdate!');
-    const { data, oldData, scaleTimeToPositionX, scalePriceToPositionY } = this.state;
+    let { data, oldData } = this.state;
 
-    const line = d3line()
-      .x(d => scaleTimeToPositionX(d.time))
-      .y(d => scalePriceToPositionY(d.price));
-    const area = d3area()
-      .x(d => scaleTimeToPositionX(d.time))
-      .y0(CHART_HEIGHT)
-      .y1(d => scalePriceToPositionY(d.price));
+    if (oldData.length === 0) {
+      oldData = data.map(({ time }) => ({ price: CHART_HEIGHT, time }));
+    }
 
     const area2 = d3area()
       .x(d => d.time)
@@ -96,8 +91,8 @@ class Chart extends Component {
         .style('fill', '#FFEBC5')
         .attr('d', area2(oldData))
       .transition()
-        .duration(800)
-        .ease(easeExp)
+        .duration(500)
+        .ease(easeCubicOut)
         .style('fill', '#F0F1F8')
         .attr('d', area2(data))
       .transition()
@@ -110,8 +105,8 @@ class Chart extends Component {
         .style('stroke', '#FFB119')
         .attr('d', line2(oldData))
       .transition()
-        .duration(800)
-        .ease(easeExp)
+        .duration(500)
+        .ease(easeCubicOut)
         .style('stroke', '#6F7CBA')
         .attr('d', line2(data))
       .transition()
