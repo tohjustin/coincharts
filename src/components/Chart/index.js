@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import { extent } from 'd3-array';
+import { easeCubicOut } from 'd3-ease';
+import { interpolatePath } from 'd3-interpolate-path';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import { select } from 'd3-selection';
-import { extent } from 'd3-array';
-import { transition } from 'd3-transition';
-import { easeCubicOut } from 'd3-ease';
 import {
   area as d3area,
   line as d3line,
 } from 'd3-shape';
+import 'd3-transition';
 
 import { formatCurrency } from './../../containers/CoinbaseChart/utils';
 
@@ -53,8 +54,6 @@ class Chart extends Component {
       time: scaleTimeToPositionX(time),
     }));
 
-    console.log(data2.length);
-
     this.setState({
       data: data2,
       oldData,
@@ -94,10 +93,7 @@ class Chart extends Component {
         .duration(500)
         .ease(easeCubicOut)
         .style('fill', '#F0F1F8')
-        .attr('d', area2(data))
-      .transition()
-        .duration(1)
-        .style('fill', '#FFEBC5');
+        .attrTween('d', () => interpolatePath(area2(oldData), area2(data)));
 
     chartSvgNode
       .append('path')
@@ -108,10 +104,7 @@ class Chart extends Component {
         .duration(500)
         .ease(easeCubicOut)
         .style('stroke', '#6F7CBA')
-        .attr('d', line2(data))
-      .transition()
-        .duration(1)
-        .style('stroke', '#FFB119');
+        .attrTween('d', () => interpolatePath(line2(oldData), line2(data)));
   }
 
   // showHoverContainers = () => {
