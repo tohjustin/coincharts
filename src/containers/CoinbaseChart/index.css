@@ -36,9 +36,10 @@ body {
 }
 
 .chart-infoboxes {
+  box-sizing: border-box;
   display: flex;
   flex-direction: row;
+  height: 140px;
   justify-content: center;
-  width: 100%;
-  margin: 20px 0px;
+  padding: 20px;
 }
