@@ -1,8 +1,8 @@
 // Supported cryptocurrencies
 const CRYPTOCURRENCY = {
-  BTC: { key: 'btc', name: 'Bitcoin' },
-  ETH: { key: 'eth', name: 'Ethereum' },
-  LTC: { key: 'ltc', name: 'Litecoin' },
+  BTC: { key: 'btc', name: 'Bitcoin', fillColor: '#FFEBC5', strokeColor: '#FFB01E' },
+  ETH: { key: 'eth', name: 'Ethereum', fillColor: '#F0F1F8', strokeColor: '#6E7CB9' },
+  LTC: { key: 'ltc', name: 'Litecoin', fillColor: '#ECECEC', strokeColor: '#B5B5B5' },
 };
 
 // Supported Currencies
