@@ -163,13 +163,18 @@ class CoinbaseChart extends Component {
   }
 
   renderPriceHistoryChart() {
-    const { activePriceHistory, selectedDurationIndex } = this.state;
+    const { activePriceHistory, selectedCryptocurrencyIndex, selectedDurationIndex } = this.state;
+    const cryptocurrency = CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex];
     const durationType = DURATION_LIST[selectedDurationIndex].key;
     return (
       <div>
         <div className="chart">
           <VerticalChartAxis data={activePriceHistory} textAlign="left" />
-          <Chart data={activePriceHistory} />
+          <Chart
+            data={activePriceHistory}
+            fillColor={cryptocurrency && cryptocurrency.fillColor} 
+            strokeColor={cryptocurrency && cryptocurrency.strokeColor} 
+          />
           <VerticalChartAxis data={activePriceHistory} textAlign="right" />
         </div>
         <HorizontalChartAxis data={activePriceHistory} duration={durationType} />

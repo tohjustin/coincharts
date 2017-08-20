@@ -22,10 +22,14 @@ const HOVER_CONTAINER_WIDTH = 200;
 const CHART_HEIGHT = 221;
 const CHART_WIDTH = 1060;
 const IDENTITY_FUNCTION = arg => arg;
+const DEFAULT_FILL_COLOR = '#FFEBC5';
+const DEFAULT_STROKE_COLOR = '#FFB119';
 const INITIAL_STATE = {
   data: [],
   scaledData: [],
   previousScaledData: [],
+  previousFillColor: DEFAULT_FILL_COLOR,
+  previousStrokeColor: DEFAULT_STROKE_COLOR,
   hoverPositionX: null,
   showContainers: false,
   scaleTimeToPositionX: IDENTITY_FUNCTION,
@@ -40,6 +44,7 @@ class Chart extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { data: nextData } = nextProps;
+    const { fillColor, strokeColor } = this.props;
     let { scaledData: previousScaledData } = this.state;
     const scaleTimeToPositionX = scaleTime()
       .range([0, CHART_WIDTH])
@@ -62,13 +67,21 @@ class Chart extends Component {
       data: nextData,
       scaledData: nextScaledData,
       previousScaledData,
+      previousFillColor: fillColor,
+      previousStrokeColor: strokeColor,
       scaleTimeToPositionX,
       scalePriceToPositionY,
     });
   }
 
   componentDidUpdate() {
-    const { scaledData, previousScaledData } = this.state;
+    const {
+      scaledData,
+      previousScaledData,
+      previousFillColor,
+      previousStrokeColor,
+    } = this.state;
+    const { fillColor, strokeColor } = this.props;
 
     const area2 = d3area()
       .x(d => d.time)
@@ -88,23 +101,23 @@ class Chart extends Component {
     chartSvgNode
       .append('path')
         .attr('class', 'area')
-        .style('fill', '#FFEBC5')
+        .style('fill', previousFillColor)
         .attr('d', area2(previousScaledData))
       .transition()
         .duration(500)
         .ease(easeCubicOut)
-        .style('fill', '#F0F1F8')
+        .style('fill', fillColor)
         .attrTween('d', () => interpolatePath(area2(previousScaledData), area2(scaledData)));
 
     chartSvgNode
       .append('path')
         .attr('class', 'line')
-        .style('stroke', '#FFB119')
+        .style('stroke', previousStrokeColor)
         .attr('d', line2(previousScaledData))
       .transition()
         .duration(500)
         .ease(easeCubicOut)
-        .style('stroke', '#6F7CBA')
+        .style('stroke', strokeColor)
         .attrTween('d', () => interpolatePath(line2(previousScaledData), line2(scaledData)));
   }
 
@@ -204,6 +217,13 @@ class Chart extends Component {
 
 Chart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  fillColor: PropTypes.string,
+  strokeColor: PropTypes.string,
+};
+
+Chart.defaultProps = {
+  fillColor: DEFAULT_FILL_COLOR,
+  strokeColor: DEFAULT_STROKE_COLOR,
 };
 
 export default Chart;
