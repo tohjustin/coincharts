@@ -24,7 +24,8 @@ const CHART_WIDTH = 1060;
 const IDENTITY_FUNCTION = arg => arg;
 const INITIAL_STATE = {
   data: [],
-  oldData: [],
+  scaledData: [],
+  previousScaledData: [],
   hoverPositionX: null,
   showContainers: false,
   scaleTimeToPositionX: IDENTITY_FUNCTION,
@@ -39,7 +40,7 @@ class Chart extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { data: nextData } = nextProps;
-    const { data: oldData } = this.state;
+    let { scaledData: previousScaledData } = this.state;
     const scaleTimeToPositionX = scaleTime()
       .range([0, CHART_WIDTH])
       .domain(extent(nextData, d => d.time));
@@ -47,25 +48,27 @@ class Chart extends Component {
       .range([CHART_HEIGHT - 20, 20])
       .domain(extent(nextData, d => d.price));
 
-    const nextData2 = nextData.map(({ price, time }) => ({
+    const nextScaledData = nextData.map(({ price, time }) => ({
       price: scalePriceToPositionY(price),
       time: scaleTimeToPositionX(time),
     }));
 
-    const oldData2 = (oldData.length === 0) ?
-      nextData2.map(({ time }) => ({ price: CHART_HEIGHT, time })) :
-      oldData;
+    if (previousScaledData.length === 0) {
+      previousScaledData = nextScaledData
+        .map(({ time }) => ({ price: CHART_HEIGHT, time }));
+    }
 
     this.setState({
-      data: nextData2,
-      oldData: oldData2,
+      data: nextData,
+      scaledData: nextScaledData,
+      previousScaledData,
       scaleTimeToPositionX,
       scalePriceToPositionY,
     });
   }
 
   componentDidUpdate() {
-    const { data, oldData } = this.state;
+    const { scaledData, previousScaledData } = this.state;
 
     const area2 = d3area()
       .x(d => d.time)
@@ -86,29 +89,30 @@ class Chart extends Component {
       .append('path')
         .attr('class', 'area')
         .style('fill', '#FFEBC5')
-        .attr('d', area2(oldData))
+        .attr('d', area2(previousScaledData))
       .transition()
         .duration(500)
         .ease(easeCubicOut)
         .style('fill', '#F0F1F8')
-        .attrTween('d', () => interpolatePath(area2(oldData), area2(data)));
+        .attrTween('d', () => interpolatePath(area2(previousScaledData), area2(scaledData)));
 
     chartSvgNode
       .append('path')
         .attr('class', 'line')
         .style('stroke', '#FFB119')
-        .attr('d', line2(oldData))
+        .attr('d', line2(previousScaledData))
       .transition()
         .duration(500)
         .ease(easeCubicOut)
         .style('stroke', '#6F7CBA')
-        .attrTween('d', () => interpolatePath(line2(oldData), line2(data)));
+        .attrTween('d', () => interpolatePath(line2(previousScaledData), line2(scaledData)));
   }
 
   showHoverContainers = () => {
-    const { data } = this.state;
-    this.setState({ showContainers: true, oldData: data });
+    const { scaledData } = this.state;
+    this.setState({ showContainers: true, previousScaledData: scaledData });
   }
+
   hideHoverContainers = () => {
     this.setState({ showContainers: false });
   }
@@ -119,27 +123,15 @@ class Chart extends Component {
     this.setState({ hoverPositionX });
   }
 
-  renderHoverContainers = () => {
-    const { data, hoverPositionX, showContainers } = this.state;
-    const containerLeftPosition = hoverPositionX - (HOVER_CONTAINER_WIDTH / 2);
-    const index = Math.round((hoverPositionX / CHART_WIDTH) * (data.length - 1));
-    const dataPoint = data[index] || {};
-    const displayClass = classNames({ show: showContainers, hidden: !showContainers });
-
-    return (
-      <div>
-        <div className={`hoverPriceContainer ${displayClass}`} style={{ left: containerLeftPosition }}>
-          <div className="content">{dataPoint.price && formatCurrency(dataPoint.price, ACTIVE_CURRENCY)}</div>
-        </div>
-        <div className={`hoverTimeContainer ${displayClass}`} style={{ left: containerLeftPosition }}>
-          <div className="content">{dataPoint.time && dataPoint.time.toLocaleString()}</div>
-        </div>
-      </div>
-    );
-  }
-
   renderActivePoint() {
-    const { data, hoverPositionX, scaleTimeToPositionX, scalePriceToPositionY, showContainers } = this.state;
+    const {
+      data,
+      hoverPositionX,
+      scaleTimeToPositionX,
+      scalePriceToPositionY,
+      showContainers,
+    } = this.state;
+
     const index = Math.round((hoverPositionX / CHART_WIDTH) * (data.length - 1));
     const dataPoint = data[index] || {};
     const displayClass = classNames({ show: showContainers, hidden: !showContainers });
@@ -168,11 +160,30 @@ class Chart extends Component {
     );
   }
 
+  renderHoverContainers = () => {
+    const { data, hoverPositionX, showContainers } = this.state;
+    const containerLeftPosition = hoverPositionX - (HOVER_CONTAINER_WIDTH / 2);
+    const index = Math.round((hoverPositionX / CHART_WIDTH) * (data.length - 1));
+    const dataPoint = data[index] || {};
+    const displayClass = classNames({ show: showContainers, hidden: !showContainers });
+
+    return (
+      <div>
+        <div className={`hoverPriceContainer ${displayClass}`} style={{ left: containerLeftPosition }}>
+          <div className="content">{dataPoint.price && formatCurrency(dataPoint.price, ACTIVE_CURRENCY)}</div>
+        </div>
+        <div className={`hoverTimeContainer ${displayClass}`} style={{ left: containerLeftPosition }}>
+          <div className="content">{dataPoint.time && dataPoint.time.toLocaleString()}</div>
+        </div>
+      </div>
+    );
+  }
+
   render() {
     return (
       <div className="containerFlex">
         <div className="chartContainer">
-            {this.renderHoverContainers()}
+          {this.renderHoverContainers()}
           <svg
             ref={(node) => { this.chartSvgComponent = node; }}
             onMouseEnter={this.showHoverContainers}
