@@ -24,6 +24,9 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
+    "eslint": "eslint --color -- \"src/**/*.js\"",
+    "stylelint": "stylelint --color -- \"src/**/*.css\"",
+    "check": "npm run stylelint && npm run eslint",
     "updatePriceData": "scripts/updatePriceData.sh ./public/priceData"
   },
   "devDependencies": {
