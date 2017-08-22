@@ -3,16 +3,19 @@ import PropTypes from 'prop-types';
 
 import './index.css';
 
-const Tabs = ({ options, selectedIndex, onChange }) => (
-  <div className="tabs">
+const Tabs = ({ onChange, options, selectedIndex }) => (
+  <div className="tabs" role="tabpanel">
     {
       options.map((option, index) => {
-        const computedClass = (index === selectedIndex) ? 'tabItem selected' : 'tabItem';
+        const isSelectedClass = (index === selectedIndex) && 'selected';
         return (
           <div
-            className={computedClass}
+            aria-labelledby={option}
+            className={`tabItem ${isSelectedClass}`}
             key={option}
             onClick={() => onChange(index)}
+            role="tab"
+            tabIndex="-1"
           >
             <div>{option}</div>
           </div>
@@ -23,9 +26,9 @@ const Tabs = ({ options, selectedIndex, onChange }) => (
 );
 
 Tabs.propTypes = {
+  onChange: PropTypes.func.isRequired,
   options: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectedIndex: PropTypes.number.isRequired,
-  onChange: PropTypes.func.isRequired,
 };
 
 export default Tabs;

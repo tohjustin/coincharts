@@ -173,8 +173,8 @@ class CoinbaseChart extends Component {
           <VerticalChartAxis data={activePriceHistory} textAlign="left" />
           <Chart
             data={activePriceHistory}
-            fillColor={cryptocurrency && cryptocurrency.fillColor} 
-            strokeColor={cryptocurrency && cryptocurrency.strokeColor} 
+            fillColor={cryptocurrency && cryptocurrency.fillColor}
+            strokeColor={cryptocurrency && cryptocurrency.strokeColor}
           />
           <VerticalChartAxis data={activePriceHistory} textAlign="right" />
         </div>

@@ -19,6 +19,10 @@
   transition: all 0.25s ease;
 }
 
+.tabItem:focus {
+  outline: none;
+}
+
 .tabItem:hover {
   color: #4e5c6e;
 }
