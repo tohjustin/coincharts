@@ -1,6 +1,6 @@
 .chart {
-  border-bottom: 1px solid #DAE1E9;
-  border-top: 1px solid #DAE1E9;
+  border-bottom: 1px solid #dae1e9;
+  border-top: 1px solid #dae1e9;
   display: flex;
   flex-direction: row;
   margin: -1px 20px 0 20px;
@@ -30,9 +30,9 @@
 }
 
 .hoverPriceContainer .content {
-  background: #7D95B6;
+  background: #7d95b6;
   border-radius: 5px;
-  color: #FFFFFF;
+  color: #fff;
   font-size: 14px;
   font-weight: 500;
   padding: 1px 6px;
@@ -47,10 +47,10 @@
 }
 
 .hoverTimeContainer .content {
-  background: #FFFFFF;
-  border: 1px solid #7D95B6;
+  background: #fff;
+  border: 1px solid #7d95b6;
   border-radius: 5px;
-  color: #7D95B6;
+  color: #7d95b6;
   font-size: 14px;
   font-weight: 500;
   padding: 1px 6px;
@@ -62,7 +62,6 @@ svg {
 }
 
 .area {
-  /* fill: #FFEBC5; */
   pointer-events: none;
   stroke: none;
 }
@@ -70,18 +69,17 @@ svg {
 .line {
   fill: none;
   pointer-events: none;
-  /* stroke: #FFB119; */
   stroke-width: 2;
 }
 
 .cursorLine {
-  stroke: #7D95B6;
+  stroke: #7d95b6;
   stroke-width: 1;
 }
 
-.activePoint{
+.activePoint {
   fill: white;
-  stroke: #7D95B6;
+  stroke: #7d95b6;
   stroke-width: 2;
 }
 
