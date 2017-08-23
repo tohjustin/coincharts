@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CoinbaseChart from './containers/CoinbaseChart';
+import CoinbaseChart from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';

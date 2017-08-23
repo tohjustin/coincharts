@@ -3,7 +3,7 @@ import currencyFormatter from 'currency-formatter';
 
 import {
   PRICE_DATA_PATH,
-} from './constants';
+} from '../constants';
 
 function fetchPriceData(cryptocurrency, currency, durationType) {
   const jsonFileName = `${cryptocurrency}_${currency}_${durationType}.json`;

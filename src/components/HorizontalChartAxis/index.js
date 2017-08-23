@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { extent } from 'd3-array';
 import { timeFormat } from 'd3-time-format';
 
-import { DURATION } from './../../containers/CoinbaseChart/constants';
+import { DURATION } from '../../constants';
 import './index.css';
 
 const AXIS_TICK_COUNT = 7;

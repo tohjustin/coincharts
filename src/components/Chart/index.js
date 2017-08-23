@@ -12,7 +12,7 @@ import {
 } from 'd3-shape';
 import 'd3-transition';
 
-import { formatCurrency } from './../../containers/CoinbaseChart/utils';
+import { formatCurrency } from '../../utils';
 
 import './index.css';
 

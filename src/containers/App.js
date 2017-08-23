@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { scan } from 'd3-array';
 
-import Chart from './../../components/Chart';
-import HorizontalChartAxis from './../../components/HorizontalChartAxis';
-import InfoBox from './../../components/InfoBox';
-import Tabs from './../../components/Tabs';
-import VerticalChartAxis from './../../components/VerticalChartAxis';
+import Chart from '../components/Chart';
+import HorizontalChartAxis from '../components/HorizontalChartAxis';
+import InfoBox from '../components/InfoBox';
+import Tabs from '../components/Tabs';
+import VerticalChartAxis from '../components/VerticalChartAxis';
 
-import { CRYPTOCURRENCY, DURATION } from './constants';
+import { CRYPTOCURRENCY, DURATION } from '../constants';
 import {
   prependPlusSymbol,
   fetchPriceData,
   fetchSpotPrices,
   formatCurrency,
-} from './utils';
+} from '../utils';
 
-import './index.css';
+import './App.css';
 
 const ACTIVE_CURRENCY = 'USD';
 const CRYPTOCURRENCY_LIST = Object.values(CRYPTOCURRENCY);
