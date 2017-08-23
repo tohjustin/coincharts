@@ -17,7 +17,7 @@ import {
 
 import './App.css';
 
-const ACTIVE_CURRENCY = 'USD';
+const ACTIVE_CURRENCY = 'usd';
 const CRYPTOCURRENCY_LIST = Object.values(CRYPTOCURRENCY);
 const DURATION_LIST = Object.values(DURATION);
 const INITIAL_STATE = {

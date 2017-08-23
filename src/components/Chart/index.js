@@ -16,7 +16,7 @@ import { formatCurrency } from '../../utils';
 
 import './index.css';
 
-const ACTIVE_CURRENCY = 'USD';
+const ACTIVE_CURRENCY = 'usd';
 const ACTIVE_POINT_RADIUS = 4;
 const HOVER_CONTAINER_WIDTH = 200;
 const CHART_HEIGHT = 221;

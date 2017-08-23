@@ -7,8 +7,8 @@ const CRYPTOCURRENCY = {
 
 // Supported Currencies
 const CURRENCY = {
-  CAD: { key: 'CAD', name: 'Canadian Dollar' },
-  USD: { key: 'USD', name: 'US Dollar' },
+  cad: { key: 'cad', name: 'Canadian Dollar' },
+  usd: { key: 'usd', name: 'US Dollar' },
 };
 
 // Time duration constants
