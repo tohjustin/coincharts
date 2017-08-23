@@ -17,7 +17,8 @@
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
-    "react-scripts": "1.0.10"
+    "react-scripts": "1.0.10",
+    "serve": "^6.0.6"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -27,7 +28,9 @@
     "eslint": "eslint --color -- \"src/**/*.js\"",
     "stylelint": "stylelint --color -- \"src/**/*.css\"",
     "check": "npm run stylelint && npm run eslint",
-    "updatePriceData": "scripts/updatePriceData.sh ./public/priceData"
+    "updatePriceData": "scripts/updatePriceData.sh ./public/priceData",
+    "deploy": "npm run check && npm run build && cp now.json ./build && now ./build",
+    "now-start": "serve ./build"
   },
   "devDependencies": {
     "eslint": "3.19.0",
