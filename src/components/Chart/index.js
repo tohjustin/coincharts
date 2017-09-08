@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
+import isEqual from 'lodash.isequal';
 import { extent } from 'd3-array';
 import { easeCubicOut } from 'd3-ease';
 import { interpolatePath } from 'd3-interpolate-path';
@@ -74,16 +75,18 @@ class Chart extends Component {
     });
   }
 
-  // Don't update when component only receives new colors
-  shouldComponentUpdate(nextProps) {
-    const { color } = this.props;
-    const { color: nextColor } = nextProps;
+  // Only update when we receive new data or user hovers
+  shouldComponentUpdate(nextProps, nextState) {
+    const { data } = this.props;
+    const { hoverXPosition, showContainers } = this.state;
+    const { data: nextData } = nextProps;
+    const { hoverXPosition: nextHoverXPosition, showContainers: nextShowContainers } = nextState;
 
-    if (color.fill !== nextColor.fill || color.stroke !== nextColor.stroke) {
-      return false;
-    }
-
-    return true;
+    return (
+      !isEqual(hoverXPosition, nextHoverXPosition) ||
+      !isEqual(showContainers, nextShowContainers) ||
+      !isEqual(data, nextData)
+    );
   }
 
   componentDidUpdate() {
