@@ -18,3 +18,18 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }
+
+a {
+  text-decoration: none;
+}
+
+.footer {
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  margin-top: 1.5em;
+}
+
+.footer-logo {
+  height: 16px;
+}
