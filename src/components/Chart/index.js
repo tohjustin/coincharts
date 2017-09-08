@@ -74,6 +74,18 @@ class Chart extends Component {
     });
   }
 
+  // Don't update when component only receives new colors
+  shouldComponentUpdate(nextProps) {
+    const { fillColor, strokeColor } = this.props;
+    const { fillColor: nextFillColor, strokeColor: nextStrokeColor } = nextProps;
+
+    if (fillColor !== nextFillColor || strokeColor !== nextStrokeColor) {
+      return false;
+    }
+
+    return true;
+  }
+
   componentDidUpdate() {
     const {
       scaledData,
