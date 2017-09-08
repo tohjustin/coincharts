@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import isEqual from 'lodash.isequal';
 import { extent } from 'd3-array';
-import { easeCubicOut } from 'd3-ease';
 import { interpolatePath } from 'd3-interpolate-path';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import { select } from 'd3-selection';
@@ -16,6 +15,7 @@ import 'd3-transition';
 import { formatCurrency } from '../../utils';
 import {
   DEFAULT_COLOR,
+  DEFAULT_TRANSITION,
   IDENTITY_FUNCTION,
 } from './constants';
 
@@ -90,12 +90,8 @@ class Chart extends Component {
   }
 
   componentDidUpdate() {
-    const {
-      scaledData,
-      previousScaledData,
-      previousColor,
-    } = this.state;
-    const { color } = this.props;
+    const { previousColor, previousScaledData, scaledData } = this.state;
+    const { color, transition } = this.props;
 
     const area = d3area()
       .x(d => d.time)
@@ -118,8 +114,8 @@ class Chart extends Component {
         .style('fill', previousColor.fill)
         .attr('d', area(previousScaledData))
       .transition()
-        .duration(500)
-        .ease(easeCubicOut)
+        .duration(transition.duration)
+        .ease(transition.ease)
         .style('fill', color.fill)
         .attrTween('d', () => interpolatePath(area(previousScaledData), area(scaledData)));
 
@@ -129,8 +125,8 @@ class Chart extends Component {
         .style('stroke', previousColor.stoke)
         .attr('d', line(previousScaledData))
       .transition()
-        .duration(500)
-        .ease(easeCubicOut)
+        .duration(transition.duration)
+        .ease(transition.ease)
         .style('stroke', color.stroke)
         .attrTween('d', () => interpolatePath(line(previousScaledData), line(scaledData)));
   }
@@ -231,10 +227,15 @@ Chart.propTypes = {
     fill: PropTypes.string,
     stroke: PropTypes.string,
   }),
+  transition: PropTypes.shape({
+    duration: PropTypes.number,
+    ease: PropTypes.function,
+  }),
 };
 
 Chart.defaultProps = {
   color: DEFAULT_COLOR,
+  transition: DEFAULT_TRANSITION,
 };
 
 export default Chart;
