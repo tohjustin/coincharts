@@ -13,6 +13,10 @@ import {
 import 'd3-transition';
 
 import { formatCurrency } from '../../utils';
+import {
+  DEFAULT_COLOR,
+  IDENTITY_FUNCTION,
+} from './constants';
 
 import './index.css';
 
@@ -21,16 +25,12 @@ const ACTIVE_POINT_RADIUS = 4;
 const HOVER_CONTAINER_WIDTH = 200;
 const CHART_HEIGHT = 221;
 const CHART_WIDTH = 1060;
-const IDENTITY_FUNCTION = arg => arg;
-const DEFAULT_FILL_COLOR = '#FFEBC5';
-const DEFAULT_STROKE_COLOR = '#FFB119';
 const INITIAL_STATE = {
   data: [],
   hoveredDataPoint: {},
   hoverXPosition: null,
-  previousFillColor: DEFAULT_FILL_COLOR,
+  previousColor: DEFAULT_COLOR,
   previousScaledData: [],
-  previousStrokeColor: DEFAULT_STROKE_COLOR,
   scaledData: [],
   scalePriceToY: IDENTITY_FUNCTION,
   scaleTimeToX: IDENTITY_FUNCTION,
@@ -45,7 +45,7 @@ class Chart extends Component {
 
   componentWillReceiveProps(nextProps) {
     const { data: nextData } = nextProps;
-    const { fillColor, strokeColor } = this.props;
+    const { color } = this.props;
     let { scaledData: previousScaledData } = this.state;
     const scaleTimeToX = scaleTime()
       .range([0, CHART_WIDTH])
@@ -68,8 +68,7 @@ class Chart extends Component {
       data: nextData,
       scaledData: nextScaledData,
       previousScaledData,
-      previousFillColor: fillColor,
-      previousStrokeColor: strokeColor,
+      previousColor: color,
       scaleTimeToX,
       scalePriceToY,
     });
@@ -77,10 +76,10 @@ class Chart extends Component {
 
   // Don't update when component only receives new colors
   shouldComponentUpdate(nextProps) {
-    const { fillColor, strokeColor } = this.props;
-    const { fillColor: nextFillColor, strokeColor: nextStrokeColor } = nextProps;
+    const { color } = this.props;
+    const { color: nextColor } = nextProps;
 
-    if (fillColor !== nextFillColor || strokeColor !== nextStrokeColor) {
+    if (color.fill !== nextColor.fill || color.stroke !== nextColor.stroke) {
       return false;
     }
 
@@ -91,10 +90,9 @@ class Chart extends Component {
     const {
       scaledData,
       previousScaledData,
-      previousFillColor,
-      previousStrokeColor,
+      previousColor,
     } = this.state;
-    const { fillColor, strokeColor } = this.props;
+    const { color } = this.props;
 
     const area = d3area()
       .x(d => d.time)
@@ -114,23 +112,23 @@ class Chart extends Component {
     chart
       .append('path')
         .attr('class', 'area')
-        .style('fill', previousFillColor)
+        .style('fill', previousColor.fill)
         .attr('d', area(previousScaledData))
       .transition()
         .duration(500)
         .ease(easeCubicOut)
-        .style('fill', fillColor)
+        .style('fill', color.fill)
         .attrTween('d', () => interpolatePath(area(previousScaledData), area(scaledData)));
 
     chart
       .append('path')
         .attr('class', 'line')
-        .style('stroke', previousStrokeColor)
+        .style('stroke', previousColor.stoke)
         .attr('d', line(previousScaledData))
       .transition()
         .duration(500)
         .ease(easeCubicOut)
-        .style('stroke', strokeColor)
+        .style('stroke', color.stroke)
         .attrTween('d', () => interpolatePath(line(previousScaledData), line(scaledData)));
   }
 
@@ -226,13 +224,14 @@ class Chart extends Component {
 
 Chart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  fillColor: PropTypes.string,
-  strokeColor: PropTypes.string,
+  color: PropTypes.shape({
+    fill: PropTypes.string,
+    stroke: PropTypes.string,
+  }),
 };
 
 Chart.defaultProps = {
-  fillColor: DEFAULT_FILL_COLOR,
-  strokeColor: DEFAULT_STROKE_COLOR,
+  color: DEFAULT_COLOR,
 };
 
 export default Chart;
