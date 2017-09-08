@@ -1,64 +1,88 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import isEqual from 'lodash.isequal';
 import { extent } from 'd3-array';
 import { timeFormat } from 'd3-time-format';
 
-import { DURATION } from '../../constants';
+import {
+  DEFAULT_TICK_COUNT,
+  DURATION,
+  DURATION_LIST,
+} from './constants';
+
 import './index.css';
 
-const AXIS_TICK_COUNT = 7;
-const DURATION_LIST = Object.values(DURATION);
+class HorizontalChartAxis extends Component {
+  static formatTime(timestamp, duration) {
+    switch (duration) {
+      case DURATION.ALL:
+        return timeFormat('%b %Y')(timestamp); // 'Mmm YYYY'
+      case DURATION.YEAR:
+      case DURATION.MONTH:
+      case DURATION.WEEK:
+        return timeFormat('%b %_d')(timestamp); // 'Mmm D'
+      case DURATION.DAY:
+      case DURATION.HOUR:
+      default:
+        return timeFormat('%I:%M %p')(timestamp); // 'HH:MM PM/AM'
+    }
+  }
 
-function formatTime(timestamp, duration) {
-  switch (duration) {
-    case DURATION.ALL.key:
-      return timeFormat('%b %Y')(timestamp); // 'Mmm YYYY'
-    case DURATION.YEAR.key:
-    case DURATION.MONTH.key:
-    case DURATION.WEEK.key:
-      return timeFormat('%b %_d')(timestamp); // 'Mmm D'
-    case DURATION.DAY.key:
-    case DURATION.HOUR.key:
-    default:
-      return timeFormat('%I:%M %p')(timestamp); // 'HH:MM PM/AM'
+  static generateTimeAxisTicks(data, tickCount) {
+    if (data.length < 2) {
+      return [];
+    }
+
+    const [minTime, maxTime] = extent(data, d => d.time);
+    const rangeStep = (maxTime - minTime) / (tickCount - 1);
+    const generatedTicks = [];
+    for (let i = 0; i < tickCount; i += 1) {
+      const time = new Date(minTime).valueOf();
+      generatedTicks.push(time + (i * rangeStep));
+    }
+
+    return generatedTicks;
+  }
+
+  static renderTimeAxisTick(string, duration) {
+    return (
+      <div key={string} className="tick">
+        <span>{HorizontalChartAxis.formatTime(string, duration)}</span>
+      </div>
+    );
+  }
+
+  // Only update when we receive new data
+  shouldComponentUpdate(nextProps) {
+    const { data } = this.props;
+    const { data: nextData } = nextProps;
+
+    return !isEqual(data, nextData);
+  }
+
+  render() {
+    const { data, duration, tickCount } = this.props;
+    const axisTicks = HorizontalChartAxis.generateTimeAxisTicks(data, tickCount);
+
+    return (
+      <div className="HorizontalChartAxis">
+        {axisTicks && axisTicks.map(time => HorizontalChartAxis.renderTimeAxisTick(time, duration))}
+      </div>
+    );
   }
 }
-
-function generateTimeAxisTicks(data, tickCount) {
-  if (data.length < 2) {
-    return [];
-  }
-
-  const [minTime, maxTime] = extent(data, d => d.time);
-  const rangeStep = (maxTime - minTime) / (tickCount - 1);
-  const generatedTicks = [];
-  for (let i = 0; i < tickCount; i += 1) {
-    const time = new Date(minTime).valueOf();
-    generatedTicks.push(time + (i * rangeStep));
-  }
-
-  return generatedTicks;
-}
-
-const renderTimeAxisTick = (string, duration) => (
-  <div key={string} className="chartAxis">
-    <span>{formatTime(string, duration)}</span>
-  </div>
-);
-
-const HorizontalChartAxis = ({ data, duration }) => {
-  const axisTicks = generateTimeAxisTicks(data, AXIS_TICK_COUNT);
-
-  return (
-    <div className="HorizontalChartAxis">
-      {axisTicks && axisTicks.map(time => renderTimeAxisTick(time, duration)) }
-    </div>
-  );
-};
 
 HorizontalChartAxis.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
-  duration: PropTypes.oneOf([...DURATION_LIST.map(e => e.key)]).isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    price: PropTypes.number,
+    time: PropTypes.data,
+  })).isRequired,
+  duration: PropTypes.oneOf(DURATION_LIST).isRequired,
+  tickCount: PropTypes.number,
+};
+
+HorizontalChartAxis.defaultProps = {
+  tickCount: DEFAULT_TICK_COUNT,
 };
 
 export default HorizontalChartAxis;
