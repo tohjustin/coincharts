@@ -2,14 +2,13 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import isEqual from 'lodash.isequal';
+import { area as d3Area, line as d3Line } from 'd3-shape';
 import { extent } from 'd3-array';
 import { interpolatePath } from 'd3-interpolate-path';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import { select } from 'd3-selection';
-import { area as d3Area, line as d3Line } from 'd3-shape';
 import 'd3-transition';
 
-import { formatCurrency } from '../../utils';
 import {
   CURSOR_RADIUS_SIZE,
   HOVER_CONTAINER_WIDTH,
@@ -17,12 +16,11 @@ import {
   DEFAULT_TRANSITION,
   DEFAULT_FUNCTION,
 } from './constants';
-
+import { formatCurrency } from '../../utils';
 import './index.css';
 
 const ACTIVE_CURRENCY = 'usd';
-const CHART_HEIGHT = 221;
-const CHART_WIDTH = 1060;
+const CHART_PADDING_TOP = 20;
 const INITIAL_STATE = {
   data: [],
   hoveredDataPoint: {},
@@ -33,6 +31,10 @@ const INITIAL_STATE = {
   scalePriceToY: DEFAULT_FUNCTION,
   scaleTimeToX: DEFAULT_FUNCTION,
   showContainers: false,
+  dimensions: {
+    height: 0,
+    width: 0,
+  },
 };
 
 class Chart extends Component {
@@ -41,15 +43,22 @@ class Chart extends Component {
     this.state = INITIAL_STATE;
   }
 
+  componentDidMount() {
+    window.addEventListener('resize', this.updateDimensions);
+    this.updateDimensions();
+  }
+
   componentWillReceiveProps(nextProps) {
     const { data: nextData } = nextProps;
     const { color } = this.props;
-    let { scaledData: previousScaledData } = this.state;
+    const { dimensions, scaledData } = this.state;
+
     const scaleTimeToX = scaleTime()
-      .range([0, CHART_WIDTH])
+      .range([0, dimensions.width])
       .domain(extent(nextData, d => d.time));
+
     const scalePriceToY = scaleLinear()
-      .range([CHART_HEIGHT - 20, 20])
+      .range([dimensions.height, CHART_PADDING_TOP])
       .domain(extent(nextData, d => d.price));
 
     const nextScaledData = nextData.map(({ price, time }) => ({
@@ -57,10 +66,9 @@ class Chart extends Component {
       time: scaleTimeToX(time),
     }));
 
-    if (previousScaledData.length === 0) {
-      previousScaledData = nextScaledData
-        .map(({ time }) => ({ price: CHART_HEIGHT, time }));
-    }
+    const previousScaledData = (scaledData.length > 0) ?
+      scaledData :
+      nextScaledData.map(({ time }) => ({ price: dimensions.height, time }));
 
     this.setState({
       data: nextData,
@@ -75,11 +83,16 @@ class Chart extends Component {
   // Only update when we receive new data or when the component is being hovered over
   shouldComponentUpdate(nextProps, nextState) {
     const { data } = this.props;
-    const { hoverXPosition, showContainers } = this.state;
+    const { hoverXPosition, showContainers, dimensions } = this.state;
     const { data: nextData } = nextProps;
-    const { hoverXPosition: nextHoverXPosition, showContainers: nextShowContainers } = nextState;
+    const {
+      dimensions: nextDimensions,
+      hoverXPosition: nextHoverXPosition,
+      showContainers: nextShowContainers,
+    } = nextState;
 
     return (
+      !isEqual(dimensions, nextDimensions) ||
       !isEqual(hoverXPosition, nextHoverXPosition) ||
       !isEqual(showContainers, nextShowContainers) ||
       !isEqual(data, nextData)
@@ -87,13 +100,13 @@ class Chart extends Component {
   }
 
   componentDidUpdate() {
-    const { previousColor, previousScaledData, scaledData } = this.state;
+    const { previousColor, previousScaledData, scaledData, dimensions } = this.state;
     const { color, transition } = this.props;
     const chart = select(this.svgNode);
 
     const area = d3Area()
       .x(d => d.time)
-      .y0(CHART_HEIGHT)
+      .y0(dimensions.height)
       .y1(d => d.price);
     const line = d3Line()
       .x(d => d.time)
@@ -135,6 +148,19 @@ class Chart extends Component {
     this.setState({ previousScaledData: scaledData });
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.updateDimensions);
+  }
+
+  updateDimensions = () => {
+    const { height, width } = this.chartSvgComponent.getBoundingClientRect();
+    const dimensions = {
+      height: Math.round(height),
+      width: Math.round(width),
+    };
+    this.setState({ dimensions });
+  }
+
   showHoverElements = () => {
     this.setState({ showContainers: true });
   }
@@ -144,19 +170,25 @@ class Chart extends Component {
   }
 
   updateHoverPosition = (e) => {
-    const { data } = this.state;
+    const { data, dimensions } = this.state;
     const svgBoundary = this.chartSvgComponent.getBoundingClientRect();
     const hoverXPosition = e.clientX - svgBoundary.left;
 
     // Find closest data point to the x-coordinates of where the user's mouse is hovering
-    const index = Math.round((hoverXPosition / CHART_WIDTH) * (data.length - 1));
+    const index = Math.round((hoverXPosition / dimensions.width) * (data.length - 1));
     const hoveredDataPoint = data[index] || {};
 
     this.setState({ hoveredDataPoint, hoverXPosition });
   }
 
   renderCursor() {
-    const { hoveredDataPoint, scaleTimeToX, scalePriceToY, showContainers } = this.state;
+    const {
+      dimensions,
+      hoveredDataPoint,
+      scaleTimeToX,
+      scalePriceToY,
+      showContainers,
+    } = this.state;
     const xPosition = scaleTimeToX(hoveredDataPoint.time) || 0;
     const yPosition = scalePriceToY(hoveredDataPoint.price) || 0;
     const displayClass = classNames({ 'Chart-show': showContainers, 'Chart-hidden': !showContainers });
@@ -168,7 +200,7 @@ class Chart extends Component {
           x1={xPosition}
           x2={xPosition}
           y1={0}
-          y2={CHART_HEIGHT}
+          y2={dimensions.height}
         />
         <circle
           className="Chart-activePoint"
@@ -180,7 +212,7 @@ class Chart extends Component {
     );
   }
 
-  renderHoverElements = () => {
+  renderHoverElements() {
     const { hoveredDataPoint, hoverXPosition, showContainers } = this.state;
     const containerLeftPosition = hoverXPosition - (HOVER_CONTAINER_WIDTH / 2);
     const displayClass = classNames({ 'Chart-show': showContainers, 'Chart-hidden': !showContainers });
