@@ -11,16 +11,16 @@ import 'd3-transition';
 
 import { formatCurrency } from '../../utils';
 import {
+  CURSOR_RADIUS_SIZE,
+  HOVER_CONTAINER_WIDTH,
   DEFAULT_COLOR,
   DEFAULT_TRANSITION,
-  IDENTITY_FUNCTION,
+  DEFAULT_FUNCTION,
 } from './constants';
 
 import './index.css';
 
 const ACTIVE_CURRENCY = 'usd';
-const ACTIVE_POINT_RADIUS = 4;
-const HOVER_CONTAINER_WIDTH = 200;
 const CHART_HEIGHT = 221;
 const CHART_WIDTH = 1060;
 const INITIAL_STATE = {
@@ -30,8 +30,8 @@ const INITIAL_STATE = {
   previousColor: DEFAULT_COLOR,
   previousScaledData: [],
   scaledData: [],
-  scalePriceToY: IDENTITY_FUNCTION,
-  scaleTimeToX: IDENTITY_FUNCTION,
+  scalePriceToY: DEFAULT_FUNCTION,
+  scaleTimeToX: DEFAULT_FUNCTION,
   showContainers: false,
 };
 
@@ -172,7 +172,7 @@ class Chart extends Component {
         />
         <circle
           className="Chart-activePoint"
-          r={ACTIVE_POINT_RADIUS}
+          r={CURSOR_RADIUS_SIZE}
           cx={xPosition}
           cy={yPosition}
         />
@@ -216,7 +216,10 @@ class Chart extends Component {
 }
 
 Chart.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    price: PropTypes.number,
+    time: PropTypes.data,
+  })).isRequired,
   color: PropTypes.shape({
     fill: PropTypes.string,
     stroke: PropTypes.string,
