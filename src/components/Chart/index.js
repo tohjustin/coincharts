@@ -26,14 +26,15 @@ const DEFAULT_FILL_COLOR = '#FFEBC5';
 const DEFAULT_STROKE_COLOR = '#FFB119';
 const INITIAL_STATE = {
   data: [],
-  scaledData: [],
-  previousScaledData: [],
+  hoveredDataPoint: {},
+  hoverXPosition: null,
   previousFillColor: DEFAULT_FILL_COLOR,
+  previousScaledData: [],
   previousStrokeColor: DEFAULT_STROKE_COLOR,
-  hoverPositionX: null,
+  scaledData: [],
+  scalePriceToY: IDENTITY_FUNCTION,
+  scaleTimeToX: IDENTITY_FUNCTION,
   showContainers: false,
-  scaleTimeToPositionX: IDENTITY_FUNCTION,
-  scalePriceToPositionY: IDENTITY_FUNCTION,
 };
 
 class Chart extends Component {
@@ -46,16 +47,16 @@ class Chart extends Component {
     const { data: nextData } = nextProps;
     const { fillColor, strokeColor } = this.props;
     let { scaledData: previousScaledData } = this.state;
-    const scaleTimeToPositionX = scaleTime()
+    const scaleTimeToX = scaleTime()
       .range([0, CHART_WIDTH])
       .domain(extent(nextData, d => d.time));
-    const scalePriceToPositionY = scaleLinear()
+    const scalePriceToY = scaleLinear()
       .range([CHART_HEIGHT - 20, 20])
       .domain(extent(nextData, d => d.price));
 
     const nextScaledData = nextData.map(({ price, time }) => ({
-      price: scalePriceToPositionY(price),
-      time: scaleTimeToPositionX(time),
+      price: scalePriceToY(price),
+      time: scaleTimeToX(time),
     }));
 
     if (previousScaledData.length === 0) {
@@ -69,8 +70,8 @@ class Chart extends Component {
       previousScaledData,
       previousFillColor: fillColor,
       previousStrokeColor: strokeColor,
-      scaleTimeToPositionX,
-      scalePriceToPositionY,
+      scaleTimeToX,
+      scalePriceToY,
     });
   }
 
@@ -95,42 +96,42 @@ class Chart extends Component {
     } = this.state;
     const { fillColor, strokeColor } = this.props;
 
-    const area2 = d3area()
+    const area = d3area()
       .x(d => d.time)
       .y0(CHART_HEIGHT)
       .y1(d => d.price);
 
-    const line2 = d3line()
+    const line = d3line()
       .x(d => d.time)
       .y(d => d.price);
 
-    const chartSvgNode = select(this.svgChartNode);
+    const chart = select(this.svgNode);
 
-    chartSvgNode
+    chart
       .selectAll('path')
       .remove();
 
-    chartSvgNode
+    chart
       .append('path')
         .attr('class', 'area')
         .style('fill', previousFillColor)
-        .attr('d', area2(previousScaledData))
+        .attr('d', area(previousScaledData))
       .transition()
         .duration(500)
         .ease(easeCubicOut)
         .style('fill', fillColor)
-        .attrTween('d', () => interpolatePath(area2(previousScaledData), area2(scaledData)));
+        .attrTween('d', () => interpolatePath(area(previousScaledData), area(scaledData)));
 
-    chartSvgNode
+    chart
       .append('path')
         .attr('class', 'line')
         .style('stroke', previousStrokeColor)
-        .attr('d', line2(previousScaledData))
+        .attr('d', line(previousScaledData))
       .transition()
         .duration(500)
         .ease(easeCubicOut)
         .style('stroke', strokeColor)
-        .attrTween('d', () => interpolatePath(line2(previousScaledData), line2(scaledData)));
+        .attrTween('d', () => interpolatePath(line(previousScaledData), line(scaledData)));
   }
 
   showHoverContainers = () => {
@@ -143,62 +144,61 @@ class Chart extends Component {
   }
 
   updateHoverPosition = (e) => {
-    const svgPosition = this.chartSvgComponent.getBoundingClientRect();
-    const hoverPositionX = e.clientX - svgPosition.left;
-    this.setState({ hoverPositionX });
+    const { data } = this.state;
+    const svgBoundary = this.chartSvgComponent.getBoundingClientRect();
+    const hoverXPosition = e.clientX - svgBoundary.left;
+
+    // Find closest data point to the x-coordinates of where the user's mouse is hovering
+    const index = Math.round((hoverXPosition / CHART_WIDTH) * (data.length - 1));
+    const hoveredDataPoint = data[index] || {};
+
+    this.setState({ hoveredDataPoint, hoverXPosition });
   }
 
-  renderActivePoint() {
+  renderCursor() {
     const {
-      data,
-      hoverPositionX,
-      scaleTimeToPositionX,
-      scalePriceToPositionY,
+      hoveredDataPoint,
+      scaleTimeToX,
+      scalePriceToY,
       showContainers,
     } = this.state;
 
-    const index = Math.round((hoverPositionX / CHART_WIDTH) * (data.length - 1));
-    const dataPoint = data[index] || {};
+    // Find the closest data point to the hovered x-coordinate
+    const xPosition = scaleTimeToX(hoveredDataPoint.time) || 0;
+    const yPosition = scalePriceToY(hoveredDataPoint.price) || 0;
     const displayClass = classNames({ show: showContainers, hidden: !showContainers });
 
     return (
-      <circle
-        className={`activePoint ${displayClass}`}
-        r={ACTIVE_POINT_RADIUS}
-        cx={scaleTimeToPositionX(dataPoint.time)}
-        cy={scalePriceToPositionY(dataPoint.price)}
-      />
-    );
-  }
-
-  renderCursorLine() {
-    const { hoverPositionX, showContainers } = this.state;
-    const displayClass = classNames({ show: showContainers, hidden: !showContainers });
-    return (
-      <line
-        className={`cursorLine ${displayClass}`}
-        x1={hoverPositionX}
-        x2={hoverPositionX}
-        y1={0}
-        y2={CHART_HEIGHT}
-      />
+      <g>
+        <line
+          className={`cursorLine ${displayClass}`}
+          x1={xPosition}
+          x2={xPosition}
+          y1={0}
+          y2={CHART_HEIGHT}
+        />
+        <circle
+          className={`activePoint ${displayClass}`}
+          r={ACTIVE_POINT_RADIUS}
+          cx={xPosition}
+          cy={yPosition}
+        />
+      </g>
     );
   }
 
   renderHoverContainers = () => {
-    const { data, hoverPositionX, showContainers } = this.state;
-    const containerLeftPosition = hoverPositionX - (HOVER_CONTAINER_WIDTH / 2);
-    const index = Math.round((hoverPositionX / CHART_WIDTH) * (data.length - 1));
-    const dataPoint = data[index] || {};
+    const { hoveredDataPoint, hoverXPosition, showContainers } = this.state;
+    const containerLeftPosition = hoverXPosition - (HOVER_CONTAINER_WIDTH / 2);
     const displayClass = classNames({ show: showContainers, hidden: !showContainers });
 
     return (
       <div>
         <div className={`hoverPriceContainer ${displayClass}`} style={{ left: containerLeftPosition }}>
-          <div className="content">{dataPoint.price && formatCurrency(dataPoint.price, ACTIVE_CURRENCY)}</div>
+          <div className="content">{hoveredDataPoint.price && formatCurrency(hoveredDataPoint.price, ACTIVE_CURRENCY)}</div>
         </div>
         <div className={`hoverTimeContainer ${displayClass}`} style={{ left: containerLeftPosition }}>
-          <div className="content">{dataPoint.time && dataPoint.time.toLocaleString()}</div>
+          <div className="content">{hoveredDataPoint.time && hoveredDataPoint.time.toLocaleString()}</div>
         </div>
       </div>
     );
@@ -215,11 +215,8 @@ class Chart extends Component {
             onMouseLeave={this.hideHoverContainers}
             onMouseMove={this.updateHoverPosition}
           >
-            <g ref={(node) => { this.svgChartNode = node; }} />
-            <g>
-              {this.renderCursorLine()}
-              {this.renderActivePoint()}
-            </g>
+            <g ref={(node) => { this.svgNode = node; }} />
+            {this.renderCursor()}
           </svg>
         </div>
       </div>
