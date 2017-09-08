@@ -31,7 +31,9 @@ function fetchSpotPrices(cryptocurrencyList, currency) {
  * @returns Formatted currency string
  */
 function formatCurrency(rawCurrencyString, currencyCode) {
-  return currencyFormatter.format(rawCurrencyString, { code: currencyCode });
+  return currencyFormatter.format(rawCurrencyString, {
+    code: currencyCode.toUpperCase(),
+  });
 }
 
  /**
