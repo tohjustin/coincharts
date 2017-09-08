@@ -14,12 +14,19 @@ body {
   max-width: 1200px;
 }
 
-.coinbase-chart {
+.coinbase-chart-content {
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
+}
+
+.chart {
+  display: flex;
+  flex-direction: row;
+  margin: -1px 20px 0 20px;
+  position: relative;
 }
 
 .chart-tabs {

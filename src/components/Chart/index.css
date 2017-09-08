@@ -1,27 +1,19 @@
-.chart {
+.Chart-container {
   border-bottom: 1px solid #dae1e9;
   border-top: 1px solid #dae1e9;
-  display: flex;
-  flex-direction: row;
-  margin: -1px 20px 0 20px;
-  position: relative;
-}
-
-.containerFlex {
-  align-items: flex-start;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-}
-
-.chartContainer {
   cursor: crosshair;
   height: 221px;
   position: relative;
   width: 1060px;
+  z-index: 10;
 }
 
-.hoverPriceContainer {
+.Chart-container svg {
+  height: 100%;
+  width: 100%;
+}
+
+.Chart-priceContainer {
   display: flex;
   justify-content: center;
   position: absolute;
@@ -29,7 +21,7 @@
   width: 200px;
 }
 
-.hoverPriceContainer .content {
+.Chart-priceContainer .content {
   background: #7d95b6;
   border-radius: 5px;
   color: #fff;
@@ -38,7 +30,7 @@
   padding: 1px 6px;
 }
 
-.hoverTimeContainer {
+.Chart-timeContainer {
   bottom: -12px;
   display: flex;
   justify-content: center;
@@ -46,7 +38,7 @@
   width: 200px;
 }
 
-.hoverTimeContainer .content {
+.Chart-timeContainer .content {
   background: #fff;
   border: 1px solid #7d95b6;
   border-radius: 5px;
@@ -56,39 +48,34 @@
   padding: 1px 6px;
 }
 
-svg {
-  height: 100%;
-  width: 100%;
-}
-
-.area {
+.Chart-area {
   pointer-events: none;
   stroke: none;
 }
 
-.line {
+.Chart-line {
   fill: none;
   pointer-events: none;
   stroke-width: 2;
 }
 
-.cursorLine {
+.Chart-cursorLine {
   stroke: #7d95b6;
   stroke-width: 1;
 }
 
-.activePoint {
+.Chart-activePoint {
   fill: white;
   stroke: #7d95b6;
   stroke-width: 2;
 }
 
-.show {
+.Chart-show {
   opacity: 1;
   transition: opacity 300ms;
 }
 
-.hidden {
+.Chart-hidden {
   opacity: 0;
   transition: opacity 300ms;
 }

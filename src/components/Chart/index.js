@@ -6,10 +6,7 @@ import { extent } from 'd3-array';
 import { interpolatePath } from 'd3-interpolate-path';
 import { scaleLinear, scaleTime } from 'd3-scale';
 import { select } from 'd3-selection';
-import {
-  area as d3area,
-  line as d3line,
-} from 'd3-shape';
+import { area as d3Area, line as d3Line } from 'd3-shape';
 import 'd3-transition';
 
 import { formatCurrency } from '../../utils';
@@ -75,7 +72,7 @@ class Chart extends Component {
     });
   }
 
-  // Only update when we receive new data or user hovers
+  // Only update when we receive new data or when the component is being hovered over
   shouldComponentUpdate(nextProps, nextState) {
     const { data } = this.props;
     const { hoverXPosition, showContainers } = this.state;
@@ -94,18 +91,18 @@ class Chart extends Component {
     const { color, transition } = this.props;
     const chart = select(this.svgNode);
 
-    const AREA = d3area()
+    const area = d3Area()
       .x(d => d.time)
       .y0(CHART_HEIGHT)
       .y1(d => d.price);
-    const LINE = d3line()
+    const line = d3Line()
       .x(d => d.time)
       .y(d => d.price);
 
-    const previousAreaChart = AREA(previousScaledData);
-    const previousLineChart = LINE(previousScaledData);
-    const newAreaChart = AREA(scaledData);
-    const newLineChart = LINE(scaledData);
+    const previousAreaChart = area(previousScaledData);
+    const previousLineChart = line(previousScaledData);
+    const newAreaChart = area(scaledData);
+    const newLineChart = line(scaledData);
 
     chart
       .selectAll('path')
@@ -113,7 +110,7 @@ class Chart extends Component {
 
     chart
       .append('path')
-        .attr('class', 'area')
+        .attr('class', 'Chart-area')
         .style('fill', previousColor.fill)
         .attr('d', previousAreaChart)
       .transition()
@@ -124,7 +121,7 @@ class Chart extends Component {
 
     chart
       .append('path')
-        .attr('class', 'line')
+        .attr('class', 'Chart-line')
         .style('stroke', previousColor.stoke)
         .attr('d', previousLineChart)
       .transition()
@@ -134,12 +131,12 @@ class Chart extends Component {
         .attrTween('d', () => interpolatePath(previousLineChart, newLineChart));
   }
 
-  showHoverContainers = () => {
+  showHoverElements = () => {
     const { scaledData } = this.state;
     this.setState({ showContainers: true, previousScaledData: scaledData });
   }
 
-  hideHoverContainers = () => {
+  hideHoverElements = () => {
     this.setState({ showContainers: false });
   }
 
@@ -156,29 +153,22 @@ class Chart extends Component {
   }
 
   renderCursor() {
-    const {
-      hoveredDataPoint,
-      scaleTimeToX,
-      scalePriceToY,
-      showContainers,
-    } = this.state;
-
-    // Find the closest data point to the hovered x-coordinate
+    const { hoveredDataPoint, scaleTimeToX, scalePriceToY, showContainers } = this.state;
     const xPosition = scaleTimeToX(hoveredDataPoint.time) || 0;
     const yPosition = scalePriceToY(hoveredDataPoint.price) || 0;
-    const displayClass = classNames({ show: showContainers, hidden: !showContainers });
+    const displayClass = classNames({ 'Chart-show': showContainers, 'Chart-hidden': !showContainers });
 
     return (
-      <g>
+      <g className={displayClass}>
         <line
-          className={`cursorLine ${displayClass}`}
+          className="Chart-cursorLine"
           x1={xPosition}
           x2={xPosition}
           y1={0}
           y2={CHART_HEIGHT}
         />
         <circle
-          className={`activePoint ${displayClass}`}
+          className="Chart-activePoint"
           r={ACTIVE_POINT_RADIUS}
           cx={xPosition}
           cy={yPosition}
@@ -187,17 +177,17 @@ class Chart extends Component {
     );
   }
 
-  renderHoverContainers = () => {
+  renderHoverElements = () => {
     const { hoveredDataPoint, hoverXPosition, showContainers } = this.state;
     const containerLeftPosition = hoverXPosition - (HOVER_CONTAINER_WIDTH / 2);
-    const displayClass = classNames({ show: showContainers, hidden: !showContainers });
+    const displayClass = classNames({ 'Chart-show': showContainers, 'Chart-hidden': !showContainers });
 
     return (
-      <div>
-        <div className={`hoverPriceContainer ${displayClass}`} style={{ left: containerLeftPosition }}>
+      <div className={displayClass}>
+        <div className="Chart-priceContainer" style={{ left: containerLeftPosition }}>
           <div className="content">{hoveredDataPoint.price && formatCurrency(hoveredDataPoint.price, ACTIVE_CURRENCY)}</div>
         </div>
-        <div className={`hoverTimeContainer ${displayClass}`} style={{ left: containerLeftPosition }}>
+        <div className="Chart-timeContainer" style={{ left: containerLeftPosition }}>
           <div className="content">{hoveredDataPoint.time && hoveredDataPoint.time.toLocaleString()}</div>
         </div>
       </div>
@@ -206,19 +196,17 @@ class Chart extends Component {
 
   render() {
     return (
-      <div className="containerFlex">
-        <div className="chartContainer">
-          {this.renderHoverContainers()}
-          <svg
-            ref={(node) => { this.chartSvgComponent = node; }}
-            onMouseEnter={this.showHoverContainers}
-            onMouseLeave={this.hideHoverContainers}
-            onMouseMove={this.updateHoverPosition}
-          >
-            <g ref={(node) => { this.svgNode = node; }} />
-            {this.renderCursor()}
-          </svg>
-        </div>
+      <div className="Chart-container">
+        {this.renderHoverElements()}
+        <svg
+          ref={(node) => { this.chartSvgComponent = node; }}
+          onMouseEnter={this.showHoverElements}
+          onMouseLeave={this.hideHoverElements}
+          onMouseMove={this.updateHoverPosition}
+        >
+          <g ref={(node) => { this.svgNode = node; }} />
+          {this.renderCursor()}
+        </svg>
       </div>
     );
   }

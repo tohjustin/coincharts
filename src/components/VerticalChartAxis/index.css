@@ -1,7 +1,9 @@
 .containerFlex {
+  border-bottom: 1px solid #dae1e9;
+  border-top: 1px solid #dae1e9;
   display: flex;
-  justify-content: space-between;
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .containerFlex.left {
