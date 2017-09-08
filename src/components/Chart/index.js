@@ -92,17 +92,20 @@ class Chart extends Component {
   componentDidUpdate() {
     const { previousColor, previousScaledData, scaledData } = this.state;
     const { color, transition } = this.props;
+    const chart = select(this.svgNode);
 
-    const area = d3area()
+    const AREA = d3area()
       .x(d => d.time)
       .y0(CHART_HEIGHT)
       .y1(d => d.price);
-
-    const line = d3line()
+    const LINE = d3line()
       .x(d => d.time)
       .y(d => d.price);
 
-    const chart = select(this.svgNode);
+    const previousAreaChart = AREA(previousScaledData);
+    const previousLineChart = LINE(previousScaledData);
+    const newAreaChart = AREA(scaledData);
+    const newLineChart = LINE(scaledData);
 
     chart
       .selectAll('path')
@@ -112,23 +115,23 @@ class Chart extends Component {
       .append('path')
         .attr('class', 'area')
         .style('fill', previousColor.fill)
-        .attr('d', area(previousScaledData))
+        .attr('d', previousAreaChart)
       .transition()
         .duration(transition.duration)
         .ease(transition.ease)
         .style('fill', color.fill)
-        .attrTween('d', () => interpolatePath(area(previousScaledData), area(scaledData)));
+      .attrTween('d', () => interpolatePath(previousAreaChart, newAreaChart));
 
     chart
       .append('path')
         .attr('class', 'line')
         .style('stroke', previousColor.stoke)
-        .attr('d', line(previousScaledData))
+        .attr('d', previousLineChart)
       .transition()
         .duration(transition.duration)
         .ease(transition.ease)
         .style('stroke', color.stroke)
-        .attrTween('d', () => interpolatePath(line(previousScaledData), line(scaledData)));
+        .attrTween('d', () => interpolatePath(previousLineChart, newLineChart));
   }
 
   showHoverContainers = () => {
