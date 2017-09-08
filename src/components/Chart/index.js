@@ -129,11 +129,14 @@ class Chart extends Component {
         .ease(transition.ease)
         .style('stroke', color.stroke)
         .attrTween('d', () => interpolatePath(previousLineChart, newLineChart));
+
+    // shouldComponentUpdate() ensures the following setState() doesn't cause a uneccesary rerender
+    // eslint-disable-next-line react/no-did-update-set-state
+    this.setState({ previousScaledData: scaledData });
   }
 
   showHoverElements = () => {
-    const { scaledData } = this.state;
-    this.setState({ showContainers: true, previousScaledData: scaledData });
+    this.setState({ showContainers: true });
   }
 
   hideHoverElements = () => {
