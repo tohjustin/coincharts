@@ -44,8 +44,8 @@ class Chart extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.updateDimensions);
-    this.updateDimensions();
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -149,16 +149,38 @@ class Chart extends Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.updateDimensions);
+    window.removeEventListener('resize', this.handleResize);
   }
 
-  updateDimensions = () => {
+  handleResize = () => {
+    const { data } = this.state;
     const { height, width } = this.chartSvgComponent.getBoundingClientRect();
     const dimensions = {
       height: Math.round(height),
       width: Math.round(width),
     };
-    this.setState({ dimensions });
+
+    const scaleTimeToX = scaleTime()
+      .range([0, dimensions.width])
+      .domain(extent(data, d => d.time));
+
+    const scalePriceToY = scaleLinear()
+      .range([dimensions.height, CHART_PADDING_TOP])
+      .domain(extent(data, d => d.price));
+
+    const scaledData = data.map(({ price, time }) => ({
+      price: scalePriceToY(price),
+      time: scaleTimeToX(time),
+    }));
+
+    this.setState({
+      data,
+      dimensions,
+      scaledData,
+      previousScaledData: scaledData,
+      scaleTimeToX,
+      scalePriceToY,
+    });
   }
 
   showHoverElements = () => {
