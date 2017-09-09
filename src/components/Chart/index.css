@@ -1,10 +1,8 @@
 .Chart-container {
-  border-bottom: 1px solid #dae1e9;
-  border-top: 1px solid #dae1e9;
   cursor: crosshair;
-  height: 221px;
+  height: 100%;
   position: relative;
-  width: 1060px;
+  width: 100%;
   z-index: 10;
 }
 

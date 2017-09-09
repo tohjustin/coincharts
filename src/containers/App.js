@@ -151,15 +151,19 @@ class CoinbaseChart extends Component {
 
     // Display only the cryptocurrency's spot price when duration 'ALL' is selected
     return (
-      priceMetrics &&
-      priceMetrics
-        .filter((e, index) => (
-          (duration !== DURATION.ALL) ||
-          (duration === DURATION.ALL && index === 0)
-        ))
-        .map(e => (
-          <InfoBox key={e.label} label={e.label} value={e.value} />
-        ))
+      <div className="infoboxes">
+        {
+          priceMetrics &&
+          priceMetrics
+            .filter((e, index) => (
+              (duration !== DURATION.ALL) ||
+              (duration === DURATION.ALL && index === 0)
+            ))
+            .map(e => (
+              <InfoBox key={e.label} label={e.label} value={e.value} />
+            ))
+        }
+      </div>
     );
   }
 
@@ -168,8 +172,8 @@ class CoinbaseChart extends Component {
     const cryptocurrency = CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex];
     const durationType = DURATION_LIST[selectedDurationIndex].key;
     return (
-      <div>
-        <div className="chart">
+      <div className="chart">
+        <div className="chart-svg">
           <VerticalChartAxis data={activePriceHistory} textAlign="left" />
           <Chart
             data={activePriceHistory}
@@ -189,18 +193,14 @@ class CoinbaseChart extends Component {
 
   render() {
     return (
-      <div className="coinbase-chart">
-        <div className="coinbase-chart-content">
-          <div className="chart-tabs">
+      <div className="app">
+        <div className="app-container">
+          <div className="tabs">
             { this.renderCryptocurrencyTabs() }
             { this.renderDurationTabs() }
           </div>
-          <div className="chart-infoboxes">
-            { this.renderInfoBoxes() }
-          </div>
-          <div>
-            { this.renderPriceHistoryChart() }
-          </div>
+          { this.renderInfoBoxes() }
+          { this.renderPriceHistoryChart() }
         </div>
       </div>
     );

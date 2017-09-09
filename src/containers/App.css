@@ -1,49 +1,38 @@
-body {
-  align-items: center;
-  background-image: linear-gradient(to bottom, #0e3877, #2b71b1);
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  justify-content: center;
-}
-
-.coinbase-chart {
-  font-weight: normal;
-  height: 460px;
-  margin: auto;
-  max-width: 1200px;
-}
-
-.coinbase-chart-content {
+.app-container {
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
+  max-width: 1500px;
+  min-width: 900px;
+  width: 80vw;
 }
 
-.chart {
-  display: flex;
-  flex-direction: row;
-  margin: -1px 20px 0 20px;
-  position: relative;
-}
-
-.chart-tabs {
+.chart .chart-svg {
   border-bottom: 1px solid #dae1e9;
+  border-top: 1px solid #dae1e9;
   display: flex;
   flex-direction: row;
-  flex-shrink: 0;
-  height: 54px;
-  justify-content: space-between;
-  padding: 0 20px;
+  height: 225px;
+  margin: 0 1.5em;
 }
 
-.chart-infoboxes {
+.infoboxes {
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   height: 140px;
   justify-content: center;
   padding: 20px;
+}
+
+.tabs {
+  border-bottom: 1px solid #dae1e9;
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  height: 55px;
+  justify-content: space-between;
+  padding: 0 20px;
 }

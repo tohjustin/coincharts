@@ -1,4 +1,8 @@
 body {
+  align-items: center;
+  background-image: linear-gradient(to bottom, #0e3877, #2b71b1);
+  display: flex;
+  flex-direction: column;
   font-family:
     "Avenir Next",
     -apple-system,
@@ -12,6 +16,8 @@ body {
     "Droid Sans",
     "Helvetica Neue",
     sans-serif;
+  height: 100vh;
+  justify-content: center;
   margin: 0;
   padding: 0;
   text-rendering: optimizeLegibility;
