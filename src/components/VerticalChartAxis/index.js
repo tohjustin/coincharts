@@ -5,10 +5,13 @@ import { extent } from 'd3-array';
 
 import './index.css';
 
-const ACTIVE_CURRENCY = 'USD';
+const ACTIVE_CURRENCY = 'usd';
 
 function formatAxisPrice(price, currencyCode) {
-  return currencyFormatter.format(price, { code: currencyCode, precision: 0 });
+  return currencyFormatter.format(price, {
+    code: currencyCode.toUpperCase(),
+    precision: 0,
+  });
 }
 
 const VerticalChartAxis = ({ data, textAlign }) => {
@@ -16,15 +19,18 @@ const VerticalChartAxis = ({ data, textAlign }) => {
   const textAlignClass = (textAlign === 'left') ? 'left' : 'right';
 
   return (
-    <div className={`chartVerticalAxisContainer containerFlex ${textAlignClass}`}>
-      <div className="chartAxis">{formatAxisPrice(maxPrice, ACTIVE_CURRENCY)}</div>
-      <div className="chartAxis">{formatAxisPrice(minPrice, ACTIVE_CURRENCY)}</div>
+    <div className={`VerticalChartAxis-container ${textAlignClass}`}>
+      <div className="tick">{formatAxisPrice(maxPrice, ACTIVE_CURRENCY)}</div>
+      <div className="tick">{formatAxisPrice(minPrice, ACTIVE_CURRENCY)}</div>
     </div>
   );
 };
 
 VerticalChartAxis.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.shape({
+    price: PropTypes.number,
+    time: PropTypes.data,
+  })).isRequired,
   textAlign: PropTypes.oneOf(['left', 'right']).isRequired,
 };
 
