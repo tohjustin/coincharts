@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import classNames from 'classnames';
 import isEqual from 'lodash.isequal';
 import { extent } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
@@ -8,27 +7,27 @@ import 'd3-transition';
 
 import Chart from './components/Chart';
 import Cursor from './components/Cursor';
+import HoverContainer from './components/HoverContainer';
 
-import {
-  HOVER_CONTAINER_WIDTH,
-  DEFAULT_COLOR,
-} from './constants';
 import { formatCurrency } from '../../utils';
 import './index.css';
 
 const ACTIVE_CURRENCY = 'usd';
 const CHART_PADDING_TOP = 20;
+const DEFAULT_COLOR = {
+  fill: '#FFEBC5',
+  stroke: '#FFB119',
+};
 const INITIAL_STATE = {
   dimensions: {
     height: 0,
     width: 0,
   },
   hovered: false,
-  hoveredDataPoint: {},
+  hoveredValue: {},
   hoverX: -1,
   hoverY: -1,
   scalePriceToY: undefined,
-  scaleTimeToX: undefined,
 };
 
 class PriceChart extends Component {
@@ -113,42 +112,41 @@ class PriceChart extends Component {
 
     // Find closest data point to the x-coordinates of where the user's mouse is hovering
     const index = Math.round((hoverX / dimensions.width) * (data.length - 1));
-    const hoveredDataPoint = data[index] || {};
-
-    const hoverY = scalePriceToY(hoveredDataPoint.price) || 0;
+    const hoveredDatapoint = data[index] || {};
+    const hoveredValue = {
+      price: hoveredDatapoint.price && formatCurrency(hoveredDatapoint.price, ACTIVE_CURRENCY),
+      time: hoveredDatapoint.time && hoveredDatapoint.time.toLocaleString(),
+    };
+    const hoverY = scalePriceToY(hoveredDatapoint.price) || 0;
 
     this.setState({
-      hoveredDataPoint,
+      hovered: !!hoveredDatapoint,
+      hoveredValue,
       hoverX,
       hoverY,
-      hovered: !!hoveredDataPoint,
     });
   };
 
-  renderHoverElements() {
-    const { hoveredDataPoint, hoverX, hovered } = this.state;
-    const containerLeftPosition = hoverX - (HOVER_CONTAINER_WIDTH / 2);
-    const displayClass = classNames({ 'Chart-show': hovered, 'Chart-hidden': !hovered });
-
-    return (
-      <div className={displayClass}>
-        <div className="Chart-priceContainer" style={{ left: containerLeftPosition }}>
-          <div className="content">{hoveredDataPoint.price && formatCurrency(hoveredDataPoint.price, ACTIVE_CURRENCY)}</div>
-        </div>
-        <div className="Chart-timeContainer" style={{ left: containerLeftPosition }}>
-          <div className="content">{hoveredDataPoint.time && hoveredDataPoint.time.toLocaleString()}</div>
-        </div>
-      </div>
-    );
-  }
-
   render() {
-    const { dimensions, hoverX, hoverY, hovered } = this.state;
+    const { dimensions, hoveredValue, hoverX, hoverY, hovered } = this.state;
     const { data, color } = this.props;
 
     return (
-      <div className="Chart-container">
-        {this.renderHoverElements()}
+      <div className="PriceChart-container">
+        <div>
+          <HoverContainer
+            top
+            value={hoveredValue.price}
+            visible={hovered}
+            x={hoverX}
+          />
+          <HoverContainer
+            bottom
+            value={hoveredValue.time}
+            visible={hovered}
+            x={hoverX}
+          />
+        </div>
         <svg
           ref={(node) => { this.chartSvgComponent = node; }}
           onMouseEnter={this.showHoverElements}

@@ -11,39 +11,30 @@
   width: 100%;
 }
 
-.Chart-priceContainer {
+.Chart-hoverContainer {
+  font-size: 14px;
+  font-weight: 500;
   display: flex;
   justify-content: center;
   position: absolute;
-  top: -12px;
   width: 200px;
 }
 
-.Chart-priceContainer .content {
-  background: #7d95b6;
+.Chart-hoverContainer .content {
   border-radius: 5px;
-  color: #fff;
-  font-size: 14px;
-  font-weight: 500;
   padding: 1px 6px;
 }
 
-.Chart-timeContainer {
-  bottom: -12px;
-  display: flex;
-  justify-content: center;
-  position: absolute;
-  width: 200px;
-}
-
-.Chart-timeContainer .content {
+.Chart-hoverContainer .content.bottom {
   background: #fff;
   border: 1px solid #7d95b6;
-  border-radius: 5px;
   color: #7d95b6;
-  font-size: 14px;
-  font-weight: 500;
-  padding: 1px 6px;
+}
+
+.Chart-hoverContainer .content.top {
+  background: #7d95b6;
+  border: none;
+  color: #fff;
 }
 
 .Chart-area {
