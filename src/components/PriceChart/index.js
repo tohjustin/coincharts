@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import isEqual from 'lodash.isequal';
 import { extent } from 'd3-array';
 import { scaleLinear } from 'd3-scale';
-import 'd3-transition';
 
 import Chart from './components/Chart';
 import Cursor from './components/Cursor';
@@ -41,59 +39,18 @@ class PriceChart extends Component {
     this.handleResize();
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { data: nextData } = nextProps;
-    const { dimensions } = this.state;
-
-    const scalePriceToY = scaleLinear()
-      .range([dimensions.height, CHART_PADDING_TOP])
-      .domain(extent(nextData, d => d.price));
-
-    this.setState({
-      data: nextData,
-      scalePriceToY,
-    });
-  }
-
-  // Only update when we receive new data or when the component is being hovered over
-  shouldComponentUpdate(nextProps, nextState) {
-    const { data } = this.props;
-    const { dimensions, hovered, hoverX } = this.state;
-    const { data: nextData } = nextProps;
-    const {
-      dimensions: nextDimensions,
-      hovered: nextHovered,
-      hoverX: nextHoverX,
-    } = nextState;
-
-    return (
-      !isEqual(dimensions, nextDimensions) ||
-      !isEqual(hovered, nextHovered) ||
-      !isEqual(hoverX, nextHoverX) ||
-      !isEqual(data, nextData)
-    );
-  }
-
   componentWillUnmount() {
     window.removeEventListener('resize', this.handleResize);
   }
 
   handleResize = () => {
-    const { data } = this.props;
     const { height, width } = this.chartSvgComponent.getBoundingClientRect();
     const dimensions = {
       height: Math.round(height),
       width: Math.round(width),
     };
 
-    const scalePriceToY = scaleLinear()
-      .range([dimensions.height, CHART_PADDING_TOP])
-      .domain(extent(data, d => d.price));
-
-    this.setState({
-      dimensions,
-      scalePriceToY,
-    });
+    this.setState({ dimensions });
   }
 
   showHoverElements = () => {
@@ -106,17 +63,20 @@ class PriceChart extends Component {
 
   updateHoverPosition = (e) => {
     const { data } = this.props;
-    const { dimensions, scalePriceToY } = this.state;
-    const hoverX =
-      e.nativeEvent.clientX - this.chartSvgComponent.getBoundingClientRect().left;
+    const { dimensions } = this.state;
 
     // Find closest data point to the x-coordinates of where the user's mouse is hovering
+    const hoverX = e.nativeEvent.clientX - this.chartSvgComponent.getBoundingClientRect().left;
     const index = Math.round((hoverX / dimensions.width) * (data.length - 1));
     const hoveredDatapoint = data[index] || {};
     const hoveredValue = {
       price: hoveredDatapoint.price && formatCurrency(hoveredDatapoint.price, ACTIVE_CURRENCY),
       time: hoveredDatapoint.time && hoveredDatapoint.time.toLocaleString(),
     };
+
+    const scalePriceToY = scaleLinear()
+      .range([dimensions.height, CHART_PADDING_TOP])
+      .domain(extent(data, d => d.price));
     const hoverY = scalePriceToY(hoveredDatapoint.price) || 0;
 
     this.setState({

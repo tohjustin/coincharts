@@ -9,8 +9,8 @@ const VERTICAL_OFFSET = -12;
 
 const HoverContainer = ({ bottom, top, value, visible, x }) => {
   const containerClass = classNames({
-    hidden: !visible,
     HoverContainer: true,
+    hidden: !visible,
     show: visible,
   });
 

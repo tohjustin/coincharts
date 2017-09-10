@@ -12,14 +12,13 @@ import 'd3-transition';
 import './index.css';
 
 const CHART_PADDING_TOP = 20;
-const DEFAULT_COLOR = { fill: '#FFEBC5', stroke: '#FFB119' };
-const TRANSITION = { duration: 500, ease: easeCubicOut };
 const INITIAL_STATE = {
-  disableTransition: false,
-  previousColor: DEFAULT_COLOR,
+  previousColor: undefined,
   previousScaledData: [],
   scaledData: [],
+  skipTransition: false,
 };
+const TRANSITION = { duration: 500, ease: easeCubicOut };
 
 class Chart extends Component {
   static scaleData(data, height, width) {
@@ -56,7 +55,7 @@ class Chart extends Component {
       scaledData : nextScaledData.map(({ time }) => ({ price: nextHeight, time }));
 
     this.setState({
-      disableTransition: (width !== nextWidth),
+      skipTransition: (width !== nextWidth),
       previousColor: color,
       previousScaledData,
       scaledData: nextScaledData,
@@ -76,9 +75,9 @@ class Chart extends Component {
 
   componentDidUpdate() {
     const { color, height } = this.props;
-    const { previousColor, previousScaledData, scaledData, disableTransition } = this.state;
+    const { previousColor = color, previousScaledData, scaledData, skipTransition } = this.state;
     const chart = select(this.svgNode);
-    const transitionDuration = (disableTransition) ? 0 : TRANSITION.duration;
+    const transitionDuration = (skipTransition) ? 0 : TRANSITION.duration;
 
     const area = d3Area()
       .x(d => d.time)
@@ -128,16 +127,16 @@ class Chart extends Component {
 }
 
 Chart.propTypes = {
+  color: PropTypes.shape({
+    fill: PropTypes.string,
+    stroke: PropTypes.string,
+  }).isRequired,
   data: PropTypes.arrayOf(PropTypes.shape({
     price: PropTypes.number,
     time: PropTypes.date,
   })).isRequired,
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired,
-  color: PropTypes.shape({
-    fill: PropTypes.string,
-    stroke: PropTypes.string,
-  }).isRequired,
 };
 
 export default Chart;
