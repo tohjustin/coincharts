@@ -39,7 +39,7 @@ const INITIAL_STATE = {
   scaleTimeToX: DEFAULT_FUNCTION,
 };
 
-class Chart extends Component {
+class PriceChart extends Component {
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
@@ -254,7 +254,7 @@ class Chart extends Component {
   }
 }
 
-Chart.propTypes = {
+PriceChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({
     price: PropTypes.number,
     time: PropTypes.data,
@@ -269,9 +269,9 @@ Chart.propTypes = {
   }),
 };
 
-Chart.defaultProps = {
+PriceChart.defaultProps = {
   color: DEFAULT_COLOR,
   transition: DEFAULT_TRANSITION,
 };
 
-export default Chart;
+export default PriceChart;

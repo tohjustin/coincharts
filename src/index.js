@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import CoinbaseChart from './containers/App';
+import App from './containers/App';
 import registerServiceWorker from './registerServiceWorker';
 
 import './index.css';
 
 // eslint-disable-next-line no-undef
-ReactDOM.render(<CoinbaseChart />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();

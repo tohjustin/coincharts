@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { scan } from 'd3-array';
 
-import Chart from '../components/Chart';
+import PriceChart from '../components/PriceChart';
 import HorizontalChartAxis from '../components/HorizontalChartAxis';
 import InfoBox from '../components/InfoBox';
 import Tabs from '../components/Tabs';
@@ -28,7 +28,7 @@ const INITIAL_STATE = {
   spotPrices: [],
 };
 
-class CoinbaseChart extends Component {
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
@@ -175,7 +175,7 @@ class CoinbaseChart extends Component {
       <div className="chart">
         <div className="chart-svg">
           <VerticalChartAxis data={activePriceHistory} textAlign="left" />
-          <Chart
+          <PriceChart
             data={activePriceHistory}
             color={
               cryptocurrency && {
@@ -207,4 +207,4 @@ class CoinbaseChart extends Component {
   }
 }
 
-export default CoinbaseChart;
+export default App;
