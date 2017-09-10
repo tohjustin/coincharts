@@ -1,6 +1,5 @@
 import { easeCubicOut } from 'd3-ease';
 
-const CURSOR_RADIUS_SIZE = 4;
 const HOVER_CONTAINER_WIDTH = 200;
 
 const DEFAULT_COLOR = {
@@ -16,7 +15,6 @@ const DEFAULT_TRANSITION = {
 };
 
 export {
-  CURSOR_RADIUS_SIZE,
   HOVER_CONTAINER_WIDTH,
   DEFAULT_COLOR,
   DEFAULT_TRANSITION,

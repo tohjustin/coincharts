@@ -9,8 +9,9 @@ import { scaleLinear, scaleTime } from 'd3-scale';
 import { select } from 'd3-selection';
 import 'd3-transition';
 
+import Cursor from './components/Cursor';
+
 import {
-  CURSOR_RADIUS_SIZE,
   HOVER_CONTAINER_WIDTH,
   DEFAULT_COLOR,
   DEFAULT_TRANSITION,
@@ -23,18 +24,19 @@ const ACTIVE_CURRENCY = 'usd';
 const CHART_PADDING_TOP = 20;
 const INITIAL_STATE = {
   data: [],
+  dimensions: {
+    height: 0,
+    width: 0,
+  },
+  hovered: false,
   hoveredDataPoint: {},
-  hoverXPosition: null,
+  hoverX: -1,
+  hoverY: -1,
   previousColor: DEFAULT_COLOR,
   previousScaledData: [],
   scaledData: [],
   scalePriceToY: DEFAULT_FUNCTION,
   scaleTimeToX: DEFAULT_FUNCTION,
-  showContainers: false,
-  dimensions: {
-    height: 0,
-    width: 0,
-  },
 };
 
 class Chart extends Component {
@@ -83,18 +85,18 @@ class Chart extends Component {
   // Only update when we receive new data or when the component is being hovered over
   shouldComponentUpdate(nextProps, nextState) {
     const { data } = this.props;
-    const { hoverXPosition, showContainers, dimensions } = this.state;
+    const { dimensions, hovered, hoverX } = this.state;
     const { data: nextData } = nextProps;
     const {
       dimensions: nextDimensions,
-      hoverXPosition: nextHoverXPosition,
-      showContainers: nextShowContainers,
+      hovered: nextHovered,
+      hoverX: nextHoverX,
     } = nextState;
 
     return (
       !isEqual(dimensions, nextDimensions) ||
-      !isEqual(hoverXPosition, nextHoverXPosition) ||
-      !isEqual(showContainers, nextShowContainers) ||
+      !isEqual(hovered, nextHovered) ||
+      !isEqual(hoverX, nextHoverX) ||
       !isEqual(data, nextData)
     );
   }
@@ -124,24 +126,24 @@ class Chart extends Component {
     chart
       .append('path')
         .attr('class', 'Chart-area')
-        .style('fill', previousColor.fill)
         .attr('d', previousAreaChart)
+        .style('fill', previousColor.fill)
       .transition()
         .duration(transition.duration)
         .ease(transition.ease)
-        .style('fill', color.fill)
-      .attrTween('d', () => interpolatePath(previousAreaChart, newAreaChart));
+        .attrTween('d', () => interpolatePath(previousAreaChart, newAreaChart))
+        .style('fill', color.fill);
 
     chart
       .append('path')
         .attr('class', 'Chart-line')
-        .style('stroke', previousColor.stoke)
         .attr('d', previousLineChart)
+        .style('stroke', previousColor.stoke)
       .transition()
         .duration(transition.duration)
         .ease(transition.ease)
-        .style('stroke', color.stroke)
-        .attrTween('d', () => interpolatePath(previousLineChart, newLineChart));
+        .attrTween('d', () => interpolatePath(previousLineChart, newLineChart))
+        .style('stroke', color.stroke);
 
     // shouldComponentUpdate() ensures the following setState() doesn't cause a uneccesary rerender
     // eslint-disable-next-line react/no-did-update-set-state
@@ -184,60 +186,36 @@ class Chart extends Component {
   }
 
   showHoverElements = () => {
-    this.setState({ showContainers: true });
+    this.setState({ hovered: true });
   }
 
   hideHoverElements = () => {
-    this.setState({ showContainers: false });
+    this.setState({ hovered: false });
   }
 
   updateHoverPosition = (e) => {
-    const { data, dimensions } = this.state;
-    const svgBoundary = this.chartSvgComponent.getBoundingClientRect();
-    const hoverXPosition = e.clientX - svgBoundary.left;
+    const { data, dimensions, scalePriceToY } = this.state;
+    const hoverX =
+      e.nativeEvent.clientX - this.chartSvgComponent.getBoundingClientRect().left;
 
     // Find closest data point to the x-coordinates of where the user's mouse is hovering
-    const index = Math.round((hoverXPosition / dimensions.width) * (data.length - 1));
+    const index = Math.round((hoverX / dimensions.width) * (data.length - 1));
     const hoveredDataPoint = data[index] || {};
 
-    this.setState({ hoveredDataPoint, hoverXPosition });
-  }
+    const hoverY = scalePriceToY(hoveredDataPoint.price) || 0;
 
-  renderCursor() {
-    const {
-      dimensions,
+    this.setState({
       hoveredDataPoint,
-      scaleTimeToX,
-      scalePriceToY,
-      showContainers,
-    } = this.state;
-    const xPosition = scaleTimeToX(hoveredDataPoint.time) || 0;
-    const yPosition = scalePriceToY(hoveredDataPoint.price) || 0;
-    const displayClass = classNames({ 'Chart-show': showContainers, 'Chart-hidden': !showContainers });
-
-    return (
-      <g className={displayClass}>
-        <line
-          className="Chart-cursorLine"
-          x1={xPosition}
-          x2={xPosition}
-          y1={0}
-          y2={dimensions.height}
-        />
-        <circle
-          className="Chart-activePoint"
-          r={CURSOR_RADIUS_SIZE}
-          cx={xPosition}
-          cy={yPosition}
-        />
-      </g>
-    );
-  }
+      hoverX,
+      hoverY,
+      hovered: !!hoveredDataPoint,
+    });
+  };
 
   renderHoverElements() {
-    const { hoveredDataPoint, hoverXPosition, showContainers } = this.state;
-    const containerLeftPosition = hoverXPosition - (HOVER_CONTAINER_WIDTH / 2);
-    const displayClass = classNames({ 'Chart-show': showContainers, 'Chart-hidden': !showContainers });
+    const { hoveredDataPoint, hoverX, hovered } = this.state;
+    const containerLeftPosition = hoverX - (HOVER_CONTAINER_WIDTH / 2);
+    const displayClass = classNames({ 'Chart-show': hovered, 'Chart-hidden': !hovered });
 
     return (
       <div className={displayClass}>
@@ -252,6 +230,8 @@ class Chart extends Component {
   }
 
   render() {
+    const { dimensions, hoverX, hoverY, hovered } = this.state;
+
     return (
       <div className="Chart-container">
         {this.renderHoverElements()}
@@ -262,7 +242,12 @@ class Chart extends Component {
           onMouseMove={this.updateHoverPosition}
         >
           <g ref={(node) => { this.svgNode = node; }} />
-          {this.renderCursor()}
+          <Cursor
+            height={dimensions.height}
+            visible={hovered}
+            x={hoverX}
+            y={hoverY}
+          />
         </svg>
       </div>
     );
