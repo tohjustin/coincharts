@@ -16,11 +16,12 @@ function formatValue(str) {
   return [plusChar, dollarChar, mainValue, superscriptValue];
 }
 
-const InfoBox = ({ label, value }) => {
+const TableCell = ({ label, value, visible }) => {
   const [plusChar, dollarChar, mainValue, superscriptValue] = formatValue(value);
 
   return (
-    <div className="infobox">
+    visible &&
+    <div className="TableCell">
       <div className="value">
         <span className="small-font plus-char">{plusChar}</span>
         <span className="small-font">{useBigMinusChar(dollarChar)}</span>
@@ -32,9 +33,14 @@ const InfoBox = ({ label, value }) => {
   );
 };
 
-InfoBox.propTypes = {
+TableCell.propTypes = {
   label: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+  visible: PropTypes.bool,
 };
 
-export default InfoBox;
+TableCell.defaultProps = {
+  visible: true,
+};
+
+export default TableCell;

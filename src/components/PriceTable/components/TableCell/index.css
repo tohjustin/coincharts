@@ -1,4 +1,4 @@
-.infobox {
+.TableCell {
   display: flex;
   color: #4e5c6e;
   flex-direction: column;
@@ -8,7 +8,7 @@
   width: 100%;
 }
 
-.infobox:not(:first-child) {
+.TableCell:not(:first-child) {
   border-left: 1px solid #dae1e9;
 }
 

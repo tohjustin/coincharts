@@ -22,10 +22,7 @@
   height: 225px;
 }
 
-.infoboxes {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
+.table-container {
   height: 180px;
   margin: 1.5em 2em;
 }

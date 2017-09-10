@@ -1,15 +1,13 @@
 import React, { Component } from 'react';
-import { scan } from 'd3-array';
 
-import PriceChart from '../components/PriceChart';
 import HorizontalChartAxis from '../components/HorizontalChartAxis';
-import InfoBox from '../components/InfoBox';
+import PriceChart from '../components/PriceChart';
+import PriceTable from '../components/PriceTable';
 import Tabs from '../components/Tabs';
 import VerticalChartAxis from '../components/VerticalChartAxis';
 
 import { CRYPTOCURRENCY, DURATION } from '../constants';
 import {
-  prependPlusSymbol,
   fetchPriceData,
   fetchSpotPrices,
   formatCurrency,
@@ -21,8 +19,8 @@ const ACTIVE_CURRENCY = 'usd';
 const CRYPTOCURRENCY_LIST = Object.values(CRYPTOCURRENCY);
 const DURATION_LIST = Object.values(DURATION);
 const INITIAL_STATE = {
-  activePriceHistory: [],
-  activeSpotPrice: 0,
+  priceHistory: [],
+  spotPrice: { amount: '0', currency: ACTIVE_CURRENCY },
   selectedCryptocurrencyIndex: 0,
   selectedDurationIndex: 2,
   spotPrices: [],
@@ -53,7 +51,7 @@ class App extends Component {
 
     Promise.all(promises)
       .then(([priceHistoryData, spotPrices]) => {
-        const activePriceHistory = priceHistoryData.prices
+        const priceHistory = priceHistoryData.prices
           .sort((a, b) => new Date(a.time) - new Date(b.time))
           .map(d => ({
             price: +d.price,
@@ -61,8 +59,8 @@ class App extends Component {
           }));
 
         this.setState({
-          activeSpotPrice: spotPrices[cryptocurrencyIndex],
-          activePriceHistory,
+          spotPrice: spotPrices[cryptocurrencyIndex],
+          priceHistory,
           spotPrices,
         });
       })
@@ -113,70 +111,36 @@ class App extends Component {
     );
   }
 
-  renderInfoBoxes() {
+  renderPriceTable() {
     const {
-      activePriceHistory,
-      activeSpotPrice,
+      priceHistory,
       selectedCryptocurrencyIndex,
       selectedDurationIndex,
-      spotPrices,
+      spotPrice,
     } = this.state;
 
-    if (activePriceHistory.length === 0) {
-      return null;
-    }
-
-    const cryptocurrency = CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex];
-    const duration = DURATION_LIST[selectedDurationIndex];
-
-    const spotPrice = spotPrices[selectedCryptocurrencyIndex].amount;
-    const currentPrice = activeSpotPrice.amount;
-    const oldPriceIndex = scan(activePriceHistory, (a, b) => a.time - b.time);
-    const oldPrice = activePriceHistory[oldPriceIndex].price;
-
-    // Compute the price metric values
-    const percentageDifference = Number(((currentPrice / oldPrice) - 1) * 100).toFixed(2);
-    const priceDifference = currentPrice - oldPrice;
-
-    const formattedSpotPrice = formatCurrency(spotPrice, ACTIVE_CURRENCY);
-    const formattedPercentageDifference = prependPlusSymbol(percentageDifference, priceDifference);
-    let formattedPriceDifference = formatCurrency(priceDifference, ACTIVE_CURRENCY);
-    formattedPriceDifference = prependPlusSymbol(formattedPriceDifference, priceDifference);
-
-    const priceMetrics = [
-      { label: `${cryptocurrency.name} price`, value: formattedSpotPrice },
-      { label: `${duration.humanize} (${ACTIVE_CURRENCY})`, value: formattedPriceDifference },
-      { label: `${duration.humanize} (%)`, value: `${formattedPercentageDifference}%` },
-    ];
-
-    // Display only the cryptocurrency's spot price when duration 'ALL' is selected
     return (
-      <div className="infoboxes">
-        {
-          priceMetrics &&
-          priceMetrics
-            .filter((e, index) => (
-              (duration !== DURATION.ALL) ||
-              (duration === DURATION.ALL && index === 0)
-            ))
-            .map(e => (
-              <InfoBox key={e.label} label={e.label} value={e.value} />
-            ))
-        }
+      <div className="table-container">
+        <PriceTable
+          cryptocurrencyLabel={CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex].name}
+          durationLabel={DURATION_LIST[selectedDurationIndex].humanize}
+          priceHistory={priceHistory}
+          spotPrice={spotPrice.amount}
+        />
       </div>
     );
   }
 
   renderPriceHistoryChart() {
-    const { activePriceHistory, selectedCryptocurrencyIndex, selectedDurationIndex } = this.state;
+    const { priceHistory, selectedCryptocurrencyIndex, selectedDurationIndex } = this.state;
     const cryptocurrency = CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex];
     const durationType = DURATION_LIST[selectedDurationIndex].key;
     return (
       <div className="chart">
         <div className="chart-svg">
-          <VerticalChartAxis data={activePriceHistory} textAlign="left" />
+          <VerticalChartAxis data={priceHistory} textAlign="left" />
           <PriceChart
-            data={activePriceHistory}
+            data={priceHistory}
             color={
               cryptocurrency && {
                 fill: cryptocurrency.fillColor,
@@ -184,9 +148,9 @@ class App extends Component {
               }
             }
           />
-          <VerticalChartAxis data={activePriceHistory} textAlign="right" />
+          <VerticalChartAxis data={priceHistory} textAlign="right" />
         </div>
-        <HorizontalChartAxis data={activePriceHistory} duration={durationType} />
+        <HorizontalChartAxis data={priceHistory} duration={durationType} />
       </div>
     );
   }
@@ -198,7 +162,7 @@ class App extends Component {
           { this.renderCryptocurrencyTabs() }
           { this.renderDurationTabs() }
         </div>
-        { this.renderInfoBoxes() }
+        { this.renderPriceTable() }
         { this.renderPriceHistoryChart() }
       </div>
     );
