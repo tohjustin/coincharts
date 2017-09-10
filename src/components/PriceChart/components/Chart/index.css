@@ -1,0 +1,10 @@
+.Chart-area {
+  pointer-events: none;
+  stroke: none;
+}
+
+.Chart-line {
+  fill: none;
+  pointer-events: none;
+  stroke-width: 2;
+}

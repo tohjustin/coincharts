@@ -1,0 +1,32 @@
+.HoverContainer {
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  width: 200px;
+}
+
+.HoverContainer.hidden {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+.HoverContainer.show {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.HoverContainer .content {
+  border-radius: 5px;
+  padding: 1px 6px;
+  background: #fff;
+  border: 1px solid #7d95b6;
+  color: #7d95b6;
+}
+
+.HoverContainer .content.invertColor {
+  background: #7d95b6;
+  border: none;
+  color: #fff;
+}

@@ -2,32 +2,33 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 
+import './index.css';
+
 const HOVER_CONTAINER_WIDTH = 200;
 const VERTICAL_OFFSET = -12;
 
 const HoverContainer = ({ bottom, top, value, visible, x }) => {
-  const hoverContainerClass = classNames({
-    'Chart-hidden': !visible,
-    'Chart-hoverContainer': true,
-    'Chart-show': visible,
+  const containerClass = classNames({
+    hidden: !visible,
+    HoverContainer: true,
+    show: visible,
   });
 
-  const hoverContainerContentClass = classNames({
+  const contentClass = classNames({
     content: true,
-    top,
-    bottom,
+    invertColor: top,
   });
 
   return (
     <div
-      className={hoverContainerClass}
+      className={containerClass}
       style={{
         bottom: bottom && VERTICAL_OFFSET,
         left: x - (HOVER_CONTAINER_WIDTH / 2),
         top: top && VERTICAL_OFFSET,
       }}
     >
-      <div className={hoverContainerContentClass}>{value}</div>
+      <div className={contentClass}>{value}</div>
     </div>
   );
 };
