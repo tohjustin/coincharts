@@ -257,7 +257,7 @@ class PriceChart extends Component {
 PriceChart.propTypes = {
   data: PropTypes.arrayOf(PropTypes.shape({
     price: PropTypes.number,
-    time: PropTypes.data,
+    time: PropTypes.date,
   })).isRequired,
   color: PropTypes.shape({
     fill: PropTypes.string,
