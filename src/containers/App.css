@@ -5,8 +5,13 @@
   display: flex;
   flex-direction: column;
   max-width: 1500px;
-  min-width: 900px;
+  min-width: 1080px;
   width: 80vw;
+  height: 475px;
+}
+
+.chart {
+  margin: 0 2em;
 }
 
 .chart .chart-svg {
@@ -15,16 +20,14 @@
   display: flex;
   flex-direction: row;
   height: 225px;
-  margin: 0 1.5em;
 }
 
 .infoboxes {
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
-  height: 140px;
-  justify-content: center;
-  padding: 20px;
+  height: 180px;
+  margin: 1.5em 2em;
 }
 
 .tabs {
@@ -34,5 +37,5 @@
   flex-shrink: 0;
   height: 55px;
   justify-content: space-between;
-  padding: 0 20px;
+  padding: 0 2em;
 }

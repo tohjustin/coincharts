@@ -5,16 +5,11 @@
   font-size: 48px;
   justify-content: center;
   line-height: normal;
-  width: 250px;
-}
-
-.infobox:not(:last-child) {
-  border-right: 1px solid #dae1e9;
-  padding-right: 48px;
+  width: 100%;
 }
 
 .infobox:not(:first-child) {
-  margin-left: 48px;
+  border-left: 1px solid #dae1e9;
 }
 
 .label {

@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import './index.css';
 
 const Tabs = ({ onChange, options, selectedIndex }) => (
-  <div className="tabs" role="tabpanel">
+  <div className="Tabs" role="tabpanel">
     {
       options.map((option, index) => {
         const isSelectedClass = (index === selectedIndex) && 'selected';
         return (
           <div
             aria-labelledby={option}
-            className={`tabItem ${isSelectedClass}`}
+            className={`Tabs-item ${isSelectedClass}`}
             key={option}
             onClick={() => onChange(index)}
             role="tab"

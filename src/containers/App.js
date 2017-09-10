@@ -193,15 +193,13 @@ class App extends Component {
 
   render() {
     return (
-      <div className="app">
-        <div className="app-container">
-          <div className="tabs">
-            { this.renderCryptocurrencyTabs() }
-            { this.renderDurationTabs() }
-          </div>
-          { this.renderInfoBoxes() }
-          { this.renderPriceHistoryChart() }
+      <div className="app-container">
+        <div className="tabs">
+          { this.renderCryptocurrencyTabs() }
+          { this.renderDurationTabs() }
         </div>
+        { this.renderInfoBoxes() }
+        { this.renderPriceHistoryChart() }
       </div>
     );
   }
