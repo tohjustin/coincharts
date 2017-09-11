@@ -87,32 +87,53 @@ class App extends Component {
 
   renderCryptocurrencyTabs() {
     const { spotPrices } = this.state;
-    const tabOptions = CRYPTOCURRENCY_LIST.map((e, index) => {
+    const keys = [];
+    const tabOptions = [];
+    CRYPTOCURRENCY_LIST.forEach(({ name }, index) => {
+      let key;
+      let tabOption;
       if (spotPrices[index]) {
-        const price = spotPrices[index].amount;
-        const formattedPrice = formatCurrency(price, ACTIVE_CURRENCY, { prependPlusSymbol: false });
-        return `${e.name} · ${formattedPrice}`;
+        const price = formatCurrency(spotPrices[index].amount, ACTIVE_CURRENCY);
+        key = `${name} ${price}`;
+        tabOption = (
+          <span className="cryptocurrency" key={key}>
+            <span>{name}</span>
+            <span>{price}</span>
+          </span>
+        );
+      } else {
+        key = name;
+        tabOption = (<span className="cryptocurrency" key={name}>{name}</span>);
       }
 
-      return `${e.name}`;
+      keys.push(key);
+      tabOptions.push(tabOption);
     });
 
     return (
       <Tabs
+        keys={keys}
         onChange={this.handleCryptocurrencyChange}
-        options={tabOptions}
         selectedIndex={this.state.selectedCryptocurrencyIndex}
-      />
+      >
+        {tabOptions}
+      </Tabs>
     );
   }
 
   renderDurationTabs() {
+    const tabOptions = DURATION_LIST.map(({ codename }) => (
+      <span key={codename}>{codename}</span>
+    ));
+
     return (
       <Tabs
+        keys={DURATION_LIST.map(({ codename }) => codename)}
         onChange={this.handleDurationChange}
-        options={DURATION_LIST.map(e => e.codename)}
         selectedIndex={this.state.selectedDurationIndex}
-      />
+      >
+        {tabOptions}
+      </Tabs>
     );
   }
 

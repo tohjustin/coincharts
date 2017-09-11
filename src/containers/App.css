@@ -36,3 +36,16 @@
   justify-content: space-between;
   padding: 0 2em;
 }
+
+.tabs .cryptocurrency span {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.tabs .cryptocurrency span + span::before {
+  content: " · ";
+}
+
+.tabs .cryptocurrency span:not(:first-child) {
+  font-size: 16px;
+}

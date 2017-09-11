@@ -3,21 +3,21 @@ import PropTypes from 'prop-types';
 
 import './index.css';
 
-const Tabs = ({ onChange, options, selectedIndex }) => (
+const Tabs = ({ children, keys, onChange, selectedIndex }) => (
   <div className="Tabs" role="tabpanel">
     {
-      options.map((option, index) => {
+      children.map((child, index) => {
         const isSelectedClass = (index === selectedIndex) && 'selected';
         return (
           <div
-            aria-labelledby={option}
+            aria-labelledby={keys[index]}
             className={`Tabs-item ${isSelectedClass}`}
-            key={option}
+            key={keys[index]}
             onClick={() => onChange(index)}
             role="tab"
             tabIndex="-1"
           >
-            <div>{option}</div>
+            {child}
           </div>
         );
       })
@@ -26,8 +26,9 @@ const Tabs = ({ onChange, options, selectedIndex }) => (
 );
 
 Tabs.propTypes = {
+  children: PropTypes.arrayOf(PropTypes.element).isRequired,
+  keys: PropTypes.arrayOf(PropTypes.string).isRequired,
   onChange: PropTypes.func.isRequired,
-  options: PropTypes.arrayOf(PropTypes.string).isRequired,
   selectedIndex: PropTypes.number.isRequired,
 };
 
