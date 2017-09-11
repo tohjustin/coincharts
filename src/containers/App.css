@@ -14,12 +14,20 @@
   margin: 0 2em;
 }
 
-.chart .chart-svg {
+.chart .topSection {
   border-bottom: 1px solid #dae1e9;
   border-top: 1px solid #dae1e9;
   display: flex;
   flex-direction: row;
   height: 225px;
+}
+
+.chart .PriceChart {
+  z-index: 10;
+}
+
+.chart .VerticalChartAxis .tick {
+  z-index: 100;
 }
 
 .table-container {

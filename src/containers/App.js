@@ -163,7 +163,7 @@ class App extends Component {
     const durationType = DURATION_LIST[selectedDurationIndex].key;
     return (
       <div className="chart">
-        <div className="chart-svg">
+        <div className="topSection">
           <VerticalChartAxis data={priceHistory} textAlign="left" />
           <PriceChart
             data={priceHistory}

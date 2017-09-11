@@ -19,7 +19,7 @@ const VerticalChartAxis = ({ data, textAlign }) => {
   const textAlignClass = (textAlign === 'left') ? 'left' : 'right';
 
   return (
-    <div className={`VerticalChartAxis-container ${textAlignClass}`}>
+    <div className={`VerticalChartAxis ${textAlignClass}`}>
       <div className="tick">{formatAxisPrice(maxPrice, ACTIVE_CURRENCY)}</div>
       <div className="tick">{formatAxisPrice(minPrice, ACTIVE_CURRENCY)}</div>
     </div>

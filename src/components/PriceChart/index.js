@@ -92,7 +92,7 @@ class PriceChart extends Component {
     const { data, color } = this.props;
 
     return (
-      <div className="PriceChart-container">
+      <div className="PriceChart">
         <div>
           <HoverContainer
             top

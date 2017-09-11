@@ -1,12 +1,11 @@
-.PriceChart-container {
+.PriceChart {
   cursor: crosshair;
   height: 100%;
   position: relative;
   width: 100%;
-  z-index: 10;
 }
 
-.PriceChart-container svg {
+.PriceChart svg {
   height: 100%;
   width: 100%;
 }
