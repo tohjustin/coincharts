@@ -50,7 +50,7 @@ class App extends Component {
     ];
 
     Promise.all(promises)
-      .then(([priceHistoryData, spotPrices]) => {
+      .then(([priceHistoryData, spotPricesData]) => {
         const priceHistory = priceHistoryData.prices
           .sort((a, b) => new Date(a.time) - new Date(b.time))
           .map(d => ({
@@ -58,9 +58,14 @@ class App extends Component {
             time: new Date(d.time),
           }));
 
+        const spotPrices = spotPricesData.map(d => ({
+          amount: +d.amount,
+          currency: d.currency,
+        }));
+
         this.setState({
-          spotPrice: spotPrices[cryptocurrencyIndex],
           priceHistory,
+          spotPrice: spotPrices[cryptocurrencyIndex],
           spotPrices,
         });
       })
@@ -125,7 +130,7 @@ class App extends Component {
           cryptocurrencyLabel={CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex].name}
           durationLabel={DURATION_LIST[selectedDurationIndex].humanize}
           priceHistory={priceHistory}
-          spotPrice={spotPrice.amount}
+          spotPrice={+spotPrice.amount}
         />
       </div>
     );
