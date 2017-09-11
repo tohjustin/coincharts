@@ -1,32 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import { formatCurrency } from '../../../../utils';
 import './index.css';
 
-const BIG_MINUS_SIGN = '\u2212';
-const MINUS_SIGN = '-';
-const PERCENTAGE_FORMAT_REGEX = /^(\+?)(-?)([\d+.?\d{0,2}]+)(%)$/;
-const PRICE_FORMAT_REGEX = /^(\+?)(-?\$?)([\d|,]+)(.*)$/;
+const ACTIVE_CURRENCY = 'usd';
+const PLUS_CHAR = '+';
+const MINUS_CHAR = '\u2212';
 
-const useBigMinusChar = (str = '') => str.replace(RegExp(MINUS_SIGN, 'g'), BIG_MINUS_SIGN);
+const TableCell = ({ label, value, isCurrency, isPercentage, showPlusCharacter, visible }) => {
+  const isNegative = value < 0;
+  const absValue = Math.abs(value);
+  const currencyValue = formatCurrency(absValue, ACTIVE_CURRENCY);
+  const percentageValue = Number(absValue).toFixed(2);
 
-function formatValue(str) {
-  const regex = PERCENTAGE_FORMAT_REGEX.test(str) ? PERCENTAGE_FORMAT_REGEX : PRICE_FORMAT_REGEX;
-  const [, plusChar, dollarChar, mainValue, superscriptValue] = regex.exec(str) || [];
-  return [plusChar, dollarChar, mainValue, superscriptValue];
-}
-
-const TableCell = ({ label, value, visible }) => {
-  const [plusChar, dollarChar, mainValue, superscriptValue] = formatValue(value);
-
+  // Todo: Parse & display currency values properly (current method is hacky)
   return (
     visible &&
     <div className="TableCell">
       <div className="value">
-        <span className="small-font plus-char">{plusChar}</span>
-        <span className="small-font">{useBigMinusChar(dollarChar)}</span>
-        <span className="large-font">{mainValue}</span>
-        <span className="small-font">{superscriptValue}</span>
+        {showPlusCharacter && <span className="small-font green">{PLUS_CHAR}</span>}
+        {isNegative && <span className="small-font">{MINUS_CHAR}</span>}
+        {isCurrency && <span className="small-font">{currencyValue.slice(0, 1)}</span>}
+        {isCurrency && <span className="large-font">{currencyValue.slice(1, -3)}</span>}
+        {isCurrency && <span className="small-font">{currencyValue.slice(-3)}</span>}
+        {isPercentage && <span className="large-font">{percentageValue}</span>}
+        {isPercentage && <span className="small-font">%</span>}
       </div>
       <div className="label">{label}</div>
     </div>
@@ -35,11 +34,17 @@ const TableCell = ({ label, value, visible }) => {
 
 TableCell.propTypes = {
   label: PropTypes.string.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.number.isRequired,
+  isCurrency: PropTypes.bool,
+  isPercentage: PropTypes.bool,
+  showPlusCharacter: PropTypes.bool,
   visible: PropTypes.bool,
 };
 
 TableCell.defaultProps = {
+  isCurrency: false,
+  isPercentage: false,
+  showPlusCharacter: false,
   visible: true,
 };
 
