@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 
+import Footer from '../components/Footer';
 import HorizontalChartAxis from '../components/HorizontalChartAxis';
 import PriceChart from '../components/PriceChart';
 import PriceTable from '../components/PriceTable';
@@ -146,7 +147,7 @@ class App extends Component {
     } = this.state;
 
     return (
-      <div className="table-container">
+      <div className="table">
         <PriceTable
           cryptocurrencyLabel={CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex].name}
           durationLabel={DURATION_LIST[selectedDurationIndex].humanize}
@@ -183,13 +184,16 @@ class App extends Component {
 
   render() {
     return (
-      <div className="app-container">
-        <div className="tabs">
-          { this.renderCryptocurrencyTabs() }
-          { this.renderDurationTabs() }
+      <div className="App">
+        <div className="dashboard">
+          <div className="tabs">
+            { this.renderCryptocurrencyTabs() }
+            { this.renderDurationTabs() }
+          </div>
+          { this.renderPriceTable() }
+          { this.renderPriceHistoryChart() }
         </div>
-        { this.renderPriceTable() }
-        { this.renderPriceHistoryChart() }
+        <Footer />
       </div>
     );
   }
