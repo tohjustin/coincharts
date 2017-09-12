@@ -1,8 +1,5 @@
 body {
-  align-items: center;
   background-image: linear-gradient(to bottom, #0e3877, #2b71b1);
-  display: flex;
-  flex-direction: column;
   font-family:
     "Avenir Next",
     -apple-system,
@@ -16,26 +13,17 @@ body {
     "Droid Sans",
     "Helvetica Neue",
     sans-serif;
+  font-size: 16px;
   height: 100vh;
-  justify-content: center;
-  margin: 0;
-  padding: 0;
+  line-height: 1.4;
   text-rendering: optimizeLegibility;
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
 }
 
-a {
-  text-decoration: none;
-}
-
-.footer {
-  color: white;
-  font-size: 16px;
-  font-weight: 500;
-  margin-top: 1.5em;
-}
-
-.footer-logo {
-  height: 16px;
+#root {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
 }

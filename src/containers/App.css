@@ -1,13 +1,18 @@
-.app-container {
+.App {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.dashboard {
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   display: flex;
   flex-direction: column;
   max-width: 1500px;
-  min-width: 1080px;
-  width: 80vw;
-  height: 475px;
+  min-width: 960px;
+  width: 90vw;
+  height: 470px;
 }
 
 .chart {
@@ -30,8 +35,9 @@
   z-index: 100;
 }
 
-.table-container {
-  height: 180px;
+.table {
+  height: 90px;
+  flex-shrink: 0;
   margin: 1.5em 2em;
 }
 
