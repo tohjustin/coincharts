@@ -24,16 +24,16 @@
     "serve": "^6.0.6"
   },
   "scripts": {
-    "start": "react-scripts start",
     "build": "react-scripts build && rm build/static/**/*.map",
-    "test": "react-scripts test --env=jsdom",
+    "check": "npm run stylelint && npm run eslint",
+    "deploy": "npm run check && npm run build && cp now.json ./build && now ./build",
     "eject": "react-scripts eject",
     "eslint": "eslint --color -- \"src/**/*.js\"",
+    "serve": "npm run build && serve ./build",
+    "start": "react-scripts start",
     "stylelint": "stylelint --color -- \"src/**/*.css\"",
-    "check": "npm run stylelint && npm run eslint",
-    "updatePriceData": "scripts/updatePriceData.sh ./public/priceData",
-    "deploy": "npm run check && npm run build && cp now.json ./build && now ./build",
-    "now-start": "serve ./build"
+    "test": "react-scripts test --env=jsdom",
+    "updatePriceData": "scripts/updatePriceData.sh ./public/priceData"
   },
   "devDependencies": {
     "eslint": "3.19.0",

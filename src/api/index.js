@@ -4,13 +4,19 @@ import get from 'lodash.get';
 import { LOCAL_JSON_DATA_DIR } from '../constants';
 
 function getPriceHistoryUrl(cryptocurrency, currency, durationType) {
-  return `${LOCAL_JSON_DATA_DIR}/${cryptocurrency}-${currency}_${durationType}.json`;
-  // return `https://www.coinbase.com/api/v2/prices/${cryptocurrency}-${currency}/historic?period=${durationType}`;
+  if (process.env.NODE_ENV !== 'production') {
+    return `${LOCAL_JSON_DATA_DIR}/${cryptocurrency}-${currency}_${durationType}.json`;
+  }
+
+  return `https://www.coinbase.com/api/v2/prices/${cryptocurrency}-${currency}/historic?period=${durationType}`;
 }
 
 function getSpotPriceUrl(currency) {
-  return `${LOCAL_JSON_DATA_DIR}/${currency}_spot.json`;
-  // return `https://api.coinbase.com/v2/prices/${currency}/spot?`;
+  if (process.env.NODE_ENV !== 'production') {
+    return `${LOCAL_JSON_DATA_DIR}/${currency}_spot.json`;
+  }
+
+  return `https://api.coinbase.com/v2/prices/${currency}/spot?`;
 }
 
 function fetchPriceHistory(cryptocurrency, currency, durationType) {
