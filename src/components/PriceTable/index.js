@@ -11,7 +11,7 @@ const PriceTable = ({ cryptocurrencyLabel, durationLabel, spotPrice, priceHistor
   const lastIndex = scan(priceHistory, (a, b) => a.time - b.time);
   const oldPrice = priceHistory[lastIndex] && priceHistory[lastIndex].price;
   const priceDifference = spotPrice - oldPrice;
-  const percentageDifference = ((spotPrice / oldPrice) - 1) * 100;
+  const percentageDifference = ((spotPrice / oldPrice) - 1) * 100 || 0;
 
   return (
     <div className="PriceTable">
