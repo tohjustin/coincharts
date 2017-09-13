@@ -31,19 +31,21 @@ class App extends Component {
   }
 
   componentDidMount() {
+    this.fetchPriceData();
+  }
+
+  fetchPriceData() {
     const {
       selectedCryptocurrencyIndex,
       selectedDurationIndex,
     } = this.state;
-    this.fetchPriceMetrics(selectedCryptocurrencyIndex, selectedDurationIndex);
-  }
-
-  fetchPriceMetrics(cryptocurrencyIndex, durationIndex) {
-    const cryptocurrency = CRYPTOCURRENCY_LIST[cryptocurrencyIndex];
-    const duration = DURATION_LIST[durationIndex];
 
     const promises = [
-      fetchPriceHistory(cryptocurrency.key, ACTIVE_CURRENCY, duration.key),
+      fetchPriceHistory(
+        CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex].key,
+        ACTIVE_CURRENCY,
+        DURATION_LIST[selectedDurationIndex].key,
+      ),
       fetchSpotPrices(ACTIVE_CURRENCY),
     ];
 
@@ -51,7 +53,7 @@ class App extends Component {
       .then(([priceHistory, spotPrices]) => {
         this.setState({
           priceHistory,
-          spotPrice: spotPrices[cryptocurrencyIndex],
+          spotPrice: spotPrices[selectedCryptocurrencyIndex],
           spotPrices,
         });
       })
@@ -62,13 +64,15 @@ class App extends Component {
   }
 
   handleCryptocurrencyChange = (nextIndex) => {
-    this.setState({ selectedCryptocurrencyIndex: nextIndex });
-    this.fetchPriceMetrics(nextIndex, this.state.selectedDurationIndex);
+    this.setState({ selectedCryptocurrencyIndex: nextIndex }, () => {
+      this.fetchPriceData();
+    });
   }
 
   handleDurationChange = (nextIndex) => {
-    this.setState({ selectedDurationIndex: nextIndex });
-    this.fetchPriceMetrics(this.state.selectedCryptocurrencyIndex, nextIndex);
+    this.setState({ selectedDurationIndex: nextIndex }, () => {
+      this.fetchPriceData();
+    });
   }
 
   renderCryptocurrencyTabs() {
