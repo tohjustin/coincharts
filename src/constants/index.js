@@ -21,12 +21,8 @@ const DURATION = {
   ALL: { key: 'all', codename: 'ALL', humanize: '' },
 };
 
-// Directory where price data (.json files) are stored
-const PRICE_DATA_PATH = './priceData';
-
 export {
   CURRENCY,
   CRYPTOCURRENCY,
   DURATION,
-  PRICE_DATA_PATH,
 };

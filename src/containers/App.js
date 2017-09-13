@@ -7,12 +7,9 @@ import PriceTable from '../components/PriceTable';
 import Tabs from '../components/Tabs';
 import VerticalChartAxis from '../components/VerticalChartAxis';
 
+import { fetchPriceHistory, fetchSpotPrices } from '../api';
 import { CRYPTOCURRENCY, DURATION } from '../constants';
-import {
-  fetchPriceData,
-  fetchSpotPrices,
-  formatCurrency,
-} from '../utils';
+import { formatCurrency } from '../utils';
 
 import './App.css';
 
@@ -46,24 +43,12 @@ class App extends Component {
     const duration = DURATION_LIST[durationIndex];
 
     const promises = [
-      fetchPriceData(cryptocurrency.key, ACTIVE_CURRENCY, duration.key),
-      fetchSpotPrices(CRYPTOCURRENCY_LIST, ACTIVE_CURRENCY),
+      fetchPriceHistory(cryptocurrency.key, ACTIVE_CURRENCY, duration.key),
+      fetchSpotPrices(ACTIVE_CURRENCY),
     ];
 
     Promise.all(promises)
-      .then(([priceHistoryData, spotPricesData]) => {
-        const priceHistory = priceHistoryData.prices
-          .sort((a, b) => new Date(a.time) - new Date(b.time))
-          .map(d => ({
-            price: +d.price,
-            time: new Date(d.time),
-          }));
-
-        const spotPrices = spotPricesData.map(d => ({
-          amount: +d.amount,
-          currency: d.currency,
-        }));
-
+      .then(([priceHistory, spotPrices]) => {
         this.setState({
           priceHistory,
           spotPrice: spotPrices[cryptocurrencyIndex],
