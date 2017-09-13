@@ -1,6 +1,20 @@
 {
   "name": "cryptocharts",
   "version": "1.0.0",
+  "description": "Cyptocurrency price chart, powered by Coinbase",
+  "license": "MIT",
+  "scripts": {
+    "build": "react-scripts build && rm build/static/**/*.map",
+    "check": "npm run stylelint && npm run eslint",
+    "deploy": "npm run check && npm run build && cp now.json ./build && now ./build && now alias",
+    "eject": "react-scripts eject",
+    "eslint": "eslint --color -- \"src/**/*.js\"",
+    "serve": "npm run build && serve ./build",
+    "start": "react-scripts start",
+    "stylelint": "stylelint --color -- \"src/**/*.css\"",
+    "test": "react-scripts test --env=jsdom",
+    "updatePriceData": "scripts/updatePriceData.sh ./public/priceData"
+  },
   "dependencies": {
     "axios": "^0.16.2",
     "classnames": "^2.2.5",
@@ -21,18 +35,6 @@
     "react-helmet": "^5.2.0",
     "react-scripts": "1.0.10",
     "serve": "^6.0.6"
-  },
-  "scripts": {
-    "build": "react-scripts build && rm build/static/**/*.map",
-    "check": "npm run stylelint && npm run eslint",
-    "deploy": "npm run check && npm run build && cp now.json ./build && now ./build && now alias",
-    "eject": "react-scripts eject",
-    "eslint": "eslint --color -- \"src/**/*.js\"",
-    "serve": "npm run build && serve ./build",
-    "start": "react-scripts start",
-    "stylelint": "stylelint --color -- \"src/**/*.css\"",
-    "test": "react-scripts test --env=jsdom",
-    "updatePriceData": "scripts/updatePriceData.sh ./public/priceData"
   },
   "devDependencies": {
     "eslint": "3.19.0",
