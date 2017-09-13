@@ -24,9 +24,13 @@ const DURATION = {
 // Directory where price data (.json files) are stored
 const LOCAL_JSON_DATA_DIR = './priceData';
 
+// Polls the API endpoint every minute to update prices
+const POLL_FREQUENCY = 60 * 1000;
+
 export {
   CURRENCY,
   CRYPTOCURRENCY,
   DURATION,
   LOCAL_JSON_DATA_DIR,
+  POLL_FREQUENCY,
 };

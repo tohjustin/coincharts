@@ -8,7 +8,7 @@ import Tabs from '../components/Tabs';
 import VerticalChartAxis from '../components/VerticalChartAxis';
 
 import { fetchPriceHistory, fetchSpotPrices } from '../api';
-import { CRYPTOCURRENCY, DURATION } from '../constants';
+import { CRYPTOCURRENCY, DURATION, POLL_FREQUENCY } from '../constants';
 import { formatCurrency } from '../utils';
 
 import './App.css';
@@ -32,6 +32,21 @@ class App extends Component {
 
   componentDidMount() {
     this.fetchPriceData();
+    this.startPriceDataPolling();
+  }
+
+  componentWillUnmount() {
+    this.clearPriceDataPolling();
+  }
+
+  startPriceDataPolling() {
+    this.pollingId = setInterval(() => {
+      this.fetchPriceData();
+    }, POLL_FREQUENCY);
+  }
+
+  clearPriceDataPolling() {
+    clearInterval(this.pollingId);
   }
 
   fetchPriceData() {
