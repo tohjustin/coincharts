@@ -21,8 +21,12 @@ const DURATION = {
   ALL: { key: 'all', codename: 'ALL', humanize: '' },
 };
 
+// Directory where price data (.json files) are stored
+const LOCAL_JSON_DATA_DIR = './priceData';
+
 export {
   CURRENCY,
   CRYPTOCURRENCY,
   DURATION,
+  LOCAL_JSON_DATA_DIR,
 };

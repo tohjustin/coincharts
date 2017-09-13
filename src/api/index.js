@@ -1,12 +1,16 @@
 import axios from 'axios';
 import get from 'lodash.get';
 
+import { LOCAL_JSON_DATA_DIR } from '../constants';
+
 function getPriceHistoryUrl(cryptocurrency, currency, durationType) {
-  return `https://www.coinbase.com/api/v2/prices/${cryptocurrency}-${currency}/historic?period=${durationType}`;
+  return `${LOCAL_JSON_DATA_DIR}/${cryptocurrency}-${currency}_${durationType}.json`;
+  // return `https://www.coinbase.com/api/v2/prices/${cryptocurrency}-${currency}/historic?period=${durationType}`;
 }
 
 function getSpotPriceUrl(currency) {
-  return `https://api.coinbase.com/v2/prices/${currency}/spot?`;
+  return `${LOCAL_JSON_DATA_DIR}/${currency}_spot.json`;
+  // return `https://api.coinbase.com/v2/prices/${currency}/spot?`;
 }
 
 function fetchPriceHistory(cryptocurrency, currency, durationType) {
