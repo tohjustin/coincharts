@@ -17,7 +17,6 @@ const Footer = () => (
         alt="coinbase"
       />
     </a>
-    <span> API</span>
   </div>
 );
 
