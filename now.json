@@ -1,4 +1,5 @@
 {
-  "name": "coinbase-charts",
-  "public": true
+  "name": "cryptocharts",
+  "public": true,
+  "alias": "cryptocharts"
 }

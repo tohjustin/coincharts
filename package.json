@@ -1,7 +1,6 @@
 {
-  "name": "coinbase-charts",
-  "version": "0.1.0",
-  "private": true,
+  "name": "cryptocharts",
+  "version": "1.0.0",
   "dependencies": {
     "axios": "^0.16.2",
     "classnames": "^2.2.5",
@@ -26,7 +25,7 @@
   "scripts": {
     "build": "react-scripts build && rm build/static/**/*.map",
     "check": "npm run stylelint && npm run eslint",
-    "deploy": "npm run check && npm run build && cp now.json ./build && now ./build",
+    "deploy": "npm run check && npm run build && cp now.json ./build && now ./build && now alias",
     "eject": "react-scripts eject",
     "eslint": "eslint --color -- \"src/**/*.js\"",
     "serve": "npm run build && serve ./build",
