@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Helmet from 'react-helmet';
 
 import Footer from '../components/Footer';
 import HorizontalChartAxis from '../components/HorizontalChartAxis';
@@ -88,6 +89,20 @@ class App extends Component {
     this.setState({ selectedDurationIndex: nextIndex }, () => {
       this.fetchPriceData();
     });
+  }
+
+  renderHelmet() {
+    const { selectedCryptocurrencyIndex, spotPrices } = this.state;
+    const cryptocurrency = CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex].key;
+    const price = spotPrices[selectedCryptocurrencyIndex] || '';
+    const priceText = formatCurrency(price.amount, ACTIVE_CURRENCY) || '';
+
+    return (
+      <Helmet>
+        <title>{`${cryptocurrency.toUpperCase()}: ${priceText}`}</title>
+        <link rel="icon" href={`${process.env.PUBLIC_URL}/icons/icon-${cryptocurrency}.png`} />
+      </Helmet>
+    );
   }
 
   renderCryptocurrencyTabs() {
@@ -189,6 +204,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        { this.renderHelmet() }
         <div className="dashboard">
           <div className="tabs">
             { this.renderCryptocurrencyTabs() }
