@@ -1,14 +1,10 @@
-.App {
-  width: fit-content;
-  margin: 0 auto;
-}
-
 .dashboard {
   background-color: #fff;
   border-radius: 4px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
   max-width: 1500px;
   min-width: 960px;
   width: 90vw;
@@ -36,8 +32,11 @@
 }
 
 .table {
-  height: 90px;
+  display: flex;
+  flex-direction: column;
   flex-shrink: 0;
+  height: 90px;
+  justify-content: center;
   margin: 1.5em 2em;
 }
 
