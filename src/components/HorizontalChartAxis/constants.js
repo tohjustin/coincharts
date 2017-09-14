@@ -9,7 +9,8 @@ const DURATION = {
   ALL: 'all',
 };
 
-const DURATION_LIST = Object.values(DURATION);
+// `Object.values` polyfill for IE (since it's not supported by CRA)
+const DURATION_LIST = Object.keys(DURATION).map(e => DURATION[e]);
 
 export {
   DEFAULT_TICK_COUNT,

@@ -14,9 +14,11 @@ import { formatCurrency } from '../utils';
 
 import './App.css';
 
+// `Object.values` polyfill for IE (since it's not supported by CRA)
+const CRYPTOCURRENCY_LIST = Object.keys(CRYPTOCURRENCY).map(e => CRYPTOCURRENCY[e]);
+const DURATION_LIST = Object.keys(DURATION).map(e => DURATION[e]);
+
 const ACTIVE_CURRENCY = 'usd';
-const CRYPTOCURRENCY_LIST = Object.values(CRYPTOCURRENCY);
-const DURATION_LIST = Object.values(DURATION);
 const INITIAL_STATE = {
   priceHistory: [],
   spotPrice: { amount: '0', currency: ACTIVE_CURRENCY },
