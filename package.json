@@ -16,16 +16,16 @@
     "updatePriceData": "scripts/updatePriceData.sh ./public/priceData"
   },
   "dependencies": {
-    "axios": "0.16.2",
+    "axios": "0.17.0",
     "classnames": "2.2.5",
-    "currency-formatter": "1.3.0",
+    "currency-formatter": "1.3.1",
     "d3-array": "1.2.1",
     "d3-ease": "1.0.3",
-    "d3-interpolate-path": "2.0.0",
+    "d3-interpolate-path": "2.0.1",
     "d3-scale": "1.0.6",
     "d3-selection": "1.1.0",
     "d3-shape": "1.2.0",
-    "d3-time-format": "2.0.5",
+    "d3-time-format": "2.1.0",
     "d3-transition": "1.1.0",
     "lodash.get": "4.4.2",
     "lodash.isequal": "4.5.0",
@@ -33,8 +33,7 @@
     "react": "16.0.0",
     "react-dom": "16.0.0",
     "react-helmet": "5.2.0",
-    "react-scripts": "1.0.10",
-    "serve": "6.1.0"
+    "react-scripts": "1.0.16"
   },
   "devDependencies": {
     "eslint": "3.19.0",
@@ -42,7 +41,8 @@
     "eslint-plugin-import": "2.7.0",
     "eslint-plugin-jsx-a11y": "5.1.1",
     "eslint-plugin-react": "7.1.0",
-    "stylelint": "8.0.0",
+    "serve": "6.4.0",
+    "stylelint": "8.2.0",
     "stylelint-config-standard": "17.0.0"
   }
 }
