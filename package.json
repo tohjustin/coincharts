@@ -5,14 +5,16 @@
   "license": "MIT",
   "scripts": {
     "build": "react-scripts build && rm build/static/**/*.map",
-    "check": "npm run stylelint && npm run eslint",
+    "check": "npm run stylelint && npm run lint",
     "deploy": "npm run check && npm run build && cp now.json ./build && now ./build --public && now alias",
     "eject": "react-scripts eject",
-    "eslint": "eslint --color -- \"src/**/*.js\"",
+    "lint": "xo",
+    "precommit": "npm run lint && lint-staged && npm run test",
     "serve": "npm run build && serve ./build",
     "start": "react-scripts start",
     "stylelint": "stylelint --color -- \"src/**/*.css\"",
-    "test": "react-scripts test --env=jsdom",
+    "test": "CI=true react-scripts test --env=jsdom",
+    "test:watch": "react-scripts test --env=jsdom",
     "updatePriceData": "scripts/updatePriceData.sh ./public/priceData"
   },
   "dependencies": {
@@ -36,13 +38,41 @@
     "react-scripts": "1.0.16"
   },
   "devDependencies": {
-    "eslint": "3.19.0",
-    "eslint-config-airbnb": "15.1.0",
-    "eslint-plugin-import": "2.7.0",
-    "eslint-plugin-jsx-a11y": "5.1.1",
-    "eslint-plugin-react": "7.1.0",
+    "eslint-config-prettier": "2.6.0",
+    "eslint-config-xo-react": "0.13.0",
+    "eslint-plugin-react": "7.4.0",
+    "husky": "0.14.3",
+    "lint-staged": "^4.3.0",
+    "now": "8.3.11",
+    "prettier": "1.7.4",
     "serve": "6.4.0",
     "stylelint": "8.2.0",
-    "stylelint-config-standard": "17.0.0"
+    "stylelint-config-standard": "17.0.0",
+    "xo": "0.18.2"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "xo": {
+    "envs": [
+      "browser",
+      "jest"
+    ],
+    "extends": [
+      "prettier",
+      "xo-react"
+    ],
+    "ignores": [
+      "src/registerServiceWorker.js"
+    ],
+    "rules": {
+      "import/no-unassigned-import": 0,
+      "react/jsx-tag-spacing": 0,
+      "unicorn/filename-case": 0
+    },
+    "space": true
   }
 }
