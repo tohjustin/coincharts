@@ -1,36 +1,44 @@
-import React, { Component } from 'react';
-import Helmet from 'react-helmet';
+import React, { Component } from "react";
+import Helmet from "react-helmet";
 
-import Footer from '../components/Footer';
-import HorizontalChartAxis from '../components/HorizontalChartAxis';
-import PriceChart from '../components/PriceChart';
-import PriceTable from '../components/PriceTable';
-import Tabs from '../components/Tabs';
-import VerticalChartAxis from '../components/VerticalChartAxis';
+import Footer from "../components/Footer";
+import HorizontalChartAxis from "../components/HorizontalChartAxis";
+import PriceChart from "../components/PriceChart";
+import PriceTable from "../components/PriceTable";
+import Tabs from "../components/Tabs";
+import VerticalChartAxis from "../components/VerticalChartAxis";
 
-import { fetchPriceHistory, fetchSpotPrices } from '../api';
-import { CRYPTOCURRENCY, DURATION, POLL_FREQUENCY } from '../constants';
-import { formatCurrency } from '../utils';
+import { fetchPriceHistory, fetchSpotPrices } from "../api";
+import { CRYPTOCURRENCY, DURATION, POLL_FREQUENCY } from "../constants";
+import { formatCurrency } from "../utils";
 
-import './App.css';
+import "./App.css";
 
 // `Object.values` polyfill for IE (since it's not supported by CRA)
-const CRYPTOCURRENCY_LIST = Object.keys(CRYPTOCURRENCY).map(e => CRYPTOCURRENCY[e]);
+const CRYPTOCURRENCY_LIST = Object.keys(CRYPTOCURRENCY).map(
+  e => CRYPTOCURRENCY[e]
+);
 const DURATION_LIST = Object.keys(DURATION).map(e => DURATION[e]);
 
-const ACTIVE_CURRENCY = 'usd';
+const ACTIVE_CURRENCY = "usd";
 const INITIAL_STATE = {
   priceHistory: [],
-  spotPrice: { amount: '0', currency: ACTIVE_CURRENCY },
+  spotPrice: { amount: "0", currency: ACTIVE_CURRENCY },
   selectedCryptocurrencyIndex: 0,
   selectedDurationIndex: 2,
-  spotPrices: [],
+  spotPrices: []
 };
 
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
+
+    // Bind event-handlers
+    this.handleCryptocurrencyChange = this.handleCryptocurrencyChange.bind(
+      this
+    );
+    this.handleDurationChange = this.handleDurationChange.bind(this);
   }
 
   componentDidMount() {
@@ -53,18 +61,15 @@ class App extends Component {
   }
 
   fetchPriceData() {
-    const {
-      selectedCryptocurrencyIndex,
-      selectedDurationIndex,
-    } = this.state;
+    const { selectedCryptocurrencyIndex, selectedDurationIndex } = this.state;
 
     const promises = [
       fetchPriceHistory(
         CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex].key,
         ACTIVE_CURRENCY,
-        DURATION_LIST[selectedDurationIndex].key,
+        DURATION_LIST[selectedDurationIndex].key
       ),
-      fetchSpotPrices(ACTIVE_CURRENCY),
+      fetchSpotPrices(ACTIVE_CURRENCY)
     ];
 
     Promise.all(promises)
@@ -72,22 +77,22 @@ class App extends Component {
         this.setState({
           priceHistory,
           spotPrice: spotPrices[selectedCryptocurrencyIndex],
-          spotPrices,
+          spotPrices
         });
       })
-      .catch((err) => {
+      .catch(err => {
         // eslint-disable-next-line no-console
         console.error(err);
       });
   }
 
-  handleCryptocurrencyChange = (nextIndex) => {
+  handleCryptocurrencyChange(nextIndex) {
     this.setState({ selectedCryptocurrencyIndex: nextIndex }, () => {
       this.fetchPriceData();
     });
   }
 
-  handleDurationChange = (nextIndex) => {
+  handleDurationChange(nextIndex) {
     this.setState({ selectedDurationIndex: nextIndex }, () => {
       this.fetchPriceData();
     });
@@ -96,13 +101,16 @@ class App extends Component {
   renderHelmet() {
     const { selectedCryptocurrencyIndex, spotPrices } = this.state;
     const cryptocurrency = CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex].key;
-    const price = spotPrices[selectedCryptocurrencyIndex] || '';
-    const priceText = formatCurrency(price.amount, ACTIVE_CURRENCY) || '';
+    const price = spotPrices[selectedCryptocurrencyIndex] || "";
+    const priceText = formatCurrency(price.amount, ACTIVE_CURRENCY) || "";
 
     return (
       <Helmet>
         <title>{`${cryptocurrency.toUpperCase()}: ${priceText}`}</title>
-        <link rel="icon" href={`${process.env.PUBLIC_URL}/icons/icon-${cryptocurrency}.png`} />
+        <link
+          rel="icon"
+          href={`${process.env.PUBLIC_URL}/icons/icon-${cryptocurrency}.png`}
+        />
       </Helmet>
     );
   }
@@ -118,14 +126,18 @@ class App extends Component {
         const price = formatCurrency(spotPrices[index].amount, ACTIVE_CURRENCY);
         key = `${name} ${price}`;
         tabOption = (
-          <span className="cryptocurrency" key={key}>
+          <span key={key} className="cryptocurrency">
             <span>{name}</span>
             <span>{price}</span>
           </span>
         );
       } else {
         key = name;
-        tabOption = (<span className="cryptocurrency" key={name}>{name}</span>);
+        tabOption = (
+          <span key={name} className="cryptocurrency">
+            {name}
+          </span>
+        );
       }
 
       keys.push(key);
@@ -164,23 +176,29 @@ class App extends Component {
       priceHistory,
       selectedCryptocurrencyIndex,
       selectedDurationIndex,
-      spotPrice,
+      spotPrice
     } = this.state;
 
     return (
       <div className="table">
         <PriceTable
-          cryptocurrencyLabel={CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex].name}
+          cryptocurrencyLabel={
+            CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex].name
+          }
           durationLabel={DURATION_LIST[selectedDurationIndex].humanize}
           priceHistory={priceHistory}
-          spotPrice={+spotPrice.amount}
+          spotPrice={Number(spotPrice.amount)}
         />
       </div>
     );
   }
 
   renderPriceHistoryChart() {
-    const { priceHistory, selectedCryptocurrencyIndex, selectedDurationIndex } = this.state;
+    const {
+      priceHistory,
+      selectedCryptocurrencyIndex,
+      selectedDurationIndex
+    } = this.state;
     const cryptocurrency = CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex];
     const durationType = DURATION_LIST[selectedDurationIndex].key;
     return (
@@ -192,7 +210,7 @@ class App extends Component {
             color={
               cryptocurrency && {
                 fill: cryptocurrency.fillColor,
-                stroke: cryptocurrency.strokeColor,
+                stroke: cryptocurrency.strokeColor
               }
             }
           />
@@ -206,14 +224,14 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        { this.renderHelmet() }
+        {this.renderHelmet()}
         <div className="dashboard">
           <div className="tabs">
-            { this.renderCryptocurrencyTabs() }
-            { this.renderDurationTabs() }
+            {this.renderCryptocurrencyTabs()}
+            {this.renderDurationTabs()}
           </div>
-          { this.renderPriceTable() }
-          { this.renderPriceHistoryChart() }
+          {this.renderPriceTable()}
+          {this.renderPriceHistoryChart()}
         </div>
         <Footer />
       </div>

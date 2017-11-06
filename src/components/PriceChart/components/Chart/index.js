@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import isEqual from 'lodash.isequal';
-import { area as d3Area, line as d3Line } from 'd3-shape';
-import { easeCubicOut } from 'd3-ease';
-import { extent } from 'd3-array';
-import { interpolatePath } from 'd3-interpolate-path';
-import { scaleLinear, scaleTime } from 'd3-scale';
-import { select } from 'd3-selection';
-import 'd3-transition';
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import isEqual from "lodash.isequal";
+import { area as d3Area, line as d3Line } from "d3-shape";
+import { easeCubicOut } from "d3-ease";
+import { extent } from "d3-array";
+import { interpolatePath } from "d3-interpolate-path";
+import { scaleLinear, scaleTime } from "d3-scale";
+import { select } from "d3-selection";
+import "d3-transition";
 
-import './index.css';
+import "./index.css";
 
 const CHART_PADDING_TOP = 20;
 const INITIAL_STATE = {
   previousColor: undefined,
   previousScaledData: [],
   scaledData: [],
-  skipTransition: false,
+  skipTransition: false
 };
 const TRANSITION = { duration: 500, ease: easeCubicOut };
 
@@ -32,7 +32,7 @@ class Chart extends Component {
 
     return data.map(({ price, time }) => ({
       price: scalePriceToY(price),
-      time: scaleTimeToX(time),
+      time: scaleTimeToX(time)
     }));
   }
 
@@ -42,23 +42,21 @@ class Chart extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {
-      data: nextData,
-      height: nextHeight,
-      width: nextWidth,
-    } = nextProps;
+    const { data: nextData, height: nextHeight, width: nextWidth } = nextProps;
     const { color, width } = this.props;
     const { scaledData } = this.state;
 
     const nextScaledData = Chart.scaleData(nextData, nextHeight, nextWidth);
-    const previousScaledData = (scaledData.length > 0) ?
-      scaledData : nextScaledData.map(({ time }) => ({ price: nextHeight, time }));
+    const previousScaledData =
+      scaledData.length > 0
+        ? scaledData
+        : nextScaledData.map(({ time }) => ({ price: nextHeight, time }));
 
     this.setState({
-      skipTransition: (width !== nextWidth),
+      skipTransition: width !== nextWidth,
       previousColor: color,
       previousScaledData,
-      scaledData: nextScaledData,
+      scaledData: nextScaledData
     });
   }
 
@@ -75,9 +73,14 @@ class Chart extends Component {
 
   componentDidUpdate() {
     const { color, height } = this.props;
-    const { previousColor = color, previousScaledData, scaledData, skipTransition } = this.state;
+    const {
+      previousColor = color,
+      previousScaledData,
+      scaledData,
+      skipTransition
+    } = this.state;
     const chart = select(this.svgNode);
-    const transitionDuration = (skipTransition) ? 0 : TRANSITION.duration;
+    const transitionDuration = skipTransition ? 0 : TRANSITION.duration;
 
     const area = d3Area()
       .x(d => d.time)
@@ -92,51 +95,53 @@ class Chart extends Component {
     const areaChart = area(scaledData);
     const lineChart = line(scaledData);
 
-    chart
-      .selectAll('path')
-      .remove();
+    chart.selectAll("path").remove();
 
     chart
-      .append('path')
-        .attr('class', 'Chart-area')
-        .attr('d', previousAreaChart)
-        .style('fill', previousColor.fill)
+      .append("path")
+      .attr("class", "Chart-area")
+      .attr("d", previousAreaChart)
+      .style("fill", previousColor.fill)
       .transition()
-        .duration(transitionDuration)
-        .ease(TRANSITION.ease)
-        .attrTween('d', () => interpolatePath(previousAreaChart, areaChart))
-        .style('fill', color.fill);
+      .duration(transitionDuration)
+      .ease(TRANSITION.ease)
+      .attrTween("d", () => interpolatePath(previousAreaChart, areaChart))
+      .style("fill", color.fill);
 
     chart
-      .append('path')
-        .attr('class', 'Chart-line')
-        .attr('d', previousLineChart)
-        .style('stroke', previousColor.stroke)
+      .append("path")
+      .attr("class", "Chart-line")
+      .attr("d", previousLineChart)
+      .style("stroke", previousColor.stroke)
       .transition()
-        .duration(transitionDuration)
-        .ease(TRANSITION.ease)
-        .attrTween('d', () => interpolatePath(previousLineChart, lineChart))
-        .style('stroke', color.stroke);
+      .duration(transitionDuration)
+      .ease(TRANSITION.ease)
+      .attrTween("d", () => interpolatePath(previousLineChart, lineChart))
+      .style("stroke", color.stroke);
   }
 
   render() {
-    return (
-      <g ref={(node) => { this.svgNode = node; }} />
-    );
+    const nodeRef = node => {
+      this.svgNode = node;
+    };
+
+    return <g ref={nodeRef} />;
   }
 }
 
 Chart.propTypes = {
   color: PropTypes.shape({
     fill: PropTypes.string,
-    stroke: PropTypes.string,
+    stroke: PropTypes.string
   }).isRequired,
-  data: PropTypes.arrayOf(PropTypes.shape({
-    price: PropTypes.number,
-    time: PropTypes.date,
-  })).isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      price: PropTypes.number,
+      time: PropTypes.date
+    })
+  ).isRequired,
   height: PropTypes.number.isRequired,
-  width: PropTypes.number.isRequired,
+  width: PropTypes.number.isRequired
 };
 
 export default Chart;

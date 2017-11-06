@@ -1,17 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { scan } from 'd3-array';
+import React from "react";
+import PropTypes from "prop-types";
+import { scan } from "d3-array";
 
-import TableCell from './components/TableCell';
+import TableCell from "./components/TableCell";
 
-import './index.css';
+import "./index.css";
 
-const ACTIVE_CURRENCY = 'usd';
-const PriceTable = ({ cryptocurrencyLabel, durationLabel, spotPrice, priceHistory }) => {
+const ACTIVE_CURRENCY = "usd";
+const PriceTable = ({
+  cryptocurrencyLabel,
+  durationLabel,
+  spotPrice,
+  priceHistory
+}) => {
   const lastIndex = scan(priceHistory, (a, b) => a.time - b.time);
   const oldPrice = priceHistory[lastIndex] && priceHistory[lastIndex].price;
   const priceDifference = spotPrice - oldPrice;
-  const percentageDifference = ((spotPrice / oldPrice) - 1) * 100 || 0;
+  const percentageDifference = (spotPrice / oldPrice - 1) * 100 || 0;
 
   return (
     <div className="PriceTable">
@@ -25,14 +30,14 @@ const PriceTable = ({ cryptocurrencyLabel, durationLabel, spotPrice, priceHistor
         isCurrency
         label={`${durationLabel} (${ACTIVE_CURRENCY})`}
         value={priceDifference}
-        visible={!!durationLabel}
+        visible={Boolean(durationLabel)}
       />
       <TableCell
         showPlusCharacter={percentageDifference > 0}
         isPercentage
         label={`${durationLabel} (%)`}
         value={percentageDifference}
-        visible={!!durationLabel}
+        visible={Boolean(durationLabel)}
       />
     </div>
   );
@@ -41,11 +46,13 @@ const PriceTable = ({ cryptocurrencyLabel, durationLabel, spotPrice, priceHistor
 PriceTable.propTypes = {
   cryptocurrencyLabel: PropTypes.string.isRequired,
   durationLabel: PropTypes.string.isRequired,
-  priceHistory: PropTypes.arrayOf(PropTypes.shape({
-    price: PropTypes.number,
-    time: PropTypes.date,
-  })).isRequired,
-  spotPrice: PropTypes.number.isRequired,
+  priceHistory: PropTypes.arrayOf(
+    PropTypes.shape({
+      price: PropTypes.number,
+      time: PropTypes.date
+    })
+  ).isRequired,
+  spotPrice: PropTypes.number.isRequired
 };
 
 export default PriceTable;
