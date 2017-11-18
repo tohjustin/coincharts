@@ -9,3 +9,108 @@
   height: 100%;
   width: 100%;
 }
+
+.Chart-area {
+  pointer-events: none;
+  stroke: none;
+}
+
+.Chart-line {
+  fill: none;
+  pointer-events: none;
+  stroke-width: 2;
+}
+
+.Cursor.show {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.Cursor.hidden {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+.Cursor .line {
+  stroke: #7d95b6;
+  stroke-width: 1;
+}
+
+.Cursor .circle {
+  fill: white;
+  stroke: #7d95b6;
+  stroke-width: 2;
+}
+
+.HorizontalChartAxis {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 0.5em 2.5em 1.5em;
+}
+
+.HorizontalChartAxis .tick {
+  color: #7d95b6;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.HoverContainer {
+  font-size: 14px;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  width: 200px;
+}
+
+.HoverContainer.hidden {
+  opacity: 0;
+  transition: opacity 300ms;
+}
+
+.HoverContainer.show {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.HoverContainer .content {
+  border-radius: 5px;
+  padding: 1px 6px;
+  background: #fff;
+  border: 1px solid #7d95b6;
+  color: #7d95b6;
+}
+
+.HoverContainer .content.invertColor {
+  background: #7d95b6;
+  border: none;
+  color: #fff;
+}
+
+.VerticalChartAxis {
+  background-color: transparent;
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 3em;
+  justify-content: space-between;
+  max-width: 3em;
+  padding: 0.5em 0;
+}
+
+.VerticalChartAxis.right {
+  align-items: flex-end;
+}
+
+.VerticalChartAxis.left {
+  align-items: flex-start;
+}
+
+.VerticalChartAxis .tick {
+  color: #7d95b6;
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+}

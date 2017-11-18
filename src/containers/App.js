@@ -2,11 +2,9 @@ import React, { Component } from "react";
 import Helmet from "react-helmet";
 
 import Footer from "../components/Footer";
-import HorizontalChartAxis from "../components/HorizontalChartAxis";
 import PriceChart from "../components/PriceChart";
 import PriceTable from "../components/PriceTable";
 import Tabs from "../components/Tabs";
-import VerticalChartAxis from "../components/VerticalChartAxis";
 
 import { fetchPriceHistory, fetchSpotPrices } from "../api";
 import { CRYPTOCURRENCY, DURATION, POLL_FREQUENCY } from "../constants";
@@ -201,23 +199,18 @@ class App extends Component {
     } = this.state;
     const cryptocurrency = CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex];
     const durationType = DURATION_LIST[selectedDurationIndex].key;
+
     return (
-      <div className="chart">
-        <div className="topSection">
-          <VerticalChartAxis data={priceHistory} textAlign="left" />
-          <PriceChart
-            data={priceHistory}
-            color={
-              cryptocurrency && {
-                fill: cryptocurrency.fillColor,
-                stroke: cryptocurrency.strokeColor
-              }
-            }
-          />
-          <VerticalChartAxis data={priceHistory} textAlign="right" />
-        </div>
-        <HorizontalChartAxis data={priceHistory} duration={durationType} />
-      </div>
+      <PriceChart
+        data={priceHistory}
+        durationType={durationType}
+        color={
+          cryptocurrency && {
+            fill: cryptocurrency.fillColor,
+            stroke: cryptocurrency.strokeColor
+          }
+        }
+      />
     );
   }
 

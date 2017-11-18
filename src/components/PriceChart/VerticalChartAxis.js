@@ -1,22 +1,20 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import currencyFormatter from 'currency-formatter';
-import { extent } from 'd3-array';
+import React from "react";
+import PropTypes from "prop-types";
+import currencyFormatter from "currency-formatter";
+import { extent } from "d3-array";
 
-import './index.css';
-
-const ACTIVE_CURRENCY = 'usd';
+import { ACTIVE_CURRENCY } from "./constants";
 
 function formatAxisPrice(price, currencyCode) {
   return currencyFormatter.format(price, {
     code: currencyCode.toUpperCase(),
-    precision: 0,
+    precision: 0
   });
 }
 
 const VerticalChartAxis = ({ data, textAlign }) => {
   const [minPrice, maxPrice] = extent(data, d => d.price);
-  const textAlignClass = (textAlign === 'left') ? 'left' : 'right';
+  const textAlignClass = textAlign === "left" ? "left" : "right";
 
   return (
     <div className={`VerticalChartAxis ${textAlignClass}`}>
@@ -27,11 +25,13 @@ const VerticalChartAxis = ({ data, textAlign }) => {
 };
 
 VerticalChartAxis.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
-    price: PropTypes.number,
-    time: PropTypes.data,
-  })).isRequired,
-  textAlign: PropTypes.oneOf(['left', 'right']).isRequired,
+  data: PropTypes.arrayOf(
+    PropTypes.shape({
+      price: PropTypes.number,
+      time: PropTypes.data
+    })
+  ).isRequired,
+  textAlign: PropTypes.oneOf(["left", "right"]).isRequired
 };
 
 export default VerticalChartAxis;

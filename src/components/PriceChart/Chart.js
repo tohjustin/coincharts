@@ -2,23 +2,20 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEqual from "lodash.isequal";
 import { area as d3Area, line as d3Line } from "d3-shape";
-import { easeCubicOut } from "d3-ease";
 import { extent } from "d3-array";
 import { interpolatePath } from "d3-interpolate-path";
 import { scaleLinear, scaleTime } from "d3-scale";
 import { select } from "d3-selection";
 import "d3-transition";
 
-import "./index.css";
+import { CHART_PADDING_TOP, TRANSITION } from "./constants";
 
-const CHART_PADDING_TOP = 20;
 const INITIAL_STATE = {
   previousColor: undefined,
   previousScaledData: [],
   scaledData: [],
   skipTransition: false
 };
-const TRANSITION = { duration: 500, ease: easeCubicOut };
 
 class Chart extends Component {
   static scaleData(data, height, width) {

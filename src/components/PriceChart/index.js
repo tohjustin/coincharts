@@ -4,9 +4,11 @@ import { extent } from "d3-array";
 import { scaleLinear } from "d3-scale";
 
 import { formatCurrency } from "../../utils";
-import Chart from "./components/Chart";
-import Cursor from "./components/Cursor";
-import HoverContainer from "./components/HoverContainer";
+import Chart from "./Chart";
+import Cursor from "./Cursor";
+import HorizontalChartAxis from "./HorizontalChartAxis";
+import HoverContainer from "./HoverContainer";
+import VerticalChartAxis from "./VerticalChartAxis";
 
 import "./index.css";
 
@@ -102,46 +104,53 @@ class PriceChart extends Component {
 
   render() {
     const { dimensions, hoveredValue, hoverX, hoverY, hovered } = this.state;
-    const { data, color } = this.props;
+    const { color, data, durationType } = this.props;
     const svgRef = node => {
       this.chartSvgComponent = node;
     };
 
     return (
-      <div className="PriceChart">
-        <div>
-          <HoverContainer
-            top
-            value={hoveredValue.price}
-            visible={hovered}
-            x={hoverX}
-          />
-          <HoverContainer
-            bottom
-            value={hoveredValue.time}
-            visible={hovered}
-            x={hoverX}
-          />
+      <div className="chart">
+        <div className="topSection">
+          <VerticalChartAxis data={data} textAlign="left" />
+          <div className="PriceChart">
+            <div>
+              <HoverContainer
+                top
+                value={hoveredValue.price}
+                visible={hovered}
+                x={hoverX}
+              />
+              <HoverContainer
+                bottom
+                value={hoveredValue.time}
+                visible={hovered}
+                x={hoverX}
+              />
+            </div>
+            <svg
+              ref={svgRef}
+              onMouseEnter={this.handleMouseEnter}
+              onMouseLeave={this.handleMouseLeave}
+              onMouseMove={this.handleMouseMove}
+            >
+              <Chart
+                height={dimensions.height}
+                width={dimensions.width}
+                data={data}
+                color={color}
+              />
+              <Cursor
+                height={dimensions.height}
+                visible={hovered}
+                x={hoverX}
+                y={hoverY}
+              />
+            </svg>
+          </div>
+          <VerticalChartAxis data={data} textAlign="right" />
         </div>
-        <svg
-          ref={svgRef}
-          onMouseEnter={this.handleMouseEnter}
-          onMouseLeave={this.handleMouseLeave}
-          onMouseMove={this.handleMouseMove}
-        >
-          <Chart
-            height={dimensions.height}
-            width={dimensions.width}
-            data={data}
-            color={color}
-          />
-          <Cursor
-            height={dimensions.height}
-            visible={hovered}
-            x={hoverX}
-            y={hoverY}
-          />
-        </svg>
+        <HorizontalChartAxis data={data} duration={durationType} />
       </div>
     );
   }
@@ -157,7 +166,8 @@ PriceChart.propTypes = {
   color: PropTypes.shape({
     fill: PropTypes.string,
     stroke: PropTypes.string
-  })
+  }),
+  durationType: PropTypes.string.isRequired
 };
 
 PriceChart.defaultProps = {
