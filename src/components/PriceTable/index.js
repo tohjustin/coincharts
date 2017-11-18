@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { scan } from "d3-array";
 
-import TableCell from "./components/TableCell";
+import TableCell from "./TableCell";
 
 import "./index.css";
 

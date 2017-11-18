@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { formatCurrency } from "../../../../utils";
+import { formatCurrency } from "../../utils";
 import "./index.css";
 
 const ACTIVE_CURRENCY = "usd";
