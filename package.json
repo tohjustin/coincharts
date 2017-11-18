@@ -35,7 +35,10 @@
     "react": "16.0.0",
     "react-dom": "16.0.0",
     "react-helmet": "5.2.0",
-    "react-scripts": "1.0.16"
+    "react-redux": "^5.0.6",
+    "react-scripts": "1.0.16",
+    "redux": "^3.7.2",
+    "reselect": "^3.0.1"
   },
   "devDependencies": {
     "eslint-config-prettier": "2.6.0",
