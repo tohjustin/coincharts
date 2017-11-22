@@ -1,13 +1,15 @@
+import PropTypes from "prop-types";
 import React, { Component } from "react";
 import Helmet from "react-helmet";
+import { connect } from "react-redux";
 
 import Footer from "../components/Footer";
 import PriceChart from "../components/PriceChart";
 import PriceTable from "../components/PriceTable";
 import Tabs from "../components/Tabs";
 
-import { fetchPriceHistory, fetchSpotPrices } from "../api";
 import { CRYPTOCURRENCY, DURATION, POLL_FREQUENCY } from "../constants";
+import { PriceSelectors, PriceActions } from "../store/price";
 import { formatCurrency } from "../utils";
 
 import "./App.css";
@@ -23,8 +25,7 @@ const INITIAL_STATE = {
   priceHistory: [],
   spotPrice: { amount: "0", currency: ACTIVE_CURRENCY },
   selectedCryptocurrencyIndex: 0,
-  selectedDurationIndex: 2,
-  spotPrices: []
+  selectedDurationIndex: 2
 };
 
 class App extends Component {
@@ -58,30 +59,30 @@ class App extends Component {
     clearInterval(this.pollingId);
   }
 
-  fetchPriceData() {
-    const { selectedCryptocurrencyIndex, selectedDurationIndex } = this.state;
+  componentWillReceiveProps(nextProps) {
+    const {
+      duration: nextDuration,
+      cryptocurrency: nextCryptocurrency
+    } = nextProps;
+    const { duration, cryptocurrency } = this.props;
 
-    const promises = [
-      fetchPriceHistory(
-        CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex].key,
-        ACTIVE_CURRENCY,
-        DURATION_LIST[selectedDurationIndex].key
-      ),
-      fetchSpotPrices(ACTIVE_CURRENCY)
-    ];
+    if (nextDuration !== duration || nextCryptocurrency !== cryptocurrency) {
+      this.fetchPriceData(nextCryptocurrency, nextDuration);
+    }
+  }
 
-    Promise.all(promises)
-      .then(([priceHistory, spotPrices]) => {
-        this.setState({
-          priceHistory,
-          spotPrice: spotPrices[selectedCryptocurrencyIndex],
-          spotPrices
-        });
-      })
-      .catch(err => {
-        // eslint-disable-next-line no-console
-        console.error(err);
-      });
+  fetchPriceData(cryptocurrency, duration) {
+    const {
+      fetchPriceData,
+      cryptocurrency: propsCryptocurrency,
+      duration: propsDuration
+    } = this.props;
+
+    // Use prop's value if `cryptocurrency` or `duration` is undefined
+    fetchPriceData(
+      cryptocurrency || propsCryptocurrency,
+      duration || propsDuration
+    );
   }
 
   handleCryptocurrencyChange(nextIndex) {
@@ -97,7 +98,8 @@ class App extends Component {
   }
 
   renderHelmet() {
-    const { selectedCryptocurrencyIndex, spotPrices } = this.state;
+    const { spotPrices } = this.props;
+    const { selectedCryptocurrencyIndex } = this.state;
     const cryptocurrency = CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex].key;
     const price = spotPrices[selectedCryptocurrencyIndex] || "";
     const priceText = formatCurrency(price.amount, ACTIVE_CURRENCY) || "";
@@ -114,7 +116,7 @@ class App extends Component {
   }
 
   renderCryptocurrencyTabs() {
-    const { spotPrices } = this.state;
+    const { spotPrices } = this.props;
     const keys = [];
     const tabOptions = [];
     CRYPTOCURRENCY_LIST.forEach(({ name }, index) => {
@@ -170,12 +172,9 @@ class App extends Component {
   }
 
   renderPriceTable() {
-    const {
-      priceHistory,
-      selectedCryptocurrencyIndex,
-      selectedDurationIndex,
-      spotPrice
-    } = this.state;
+    const { selectedCryptocurrencyIndex, selectedDurationIndex } = this.state;
+    const { spotPrices, priceHistory } = this.props;
+    const spotPrice = spotPrices[selectedCryptocurrencyIndex];
 
     return (
       <div className="table">
@@ -185,18 +184,16 @@ class App extends Component {
           }
           durationLabel={DURATION_LIST[selectedDurationIndex].humanize}
           priceHistory={priceHistory}
-          spotPrice={Number(spotPrice.amount)}
+          spotPrice={(spotPrice && Number(spotPrice.amount)) || 0}
         />
       </div>
     );
   }
 
   renderPriceHistoryChart() {
-    const {
-      priceHistory,
-      selectedCryptocurrencyIndex,
-      selectedDurationIndex
-    } = this.state;
+    const { selectedCryptocurrencyIndex, selectedDurationIndex } = this.state;
+    const { priceHistory } = this.props;
+
     const cryptocurrency = CRYPTOCURRENCY_LIST[selectedCryptocurrencyIndex];
     const durationType = DURATION_LIST[selectedDurationIndex].key;
 
@@ -232,4 +229,51 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchPriceData: (cryptocurrency, duration) => {
+      dispatch(PriceActions.price.request(cryptocurrency, duration));
+    }
+  };
+};
+
+function mapStateToProps(state, ownProps) {
+  const { location } = ownProps;
+  const cryptocurrency = location.query.cryptocurrency;
+  const duration = location.query.duration;
+  const priceHistory = PriceSelectors.getPriceHistory(state);
+  const spotPrices = PriceSelectors.getPriceSpot(state);
+
+  return {
+    cryptocurrency,
+    duration,
+    priceHistory,
+    spotPrices
+  };
+}
+
+App.propTypes = {
+  priceHistory: PropTypes.arrayOf(
+    PropTypes.shape({
+      price: PropTypes.number.isRequired,
+      time: PropTypes.instanceOf(Date).isRequired
+    }).isRequired
+  ),
+  spotPrices: PropTypes.array,
+  fetchPriceData: PropTypes.func,
+  cryptocurrency: PropTypes.oneOf(["btc", "eth", "ltc"]),
+  duration: PropTypes.oneOf(["day", "week", "month", "year", "all"])
+};
+
+App.defaultProps = {
+  priceHistory: [],
+  spotPrices: [],
+  fetchPriceData: undefined,
+  cryptocurrency: "btc",
+  duration: "day"
+};
+
+// Use named export for tests
+export { App as UnconnectedApp, mapDispatchToProps, mapStateToProps };
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
