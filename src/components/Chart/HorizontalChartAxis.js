@@ -4,19 +4,20 @@ import isEqual from "lodash.isequal";
 import { extent } from "d3-array";
 import { timeFormat } from "d3-time-format";
 
-import { DEFAULT_TICK_COUNT, DURATION, DURATION_LIST } from "./constants";
+import { DURATION, PROPTYPES } from "../../constants";
+import { DEFAULT_TICK_COUNT } from "./constants";
 
 class HorizontalChartAxis extends Component {
   static formatTime(timestamp, duration) {
     switch (duration) {
-      case DURATION.ALL:
+      case DURATION.ALL.key:
         return timeFormat("%b %Y")(timestamp); // 'Mmm YYYY'
-      case DURATION.YEAR:
-      case DURATION.MONTH:
-      case DURATION.WEEK:
+      case DURATION.YEAR.key:
+      case DURATION.MONTH.key:
+      case DURATION.WEEK.key:
         return timeFormat("%b %_d")(timestamp); // 'Mmm D'
-      case DURATION.DAY:
-      case DURATION.HOUR:
+      case DURATION.DAY.key:
+      case DURATION.HOUR.key:
       default:
         return timeFormat("%I:%M %p")(timestamp); // 'HH:MM PM/AM'
     }
@@ -51,6 +52,11 @@ class HorizontalChartAxis extends Component {
     const { data } = this.props;
     const { data: nextData } = nextProps;
 
+    // Don't update if next set of data is not ready
+    if (nextData === undefined || nextData.length === 0) {
+      return false;
+    }
+
     return !isEqual(data, nextData);
   }
 
@@ -73,13 +79,8 @@ class HorizontalChartAxis extends Component {
 }
 
 HorizontalChartAxis.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      price: PropTypes.number,
-      time: PropTypes.data
-    })
-  ).isRequired,
-  duration: PropTypes.oneOf(DURATION_LIST).isRequired,
+  data: PROPTYPES.PRICE_DATA.isRequired,
+  duration: PROPTYPES.DURATION.isRequired,
   tickCount: PropTypes.number
 };
 
