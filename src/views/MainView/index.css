@@ -1,0 +1,64 @@
+.dashboard {
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  max-width: 1500px;
+  min-width: 960px;
+  width: 90vw;
+  height: 470px;
+}
+
+.chart {
+  margin: 0 2em;
+}
+
+.chart .topSection {
+  border-bottom: 1px solid #dae1e9;
+  border-top: 1px solid #dae1e9;
+  display: flex;
+  flex-direction: row;
+  height: 225px;
+}
+
+.chart .PriceChart {
+  z-index: 10;
+}
+
+.chart .VerticalChartAxis .tick {
+  z-index: 100;
+}
+
+.table {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  height: 90px;
+  justify-content: center;
+  margin: 1.5em 2em;
+}
+
+.tabs {
+  border-bottom: 1px solid #dae1e9;
+  display: flex;
+  flex-direction: row;
+  flex-shrink: 0;
+  height: 55px;
+  justify-content: space-between;
+  padding: 0 2em;
+}
+
+.tabs .cryptocurrency span {
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.tabs .cryptocurrency span + span::before {
+  content: " · ";
+}
+
+.tabs .cryptocurrency span:not(:first-child) {
+  font-size: 16px;
+}
