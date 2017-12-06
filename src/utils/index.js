@@ -1,4 +1,4 @@
-import currencyFormatter from 'currency-formatter';
+import currencyFormatter from "currency-formatter";
 
 /**
  * Adds the appropriate symbol & separators to `value` based on the input `currencyCode`
@@ -8,7 +8,7 @@ import currencyFormatter from 'currency-formatter';
  */
 function formatCurrency(value, currencyCode) {
   return currencyFormatter.format(value, {
-    code: currencyCode.toUpperCase(),
+    code: currencyCode.toUpperCase()
   });
 }
 

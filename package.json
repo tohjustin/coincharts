@@ -1,7 +1,7 @@
 {
   "name": "coincharts",
   "version": "1.0.0",
-  "description": "Cyptocurrency price chart, powered by Coinbase",
+  "description": "Cryptocurrency price chart, powered by Coinbase",
   "license": "MIT",
   "scripts": {
     "build": "react-scripts build && rm build/static/**/*.map",
@@ -9,7 +9,7 @@
     "deploy": "npm run check && npm run build && cp now.json ./build && now ./build --public && now alias",
     "eject": "react-scripts eject",
     "lint": "xo",
-    "precommit": "npm run lint && lint-staged && npm run test",
+    "precommit": "npm run lint && lint-staged",
     "serve": "npm run build && serve ./build",
     "start": "react-scripts start",
     "stylelint": "stylelint --color -- \"src/**/*.css\"",
@@ -60,6 +60,9 @@
       "git add"
     ]
   },
+  "prettier": {
+    "printWidth": 120
+  },
   "xo": {
     "envs": [
       "browser",
@@ -75,7 +78,8 @@
     "rules": {
       "import/no-unassigned-import": 0,
       "react/jsx-tag-spacing": 0,
-      "unicorn/filename-case": 0
+      "unicorn/filename-case": 0,
+      "quotes": ["error", "double", { "allowTemplateLiterals": true }]
     },
     "space": true
   }
