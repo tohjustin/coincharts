@@ -14,6 +14,7 @@
     "start": "react-scripts start",
     "stylelint": "stylelint --color -- \"src/**/*.css\"",
     "test": "CI=true react-scripts test --env=jsdom",
+    "test:coverage": "npm run test -- --coverage --verbose",
     "test:watch": "react-scripts test --env=jsdom",
     "updatePriceData": "scripts/updatePriceData.sh ./public/priceData"
   },
@@ -42,11 +43,14 @@
     "reselect": "3.0.1"
   },
   "devDependencies": {
+    "enzyme": "3.2.0",
+    "enzyme-adapter-react-16": "1.1.1",
     "eslint-config-prettier": "2.6.0",
     "eslint-config-xo-react": "0.13.0",
     "eslint-plugin-react": "7.4.0",
     "husky": "0.14.3",
-    "lint-staged": "^4.3.0",
+    "jest-enzyme": "4.0.1",
+    "lint-staged": "4.3.0",
     "now": "8.3.11",
     "prettier": "1.7.4",
     "serve": "6.4.0",
@@ -58,6 +62,12 @@
     "*.js": [
       "prettier --write",
       "git add"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!<rootDir>/node_modules/"
     ]
   },
   "prettier": {
@@ -79,7 +89,13 @@
       "import/no-unassigned-import": 0,
       "react/jsx-tag-spacing": 0,
       "unicorn/filename-case": 0,
-      "quotes": ["error", "double", { "allowTemplateLiterals": true }]
+      "quotes": [
+        "error",
+        "double",
+        {
+          "allowTemplateLiterals": true
+        }
+      ]
     },
     "space": true
   }
