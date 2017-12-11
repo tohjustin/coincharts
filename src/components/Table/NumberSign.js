@@ -11,4 +11,7 @@ NumberSign.propTypes = {
   isPositive: PropTypes.bool.isRequired
 };
 
+// Use named export for tests
+export { PLUS_CHAR, MINUS_CHAR };
+
 export default NumberSign;
