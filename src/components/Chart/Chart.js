@@ -1,147 +1,163 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import isEqual from "lodash.isequal";
-import { area as d3Area, line as d3Line } from "d3-shape";
 import { extent } from "d3-array";
-import { interpolatePath } from "d3-interpolate-path";
-import { scaleLinear, scaleTime } from "d3-scale";
-import { select } from "d3-selection";
-import "d3-transition";
+import { scaleLinear } from "d3-scale";
 
-import { PROPTYPES } from "../../constants";
-import { CHART_PADDING_TOP, TRANSITION } from "./constants";
+import { DEFAULT_PROPS, PROPTYPES } from "../../constants";
+import { formatCurrency } from "../../utils";
+import Graph from "./Graph";
+import { GRAPH_PADDING_TOP } from "./constants";
+import Cursor from "./Cursor";
+import HorizontalAxis from "./HorizontalAxis";
+import HoverContainer from "./HoverContainer";
+import VerticalAxis from "./VerticalAxis";
+
+import "./index.css";
 
 const INITIAL_STATE = {
-  previousColor: undefined,
-  previousScaledData: [],
-  scaledData: [],
-  skipTransition: false
+  dimensions: {
+    height: 0,
+    width: 0
+  },
+  hovered: false,
+  hoveredValue: {},
+  hoverX: -1,
+  hoverY: -1
 };
 
 class Chart extends Component {
-  static scaleData(data, height, width) {
-    const scalePriceToY = scaleLinear()
-      .range([height, CHART_PADDING_TOP])
-      .domain(extent(data, d => d.price));
-
-    const scaleTimeToX = scaleTime()
-      .range([0, width])
-      .domain(extent(data, d => d.time));
-
-    return data.map(({ price, time }) => ({
-      price: scalePriceToY(price),
-      time: scaleTimeToX(time)
-    }));
-  }
-
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
+
+    // Bind event-handlers
+    this.handleResize = this.handleResize.bind(this);
+    this.handleMouseEnter = this.handleMouseEnter.bind(this);
+    this.handleMouseLeave = this.handleMouseLeave.bind(this);
+    this.handleMouseMove = this.handleMouseMove.bind(this);
   }
 
-  componentWillReceiveProps(nextProps) {
-    const { data: nextData, height: nextHeight, width: nextWidth } = nextProps;
-    const { color, width } = this.props;
-    const { scaledData } = this.state;
+  componentDidMount() {
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize();
+  }
 
-    // Don't update if next set of data is not ready
-    if (nextData.length === 0) {
-      return;
-    }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleResize);
+  }
 
-    const nextScaledData = Chart.scaleData(nextData, nextHeight, nextWidth);
-    const previousScaledData =
-      scaledData.length > 0
-        ? scaledData
-        : nextScaledData.map(({ time }) => ({ price: nextHeight, time }));
+  handleResize() {
+    const { height, width } = this.chartSvgComponent.getBoundingClientRect();
+    const dimensions = {
+      height: Math.round(height),
+      width: Math.round(width)
+    };
+
+    this.setState({ dimensions });
+  }
+
+  // Show hover elements
+  handleMouseEnter() {
+    this.setState({ hovered: true });
+  }
+
+  // Hide hover elements
+  handleMouseLeave() {
+    this.setState({ hovered: false });
+  }
+
+  // Update hover position
+  handleMouseMove(e) {
+    const { data } = this.props;
+    const { dimensions } = this.state;
+
+    // Find closest data point to the x-coordinates of where the user's mouse is hovering
+    const hoverX =
+      e.nativeEvent.clientX -
+      this.chartSvgComponent.getBoundingClientRect().left;
+    const index = Math.round(hoverX / dimensions.width * (data.length - 1));
+    const hoveredDatapoint = data[index] || {};
+    const hoveredValue = {
+      price:
+        hoveredDatapoint.price &&
+        formatCurrency(hoveredDatapoint.price, DEFAULT_PROPS.CURRENCY),
+      time: hoveredDatapoint.time && hoveredDatapoint.time.toLocaleString()
+    };
+
+    const scalePriceToY = scaleLinear()
+      .range([dimensions.height, GRAPH_PADDING_TOP])
+      .domain(extent(data, d => d.price));
+    const hoverY = scalePriceToY(hoveredDatapoint.price) || 0;
 
     this.setState({
-      skipTransition: width !== nextWidth,
-      previousColor: color,
-      previousScaledData,
-      scaledData: nextScaledData
+      hovered: Boolean(hoveredDatapoint),
+      hoveredValue,
+      hoverX,
+      hoverY
     });
   }
 
-  shouldComponentUpdate(nextProps) {
-    const { data, height, width } = this.props;
-    const { data: nextData, height: nextHeight, width: nextWidth } = nextProps;
-
-    // Don't update if next set of data is not ready
-    if (nextData === undefined || nextData.length === 0) {
-      return false;
-    }
-
-    return (
-      !isEqual(data, nextData) ||
-      !isEqual(height, nextHeight) ||
-      !isEqual(width, nextWidth)
-    );
-  }
-
-  componentDidUpdate() {
-    const { color, height } = this.props;
-    const {
-      previousColor = color,
-      previousScaledData,
-      scaledData,
-      skipTransition
-    } = this.state;
-    const chart = select(this.svgNode);
-    const transitionDuration = skipTransition ? 0 : TRANSITION.duration;
-
-    const area = d3Area()
-      .x(d => d.time)
-      .y0(height)
-      .y1(d => d.price);
-    const line = d3Line()
-      .x(d => d.time)
-      .y(d => d.price);
-
-    const previousAreaChart = area(previousScaledData);
-    const previousLineChart = line(previousScaledData);
-    const areaChart = area(scaledData);
-    const lineChart = line(scaledData);
-
-    chart.selectAll("path").remove();
-
-    chart
-      .append("path")
-      .attr("class", "Chart-area")
-      .attr("d", previousAreaChart)
-      .style("fill", previousColor.fill)
-      .transition()
-      .duration(transitionDuration)
-      .ease(TRANSITION.ease)
-      .attrTween("d", () => interpolatePath(previousAreaChart, areaChart))
-      .style("fill", color.fill);
-
-    chart
-      .append("path")
-      .attr("class", "Chart-line")
-      .attr("d", previousLineChart)
-      .style("stroke", previousColor.stroke)
-      .transition()
-      .duration(transitionDuration)
-      .ease(TRANSITION.ease)
-      .attrTween("d", () => interpolatePath(previousLineChart, lineChart))
-      .style("stroke", color.stroke);
-  }
-
   render() {
-    const nodeRef = node => {
-      this.svgNode = node;
+    const { dimensions, hoveredValue, hoverX, hoverY, hovered } = this.state;
+    const { color, data, durationType } = this.props;
+    const svgRef = node => {
+      this.chartSvgComponent = node;
     };
 
-    return <g ref={nodeRef} />;
+    return (
+      <div className="chart">
+        <div className="topSection">
+          <VerticalAxis data={data} textAlign="left" />
+          <div className="Chart">
+            <div>
+              <HoverContainer
+                top
+                value={hoveredValue.price}
+                visible={hovered}
+                x={hoverX}
+              />
+              <HoverContainer
+                bottom
+                value={hoveredValue.time}
+                visible={hovered}
+                x={hoverX}
+              />
+            </div>
+            <svg
+              ref={svgRef}
+              onMouseEnter={this.handleMouseEnter}
+              onMouseLeave={this.handleMouseLeave}
+              onMouseMove={this.handleMouseMove}
+            >
+              <Graph
+                height={dimensions.height}
+                width={dimensions.width}
+                data={data}
+                color={color}
+              />
+              <Cursor
+                height={dimensions.height}
+                visible={hovered}
+                x={hoverX}
+                y={hoverY}
+              />
+            </svg>
+          </div>
+          <VerticalAxis data={data} textAlign="right" />
+        </div>
+        <HorizontalAxis data={data} duration={durationType} />
+      </div>
+    );
   }
 }
 
 Chart.propTypes = {
-  color: PROPTYPES.COLOR.isRequired,
   data: PROPTYPES.PRICE_DATA.isRequired,
-  height: PropTypes.number.isRequired,
-  width: PropTypes.number.isRequired
+  color: PROPTYPES.COLOR,
+  durationType: PROPTYPES.DURATION.isRequired
+};
+
+Chart.defaultProps = {
+  color: DEFAULT_PROPS.COLOR
 };
 
 export default Chart;

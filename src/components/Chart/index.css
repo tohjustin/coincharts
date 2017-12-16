@@ -1,21 +1,21 @@
-.PriceChart {
+.Chart {
   cursor: crosshair;
   height: 100%;
   position: relative;
   width: 100%;
 }
 
-.PriceChart svg {
+.Chart svg {
   height: 100%;
   width: 100%;
 }
 
-.Chart-area {
+.Graph-area {
   pointer-events: none;
   stroke: none;
 }
 
-.Chart-line {
+.Graph-line {
   fill: none;
   pointer-events: none;
   stroke-width: 2;
@@ -42,14 +42,14 @@
   stroke-width: 2;
 }
 
-.HorizontalChartAxis {
+.HorizontalAxis {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 0.5em 2.5em 1.5em;
 }
 
-.HorizontalChartAxis .tick {
+.HorizontalAxis .tick {
   color: #7d95b6;
   font-size: 14px;
   font-weight: 500;
@@ -88,7 +88,7 @@
   color: #fff;
 }
 
-.VerticalChartAxis {
+.VerticalAxis {
   background-color: transparent;
   display: flex;
   flex-direction: column;
@@ -98,15 +98,15 @@
   padding: 0.5em 0;
 }
 
-.VerticalChartAxis.right {
+.VerticalAxis.right {
   align-items: flex-end;
 }
 
-.VerticalChartAxis.left {
+.VerticalAxis.left {
   align-items: flex-start;
 }
 
-.VerticalChartAxis .tick {
+.VerticalAxis .tick {
   color: #7d95b6;
   display: flex;
   flex-direction: row;

@@ -1,7 +1,7 @@
 import { easeCubicOut } from "d3-ease";
 
-// Chart
-const CHART_PADDING_TOP = 20;
+// Graph
+const GRAPH_PADDING_TOP = 20;
 const TRANSITION = { duration: 500, ease: easeCubicOut };
 
 // Cursor
@@ -15,7 +15,7 @@ const HOVER_CONTAINER_WIDTH = 200;
 const VERTICAL_OFFSET = -12;
 
 export {
-  CHART_PADDING_TOP,
+  GRAPH_PADDING_TOP,
   CURSOR_RADIUS_SIZE,
   DEFAULT_TICK_COUNT,
   HOVER_CONTAINER_WIDTH,

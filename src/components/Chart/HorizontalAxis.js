@@ -7,7 +7,7 @@ import { timeFormat } from "d3-time-format";
 import { DURATION, PROPTYPES } from "../../constants";
 import { DEFAULT_TICK_COUNT } from "./constants";
 
-class HorizontalChartAxis extends Component {
+class HorizontalAxis extends Component {
   static formatTime(timestamp, duration) {
     switch (duration) {
       case DURATION.ALL.key:
@@ -23,7 +23,7 @@ class HorizontalChartAxis extends Component {
     }
   }
 
-  static generateTimeAxisTicks(data, tickCount) {
+  static generateTicks(data, tickCount) {
     if (data.length < 2) {
       return [];
     }
@@ -37,14 +37,6 @@ class HorizontalChartAxis extends Component {
     }
 
     return generatedTicks;
-  }
-
-  static renderTimeAxisTick(string, duration) {
-    return (
-      <div key={string} className="tick">
-        <span>{HorizontalChartAxis.formatTime(string, duration)}</span>
-      </div>
-    );
   }
 
   // Only update when we receive new data
@@ -62,30 +54,33 @@ class HorizontalChartAxis extends Component {
 
   render() {
     const { data, duration, tickCount } = this.props;
-    const axisTicks = HorizontalChartAxis.generateTimeAxisTicks(
-      data,
-      tickCount
-    );
+    const durationTicks = HorizontalAxis.generateTicks(data, tickCount);
+    const axisTicks = durationTicks.map(timestamp => ({
+      timestamp,
+      label: HorizontalAxis.formatTime(timestamp, duration)
+    }));
 
     return (
-      <div className="HorizontalChartAxis">
+      <div className="HorizontalAxis">
         {axisTicks &&
-          axisTicks.map(time =>
-            HorizontalChartAxis.renderTimeAxisTick(time, duration)
-          )}
+          axisTicks.map(({ timestamp, label }) => (
+            <div key={timestamp} className="tick">
+              <span>{label}</span>
+            </div>
+          ))}
       </div>
     );
   }
 }
 
-HorizontalChartAxis.propTypes = {
+HorizontalAxis.propTypes = {
   data: PROPTYPES.PRICE_DATA.isRequired,
   duration: PROPTYPES.DURATION.isRequired,
   tickCount: PropTypes.number
 };
 
-HorizontalChartAxis.defaultProps = {
+HorizontalAxis.defaultProps = {
   tickCount: DEFAULT_TICK_COUNT
 };
 
-export default HorizontalChartAxis;
+export default HorizontalAxis;
