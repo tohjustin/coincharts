@@ -2,11 +2,11 @@ import React from "react";
 import PropTypes from "prop-types";
 import { scan } from "d3-array";
 
+import { DEFAULT_PROPS, PROPTYPES } from "../../constants";
 import TableCell from "./TableCell";
 
 import "./index.css";
 
-const ACTIVE_CURRENCY = "usd";
 const PriceTable = ({
   cryptocurrencyLabel,
   durationLabel,
@@ -28,7 +28,7 @@ const PriceTable = ({
       <TableCell
         showPlusCharacter={priceDifference > 0}
         isCurrency
-        label={`${durationLabel} (${ACTIVE_CURRENCY})`}
+        label={`${durationLabel} (${DEFAULT_PROPS.CURRENCY})`}
         value={priceDifference}
         visible={Boolean(durationLabel)}
       />
@@ -46,12 +46,7 @@ const PriceTable = ({
 PriceTable.propTypes = {
   cryptocurrencyLabel: PropTypes.string.isRequired,
   durationLabel: PropTypes.string.isRequired,
-  priceHistory: PropTypes.arrayOf(
-    PropTypes.shape({
-      price: PropTypes.number,
-      time: PropTypes.date
-    })
-  ).isRequired,
+  priceHistory: PROPTYPES.PRICE_DATA.isRequired,
   spotPrice: PropTypes.number.isRequired
 };
 

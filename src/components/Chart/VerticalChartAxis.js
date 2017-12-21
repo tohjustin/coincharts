@@ -1,9 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import currencyFormatter from "currency-formatter";
 import { extent } from "d3-array";
 
-import { ACTIVE_CURRENCY } from "./constants";
+import { DEFAULT_PROPS, PROPTYPES } from "../../constants";
 
 function formatAxisPrice(price, currencyCode) {
   return currencyFormatter.format(price, {
@@ -18,20 +17,19 @@ const VerticalChartAxis = ({ data, textAlign }) => {
 
   return (
     <div className={`VerticalChartAxis ${textAlignClass}`}>
-      <div className="tick">{formatAxisPrice(maxPrice, ACTIVE_CURRENCY)}</div>
-      <div className="tick">{formatAxisPrice(minPrice, ACTIVE_CURRENCY)}</div>
+      <div className="tick">
+        {formatAxisPrice(maxPrice, DEFAULT_PROPS.CURRENCY)}
+      </div>
+      <div className="tick">
+        {formatAxisPrice(minPrice, DEFAULT_PROPS.CURRENCY)}
+      </div>
     </div>
   );
 };
 
 VerticalChartAxis.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      price: PropTypes.number,
-      time: PropTypes.data
-    })
-  ).isRequired,
-  textAlign: PropTypes.oneOf(["left", "right"]).isRequired
+  data: PROPTYPES.PRICE_DATA.isRequired,
+  textAlign: PROPTYPES.TEXT_ALIGNMENT.isRequired
 };
 
 export default VerticalChartAxis;

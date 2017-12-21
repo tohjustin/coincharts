@@ -1,10 +1,11 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import { extent } from "d3-array";
 import { scaleLinear } from "d3-scale";
 
+import { DEFAULT_PROPS, PROPTYPES } from "../../constants";
 import { formatCurrency } from "../../utils";
 import Chart from "./Chart";
+import { CHART_PADDING_TOP } from "./constants";
 import Cursor from "./Cursor";
 import HorizontalChartAxis from "./HorizontalChartAxis";
 import HoverContainer from "./HoverContainer";
@@ -12,12 +13,6 @@ import VerticalChartAxis from "./VerticalChartAxis";
 
 import "./index.css";
 
-const ACTIVE_CURRENCY = "usd";
-const CHART_PADDING_TOP = 20;
-const DEFAULT_COLOR = {
-  fill: "#FFEBC5",
-  stroke: "#FFB119"
-};
 const INITIAL_STATE = {
   dimensions: {
     height: 0,
@@ -26,8 +21,7 @@ const INITIAL_STATE = {
   hovered: false,
   hoveredValue: {},
   hoverX: -1,
-  hoverY: -1,
-  scalePriceToY: undefined
+  hoverY: -1
 };
 
 class PriceChart extends Component {
@@ -85,7 +79,7 @@ class PriceChart extends Component {
     const hoveredValue = {
       price:
         hoveredDatapoint.price &&
-        formatCurrency(hoveredDatapoint.price, ACTIVE_CURRENCY),
+        formatCurrency(hoveredDatapoint.price, DEFAULT_PROPS.CURRENCY),
       time: hoveredDatapoint.time && hoveredDatapoint.time.toLocaleString()
     };
 
@@ -157,21 +151,13 @@ class PriceChart extends Component {
 }
 
 PriceChart.propTypes = {
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      price: PropTypes.number,
-      time: PropTypes.date
-    })
-  ).isRequired,
-  color: PropTypes.shape({
-    fill: PropTypes.string,
-    stroke: PropTypes.string
-  }),
-  durationType: PropTypes.string.isRequired
+  data: PROPTYPES.PRICE_DATA.isRequired,
+  color: PROPTYPES.COLOR,
+  durationType: PROPTYPES.DURATION.isRequired
 };
 
 PriceChart.defaultProps = {
-  color: DEFAULT_COLOR
+  color: DEFAULT_PROPS.COLOR
 };
 
 export default PriceChart;

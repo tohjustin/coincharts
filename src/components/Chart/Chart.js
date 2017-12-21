@@ -8,6 +8,7 @@ import { scaleLinear, scaleTime } from "d3-scale";
 import { select } from "d3-selection";
 import "d3-transition";
 
+import { PROPTYPES } from "../../constants";
 import { CHART_PADDING_TOP, TRANSITION } from "./constants";
 
 const INITIAL_STATE = {
@@ -43,6 +44,11 @@ class Chart extends Component {
     const { color, width } = this.props;
     const { scaledData } = this.state;
 
+    // Don't update if next set of data is not ready
+    if (nextData.length === 0) {
+      return;
+    }
+
     const nextScaledData = Chart.scaleData(nextData, nextHeight, nextWidth);
     const previousScaledData =
       scaledData.length > 0
@@ -60,6 +66,11 @@ class Chart extends Component {
   shouldComponentUpdate(nextProps) {
     const { data, height, width } = this.props;
     const { data: nextData, height: nextHeight, width: nextWidth } = nextProps;
+
+    // Don't update if next set of data is not ready
+    if (nextData === undefined || nextData.length === 0) {
+      return false;
+    }
 
     return (
       !isEqual(data, nextData) ||
@@ -127,16 +138,8 @@ class Chart extends Component {
 }
 
 Chart.propTypes = {
-  color: PropTypes.shape({
-    fill: PropTypes.string,
-    stroke: PropTypes.string
-  }).isRequired,
-  data: PropTypes.arrayOf(
-    PropTypes.shape({
-      price: PropTypes.number,
-      time: PropTypes.date
-    })
-  ).isRequired,
+  color: PROPTYPES.COLOR.isRequired,
+  data: PROPTYPES.PRICE_DATA.isRequired,
   height: PropTypes.number.isRequired,
   width: PropTypes.number.isRequired
 };

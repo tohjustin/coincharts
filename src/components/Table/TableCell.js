@@ -3,8 +3,8 @@ import PropTypes from "prop-types";
 
 import { formatCurrency } from "../../utils";
 import "./index.css";
+import { DEFAULT_PROPS } from "../../constants/index";
 
-const ACTIVE_CURRENCY = "usd";
 const PLUS_CHAR = "+";
 const MINUS_CHAR = "\u2212";
 
@@ -18,7 +18,7 @@ const TableCell = ({
 }) => {
   const isNegative = value < 0;
   const absValue = Math.abs(value);
-  const currencyValue = formatCurrency(absValue, ACTIVE_CURRENCY);
+  const currencyValue = formatCurrency(absValue, DEFAULT_PROPS.CURRENCY);
   const percentageValue = Number(absValue).toFixed(2);
 
   return (
