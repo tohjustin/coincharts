@@ -21,9 +21,7 @@ const CRYPTOCURRENCY = {
     strokeColor: "#B5B5B5"
   }
 };
-const CRYPTOCURRENCY_LIST = Object.keys(CRYPTOCURRENCY).map(
-  e => CRYPTOCURRENCY[e]
-);
+const CRYPTOCURRENCY_LIST = Object.keys(CRYPTOCURRENCY).map(e => CRYPTOCURRENCY[e]);
 
 // Supported Currencies
 const CURRENCY = {
@@ -69,7 +67,8 @@ const PROPTYPES = {
     eth: PropTypes.number,
     ltc: PropTypes.number
   }),
-  TEXT_ALIGNMENT: PropTypes.oneOf(["left", "right"])
+  TEXT_ALIGNMENT: PropTypes.oneOf(["left", "right"]),
+  HOVER_CONTAINER_POSITION: PropTypes.oneOf(["top", "bottom"])
 };
 
 const DEFAULT_PROPS = {

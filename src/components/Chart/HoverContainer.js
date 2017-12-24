@@ -2,9 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import classNames from "classnames";
 
+import { PROPTYPES } from "../../constants";
 import { HOVER_CONTAINER_WIDTH, VERTICAL_OFFSET } from "./constants";
 
-const HoverContainer = ({ bottom, top, value, visible, x }) => {
+const HoverContainer = ({ position, label, visible, x }) => {
   const containerClass = classNames({
     HoverContainer: true,
     hidden: !visible,
@@ -13,37 +14,31 @@ const HoverContainer = ({ bottom, top, value, visible, x }) => {
 
   const contentClass = classNames({
     content: true,
-    invertColor: top
+    invertColor: position === "top"
   });
 
   return (
     <div
       className={containerClass}
       style={{
-        bottom: bottom && VERTICAL_OFFSET,
-        left: x - HOVER_CONTAINER_WIDTH / 2,
-        top: top && VERTICAL_OFFSET
+        [position]: VERTICAL_OFFSET,
+        left: x - HOVER_CONTAINER_WIDTH / 2
       }}
     >
-      <div className={contentClass}>{value}</div>
+      <div className={contentClass}>{label}</div>
     </div>
   );
 };
 
 HoverContainer.propTypes = {
-  bottom: PropTypes.bool,
-  top: PropTypes.bool,
-  value: PropTypes.string,
-  visible: PropTypes.bool,
-  x: PropTypes.number
+  position: PROPTYPES.HOVER_CONTAINER_POSITION.isRequired,
+  visible: PropTypes.bool.isRequired,
+  x: PropTypes.number.isRequired,
+  label: PropTypes.string
 };
 
 HoverContainer.defaultProps = {
-  bottom: false,
-  top: false,
-  value: "",
-  visible: false,
-  x: 0
+  label: ""
 };
 
 export default HoverContainer;
