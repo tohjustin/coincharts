@@ -24,7 +24,7 @@ class HorizontalAxis extends Component {
   }
 
   static generateTicks(data, tickCount) {
-    if (data.length < 2) {
+    if (data.length < 2 || tickCount < 2) {
       return [];
     }
 

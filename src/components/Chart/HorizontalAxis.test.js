@@ -8,11 +8,33 @@ describe("<HorizontalAxis />", () => {
     const props = {
       data: [],
       duration: "month",
-      tickCount: 1
+      tickCount: 10
     };
 
     const wrapper = shallow(<HorizontalAxis {...props} />);
     expect(wrapper.find(".HorizontalAxis")).toHaveLength(1);
+  });
+
+  it("does not render ticks when `props.data` is []", () => {
+    const props = {
+      data: [],
+      duration: "month",
+      tickCount: 10
+    };
+
+    const wrapper = shallow(<HorizontalAxis {...props} />);
+    expect(wrapper.find(".HorizontalAxis .tick")).toHaveLength(0);
+  });
+
+  it("renders ticks correctly", () => {
+    const props = {
+      data: [{ price: 1, time: new Date(1000) }, { price: 2, time: new Date(2000) }],
+      duration: "month",
+      tickCount: 10
+    };
+
+    const wrapper = shallow(<HorizontalAxis {...props} />);
+    expect(wrapper.find(".HorizontalAxis .tick")).toHaveLength(props.tickCount);
   });
 
   describe("formatTime()", () => {
@@ -49,11 +71,28 @@ describe("<HorizontalAxis />", () => {
     });
   });
 
-  // TODO
-  describe("generateTimeAxisTicks()", () => {
-  });
+  describe("generateTicks()", () => {
+    const data = [
+      { price: 1, time: new Date(1000) },
+      { price: 2, time: new Date(2000) },
+      { price: 2, time: new Date(3000) },
+      { price: 2, time: new Date(5000) },
+      { price: 2, time: new Date(6000) },
+      { price: 2, time: new Date(9000) },
+      { price: 2, time: new Date(10000) }
+    ];
 
-  // TODO
-  describe("renderTimeAxisTick()", () => {
+    it("generates a sequence of ticks based on `tickCounts`", () => {
+      expect(HorizontalAxis.generateTicks(data, 2)).toEqual([1000, 10000]);
+      expect(HorizontalAxis.generateTicks(data, 3)).toEqual([1000, 5500, 10000]);
+      expect(HorizontalAxis.generateTicks(data, 4)).toEqual([1000, 4000, 7000, 10000]);
+      expect(HorizontalAxis.generateTicks(data, 5)).toEqual([1000, 3250, 5500, 7750, 10000]);
+    });
+
+    it("returns [] when `tickCount` is invalid (1, 0, negative number)", () => {
+      expect(HorizontalAxis.generateTicks(data, 1)).toEqual([]);
+      expect(HorizontalAxis.generateTicks(data, 0)).toEqual([]);
+      expect(HorizontalAxis.generateTicks(data, -1)).toEqual([]);
+    });
   });
 });
