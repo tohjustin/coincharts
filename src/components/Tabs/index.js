@@ -1,35 +1,41 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import PropTypes from "prop-types";
 
-import './index.css';
+import "./index.css";
 
-const Tabs = ({ children, keys, onChange, selectedIndex }) => (
-  <div className="Tabs" role="tabpanel">
-    {
-      children.map((child, index) => {
-        const isSelectedClass = (index === selectedIndex) && 'selected';
+const Tabs = ({ options, onChange, selectedKey }) => {
+  return (
+    <div className="Tabs" role="tabpanel">
+      {Object.keys(options).map(key => {
+        const isSelectedClass = key === selectedKey && "selected";
+
         return (
           <div
-            aria-labelledby={keys[index]}
+            key={options[key].listKey}
+            aria-labelledby={options[key]}
             className={`Tabs-item ${isSelectedClass}`}
-            key={keys[index]}
-            onClick={() => onChange(index)}
+            onClick={function() {
+              onChange(key);
+            }}
             role="tab"
             tabIndex="-1"
           >
-            {child}
+            {options[key].element}
           </div>
         );
-      })
-    }
-  </div>
-);
+      })}
+    </div>
+  );
+};
 
 Tabs.propTypes = {
-  children: PropTypes.arrayOf(PropTypes.element).isRequired,
-  keys: PropTypes.arrayOf(PropTypes.string).isRequired,
+  options: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
-  selectedIndex: PropTypes.number.isRequired,
+  selectedKey: PropTypes.string
+};
+
+Tabs.defaultProps = {
+  selectedKey: undefined
 };
 
 export default Tabs;

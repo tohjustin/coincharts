@@ -1,7 +1,7 @@
-import React from 'react';
+import React from "react";
 
-import logo from './assets/logo.svg';
-import './index.css';
+import logo from "./assets/logo.svg";
+import "./index.css";
 
 const Footer = () => (
   <div className="Footer">
@@ -11,11 +11,7 @@ const Footer = () => (
       target="_blank"
       rel="noopener noreferrer"
     >
-      <img
-        src={logo}
-        className="logo"
-        alt="coinbase"
-      />
+      <img src={logo} className="logo" alt="coinbase" />
     </a>
   </div>
 );

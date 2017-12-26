@@ -1,11 +1,26 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './containers/App';
-import registerServiceWorker from './registerServiceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Provider } from "react-redux";
 
-import './reset.css';
-import './index.css';
+import Footer from "./components/Footer";
+import Title from "./containers/Title";
+import MainView from "./views/MainView";
+import configureStore from "./store/configureStore";
+import registerServiceWorker from "./registerServiceWorker";
 
-// eslint-disable-next-line no-undef
-ReactDOM.render(<App />, document.getElementById('root'));
+import "./reset.css";
+import "./index.css";
+
+const { store } = configureStore();
+
+ReactDOM.render(
+  <Provider store={store}>
+    <div>
+      <Title />
+      <MainView />
+      <Footer />
+    </div>
+  </Provider>,
+  document.getElementById("root")
+);
 registerServiceWorker();
