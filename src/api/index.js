@@ -42,7 +42,9 @@ function fetchSpotPrices(currency) {
     axios.get(url)
       .then((response) => {
         const spotPrices = get(response, ['data', 'data'], []);
-        const formattedSpotPrices = spotPrices.map(e => ({ ...e, amount: +e.amount }));
+        const formattedSpotPrices = spotPrices
+          .filter(e => ["BTC", "ETH", "LTC"].indexOf(e.base) >= 0)
+          .map(e => ({ ...e, amount: +e.amount }));
         resolve(formattedSpotPrices);
       })
       .catch(err => reject(err));
