@@ -1,7 +1,7 @@
 {
   "name": "coincharts",
-  "version": "1.0.0",
-  "description": "Cyptocurrency price chart, powered by Coinbase",
+  "version": "1.0.1",
+  "description": "Cryptocurrency price chart, powered by Coinbase",
   "license": "MIT",
   "scripts": {
     "build": "react-scripts build && rm build/static/**/*.map",

@@ -38,5 +38,5 @@ curl https://www.coinbase.com/api/v2/prices/LTC-USD/historic\?period\=week > "$D
 curl https://www.coinbase.com/api/v2/prices/LTC-USD/historic\?period\=day > "$DATA_DIR/ltc-usd_day.json"
 curl https://www.coinbase.com/api/v2/prices/LTC-USD/historic\?period\=hour > "$DATA_DIR/ltc-usd_hour.json"
 
-# Spot Prices (BTC, ETH, LTC)
+# Spot Prices (BTC, BCH, ETH, LTC)
 curl https://www.coinbase.com/api/v2/prices/USD/spot? > "$DATA_DIR/usd_spot.json"
