@@ -23,7 +23,8 @@ function fetchPriceHistory(cryptocurrency, currency, durationType) {
   const url = getPriceHistoryUrl(cryptocurrency, currency, durationType);
 
   return new Promise((resolve, reject) => {
-    axios.get(url)
+    axios
+      .get(url)
       .then((response) => {
         const priceHistory = get(response, ['data', 'data', 'prices'], []);
         const formattedPriceHistory = priceHistory
@@ -39,11 +40,12 @@ function fetchSpotPrices(currency) {
   const url = getSpotPriceUrl(currency);
 
   return new Promise((resolve, reject) => {
-    axios.get(url)
+    axios
+      .get(url)
       .then((response) => {
         const spotPrices = get(response, ['data', 'data'], []);
         const formattedSpotPrices = spotPrices
-          .filter(e => ['BTC', 'ETH', 'LTC'].indexOf(e.base) >= 0)
+          .filter(e => ['BTC', 'BCH', 'ETH', 'LTC'].indexOf(e.base) >= 0)
           .map(e => ({ ...e, amount: +e.amount }));
         resolve(formattedSpotPrices);
       })
@@ -51,7 +53,4 @@ function fetchSpotPrices(currency) {
   });
 }
 
-export {
-  fetchPriceHistory,
-  fetchSpotPrices,
-};
+export { fetchPriceHistory, fetchSpotPrices };
