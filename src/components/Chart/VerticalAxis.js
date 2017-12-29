@@ -13,16 +13,12 @@ function formatAxisPrice(price, currencyCode) {
 
 const VerticalAxis = ({ data, textAlign }) => {
   const [minPrice, maxPrice] = extent(data, d => d.price);
-  const textAlignClass = textAlign === "left" ? "left" : "right";
+  const textAlignClass = textAlign;
 
   return (
     <div className={`VerticalAxis ${textAlignClass}`}>
-      <div className="tick">
-        {formatAxisPrice(maxPrice, DEFAULT_PROPS.CURRENCY)}
-      </div>
-      <div className="tick">
-        {formatAxisPrice(minPrice, DEFAULT_PROPS.CURRENCY)}
-      </div>
+      {maxPrice && <div className="tick">{formatAxisPrice(maxPrice, DEFAULT_PROPS.CURRENCY)}</div>}
+      {minPrice && <div className="tick">{formatAxisPrice(minPrice, DEFAULT_PROPS.CURRENCY)}</div>}
     </div>
   );
 };
@@ -31,5 +27,8 @@ VerticalAxis.propTypes = {
   data: PROPTYPES.PRICE_DATA.isRequired,
   textAlign: PROPTYPES.TEXT_ALIGNMENT.isRequired
 };
+
+// Use named export for tests
+export { formatAxisPrice };
 
 export default VerticalAxis;
