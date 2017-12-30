@@ -71,15 +71,11 @@ class Chart extends Component {
     const { dimensions } = this.state;
 
     // Find closest data point to the x-coordinates of where the user's mouse is hovering
-    const hoverX =
-      e.nativeEvent.clientX -
-      this.chartSvgComponent.getBoundingClientRect().left;
+    const hoverX = e.nativeEvent.clientX - this.chartSvgComponent.getBoundingClientRect().left;
     const index = Math.round(hoverX / dimensions.width * (data.length - 1));
     const hoveredDatapoint = data[index] || {};
     const hoveredValue = {
-      price:
-        hoveredDatapoint.price &&
-        formatCurrency(hoveredDatapoint.price, DEFAULT_PROPS.CURRENCY),
+      price: hoveredDatapoint.price && formatCurrency(hoveredDatapoint.price, DEFAULT_PROPS.CURRENCY),
       time: hoveredDatapoint.time && hoveredDatapoint.time.toLocaleString()
     };
 
@@ -109,18 +105,8 @@ class Chart extends Component {
           <VerticalAxis data={data} textAlign="left" />
           <div className="Chart">
             <div>
-              <HoverContainer
-                top
-                value={hoveredValue.price}
-                visible={hovered}
-                x={hoverX}
-              />
-              <HoverContainer
-                bottom
-                value={hoveredValue.time}
-                visible={hovered}
-                x={hoverX}
-              />
+              <HoverContainer position="top" label={hoveredValue.price} visible={hovered} x={hoverX} />
+              <HoverContainer position="bottom" label={hoveredValue.time} visible={hovered} x={hoverX} />
             </div>
             <svg
               ref={svgRef}
@@ -128,18 +114,8 @@ class Chart extends Component {
               onMouseLeave={this.handleMouseLeave}
               onMouseMove={this.handleMouseMove}
             >
-              <Graph
-                height={dimensions.height}
-                width={dimensions.width}
-                data={data}
-                color={color}
-              />
-              <Cursor
-                height={dimensions.height}
-                visible={hovered}
-                x={hoverX}
-                y={hoverY}
-              />
+              <Graph height={dimensions.height} width={dimensions.width} data={data} color={color} />
+              <Cursor height={dimensions.height} visible={hovered} x={hoverX} y={hoverY} />
             </svg>
           </div>
           <VerticalAxis data={data} textAlign="right" />
@@ -152,8 +128,8 @@ class Chart extends Component {
 
 Chart.propTypes = {
   data: PROPTYPES.PRICE_DATA.isRequired,
-  color: PROPTYPES.COLOR,
-  durationType: PROPTYPES.DURATION.isRequired
+  durationType: PROPTYPES.DURATION.isRequired,
+  color: PROPTYPES.COLOR
 };
 
 Chart.defaultProps = {
