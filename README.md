@@ -1,5 +1,10 @@
 # coincharts
 
+[![CircleCI](https://circleci.com/gh/tohjustin/coincharts/tree/master.svg?style=shield&circle-token=3fd04aa6997f211630fc7d4f45931bef1953a97b)](https://circleci.com/gh/tohjustin/coincharts/tree/master)
+[![codecov](https://codecov.io/gh/tohjustin/coincharts/branch/master/graph/badge.svg)](https://codecov.io/gh/tohjustin/coincharts)
+[![XO code style](https://img.shields.io/badge/code_style-XO-5ed9c7.svg)](https://github.com/sindresorhus/xo)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 A cryptocurrency price chart built with [React.js](https://facebook.github.io/react/), [D3.js](https://d3js.org/) & [Coinbase API](https://developers.coinbase.com/api/v2).
 
 - Bootstrapped with [create-react-app](https://github.com/facebookincubator/create-react-app)
