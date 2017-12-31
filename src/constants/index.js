@@ -8,6 +8,12 @@ const CRYPTOCURRENCY = {
     fillColor: "#FFEBC5",
     strokeColor: "#FFB01E"
   },
+  BCH: {
+    key: "bch",
+    name: "Bitcoin Cash",
+    fillColor: "#E2F0D2",
+    strokeColor: "#8DC451"
+  },
   ETH: {
     key: "eth",
     name: "Ethereum",
@@ -54,7 +60,7 @@ const PROPTYPES = {
     stroke: PropTypes.string
   }),
   CURRENCY: PropTypes.oneOf(["cad", "usd"]),
-  CRYPTOCURRENCY: PropTypes.oneOf(["btc", "eth", "ltc"]),
+  CRYPTOCURRENCY: PropTypes.oneOf(["btc", "bch", "eth", "ltc"]),
   DURATION: PropTypes.oneOf(["hour", "day", "week", "month", "year", "all"]),
   PRICE_DATA: PropTypes.arrayOf(
     PropTypes.shape({
@@ -64,6 +70,7 @@ const PROPTYPES = {
   ),
   SPOT_PRICES: PropTypes.shape({
     btc: PropTypes.number,
+    bch: PropTypes.number,
     eth: PropTypes.number,
     ltc: PropTypes.number
   }),
@@ -71,6 +78,7 @@ const PROPTYPES = {
   HOVER_CONTAINER_POSITION: PropTypes.oneOf(["top", "bottom"])
 };
 
+// Default Props
 const DEFAULT_PROPS = {
   COLOR: {
     fill: "#FFEBC5",
@@ -82,6 +90,7 @@ const DEFAULT_PROPS = {
   PRICE_DATA: [],
   SPOT_PRICES: {
     btc: 0,
+    bch: 0,
     eth: 0,
     ltc: 0
   },

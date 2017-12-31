@@ -25,9 +25,10 @@ import { PriceActionTypes } from "./actions";
  *        ]
  *      },
  *      spot: {
- *        'btc': XXX, 
- *        'eth': YYY, 
- *        'ltc': ZZZ, 
+ *        'btc': WWW,
+ *        'bch': XXX,
+ *        'eth': YYY,
+ *        'ltc': ZZZ,
  *      }
  *    }
  * }
@@ -42,6 +43,7 @@ const initialState = {
   history: [],
   spot: {
     btc: 0,
+    bch: 0,
     eth: 0,
     ltc: 0
   }
