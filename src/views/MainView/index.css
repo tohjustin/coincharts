@@ -27,7 +27,7 @@
   z-index: 10;
 }
 
-.chart .VerticalChartAxis .tick {
+.chart .VerticalAxis {
   z-index: 100;
 }
 
