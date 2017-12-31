@@ -88,6 +88,10 @@ const DEFAULT_PROPS = {
   CRYPTOCURRENCY: "btc",
   DURATION: "day",
   PRICE_DATA: [],
+  STATUS: {
+    pricePending: false,
+    error: null
+  },
   SPOT_PRICES: {
     btc: 0,
     bch: 0,

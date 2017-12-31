@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 
+import { DEFAULT_PROPS } from "../../constants";
 import { PriceActionTypes } from "./actions";
 
 /** 
@@ -36,17 +37,9 @@ import { PriceActionTypes } from "./actions";
  */
 
 const initialState = {
-  status: {
-    pricePending: false,
-    error: null
-  },
-  history: [],
-  spot: {
-    btc: 0,
-    bch: 0,
-    eth: 0,
-    ltc: 0
-  }
+  status: DEFAULT_PROPS.STATUS,
+  history: DEFAULT_PROPS.PRICE_DATA,
+  spot: DEFAULT_PROPS.SPOT_PRICES
 };
 
 function priceStatus(state = initialState.status, action) {
