@@ -68,27 +68,30 @@ class Chart extends Component {
   // Update hover position
   handleMouseMove(e) {
     const { data } = this.props;
-    const { dimensions } = this.state;
 
     // Find closest data point to the x-coordinates of where the user's mouse is hovering
     const hoverX = e.nativeEvent.clientX - this.chartSvgComponent.getBoundingClientRect().left;
-    const index = Math.round(hoverX / dimensions.width * (data.length - 1));
-    const hoveredDatapoint = data[index] || {};
-    const hoveredValue = {
-      price: hoveredDatapoint.price && formatCurrency(hoveredDatapoint.price, DEFAULT_PROPS.CURRENCY),
-      time: hoveredDatapoint.time && hoveredDatapoint.time.toLocaleString()
-    };
 
-    const scalePriceToY = scaleLinear()
-      .range([dimensions.height, GRAPH_PADDING_TOP])
-      .domain(extent(data, d => d.price));
-    const hoverY = scalePriceToY(hoveredDatapoint.price) || 0;
+    this.setState(prevState => {
+      const { dimensions } = prevState;
+      const index = Math.round(hoverX / dimensions.width * (data.length - 1));
+      const hoveredDatapoint = data[index] || {};
+      const hoveredValue = {
+        price: hoveredDatapoint.price && formatCurrency(hoveredDatapoint.price, DEFAULT_PROPS.CURRENCY),
+        time: hoveredDatapoint.time && hoveredDatapoint.time.toLocaleString()
+      };
 
-    this.setState({
-      hovered: Boolean(hoveredDatapoint),
-      hoveredValue,
-      hoverX,
-      hoverY
+      const scalePriceToY = scaleLinear()
+        .range([dimensions.height, GRAPH_PADDING_TOP])
+        .domain(extent(data, d => d.price));
+      const hoverY = scalePriceToY(hoveredDatapoint.price) || 0;
+
+      return {
+        hovered: Boolean(hoveredDatapoint),
+        hoveredValue,
+        hoverX,
+        hoverY
+      };
     });
   }
 

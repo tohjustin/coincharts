@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-bind */
 import React from "react";
 import PropTypes from "prop-types";
 
@@ -14,9 +15,7 @@ const Tabs = ({ options, onChange, selectedKey }) => {
             key={options[key].listKey}
             aria-labelledby={options[key].listKey}
             className={`Tabs-item ${isSelectedClass}`}
-            onClick={function() {
-              onChange(key);
-            }}
+            onClick={onChange.bind(null, key)}
             role="tab"
             tabIndex="-1"
           >

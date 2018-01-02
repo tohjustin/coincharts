@@ -42,24 +42,24 @@ class Graph extends Component {
   componentWillReceiveProps(nextProps) {
     const { data: nextData, height: nextHeight, width: nextWidth } = nextProps;
     const { color, width } = this.props;
-    const { scaledData } = this.state;
 
     // Don't update if next set of data is not ready
     if (nextData.length === 0) {
       return;
     }
 
-    const nextScaledData = Graph.scaleData(nextData, nextHeight, nextWidth);
-    const previousScaledData =
-      scaledData.length > 0
-        ? scaledData
-        : nextScaledData.map(({ time }) => ({ price: nextHeight, time }));
+    this.setState(prevState => {
+      const { scaledData } = prevState;
+      const nextScaledData = Graph.scaleData(nextData, nextHeight, nextWidth);
+      const previousScaledData =
+        scaledData.length > 0 ? scaledData : nextScaledData.map(({ time }) => ({ price: nextHeight, time }));
 
-    this.setState({
-      skipTransition: width !== nextWidth,
-      previousColor: color,
-      previousScaledData,
-      scaledData: nextScaledData
+      return {
+        skipTransition: width !== nextWidth,
+        previousColor: color,
+        previousScaledData,
+        scaledData: nextScaledData
+      };
     });
   }
 
@@ -72,21 +72,12 @@ class Graph extends Component {
       return false;
     }
 
-    return (
-      !isEqual(data, nextData) ||
-      !isEqual(height, nextHeight) ||
-      !isEqual(width, nextWidth)
-    );
+    return !isEqual(data, nextData) || !isEqual(height, nextHeight) || !isEqual(width, nextWidth);
   }
 
   componentDidUpdate() {
     const { color, height } = this.props;
-    const {
-      previousColor = color,
-      previousScaledData,
-      scaledData,
-      skipTransition
-    } = this.state;
+    const { previousColor = color, previousScaledData, scaledData, skipTransition } = this.state;
     const graph = select(this.svgNode);
     const transitionDuration = skipTransition ? 0 : TRANSITION.duration;
 

@@ -87,9 +87,20 @@
     "ignores": [
       "src/registerServiceWorker.js"
     ],
+    "overrides": [
+      {
+        "files": [ "**/*.test.js" ],
+        "rules": {
+          "react/destructuring-assignment": 0
+        }
+      }
+    ],
     "rules": {
       "import/no-unassigned-import": 0,
+      "react/jsx-no-bind": [2, { "ignoreRefs": true }],
+      "react/jsx-one-expression-per-line": 0,
       "react/jsx-tag-spacing": 0,
+      "react/no-typos": 0,
       "unicorn/filename-case": 0,
       "quotes": [
         "error",
