@@ -32,7 +32,7 @@ function fetchPriceHistory(cryptocurrency, currency, durationType) {
           .map(e => ({ price: Number(e.price), time: new Date(e.time) }));
         resolve(formattedPriceHistory);
       })
-      .catch(err => reject(err));
+      .catch(reject);
   });
 }
 
@@ -50,8 +50,8 @@ function fetchSpotPrices(currency) {
         }));
         resolve(formattedSpotPrices);
       })
-      .catch(err => reject(err));
+      .catch(reject);
   });
 }
 
-export { fetchPriceHistory, fetchSpotPrices };
+export { getPriceHistoryUrl, getSpotPriceUrl, fetchPriceHistory, fetchSpotPrices };

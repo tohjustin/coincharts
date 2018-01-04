@@ -44,6 +44,7 @@
     "reselect": "3.0.1"
   },
   "devDependencies": {
+    "check-types": "7.3.0",
     "codecov": "3.0.0",
     "enzyme": "3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
