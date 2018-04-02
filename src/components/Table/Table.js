@@ -1,22 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { scan } from "d3-array";
 
-import { DEFAULT_PROPS, PROPTYPES } from "../../constants";
+import { DEFAULT_PROPS } from "../../constants";
 import { formatCurrency } from "../../utils";
 import NumberSign from "./NumberSign";
 
 import "./index.css";
 
-const Table = ({ cryptocurrencyLabel, durationLabel, spotPrice, priceHistory }) => {
-  const lastIndex = scan(priceHistory, (a, b) => a.time - b.time);
-  const oldPrice = priceHistory[lastIndex] && priceHistory[lastIndex].price;
-  const priceDifference = spotPrice - oldPrice;
-  const percentageDifference = (spotPrice / oldPrice - 1) * 100 || 0;
-
+const Table = ({ cryptocurrencyLabel, durationLabel, percentDifference, priceDifference, spotPrice }) => {
+  const percentDifferenceFormatted = Number(Math.abs(percentDifference)).toFixed(2);
   const priceDifferenceFormatted = formatCurrency(Math.abs(priceDifference), DEFAULT_PROPS.CURRENCY);
   const spotPriceFormatted = formatCurrency(Math.abs(spotPrice), DEFAULT_PROPS.CURRENCY);
-  const percentageFormatted = Number(Math.abs(percentageDifference)).toFixed(2);
   const showOtherCells = Boolean(durationLabel);
 
   return (
@@ -32,7 +26,7 @@ const Table = ({ cryptocurrencyLabel, durationLabel, spotPrice, priceHistory }) 
       {showOtherCells && (
         <div className="TableCell">
           <div className="value">
-            <NumberSign isPositive={percentageDifference > 0} />
+            <NumberSign value={priceDifference} />
             <span className="small-font">{priceDifferenceFormatted.slice(0, 1)}</span>
             <span className="large-font">{priceDifferenceFormatted.slice(1, -3)}</span>
             <span className="small-font">{priceDifferenceFormatted.slice(-3)}</span>
@@ -45,8 +39,8 @@ const Table = ({ cryptocurrencyLabel, durationLabel, spotPrice, priceHistory }) 
       {showOtherCells && (
         <div className="TableCell">
           <div className="value">
-            <NumberSign isPositive={percentageDifference > 0} />
-            <span className="large-font">{percentageFormatted}</span>
+            <NumberSign value={percentDifference} />
+            <span className="large-font">{percentDifferenceFormatted}</span>
             <span className="small-font">%</span>
           </div>
           <div className="label">{durationLabel} (%)</div>
@@ -59,7 +53,8 @@ const Table = ({ cryptocurrencyLabel, durationLabel, spotPrice, priceHistory }) 
 Table.propTypes = {
   cryptocurrencyLabel: PropTypes.string.isRequired,
   durationLabel: PropTypes.string.isRequired,
-  priceHistory: PROPTYPES.PRICE_DATA.isRequired,
+  percentDifference: PropTypes.number.isRequired,
+  priceDifference: PropTypes.number.isRequired,
   spotPrice: PropTypes.number.isRequired
 };
 

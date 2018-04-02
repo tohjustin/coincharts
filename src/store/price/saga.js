@@ -7,9 +7,7 @@ function* fetchPrice() {
   try {
     // Fetch data based on current selected settings
     const currency = yield select(SettingsSelectors.getSelectedCurrency);
-    const cryptocurrency = yield select(
-      SettingsSelectors.getSelectedCryptocurrency
-    );
+    const cryptocurrency = yield select(SettingsSelectors.getSelectedCryptocurrency);
     const duration = yield select(SettingsSelectors.getSelectedDuration);
 
     const [priceHistory, spotPrices] = yield all([

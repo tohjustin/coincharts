@@ -14,7 +14,8 @@ describe("<Table />", () => {
     const props = {
       cryptocurrencyLabel: "testCryptocurrencyLabel",
       durationLabel: "testDurationLabel",
-      priceHistory: [],
+      percentDifference: 0,
+      priceDifference: 0,
       spotPrice: 0
     };
 
@@ -26,7 +27,8 @@ describe("<Table />", () => {
     const props = {
       cryptocurrencyLabel: "testCryptocurrencyLabel",
       durationLabel: "testDurationLabel",
-      priceHistory: [],
+      percentDifference: 0,
+      priceDifference: 0,
       spotPrice: 0
     };
 
@@ -38,7 +40,8 @@ describe("<Table />", () => {
     const props = {
       cryptocurrencyLabel: "testCryptocurrencyLabel",
       durationLabel: "testDurationLabel",
-      priceHistory: [],
+      percentDifference: 0,
+      priceDifference: 0,
       spotPrice: 0
     };
 
@@ -50,7 +53,8 @@ describe("<Table />", () => {
     const props = {
       cryptocurrencyLabel: "testCryptocurrencyLabel",
       durationLabel: "",
-      priceHistory: [],
+      percentDifference: 0,
+      priceDifference: 0,
       spotPrice: 0
     };
 
@@ -62,7 +66,8 @@ describe("<Table />", () => {
     const props = {
       cryptocurrencyLabel: "testCryptocurrencyLabel",
       durationLabel: "",
-      priceHistory: [],
+      percentDifference: 0,
+      priceDifference: 0,
       spotPrice: 0
     };
 

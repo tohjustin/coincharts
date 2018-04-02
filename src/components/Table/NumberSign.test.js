@@ -6,28 +6,37 @@ import NumberSign, { PLUS_CHAR, MINUS_CHAR } from "./NumberSign";
 describe("<NumberSign />", () => {
   it("renders without crashing", () => {
     const props = {
-      isPositive: true
+      value: 1000
     };
 
     const wrapper = shallow(<NumberSign {...props} />);
     expect(wrapper.find("span")).toHaveLength(1);
   });
 
-  it("renders '+' when `props.isPositive` is true", () => {
+  it("renders '+' when `props.value` is 1", () => {
     const props = {
-      isPositive: true
+      value: 1
     };
 
     const wrapper = shallow(<NumberSign {...props} />);
     expect(wrapper.text()).toEqual(PLUS_CHAR);
   });
 
-  it("renders '-' when `props.isPositive` is false", () => {
+  it("renders '-' when `props.value` is -1", () => {
     const props = {
-      isPositive: false
+      value: -1
     };
 
     const wrapper = shallow(<NumberSign {...props} />);
     expect(wrapper.text()).toEqual(MINUS_CHAR);
+  });
+
+  it("renders nothing when `props.value` is 0", () => {
+    const props = {
+      value: 0
+    };
+
+    const wrapper = shallow(<NumberSign {...props} />);
+    expect(wrapper.text()).toEqual("");
   });
 });
