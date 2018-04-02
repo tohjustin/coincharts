@@ -5,7 +5,6 @@ import { extent } from "d3-array";
 import { timeFormat } from "d3-time-format";
 
 import { DURATION, PROPTYPES } from "../../constants";
-import { DEFAULT_TICK_COUNT } from "./constants";
 
 class HorizontalAxis extends Component {
   static formatTime(timestamp, duration) {

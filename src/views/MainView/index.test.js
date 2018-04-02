@@ -13,18 +13,6 @@ describe("<MainView/>", () => {
     expect(wrapper.find(".App")).toHaveLength(1);
   });
 
-  it("renders sub-components correctly", () => {
-    const props = {
-      requestPriceData: () => {}
-    };
-
-    const wrapper = shallow(<UnconnectedMainView {...props} />);
-    expect(wrapper.find("Connect(CryptocurrencyTabs)")).toHaveLength(1);
-    expect(wrapper.find("Connect(DurationTabs)")).toHaveLength(1);
-    expect(wrapper.find("Connect(PriceTable)")).toHaveLength(1);
-    expect(wrapper.find("Connect(PriceChart)")).toHaveLength(1);
-  });
-
   describe("Price data polling", () => {
     // Use fake timers to tests `setInterval()` behavior
     jest.useFakeTimers();

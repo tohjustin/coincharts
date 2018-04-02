@@ -1,26 +1,31 @@
 .dashboard {
   background-color: #fff;
-  border-radius: 4px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   display: flex;
   flex-direction: column;
   margin: 0 auto;
-  max-width: 1500px;
+}
+
+.dashboard.desktop {
+  border-radius: 4px;
   min-width: 960px;
+  max-width: 1500px;
   width: 90vw;
-  height: 470px;
 }
 
 .chart {
-  margin: 0 2em;
+  margin: 0 20px;
 }
 
 .chart .topSection {
   border-bottom: 1px solid #dae1e9;
-  border-top: 1px solid #dae1e9;
   display: flex;
   flex-direction: row;
   height: 225px;
+}
+
+.desktop .chart .topSection {
+  border-top: 1px solid #dae1e9;
 }
 
 .chart .PriceChart {
@@ -37,7 +42,7 @@
   flex-shrink: 0;
   height: 90px;
   justify-content: center;
-  margin: 1.5em 2em;
+  margin: 15px 20px;
 }
 
 .tabs {
@@ -47,7 +52,16 @@
   flex-shrink: 0;
   height: 55px;
   justify-content: space-between;
-  padding: 0 2em;
+  padding: 0 20px;
+}
+
+.tabs-header {
+  display: flex;
+  align-items: center;
+  color: rgb(6, 103, 208);
+  font-size: 18px;
+  font-weight: 500;
+  margin: 0px;  
 }
 
 .tabs .cryptocurrency span {
