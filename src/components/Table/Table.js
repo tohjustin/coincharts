@@ -1,47 +1,34 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-import { DEFAULT_PROPS } from "../../constants";
-import { formatCurrency } from "../../utils";
-import NumberSign from "./NumberSign";
-
+import BigAmount from "../BigAmount";
 import "./index.css";
 
-const Table = ({ cryptocurrencyLabel, durationLabel, percentDifference, priceDifference, spotPrice }) => {
-  const percentDifferenceFormatted = Number(Math.abs(percentDifference)).toFixed(2);
-  const priceDifferenceFormatted = formatCurrency(Math.abs(priceDifference), DEFAULT_PROPS.CURRENCY);
-  const spotPriceFormatted = formatCurrency(Math.abs(spotPrice), DEFAULT_PROPS.CURRENCY);
+const Table = ({ cryptocurrencyLabel, durationLabel, percentDifference, priceDifference, spotPrice, currency }) => {
   const showOtherCells = Boolean(durationLabel);
 
   return (
     <div className="Table">
       <div className="TableCell">
         <div className="value">
-          <span className="small-font">{spotPriceFormatted.slice(0, 1)}</span>
-          <span className="large-font">{spotPriceFormatted.slice(1, -3)}</span>
-          <span className="small-font">{spotPriceFormatted.slice(-3)}</span>
+          <BigAmount type="currency" currency={currency} value={spotPrice} />
         </div>
         <div className="label">{cryptocurrencyLabel} price</div>
       </div>
       {showOtherCells && (
         <div className="TableCell">
           <div className="value">
-            <NumberSign value={priceDifference} />
-            <span className="small-font">{priceDifferenceFormatted.slice(0, 1)}</span>
-            <span className="large-font">{priceDifferenceFormatted.slice(1, -3)}</span>
-            <span className="small-font">{priceDifferenceFormatted.slice(-3)}</span>
+            <BigAmount showNumberSign type="currency" currency={currency} value={priceDifference} />
           </div>
           <div className="label">
-            {durationLabel} (${DEFAULT_PROPS.CURRENCY})
+            {durationLabel} ({currency})
           </div>
         </div>
       )}
       {showOtherCells && (
         <div className="TableCell">
           <div className="value">
-            <NumberSign value={percentDifference} />
-            <span className="large-font">{percentDifferenceFormatted}</span>
-            <span className="small-font">%</span>
+            <BigAmount showNumberSign type="percentage" value={percentDifference} />
           </div>
           <div className="label">{durationLabel} (%)</div>
         </div>
@@ -55,7 +42,8 @@ Table.propTypes = {
   durationLabel: PropTypes.string.isRequired,
   percentDifference: PropTypes.number.isRequired,
   priceDifference: PropTypes.number.isRequired,
-  spotPrice: PropTypes.number.isRequired
+  spotPrice: PropTypes.number.isRequired,
+  currency: PropTypes.string.isRequired
 };
 
 export default Table;

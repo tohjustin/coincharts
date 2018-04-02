@@ -28,17 +28,19 @@ const CRYPTOCURRENCY = {
   }
 };
 const CRYPTOCURRENCY_LIST = Object.keys(CRYPTOCURRENCY).map(e => CRYPTOCURRENCY[e]);
+const CRYPTOCURRENCY_KEYS = Object.keys(CRYPTOCURRENCY).map(e => CRYPTOCURRENCY[e].key);
 
 // Supported Currencies
 const CURRENCY = {
-  cad: { key: "cad", name: "Canadian Dollar" },
-  usd: { key: "usd", name: "US Dollar" }
+  cad: { key: "CAD", name: "Canadian Dollar" },
+  usd: { key: "USD", name: "US Dollar" }
 };
 const CURRENCY_LIST = Object.keys(CURRENCY).map(e => CURRENCY[e]);
+const CURRENCY_KEYS = Object.keys(CURRENCY).map(e => CURRENCY[e].key);
 
 // Time duration constants
 const DURATION = {
-  HOUR: { key: "hour", codename: "1H", humanize: "since an hour ago" },
+  HOUR: { key: "hour", codename: "1H", humanize: "past hour" },
   DAY: { key: "day", codename: "1D", humanize: "since yesterday" },
   WEEK: { key: "week", codename: "1W", humanize: "since last week" },
   MONTH: { key: "month", codename: "1M", humanize: "since last month" },
@@ -46,6 +48,7 @@ const DURATION = {
   ALL: { key: "all", codename: "ALL", humanize: "" }
 };
 const DURATION_LIST = Object.keys(DURATION).map(e => DURATION[e]);
+const DURATION_KEYS = Object.keys(DURATION).map(e => DURATION[e].key);
 
 // Directory where price data (.json files) are stored
 const LOCAL_JSON_DATA_DIR = "./priceData";
@@ -59,9 +62,9 @@ const PROPTYPES = {
     fill: PropTypes.string,
     stroke: PropTypes.string
   }),
-  CURRENCY: PropTypes.oneOf(["cad", "usd"]),
-  CRYPTOCURRENCY: PropTypes.oneOf(["btc", "bch", "eth", "ltc"]),
-  DURATION: PropTypes.oneOf(["hour", "day", "week", "month", "year", "all"]),
+  CURRENCY: PropTypes.oneOf(CURRENCY_KEYS),
+  CRYPTOCURRENCY: PropTypes.oneOf(CRYPTOCURRENCY_KEYS),
+  DURATION: PropTypes.oneOf(DURATION_KEYS),
   PRICE_DATA: PropTypes.arrayOf(
     PropTypes.shape({
       price: PropTypes.number.isRequired,
@@ -69,13 +72,14 @@ const PROPTYPES = {
     }).isRequired
   ),
   SPOT_PRICES: PropTypes.shape({
-    btc: PropTypes.number,
-    bch: PropTypes.number,
-    eth: PropTypes.number,
-    ltc: PropTypes.number
+    btc: PropTypes.number.isRequired,
+    bch: PropTypes.number.isRequired,
+    eth: PropTypes.number.isRequired,
+    ltc: PropTypes.number.isRequired
   }),
   TEXT_ALIGNMENT: PropTypes.oneOf(["left", "right"]),
-  HOVER_CONTAINER_POSITION: PropTypes.oneOf(["top", "bottom"])
+  HOVER_CONTAINER_POSITION: PropTypes.oneOf(["top", "bottom"]),
+  BIG_AMOUNT_TYPE: PropTypes.oneOf(["currency", "percentage"])
 };
 
 // Default Props
@@ -84,7 +88,7 @@ const DEFAULT_PROPS = {
     fill: "#FFEBC5",
     stroke: "#FFB119"
   },
-  CURRENCY: "usd",
+  CURRENCY: "USD",
   CRYPTOCURRENCY: "btc",
   DURATION: "day",
   PRICE_DATA: [],
