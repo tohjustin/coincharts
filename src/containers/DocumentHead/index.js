@@ -8,10 +8,9 @@ import { PriceSelectors } from "../../store/price";
 import { SettingsSelectors } from "../../store/settings";
 import { formatCurrency } from "../../utils";
 
-const Title = ({ selectedCryptocurrency, selectedCurrency, spotPrice }) => {
+const DocumentHead = ({ selectedCryptocurrency, selectedCurrency, spotPrice }) => {
   const cryptocurrencySymbol = selectedCryptocurrency.toUpperCase();
-  const iconPath = `${process.env
-    .PUBLIC_URL}/icons/icon-${selectedCryptocurrency}.png`;
+  const iconPath = `${process.env.PUBLIC_URL}/icons/icon-${selectedCryptocurrency}.png`;
   const priceText = formatCurrency(spotPrice, selectedCurrency) || "";
 
   return (
@@ -24,9 +23,7 @@ const Title = ({ selectedCryptocurrency, selectedCurrency, spotPrice }) => {
 
 function mapStateToProps(state) {
   const selectedCurrency = SettingsSelectors.getSelectedCurrency(state);
-  const selectedCryptocurrency = SettingsSelectors.getSelectedCryptocurrency(
-    state
-  );
+  const selectedCryptocurrency = SettingsSelectors.getSelectedCryptocurrency(state);
   const spotPrice = PriceSelectors.getSelectedSpotPrice(state);
 
   return {
@@ -36,19 +33,19 @@ function mapStateToProps(state) {
   };
 }
 
-Title.propTypes = {
+DocumentHead.propTypes = {
   selectedCurrency: PropTypes.string,
   selectedCryptocurrency: PROPTYPES.CRYPTOCURRENCY,
   spotPrice: PropTypes.number
 };
 
-Title.defaultProps = {
+DocumentHead.defaultProps = {
   selectedCurrency: DEFAULT_PROPS.CURRENCY,
   selectedCryptocurrency: DEFAULT_PROPS.CRYPTOCURRENCY,
   spotPrice: 0
 };
 
 // Use named export for tests
-export { Title as UnconnectedTitle, mapStateToProps };
+export { DocumentHead as UnconnectedDocumentHead, mapStateToProps };
 
-export default connect(mapStateToProps)(Title);
+export default connect(mapStateToProps)(DocumentHead);
