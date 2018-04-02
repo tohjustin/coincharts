@@ -8,9 +8,9 @@ import { SettingsActionTypes } from "./actions";
  * ```
  * {
  *    settings: {
- *      selectedCryptocurrency: 'btc',
- *      selectedCurrency: 'usd',
- *      selectedDuration: 'day',
+ *      selectedCryptocurrency: "btc",
+ *      selectedCurrency: "USD",
+ *      selectedDuration: "day",
  *    }
  * }
  * ```
@@ -18,7 +18,7 @@ import { SettingsActionTypes } from "./actions";
 
 const initialState = {
   selectedCryptocurrency: "btc",
-  selectedCurrency: "usd",
+  selectedCurrency: "USD",
   selectedDuration: "day"
 };
 

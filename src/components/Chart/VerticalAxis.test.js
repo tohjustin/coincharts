@@ -53,8 +53,8 @@ describe("<VerticalAxis />", () => {
   });
 
   describe("formatAxisPrice()", () => {
-    it("formats currency correctly (`currencyCode` = `usd`)", () => {
-      const currencyCode = "usd";
+    it("formats currency correctly (`currencyCode` = `USD`)", () => {
+      const currencyCode = "USD";
       expect(formatAxisPrice(1999999, currencyCode)).toEqual("$1,999,999");
       expect(formatAxisPrice(199999, currencyCode)).toEqual("$199,999");
       expect(formatAxisPrice(19999, currencyCode)).toEqual("$19,999");
