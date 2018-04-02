@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { extent } from "d3-array";
 import { scaleLinear } from "d3-scale";
+import MediaQuery from "react-responsive";
 
-import { DEFAULT_PROPS, PROPTYPES } from "../../constants";
+import { DEFAULT_PROPS, PROPTYPES, MOBILE_WIDTH } from "../../constants";
 import { formatCurrency } from "../../utils";
 import Graph from "./Graph";
-import { GRAPH_PADDING_TOP } from "./constants";
+import { GRAPH_PADDING_TOP, TICK_COUNT_DESKTOP, TICK_COUNT_MOBILE } from "./constants";
 import Cursor from "./Cursor";
 import HorizontalAxis from "./HorizontalAxis";
 import HoverContainer from "./HoverContainer";
@@ -95,7 +96,29 @@ class Chart extends Component {
     });
   }
 
-  render() {
+  renderMobile() {
+    const { dimensions } = this.state;
+    const { color, data, durationType } = this.props;
+    const svgRef = node => {
+      this.chartSvgComponent = node;
+    };
+
+    return (
+      <div className="chart mobile">
+        <div className="topSection">
+          <VerticalAxis data={data} textAlign="left" />
+          <div className="Chart">
+            <svg ref={svgRef}>
+              <Graph height={dimensions.height} width={dimensions.width} data={data} color={color} />
+            </svg>
+          </div>
+        </div>
+        <HorizontalAxis data={data} duration={durationType} tickCount={TICK_COUNT_MOBILE}/>
+      </div>
+    );
+  }
+
+  renderDesktop() {
     const { dimensions, hoveredValue, hoverX, hoverY, hovered } = this.state;
     const { color, data, durationType } = this.props;
     const svgRef = node => {
@@ -123,8 +146,16 @@ class Chart extends Component {
           </div>
           <VerticalAxis data={data} textAlign="right" />
         </div>
-        <HorizontalAxis data={data} duration={durationType} />
+        <HorizontalAxis data={data} duration={durationType} tickCount={TICK_COUNT_DESKTOP}/>
       </div>
+    );
+  }
+
+  render() {
+    return (
+      <MediaQuery maxWidth={MOBILE_WIDTH}>
+        {(matches) => matches ? this.renderMobile() : this.renderDesktop()}
+      </MediaQuery>
     );
   }
 }
@@ -132,11 +163,11 @@ class Chart extends Component {
 Chart.propTypes = {
   data: PROPTYPES.PRICE_DATA.isRequired,
   durationType: PROPTYPES.DURATION.isRequired,
-  color: PROPTYPES.COLOR
+  color: PROPTYPES.COLOR,
 };
 
 Chart.defaultProps = {
-  color: DEFAULT_PROPS.COLOR
+  color: DEFAULT_PROPS.COLOR,
 };
 
 export default Chart;

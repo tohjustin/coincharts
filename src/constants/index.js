@@ -1,5 +1,8 @@
 import PropTypes from "prop-types";
 
+// Breakpoints for responsive layout
+const MOBILE_WIDTH = 1024;
+
 // Supported cryptocurrencies
 const CRYPTOCURRENCY = {
   BTC: {
@@ -106,6 +109,7 @@ const DEFAULT_PROPS = {
 };
 
 export {
+  MOBILE_WIDTH,
   CURRENCY,
   CURRENCY_LIST,
   CRYPTOCURRENCY,
@@ -115,5 +119,5 @@ export {
   DURATION_LIST,
   LOCAL_JSON_DATA_DIR,
   POLL_FREQUENCY,
-  PROPTYPES
+  PROPTYPES,
 };

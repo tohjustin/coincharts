@@ -38,6 +38,7 @@
     "react-dom": "16.2.0",
     "react-helmet": "5.2.0",
     "react-redux": "5.0.6",
+    "react-responsive": "^4.1.0",
     "react-scripts": "1.0.17",
     "redux": "3.7.2",
     "redux-saga": "0.16.0",
@@ -90,7 +91,9 @@
     ],
     "overrides": [
       {
-        "files": [ "**/*.test.js" ],
+        "files": [
+          "**/*.test.js"
+        ],
         "rules": {
           "react/destructuring-assignment": 0
         }
@@ -98,7 +101,12 @@
     ],
     "rules": {
       "import/no-unassigned-import": 0,
-      "react/jsx-no-bind": [2, { "ignoreRefs": true }],
+      "react/jsx-no-bind": [
+        2,
+        {
+          "ignoreRefs": true
+        }
+      ],
       "react/jsx-one-expression-per-line": 0,
       "react/jsx-tag-spacing": 0,
       "react/no-typos": 0,

@@ -42,6 +42,10 @@
   stroke-width: 2;
 }
 
+.mobile .HorizontalAxis {
+  margin: 10px 0px 10px 20px;
+}
+
 .HorizontalAxis {
   display: flex;
   flex-direction: row;

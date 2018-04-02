@@ -41,8 +41,13 @@ class HorizontalAxis extends Component {
 
   // Only update when we receive new data
   shouldComponentUpdate(nextProps) {
-    const { data } = this.props;
-    const { data: nextData } = nextProps;
+    const { data, tickCount } = this.props;
+    const { data: nextData, tickCount: nextTickCount } = nextProps;
+
+    // Always update when tickCount changes
+    if (tickCount !== nextTickCount) {
+      return true;
+    }
 
     // Don't update if next set of data is not ready
     if (nextData === undefined || nextData.length === 0) {
@@ -76,11 +81,7 @@ class HorizontalAxis extends Component {
 HorizontalAxis.propTypes = {
   data: PROPTYPES.PRICE_DATA.isRequired,
   duration: PROPTYPES.DURATION.isRequired,
-  tickCount: PropTypes.number
-};
-
-HorizontalAxis.defaultProps = {
-  tickCount: DEFAULT_TICK_COUNT
+  tickCount: PropTypes.number.isRequired,
 };
 
 export default HorizontalAxis;
