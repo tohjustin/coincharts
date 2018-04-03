@@ -58,10 +58,10 @@
 .tabs-header {
   display: flex;
   align-items: center;
-  color: rgb(6, 103, 208);
+  color: #0667d0;
   font-size: 18px;
   font-weight: 500;
-  margin: 0px;  
+  margin: 0;
 }
 
 .tabs .cryptocurrency span {

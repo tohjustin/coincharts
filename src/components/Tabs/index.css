@@ -30,10 +30,6 @@
   outline: none;
 }
 
-.Tabs-item:hover::after {
-  border-bottom-color: #7d95b6;
-}
-
 .Tabs-item::after {
   bottom: -1px;
   border-bottom: 1px solid transparent;
@@ -42,6 +38,10 @@
   left: 0;
   position: absolute;
   width: 100%;
+}
+
+.Tabs-item:hover::after {
+  border-bottom-color: #7d95b6;
 }
 
 .Tabs-item.selected {

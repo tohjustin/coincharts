@@ -42,15 +42,15 @@
   stroke-width: 2;
 }
 
-.mobile .HorizontalAxis {
-  margin: 10px 0px 10px 20px;
-}
-
 .HorizontalAxis {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   margin: 0.5em 2.5em 1.5em;
+}
+
+.mobile .HorizontalAxis {
+  margin: 10px 0 10px 20px;
 }
 
 .HorizontalAxis .tick {
