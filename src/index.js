@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
+import Raven from "raven-js";
 
 import DocumentHead from "./containers/DocumentHead";
 import Footer from "./components/Footer";
@@ -10,6 +11,12 @@ import registerServiceWorker from "./registerServiceWorker";
 
 import "./reset.css";
 import "./index.css";
+
+require("dotenv").config();
+
+if (process.env.NODE_ENV === "production") {
+  Raven.config(process.env.RAVEN_PUBLIC_DSN).install();
+}
 
 const { store } = configureStore();
 
