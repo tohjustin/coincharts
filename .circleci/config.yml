@@ -26,16 +26,16 @@ jobs:
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
 
-      - run: yarn install
+      - run: npm install
 
       - save_cache:
           paths:
             - node_modules
-          key: v1-dependencies-{{ checksum "package.json" }}
+          key: v2.0.0-dependencies-{{ checksum "package.json" }}
         
       - run: 
           name: Run Test Suite
-          command: yarn run test:coverage
+          command: npm run test:coverage
 
       - run: 
           name: Upload Test Coverage Report
