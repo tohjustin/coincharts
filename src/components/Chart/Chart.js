@@ -68,7 +68,7 @@ class Chart extends Component {
 
   // Update hover position
   handleMouseMove(e) {
-    const { data } = this.props;
+    const { data, currency } = this.props;
 
     // Find closest data point to the x-coordinates of where the user's mouse is hovering
     const hoverX = e.nativeEvent.clientX - this.chartSvgComponent.getBoundingClientRect().left;
@@ -78,7 +78,7 @@ class Chart extends Component {
       const index = Math.round(hoverX / dimensions.width * (data.length - 1));
       const hoveredDatapoint = data[index] || {};
       const hoveredValue = {
-        price: hoveredDatapoint.price && formatCurrency(hoveredDatapoint.price, DEFAULT_PROPS.CURRENCY),
+        price: hoveredDatapoint.price && formatCurrency(hoveredDatapoint.price, currency),
         time: hoveredDatapoint.time && hoveredDatapoint.time.toLocaleString()
       };
 
@@ -98,7 +98,7 @@ class Chart extends Component {
 
   renderMobile() {
     const { dimensions } = this.state;
-    const { color, data, durationType } = this.props;
+    const { color, currency, data, durationType } = this.props;
     const svgRef = node => {
       this.chartSvgComponent = node;
     };
@@ -106,7 +106,7 @@ class Chart extends Component {
     return (
       <div className="chart mobile">
         <div className="topSection">
-          <VerticalAxis data={data} textAlign="left" />
+          <VerticalAxis data={data} currency={currency} textAlign="left" />
           <div className="Chart">
             <svg ref={svgRef}>
               <Graph height={dimensions.height} width={dimensions.width} data={data} color={color} />
@@ -120,7 +120,7 @@ class Chart extends Component {
 
   renderDesktop() {
     const { dimensions, hoveredValue, hoverX, hoverY, hovered } = this.state;
-    const { color, data, durationType } = this.props;
+    const { color, currency, data, durationType } = this.props;
     const svgRef = node => {
       this.chartSvgComponent = node;
     };
@@ -128,7 +128,7 @@ class Chart extends Component {
     return (
       <div className="chart">
         <div className="topSection">
-          <VerticalAxis data={data} textAlign="left" />
+          <VerticalAxis data={data} currency={currency} textAlign="left" />
           <div className="Chart">
             <div>
               <HoverContainer position="top" label={hoveredValue.price} visible={hovered} x={hoverX} />
@@ -144,7 +144,7 @@ class Chart extends Component {
               <Cursor height={dimensions.height} visible={hovered} x={hoverX} y={hoverY} />
             </svg>
           </div>
-          <VerticalAxis data={data} textAlign="right" />
+          <VerticalAxis data={data} currency={currency} textAlign="right" />
         </div>
         <HorizontalAxis data={data} duration={durationType} tickCount={TICK_COUNT_DESKTOP}/>
       </div>
@@ -161,6 +161,7 @@ class Chart extends Component {
 }
 
 Chart.propTypes = {
+  currency: PROPTYPES.CURRENCY.isRequired,
   data: PROPTYPES.PRICE_DATA.isRequired,
   durationType: PROPTYPES.DURATION.isRequired,
   color: PROPTYPES.COLOR,

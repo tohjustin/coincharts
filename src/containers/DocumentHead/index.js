@@ -3,7 +3,7 @@ import React from "react";
 import Helmet from "react-helmet";
 import { connect } from "react-redux";
 
-import { DEFAULT_PROPS, PROPTYPES } from "../../constants";
+import { PROPTYPES } from "../../constants";
 import { PriceSelectors } from "../../store/price";
 import { SettingsSelectors } from "../../store/settings";
 import { formatCurrency } from "../../utils";
@@ -34,15 +34,9 @@ function mapStateToProps(state) {
 }
 
 DocumentHead.propTypes = {
-  selectedCurrency: PropTypes.string,
-  selectedCryptocurrency: PROPTYPES.CRYPTOCURRENCY,
-  spotPrice: PropTypes.number
-};
-
-DocumentHead.defaultProps = {
-  selectedCurrency: DEFAULT_PROPS.CURRENCY,
-  selectedCryptocurrency: DEFAULT_PROPS.CRYPTOCURRENCY,
-  spotPrice: 0
+  selectedCurrency: PROPTYPES.CURRENCY.isRequired,
+  selectedCryptocurrency: PROPTYPES.CRYPTOCURRENCY.isRequired,
+  spotPrice: PropTypes.number.isRequired
 };
 
 // Use named export for tests

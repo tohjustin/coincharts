@@ -1,5 +1,6 @@
 import { combineReducers } from "redux";
 
+import { DEFAULT_PROPS } from "../../constants";
 import { SettingsActionTypes } from "./actions";
 
 /** 
@@ -17,9 +18,9 @@ import { SettingsActionTypes } from "./actions";
  */
 
 const initialState = {
-  selectedCryptocurrency: "btc",
-  selectedCurrency: "USD",
-  selectedDuration: "day"
+  selectedCryptocurrency: DEFAULT_PROPS.CRYPTOCURRENCY,
+  selectedCurrency: DEFAULT_PROPS.CURRENCY,
+  selectedDuration: DEFAULT_PROPS.DURATION,
 };
 
 function settingsSelectedCryptocurrency(

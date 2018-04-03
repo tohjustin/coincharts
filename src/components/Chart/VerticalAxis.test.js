@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 
-import VerticalAxis, { formatAxisPrice } from "./VerticalAxis";
+import VerticalAxis from "./VerticalAxis";
 
 describe("<VerticalAxis />", () => {
   it("renders without crashing", () => {
@@ -50,19 +50,5 @@ describe("<VerticalAxis />", () => {
     expect(wrapper.find(".VerticalAxis .tick")).toHaveLength(2);
     expect(wrapper.find(".VerticalAxis.left .tick")).toHaveLength(2);
     expect(wrapper.find(".VerticalAxis.right .tick")).toHaveLength(0);
-  });
-
-  describe("formatAxisPrice()", () => {
-    it("formats currency correctly (`currencyCode` = `USD`)", () => {
-      const currencyCode = "USD";
-      expect(formatAxisPrice(1999999, currencyCode)).toEqual("$1,999,999");
-      expect(formatAxisPrice(199999, currencyCode)).toEqual("$199,999");
-      expect(formatAxisPrice(19999, currencyCode)).toEqual("$19,999");
-      expect(formatAxisPrice(1999, currencyCode)).toEqual("$1,999");
-      expect(formatAxisPrice(999, currencyCode)).toEqual("$999");
-      expect(formatAxisPrice(99, currencyCode)).toEqual("$99");
-      expect(formatAxisPrice(9, currencyCode)).toEqual("$9");
-      expect(formatAxisPrice(0, currencyCode)).toEqual("$0");
-    });
   });
 });

@@ -9,6 +9,7 @@ import { SettingsSelectors } from "../../store/settings";
 const PriceChart = ({
   priceData,
   selectedCryptocurrency,
+  selectedCurrency,
   selectedDuration
 }) => {
   const cryptocurrency = CRYPTOCURRENCY_LIST.filter(
@@ -17,6 +18,7 @@ const PriceChart = ({
 
   return (
     <Chart
+      currency={selectedCurrency}
       data={priceData}
       durationType={selectedDuration}
       color={
@@ -34,11 +36,13 @@ function mapStateToProps(state) {
   const selectedCryptocurrency = SettingsSelectors.getSelectedCryptocurrency(
     state
   );
+  const selectedCurrency = SettingsSelectors.getSelectedCurrency(state);
   const selectedDuration = SettingsSelectors.getSelectedDuration(state);
 
   return {
     priceData,
     selectedCryptocurrency,
+    selectedCurrency,
     selectedDuration
   };
 }
@@ -46,12 +50,14 @@ function mapStateToProps(state) {
 PriceChart.propTypes = {
   priceData: PROPTYPES.PRICE_DATA,
   selectedCryptocurrency: PROPTYPES.CRYPTOCURRENCY,
+  selectedCurrency: PROPTYPES.CURRENCY,
   selectedDuration: PROPTYPES.DURATION
 };
 
 PriceChart.defaultProps = {
   priceData: DEFAULT_PROPS.PRICE_DATA,
   selectedCryptocurrency: DEFAULT_PROPS.CRYPTOCURRENCY,
+  selectedCurrency: DEFAULT_PROPS.CURRENCY,
   selectedDuration: DEFAULT_PROPS.DURATION
 };
 

@@ -11,10 +11,11 @@ import { formatCurrency } from "../../utils";
 const CryptocurrencyTabs = ({
   handleCryptocurrencyChange,
   selectedCryptocurrency,
-  spotPrices
+  selectedCurrency,
+  spotPrices,
 }) => {
   const options = CRYPTOCURRENCY_LIST.reduce((accumulator, { key, name }) => {
-    const price = formatCurrency(spotPrices[key], DEFAULT_PROPS.CURRENCY);
+    const price = formatCurrency(spotPrices[key], selectedCurrency);
     accumulator[key] = {
       listKey: `${name}-${price}`,
       element: (
@@ -45,21 +46,22 @@ const mapDispatchToProps = dispatch => {
 };
 
 function mapStateToProps(state) {
-  const selectedCryptocurrency = SettingsSelectors.getSelectedCryptocurrency(
-    state
-  );
+  const selectedCryptocurrency = SettingsSelectors.getSelectedCryptocurrency(state);
+  const selectedCurrency = SettingsSelectors.getSelectedCurrency(state);
   const spotPrices = PriceSelectors.getSpotPrices(state);
-  return { selectedCryptocurrency, spotPrices };
+  return { selectedCryptocurrency, selectedCurrency, spotPrices };
 }
 
 CryptocurrencyTabs.propTypes = {
   handleCryptocurrencyChange: PropTypes.func.isRequired,
   selectedCryptocurrency: PROPTYPES.CRYPTOCURRENCY,
-  spotPrices: PROPTYPES.SPOT_PRICES
+  selectedCurrency: PROPTYPES.CURRENCY,
+  spotPrices: PROPTYPES.SPOT_PRICES,
 };
 
 CryptocurrencyTabs.defaultProps = {
   selectedCryptocurrency: DEFAULT_PROPS.CRYPTOCURRENCY,
+  selectedCurrency: DEFAULT_PROPS.CURRENCY,
   spotPrices: DEFAULT_PROPS.SPOT_PRICES
 };
 
