@@ -1,5 +1,5 @@
 import React from "react";
-import { mount } from "enzyme"
+import { mount } from "enzyme";
 
 import Chart from "./Chart";
 import Default from "./index";
@@ -11,6 +11,7 @@ describe("<Chart/>", () => {
 
   it("renders without crashing", () => {
     const props = {
+      currency: "USD",
       data: [],
       color: {
         fill: "#333",
@@ -25,6 +26,7 @@ describe("<Chart/>", () => {
 
   it("renders sub-components correctly", () => {
     const props = {
+      currency: "USD",
       data: [],
       color: {
         fill: "#333",
@@ -43,6 +45,7 @@ describe("<Chart/>", () => {
 
   it("updates `state.hovered` when moused is hovered over SVG chart", () => {
     const props = {
+      currency: "USD",
       data: [],
       color: {
         fill: "#333",
@@ -54,7 +57,7 @@ describe("<Chart/>", () => {
     const wrapper = mount(<Chart {...props} />);
 
     // Simulate hovering (mouse entering chart)
-    wrapper.find("svg").simulate("mouseenter")
+    wrapper.find("svg").simulate("mouseenter");
     expect(wrapper.state().hovered).toEqual(true);
 
     // Simulate hovering (mouse leaving chart)
@@ -66,6 +69,7 @@ describe("<Chart/>", () => {
     const initialBoundingClientRect = { width: 200, height: 250, top: 0, left: 0, bottom: 0, right: 0 };
     const finalBoundingClientRect = { width: 500, height: 300, top: 0, left: 0, bottom: 0, right: 0 };
     const props = {
+      currency: "USD",
       data: [],
       color: {
         fill: "#333",
@@ -79,7 +83,7 @@ describe("<Chart/>", () => {
 
     const wrapper = mount(<Chart {...props} />);
     expect(wrapper.state().dimensions).toEqual({ width: 200, height: 250 });
-    
+
     // Simulate window resizing
     Element.prototype.getBoundingClientRect = jest.fn(() => finalBoundingClientRect);
     global.dispatchEvent(new Event("resize"));

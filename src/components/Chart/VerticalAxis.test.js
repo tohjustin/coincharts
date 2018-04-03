@@ -6,6 +6,7 @@ import VerticalAxis from "./VerticalAxis";
 describe("<VerticalAxis />", () => {
   it("renders without crashing", () => {
     const props = {
+      currency: "USD",
       data: [
         { price: 1, time: new Date(1000) },
         { price: 2, time: new Date(2000) },
@@ -24,6 +25,7 @@ describe("<VerticalAxis />", () => {
 
   it("does not render ticks when `props.data` is []", () => {
     const props = {
+      currency: "USD",
       data: [],
       textAlign: "left"
     };
@@ -34,6 +36,7 @@ describe("<VerticalAxis />", () => {
 
   it("renders ticks correctly", () => {
     const props = {
+      currency: "USD",
       data: [
         { price: 1, time: new Date(1000) },
         { price: 2, time: new Date(2000) },

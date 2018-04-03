@@ -5,14 +5,14 @@ import { extent } from "d3-array";
 import { PROPTYPES } from "../../constants";
 
 const VerticalAxis = ({ data, textAlign, currency }) => {
-  const [minPrice, maxPrice] = extent(data, d => d.price)
-    .map(price => currencyFormatter.format(price, { code: currency, precision: 0 }));
+  const formatPrice = price => currencyFormatter.format(price, { code: currency, precision: 0 });
+  const [minPrice, maxPrice] = extent(data, d => d.price);
   const textAlignClass = textAlign;
 
   return (
     <div className={`VerticalAxis ${textAlignClass}`}>
-      {maxPrice && <div className="tick">{maxPrice}</div>}
-      {minPrice && <div className="tick">{minPrice}</div>}
+      {maxPrice && <div className="tick">{formatPrice(maxPrice)}</div>}
+      {minPrice && <div className="tick">{formatPrice(minPrice)}</div>}
     </div>
   );
 };
