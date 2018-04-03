@@ -12,10 +12,8 @@ import registerServiceWorker from "./registerServiceWorker";
 import "./reset.css";
 import "./index.css";
 
-require("dotenv").config();
-
 if (process.env.NODE_ENV === "production") {
-  Raven.config(process.env.RAVEN_PUBLIC_DSN).install();
+  Raven.config(process.env.REACT_APP_RAVEN_PUBLIC_DSN).install();
 }
 
 const { store } = configureStore();

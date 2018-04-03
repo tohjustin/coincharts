@@ -5,7 +5,7 @@
   "repository": "tohjustin/coincharts",
   "license": "MIT",
   "scripts": {
-    "build": "react-scripts build && rm build/static/**/*.map",
+    "build": "source .env && react-scripts build && rm build/static/**/*.map",
     "check": "npm run stylelint && npm run lint",
     "deploy": "npm run check && npm run build && cp now.json ./build && now ./build --public && now alias",
     "eject": "react-scripts eject",
@@ -31,7 +31,6 @@
     "d3-shape": "1.2.0",
     "d3-time-format": "2.1.1",
     "d3-transition": "1.1.1",
-    "dotenv": "^5.0.1",
     "lodash.get": "4.4.2",
     "lodash.isequal": "4.5.0",
     "prop-types": "15.6.0",
