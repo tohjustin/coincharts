@@ -26,6 +26,6 @@ ReactDOM.render(
       <Footer />
     </div>
   </Provider>,
-  document.getElementById("root")
+  document.getElementById("root"),
 );
 registerServiceWorker();

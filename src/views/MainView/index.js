@@ -1,3 +1,4 @@
+/* eslint-disable class-methods-use-this */
 import PropTypes from "prop-types";
 import React, { Component } from "react";
 import { connect } from "react-redux";
@@ -68,23 +69,21 @@ class MainView extends Component {
     return (
       <div className="App">
         <MediaQuery maxWidth={MOBILE_WIDTH}>
-          {(matches) => matches ? this.renderMobile() : this.renderDesktop()}
+          {matches => (matches ? this.renderMobile() : this.renderDesktop())}
         </MediaQuery>
       </div>
     );
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    requestPriceData: () => {
-      dispatch(PriceActions.request());
-    }
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  requestPriceData: () => {
+    dispatch(PriceActions.request());
+  },
+});
 
 MainView.propTypes = {
-  requestPriceData: PropTypes.func.isRequired
+  requestPriceData: PropTypes.func.isRequired,
 };
 
 // Use named export for tests

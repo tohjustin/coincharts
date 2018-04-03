@@ -7,7 +7,14 @@ import { CRYPTOCURRENCY_LIST, DEFAULT_PROPS, DURATION_LIST, PROPTYPES } from "..
 import { PriceSelectors } from "../../store/price";
 import { SettingsSelectors } from "../../store/settings";
 
-const PriceTable = ({ percentDifference, priceDifference, spotPrice, selectedCryptocurrency, selectedCurrency, selectedDuration }) => {
+const PriceTable = ({
+  percentDifference,
+  priceDifference,
+  spotPrice,
+  selectedCryptocurrency,
+  selectedCurrency,
+  selectedDuration,
+}) => {
   const cryptocurrencyLabel = CRYPTOCURRENCY_LIST.filter(e => e.key === selectedCryptocurrency)[0].name;
   const durationLabel = DURATION_LIST.filter(e => e.key === selectedDuration)[0].humanize;
 
@@ -39,7 +46,7 @@ function mapStateToProps(state) {
     spotPrice,
     selectedCryptocurrency,
     selectedCurrency,
-    selectedDuration
+    selectedDuration,
   };
 }
 
@@ -49,7 +56,7 @@ PriceTable.propTypes = {
   spotPrice: PropTypes.number,
   selectedCryptocurrency: PROPTYPES.CRYPTOCURRENCY,
   selectedCurrency: PROPTYPES.CURRENCY,
-  selectedDuration: PROPTYPES.DURATION
+  selectedDuration: PROPTYPES.DURATION,
 };
 
 PriceTable.defaultProps = {
@@ -58,7 +65,7 @@ PriceTable.defaultProps = {
   spotPrice: 0,
   selectedCryptocurrency: DEFAULT_PROPS.CRYPTOCURRENCY,
   selectedCurrency: DEFAULT_PROPS.CURRENCY,
-  selectedDuration: DEFAULT_PROPS.DURATION
+  selectedDuration: DEFAULT_PROPS.DURATION,
 };
 
 // Use named export for tests

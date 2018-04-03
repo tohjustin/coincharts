@@ -18,7 +18,7 @@ function generateActionCreator(type, payload = {}) {
 export const PriceActionTypes = {
   SEND_REQUEST,
   REQUEST_SUCCESS,
-  REQUEST_FAILURE
+  REQUEST_FAILURE,
 };
 
 /**
@@ -30,12 +30,12 @@ export const PriceActions = {
     generateActionCreator(PriceActionTypes.REQUEST_SUCCESS, {
       cryptocurrency,
       duration,
-      response
+      response,
     }),
   failure: (cryptocurrency, duration, error) =>
     generateActionCreator(PriceActionTypes.REQUEST_FAILURE, {
       cryptocurrency,
       duration,
-      error
-    })
+      error,
+    }),
 };

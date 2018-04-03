@@ -1,7 +1,8 @@
+import { all, call, put, select, takeLatest } from "redux-saga/effects";
+
 import { fetchPriceHistory, fetchSpotPrices } from "../../api";
 import { SettingsActionTypes, SettingsSelectors } from "../settings";
 import { PriceActionTypes } from "./actions";
-import { all, call, put, select, takeLatest } from "redux-saga/effects";
 
 function* fetchPrice() {
   try {
@@ -12,7 +13,7 @@ function* fetchPrice() {
 
     const [priceHistory, spotPrices] = yield all([
       call(fetchPriceHistory, cryptocurrency, currency, duration),
-      call(fetchSpotPrices, currency)
+      call(fetchSpotPrices, currency),
     ]);
 
     yield put({
@@ -20,13 +21,13 @@ function* fetchPrice() {
       payload: {
         key: `${cryptocurrency}-${duration}`,
         priceData: priceHistory,
-        spotPrices
-      }
+        spotPrices,
+      },
     });
   } catch (err) {
     yield put({
       type: PriceActionTypes.REQUEST_FAILURE,
-      payload: { error: err.message }
+      payload: { error: err.message },
     });
   }
 }
@@ -36,6 +37,6 @@ export default function* priceSaga() {
     takeLatest(PriceActionTypes.SEND_REQUEST, fetchPrice),
     takeLatest(SettingsActionTypes.SELECT_CRYPTOCURRENCY, fetchPrice),
     takeLatest(SettingsActionTypes.SELECT_CURRENCY, fetchPrice),
-    takeLatest(SettingsActionTypes.SELECT_DURATION, fetchPrice)
+    takeLatest(SettingsActionTypes.SELECT_DURATION, fetchPrice),
   ]);
 }

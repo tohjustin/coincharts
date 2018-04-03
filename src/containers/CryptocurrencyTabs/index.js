@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
@@ -8,12 +9,7 @@ import { PriceSelectors } from "../../store/price";
 import { SettingsActions, SettingsSelectors } from "../../store/settings";
 import { formatCurrency } from "../../utils";
 
-const CryptocurrencyTabs = ({
-  handleCryptocurrencyChange,
-  selectedCryptocurrency,
-  selectedCurrency,
-  spotPrices,
-}) => {
+const CryptocurrencyTabs = ({ handleCryptocurrencyChange, selectedCryptocurrency, selectedCurrency, spotPrices }) => {
   const options = CRYPTOCURRENCY_LIST.reduce((accumulator, { key, name }) => {
     const price = formatCurrency(spotPrices[key], selectedCurrency);
     accumulator[key] = {
@@ -23,27 +19,19 @@ const CryptocurrencyTabs = ({
           <span>{name}</span>
           <span>{price}</span>
         </span>
-      )
+      ),
     };
     return accumulator;
   }, {});
 
-  return (
-    <Tabs
-      options={options}
-      onChange={handleCryptocurrencyChange}
-      selectedKey={selectedCryptocurrency}
-    />
-  );
+  return <Tabs options={options} onChange={handleCryptocurrencyChange} selectedKey={selectedCryptocurrency} />;
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    handleCryptocurrencyChange: cryptocurrencyKey => {
-      dispatch(SettingsActions.selectCryptocurrency(cryptocurrencyKey));
-    }
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  handleCryptocurrencyChange: cryptocurrencyKey => {
+    dispatch(SettingsActions.selectCryptocurrency(cryptocurrencyKey));
+  },
+});
 
 function mapStateToProps(state) {
   const selectedCryptocurrency = SettingsSelectors.getSelectedCryptocurrency(state);
@@ -62,14 +50,10 @@ CryptocurrencyTabs.propTypes = {
 CryptocurrencyTabs.defaultProps = {
   selectedCryptocurrency: DEFAULT_PROPS.CRYPTOCURRENCY,
   selectedCurrency: DEFAULT_PROPS.CURRENCY,
-  spotPrices: DEFAULT_PROPS.SPOT_PRICES
+  spotPrices: DEFAULT_PROPS.SPOT_PRICES,
 };
 
 // Use named export for tests
-export {
-  CryptocurrencyTabs as UnconnectedCryptocurrencyTabs,
-  mapDispatchToProps,
-  mapStateToProps
-};
+export { CryptocurrencyTabs as UnconnectedCryptocurrencyTabs, mapDispatchToProps, mapStateToProps };
 
 export default connect(mapStateToProps, mapDispatchToProps)(CryptocurrencyTabs);

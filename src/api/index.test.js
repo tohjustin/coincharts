@@ -24,7 +24,7 @@ describe("api", () => {
         { input: ["bch", "cad", "day"], expected: "./priceData/bch-cad_day.json" },
         { input: ["eth", "sgd", "week"], expected: "./priceData/eth-sgd_week.json" },
         { input: ["ltc", "rmb", "month"], expected: "./priceData/ltc-rmb_month.json" },
-        { input: ["xmr", "yen", "year"], expected: "./priceData/xmr-yen_year.json" }
+        { input: ["xmr", "yen", "year"], expected: "./priceData/xmr-yen_year.json" },
       ];
 
       testCases.forEach(testCase => {
@@ -39,24 +39,24 @@ describe("api", () => {
       const testCases = [
         {
           input: ["btc", "usd", "hour"],
-          expected: "https://www.coinbase.com/api/v2/prices/btc-usd/historic?period=hour"
+          expected: "https://www.coinbase.com/api/v2/prices/btc-usd/historic?period=hour",
         },
         {
           input: ["bch", "cad", "day"],
-          expected: "https://www.coinbase.com/api/v2/prices/bch-cad/historic?period=day"
+          expected: "https://www.coinbase.com/api/v2/prices/bch-cad/historic?period=day",
         },
         {
           input: ["eth", "sgd", "week"],
-          expected: "https://www.coinbase.com/api/v2/prices/eth-sgd/historic?period=week"
+          expected: "https://www.coinbase.com/api/v2/prices/eth-sgd/historic?period=week",
         },
         {
           input: ["ltc", "rmb", "month"],
-          expected: "https://www.coinbase.com/api/v2/prices/ltc-rmb/historic?period=month"
+          expected: "https://www.coinbase.com/api/v2/prices/ltc-rmb/historic?period=month",
         },
         {
           input: ["xmr", "yen", "year"],
-          expected: "https://www.coinbase.com/api/v2/prices/xmr-yen/historic?period=year"
-        }
+          expected: "https://www.coinbase.com/api/v2/prices/xmr-yen/historic?period=year",
+        },
       ];
 
       testCases.forEach(testCase => {
@@ -75,7 +75,7 @@ describe("api", () => {
         { input: ["cad"], expected: "./priceData/cad_spot.json" },
         { input: ["sgd"], expected: "./priceData/sgd_spot.json" },
         { input: ["rmb"], expected: "./priceData/rmb_spot.json" },
-        { input: ["yen"], expected: "./priceData/yen_spot.json" }
+        { input: ["yen"], expected: "./priceData/yen_spot.json" },
       ];
 
       testCases.forEach(testCase => {
@@ -92,7 +92,7 @@ describe("api", () => {
         { input: ["cad"], expected: "https://api.coinbase.com/v2/prices/cad/spot?" },
         { input: ["sgd"], expected: "https://api.coinbase.com/v2/prices/sgd/spot?" },
         { input: ["rmb"], expected: "https://api.coinbase.com/v2/prices/rmb/spot?" },
-        { input: ["yen"], expected: "https://api.coinbase.com/v2/prices/yen/spot?" }
+        { input: ["yen"], expected: "https://api.coinbase.com/v2/prices/yen/spot?" },
       ];
 
       testCases.forEach(testCase => {
@@ -111,7 +111,7 @@ describe("api", () => {
     it("should resolve to an array, sorted by `time` in increasing order", async () => {
       const isSortedByTimeAscending = arr => {
         if (arr.length > 1) {
-          for (let i = 1; i < arr.length; i++) {
+          for (let i = 1; i < arr.length; i += 1) {
             if (arr[i].time < arr[i - 1].time) {
               return false;
             }

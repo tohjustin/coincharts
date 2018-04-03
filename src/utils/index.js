@@ -8,7 +8,7 @@ import currencyFormatter from "currency-formatter";
  */
 function formatCurrency(value, currencyCode) {
   return currencyFormatter.format(value, {
-    code: currencyCode.toUpperCase()
+    code: currencyCode.toUpperCase(),
   });
 }
 

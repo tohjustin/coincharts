@@ -1,11 +1,12 @@
+/* eslint-disable no-param-reassign */
 import { combineReducers } from "redux";
 
 import { DEFAULT_PROPS } from "../../constants";
 import { PriceActionTypes } from "./actions";
 
-/** 
+/**
  * State Shape
- * 
+ *
  * ```
  * {
  *    price: {
@@ -39,7 +40,7 @@ import { PriceActionTypes } from "./actions";
 const initialState = {
   status: DEFAULT_PROPS.STATUS,
   history: DEFAULT_PROPS.PRICE_DATA,
-  spot: DEFAULT_PROPS.SPOT_PRICES
+  spot: DEFAULT_PROPS.SPOT_PRICES,
 };
 
 function priceStatus(state = initialState.status, action) {
@@ -47,14 +48,14 @@ function priceStatus(state = initialState.status, action) {
     case PriceActionTypes.SEND_REQUEST:
       return {
         pricePending: true,
-        error: null
+        error: null,
       };
     case PriceActionTypes.REQUEST_SUCCESS:
       return initialState.status;
     case PriceActionTypes.REQUEST_FAILURE:
       return {
         pricePending: false,
-        error: action.payload.error
+        error: action.payload.error,
       };
     default:
       return state;
@@ -66,7 +67,7 @@ function priceHistory(state = initialState.history, action) {
     case PriceActionTypes.REQUEST_SUCCESS:
       return {
         ...state,
-        [action.payload.key]: action.payload.priceData
+        [action.payload.key]: action.payload.priceData,
       };
     default:
       return state;
@@ -90,7 +91,7 @@ function priceSpot(state = initialState.spot, action) {
 const priceReducer = combineReducers({
   status: priceStatus,
   history: priceHistory,
-  spot: priceSpot
+  spot: priceSpot,
 });
 
 export default priceReducer;

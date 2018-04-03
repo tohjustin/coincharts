@@ -3,9 +3,9 @@ import { combineReducers } from "redux";
 import { DEFAULT_PROPS } from "../../constants";
 import { SettingsActionTypes } from "./actions";
 
-/** 
+/**
  * State Shape
- * 
+ *
  * ```
  * {
  *    settings: {
@@ -23,10 +23,7 @@ const initialState = {
   selectedDuration: DEFAULT_PROPS.DURATION,
 };
 
-function settingsSelectedCryptocurrency(
-  state = initialState.selectedCryptocurrency,
-  action
-) {
+function settingsSelectedCryptocurrency(state = initialState.selectedCryptocurrency, action) {
   switch (action.type) {
     case SettingsActionTypes.SELECT_CRYPTOCURRENCY:
       return action.payload.cryptocurrency;
@@ -35,10 +32,7 @@ function settingsSelectedCryptocurrency(
   }
 }
 
-function settingsSelectedCurrency(
-  state = initialState.selectedCurrency,
-  action
-) {
+function settingsSelectedCurrency(state = initialState.selectedCurrency, action) {
   switch (action.type) {
     case SettingsActionTypes.SELECT_CURRENCY:
       return action.payload.currency;
@@ -47,10 +41,7 @@ function settingsSelectedCurrency(
   }
 }
 
-function settingsSelectedDuration(
-  state = initialState.selectedDuration,
-  action
-) {
+function settingsSelectedDuration(state = initialState.selectedDuration, action) {
   switch (action.type) {
     case SettingsActionTypes.SELECT_DURATION:
       return action.payload.duration;
@@ -62,7 +53,7 @@ function settingsSelectedDuration(
 const settingsReducer = combineReducers({
   selectedCryptocurrency: settingsSelectedCryptocurrency,
   selectedCurrency: settingsSelectedCurrency,
-  selectedDuration: settingsSelectedDuration
+  selectedDuration: settingsSelectedDuration,
 });
 
 export default settingsReducer;

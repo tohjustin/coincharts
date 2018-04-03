@@ -43,7 +43,7 @@ Table.propTypes = {
   percentDifference: PropTypes.number.isRequired,
   priceDifference: PropTypes.number.isRequired,
   spotPrice: PropTypes.number.isRequired,
-  currency: PropTypes.string.isRequired
+  currency: PropTypes.string.isRequired,
 };
 
 export default Table;

@@ -29,14 +29,14 @@ function mapStateToProps(state) {
   return {
     selectedCurrency,
     selectedCryptocurrency,
-    spotPrice
+    spotPrice,
   };
 }
 
 DocumentHead.propTypes = {
   selectedCurrency: PROPTYPES.CURRENCY.isRequired,
   selectedCryptocurrency: PROPTYPES.CRYPTOCURRENCY.isRequired,
-  spotPrice: PropTypes.number.isRequired
+  spotPrice: PropTypes.number.isRequired,
 };
 
 // Use named export for tests

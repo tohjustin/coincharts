@@ -2,22 +2,17 @@ import React from "react";
 import { mount } from "enzyme";
 
 import Chart from "./Chart";
-import Default from "./index";
 
 describe("<Chart/>", () => {
-  it("exports <Chart/> by default", () => {
-    expect(Default).toEqual(Chart);
-  });
-
   it("renders without crashing", () => {
     const props = {
       currency: "USD",
       data: [],
       color: {
         fill: "#333",
-        stroke: "#666"
+        stroke: "#666",
       },
-      durationType: "day"
+      durationType: "day",
     };
 
     const wrapper = mount(<Chart {...props} />);
@@ -30,9 +25,9 @@ describe("<Chart/>", () => {
       data: [],
       color: {
         fill: "#333",
-        stroke: "#666"
+        stroke: "#666",
       },
-      durationType: "day"
+      durationType: "day",
     };
 
     const wrapper = mount(<Chart {...props} />);
@@ -49,9 +44,9 @@ describe("<Chart/>", () => {
       data: [],
       color: {
         fill: "#333",
-        stroke: "#666"
+        stroke: "#666",
       },
-      durationType: "day"
+      durationType: "day",
     };
 
     const wrapper = mount(<Chart {...props} />);
@@ -73,9 +68,9 @@ describe("<Chart/>", () => {
       data: [],
       color: {
         fill: "#333",
-        stroke: "#666"
+        stroke: "#666",
       },
-      durationType: "day"
+      durationType: "day",
     };
 
     // Set initial parameters from `boundingClientRect()`

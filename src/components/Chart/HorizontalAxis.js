@@ -61,7 +61,7 @@ class HorizontalAxis extends Component {
     const durationTicks = HorizontalAxis.generateTicks(data, tickCount);
     const axisTicks = durationTicks.map(timestamp => ({
       timestamp,
-      label: HorizontalAxis.formatTime(timestamp, duration)
+      label: HorizontalAxis.formatTime(timestamp, duration),
     }));
 
     return (

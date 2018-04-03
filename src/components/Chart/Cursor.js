@@ -8,7 +8,7 @@ const Cursor = ({ height, visible, x, y }) => {
   const cursorClass = classNames({
     Cursor: true,
     hidden: !visible,
-    show: visible
+    show: visible,
   });
 
   return (
@@ -23,7 +23,7 @@ Cursor.propTypes = {
   height: PropTypes.number.isRequired,
   visible: PropTypes.bool.isRequired,
   x: PropTypes.number.isRequired,
-  y: PropTypes.number.isRequired
+  y: PropTypes.number.isRequired,
 };
 
 export default Cursor;

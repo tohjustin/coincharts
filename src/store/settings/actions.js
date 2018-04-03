@@ -18,7 +18,7 @@ function generateActionCreator(type, payload = {}) {
 export const SettingsActionTypes = {
   SELECT_CRYPTOCURRENCY,
   SELECT_CURRENCY,
-  SELECT_DURATION
+  SELECT_DURATION,
 };
 
 /**
@@ -27,10 +27,8 @@ export const SettingsActionTypes = {
 export const SettingsActions = {
   selectCryptocurrency: cryptocurrency =>
     generateActionCreator(SettingsActionTypes.SELECT_CRYPTOCURRENCY, {
-      cryptocurrency
+      cryptocurrency,
     }),
-  selectCurrency: currency =>
-    generateActionCreator(SettingsActionTypes.SELECT_CURRENCY, { currency }),
-  selectDuration: duration =>
-    generateActionCreator(SettingsActionTypes.SELECT_DURATION, { duration })
+  selectCurrency: currency => generateActionCreator(SettingsActionTypes.SELECT_CURRENCY, { currency }),
+  selectDuration: duration => generateActionCreator(SettingsActionTypes.SELECT_DURATION, { duration }),
 };

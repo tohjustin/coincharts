@@ -3,8 +3,8 @@ const MOCK_SPOT_PRICE = {
     { base: "BTC", currency: "USD", amount: "13159.59" },
     { base: "BCH", currency: "USD", amount: "2316.23" },
     { base: "ETH", currency: "USD", amount: "719.30" },
-    { base: "LTC", currency: "USD", amount: "218.61" }
-  ]
+    { base: "LTC", currency: "USD", amount: "218.61" },
+  ],
 };
 
 const MOCK_PRICE_DATA = {
@@ -20,9 +20,9 @@ const MOCK_PRICE_DATA = {
       { price: "218.92", time: "2017-12-31T12:36:00Z" },
       { price: "218.92", time: "2017-12-31T12:32:00Z" },
       { price: "217.06", time: "2017-12-31T12:28:00Z" },
-      { price: "215.21", time: "2017-12-31T12:24:00Z" }
-    ]
-  }
+      { price: "215.21", time: "2017-12-31T12:24:00Z" },
+    ],
+  },
 };
 
 const mockAxios = {
@@ -40,7 +40,7 @@ const mockAxios = {
           break;
       }
     });
-  }
+  },
 };
 
 export default mockAxios;

@@ -12,7 +12,7 @@ const BigAmount = ({ type, showNumberSign, value, currency }) => {
   switch (type) {
     case "currency": {
       const { decimalSeparator, spaceBetweenAmountAndSymbol, symbol, symbolOnLeft } = currencyFormatter.findCurrency(
-        currency
+        currency,
       );
       const formattedValue = currencyFormatter.format(Math.abs(value), { code: currency, symbol: "" });
       const [integerValue, decimalValue] = formattedValue.split(decimalSeparator);
@@ -60,12 +60,12 @@ BigAmount.propTypes = {
   type: PROPTYPES.BIG_AMOUNT_TYPE.isRequired,
   value: PropTypes.number.isRequired,
   showNumberSign: PropTypes.bool,
-  currency: PropTypes.string
+  currency: PropTypes.string,
 };
 
 BigAmount.defaultProps = {
   showNumberSign: false,
-  currency: DEFAULT_PROPS.CURRENCY
+  currency: DEFAULT_PROPS.CURRENCY,
 };
 
 export default BigAmount;

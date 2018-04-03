@@ -3,10 +3,4 @@ import * as PriceSelectors from "./selectors";
 import PriceReducer from "./reducer";
 import PriceSaga from "./saga";
 
-export {
-  PriceActionTypes,
-  PriceActions,
-  PriceReducer,
-  PriceSaga,
-  PriceSelectors
-};
+export { PriceActionTypes, PriceActions, PriceReducer, PriceSaga, PriceSelectors };

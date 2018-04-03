@@ -8,7 +8,7 @@ describe("<HorizontalAxis />", () => {
     const props = {
       data: [],
       duration: "month",
-      tickCount: 10
+      tickCount: 10,
     };
 
     const wrapper = shallow(<HorizontalAxis {...props} />);
@@ -19,7 +19,7 @@ describe("<HorizontalAxis />", () => {
     const props = {
       data: [],
       duration: "month",
-      tickCount: 10
+      tickCount: 10,
     };
 
     const wrapper = shallow(<HorizontalAxis {...props} />);
@@ -30,7 +30,7 @@ describe("<HorizontalAxis />", () => {
     const props = {
       data: [{ price: 1, time: new Date(1000) }, { price: 2, time: new Date(2000) }],
       duration: "month",
-      tickCount: 10
+      tickCount: 10,
     };
 
     const wrapper = shallow(<HorizontalAxis {...props} />);
@@ -79,7 +79,7 @@ describe("<HorizontalAxis />", () => {
       { price: 2, time: new Date(5000) },
       { price: 2, time: new Date(6000) },
       { price: 2, time: new Date(9000) },
-      { price: 2, time: new Date(10000) }
+      { price: 2, time: new Date(10000) },
     ];
 
     it("generates a sequence of ticks based on `tickCounts`", () => {

@@ -46,7 +46,7 @@ function fetchSpotPrices(currency) {
         const spotPrices = get(response, ["data", "data"], []);
         const formattedSpotPrices = spotPrices.map(e => ({
           ...e,
-          amount: Number(e.amount)
+          amount: Number(e.amount),
         }));
         resolve(formattedSpotPrices);
       })

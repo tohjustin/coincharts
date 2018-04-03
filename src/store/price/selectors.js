@@ -25,7 +25,7 @@ export const getSelectedPriceHistory = createSelector(
   (histories, selectedCryptocurrency, selectedDuration) => {
     const key = `${selectedCryptocurrency}-${selectedDuration}`;
     return histories[key];
-  }
+  },
 );
 
 /**
@@ -39,7 +39,7 @@ export const getSelectedSpotPrice = createSelector(
   (spotPrices, selectedCryptocurrency) => {
     const key = `${selectedCryptocurrency}`;
     return spotPrices[key];
-  }
+  },
 );
 
 /*
@@ -52,7 +52,7 @@ export const getSelectedPriceDifference = createSelector(
     const lastIndex = scan(priceHistory, (a, b) => a.time - b.time);
     const oldPrice = priceHistory[lastIndex] && priceHistory[lastIndex].price;
     return spotPrice - oldPrice;
-  }
+  },
 );
 
 export const getSelectedPercentDifference = createSelector(
@@ -62,5 +62,5 @@ export const getSelectedPercentDifference = createSelector(
     const lastIndex = scan(priceHistory, (a, b) => a.time - b.time);
     const oldPrice = priceHistory[lastIndex] && priceHistory[lastIndex].price;
     return (spotPrice / oldPrice - 1) * 100 || 0;
-  }
+  },
 );

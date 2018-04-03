@@ -15,7 +15,7 @@ const INITIAL_STATE = {
   previousColor: undefined,
   previousScaledData: [],
   scaledData: [],
-  skipTransition: false
+  skipTransition: false,
 };
 
 class Graph extends Component {
@@ -30,7 +30,7 @@ class Graph extends Component {
 
     return data.map(({ price, time }) => ({
       price: scalePriceToY(price),
-      time: scaleTimeToX(time)
+      time: scaleTimeToX(time),
     }));
   }
 
@@ -58,7 +58,7 @@ class Graph extends Component {
         skipTransition: width !== nextWidth,
         previousColor: color,
         previousScaledData,
-        scaledData: nextScaledData
+        scaledData: nextScaledData,
       };
     });
   }
@@ -132,7 +132,7 @@ Graph.propTypes = {
   color: PROPTYPES.COLOR.isRequired,
   data: PROPTYPES.PRICE_DATA.isRequired,
   height: PropTypes.number.isRequired,
-  width: PropTypes.number.isRequired
+  width: PropTypes.number.isRequired,
 };
 
 export default Graph;

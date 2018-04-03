@@ -8,15 +8,13 @@ export default (initialState = {}) => {
   // Consolidate all reducers
   const rootReducer = combineReducers({
     price: PriceReducer,
-    settings: SettingsReducer
+    settings: SettingsReducer,
   });
 
   // Consolidate all middleware
   const sagaMiddleware = createSagaMiddleware();
   const composeEnhancers =
-    process.env.NODE_ENV !== "production" &&
-    typeof window === "object" &&
-    window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+    process.env.NODE_ENV !== "production" && typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
       ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
       : compose;
   const enhancer = composeEnhancers(applyMiddleware(sagaMiddleware));
@@ -26,6 +24,6 @@ export default (initialState = {}) => {
 
   return {
     store,
-    runSaga: sagaMiddleware.run(PriceSaga)
+    runSaga: sagaMiddleware.run(PriceSaga),
   };
 };

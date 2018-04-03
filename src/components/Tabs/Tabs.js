@@ -1,40 +1,40 @@
-/* eslint-disable react/jsx-no-bind */
+/* eslint-disable react/jsx-no-bind, jsx-a11y/click-events-have-key-events */
 import React from "react";
 import PropTypes from "prop-types";
 
 import "./index.css";
 
-const Tabs = ({ options, onChange, selectedKey }) => {
-  return (
-    <div className="Tabs" role="tabpanel">
-      {Object.keys(options).map(key => {
-        const isSelectedClass = key === selectedKey && "selected";
+const Tabs = ({ options, onChange, selectedKey }) => (
+  <div className="Tabs" role="tabpanel">
+    {Object.keys(options).map(key => {
+      const isSelectedClass = key === selectedKey && "selected";
 
-        return (
-          <div
-            key={options[key].listKey}
-            aria-labelledby={options[key].listKey}
-            className={`Tabs-item ${isSelectedClass}`}
-            onClick={onChange.bind(null, key)}
-            role="tab"
-            tabIndex="-1"
-          >
-            {options[key].element}
-          </div>
-        );
-      })}
-    </div>
-  );
-};
+      return (
+        <div
+          key={options[key].listKey}
+          aria-labelledby={options[key].listKey}
+          className={`Tabs-item ${isSelectedClass}`}
+          onClick={onChange.bind(null, key)}
+          role="tab"
+          tabIndex="-1"
+        >
+          {options[key].element}
+        </div>
+      );
+    })}
+  </div>
+);
 
 Tabs.propTypes = {
   onChange: PropTypes.func.isRequired,
-  options: PropTypes.object.isRequired,
-  selectedKey: PropTypes.string
+  options: PropTypes.shape({
+    key: PropTypes.string,
+  }).isRequired,
+  selectedKey: PropTypes.string,
 };
 
 Tabs.defaultProps = {
-  selectedKey: undefined
+  selectedKey: undefined,
 };
 
 export default Tabs;

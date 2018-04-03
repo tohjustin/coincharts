@@ -20,7 +20,7 @@ const VerticalAxis = ({ data, textAlign, currency }) => {
 VerticalAxis.propTypes = {
   currency: PROPTYPES.CURRENCY.isRequired,
   data: PROPTYPES.PRICE_DATA.isRequired,
-  textAlign: PROPTYPES.TEXT_ALIGNMENT.isRequired
+  textAlign: PROPTYPES.TEXT_ALIGNMENT.isRequired,
 };
 
 export default VerticalAxis;

@@ -3,13 +3,8 @@ import { shallow } from "enzyme";
 
 import logo from "./assets/logo.svg";
 import Footer from "./Footer";
-import Default from "./index";
 
 describe("<Footer />", () => {
-  it("exports <Footer/> by default", () => {
-    expect(Default).toEqual(Footer);
-  });
-
   it("renders without crashing", () => {
     const wrapper = shallow(<Footer />);
     expect(wrapper.find("a")).toHaveLength(1);

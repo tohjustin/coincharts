@@ -17,12 +17,12 @@ import "./index.css";
 const INITIAL_STATE = {
   dimensions: {
     height: 0,
-    width: 0
+    width: 0,
   },
   hovered: false,
   hoveredValue: {},
   hoverX: -1,
-  hoverY: -1
+  hoverY: -1,
 };
 
 class Chart extends Component {
@@ -50,7 +50,7 @@ class Chart extends Component {
     const { height, width } = this.chartSvgComponent.getBoundingClientRect();
     const dimensions = {
       height: Math.round(height),
-      width: Math.round(width)
+      width: Math.round(width),
     };
 
     this.setState({ dimensions });
@@ -79,7 +79,7 @@ class Chart extends Component {
       const hoveredDatapoint = data[index] || {};
       const hoveredValue = {
         price: hoveredDatapoint.price && formatCurrency(hoveredDatapoint.price, currency),
-        time: hoveredDatapoint.time && hoveredDatapoint.time.toLocaleString()
+        time: hoveredDatapoint.time && hoveredDatapoint.time.toLocaleString(),
       };
 
       const scalePriceToY = scaleLinear()
@@ -91,7 +91,7 @@ class Chart extends Component {
         hovered: Boolean(hoveredDatapoint),
         hoveredValue,
         hoverX,
-        hoverY
+        hoverY,
       };
     });
   }
@@ -113,7 +113,7 @@ class Chart extends Component {
             </svg>
           </div>
         </div>
-        <HorizontalAxis data={data} duration={durationType} tickCount={TICK_COUNT_MOBILE}/>
+        <HorizontalAxis data={data} duration={durationType} tickCount={TICK_COUNT_MOBILE} />
       </div>
     );
   }
@@ -146,7 +146,7 @@ class Chart extends Component {
           </div>
           <VerticalAxis data={data} currency={currency} textAlign="right" />
         </div>
-        <HorizontalAxis data={data} duration={durationType} tickCount={TICK_COUNT_DESKTOP}/>
+        <HorizontalAxis data={data} duration={durationType} tickCount={TICK_COUNT_DESKTOP} />
       </div>
     );
   }
@@ -154,7 +154,7 @@ class Chart extends Component {
   render() {
     return (
       <MediaQuery maxWidth={MOBILE_WIDTH}>
-        {(matches) => matches ? this.renderMobile() : this.renderDesktop()}
+        {matches => (matches ? this.renderMobile() : this.renderDesktop())}
       </MediaQuery>
     );
   }

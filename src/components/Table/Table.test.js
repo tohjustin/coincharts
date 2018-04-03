@@ -2,13 +2,8 @@ import React from "react";
 import { shallow } from "enzyme";
 
 import Table from "./Table";
-import Default from "./index";
 
 describe("<Table />", () => {
-  it("exports <Table/> by default", () => {
-    expect(Default).toEqual(Table);
-  });
-
   it("renders without crashing", () => {
     const props = {
       cryptocurrencyLabel: "testCryptocurrencyLabel",
@@ -16,7 +11,7 @@ describe("<Table />", () => {
       currency: "USD",
       percentDifference: 0,
       priceDifference: 0,
-      spotPrice: 0
+      spotPrice: 0,
     };
 
     const wrapper = shallow(<Table {...props} />);
@@ -30,7 +25,7 @@ describe("<Table />", () => {
       currency: "USD",
       percentDifference: 0,
       priceDifference: 0,
-      spotPrice: 0
+      spotPrice: 0,
     };
 
     const wrapper = shallow(<Table {...props} />);
@@ -44,7 +39,7 @@ describe("<Table />", () => {
       currency: "USD",
       percentDifference: 0,
       priceDifference: 0,
-      spotPrice: 0
+      spotPrice: 0,
     };
 
     const wrapper = shallow(<Table {...props} />);

@@ -9,7 +9,7 @@ describe("<HoverContainer />", () => {
       position: "top",
       visible: true,
       x: 0,
-      value: "PropTypes.string"
+      value: "PropTypes.string",
     };
 
     const wrapper = shallow(<HoverContainer {...props} />);
@@ -21,7 +21,7 @@ describe("<HoverContainer />", () => {
       position: "top",
       visible: true,
       x: 0,
-      label: "testLabel"
+      label: "testLabel",
     };
 
     const wrapper = shallow(<HoverContainer {...props} />);
@@ -32,7 +32,7 @@ describe("<HoverContainer />", () => {
     const props = {
       position: "top",
       visible: true,
-      x: 0
+      x: 0,
     };
 
     const wrapper = shallow(<HoverContainer {...props} />);
@@ -44,7 +44,7 @@ describe("<HoverContainer />", () => {
     const props = {
       position: "bottom",
       visible: true,
-      x: 0
+      x: 0,
     };
 
     const wrapper = shallow(<HoverContainer {...props} />);

@@ -2,18 +2,13 @@ import React from "react";
 import { shallow } from "enzyme";
 
 import Tabs from "./Tabs";
-import Default from "./index";
 
 describe("<Tabs />", () => {
-  it("exports <Tabs/> by default", () => {
-    expect(Default).toEqual(Tabs);
-  });
-
   it("renders without crashing", () => {
     const props = {
       options: {},
       onChange: () => {},
-      selectedKey: undefined
+      selectedKey: undefined,
     };
 
     const wrapper = shallow(<Tabs {...props} />);
@@ -25,19 +20,19 @@ describe("<Tabs />", () => {
       options: {
         key0: {
           listKey: "testListKey0",
-          element: "<div>test0</div>"
+          element: "<div>test0</div>",
         },
         key1: {
           listKey: "testListKey1",
-          element: "<div>test1</div>"
+          element: "<div>test1</div>",
         },
         key2: {
           listKey: "testListKey2",
-          element: "<div>test2</div>"
-        }
+          element: "<div>test2</div>",
+        },
       },
       onChange: () => {},
-      selectedKey: undefined
+      selectedKey: undefined,
     };
     const numberOfKeysInOptions = Object.keys(props.options).length;
 
@@ -49,7 +44,7 @@ describe("<Tabs />", () => {
     const props = {
       options: {},
       onChange: () => {},
-      selectedKey: undefined
+      selectedKey: undefined,
     };
     const numberOfKeysInOptions = Object.keys(props.options).length;
 
@@ -62,15 +57,15 @@ describe("<Tabs />", () => {
       options: {
         key0: {
           listKey: "testListKey0",
-          element: "<div>test0</div>"
+          element: "<div>test0</div>",
         },
         key1: {
           listKey: "testListKey1",
-          element: "<div>test1</div>"
-        }
+          element: "<div>test1</div>",
+        },
       },
       onChange: () => {},
-      selectedKey: undefined
+      selectedKey: undefined,
     };
 
     const wrapper = shallow(<Tabs {...props} />);
@@ -82,15 +77,15 @@ describe("<Tabs />", () => {
       options: {
         key0: {
           listKey: "testListKey0",
-          element: "<div>test0</div>"
+          element: "<div>test0</div>",
         },
         key1: {
           listKey: "testListKey1",
-          element: "<div>test1</div>"
-        }
+          element: "<div>test1</div>",
+        },
       },
       onChange: () => {},
-      selectedKey: "key1"
+      selectedKey: "key1",
     };
     const selectedOptionListKey = props.options[props.selectedKey].listKey;
 
@@ -104,15 +99,15 @@ describe("<Tabs />", () => {
       options: {
         key0: {
           listKey: "testListKey0",
-          element: "<div>test0</div>"
+          element: "<div>test0</div>",
         },
         key1: {
           listKey: "testListKey1",
-          element: "<div>test1</div>"
-        }
+          element: "<div>test1</div>",
+        },
       },
       onChange: () => {},
-      selectedKey: "key1"
+      selectedKey: "key1",
     };
     const selectedOptionListKey = props.options[props.selectedKey].listKey;
 
@@ -126,15 +121,15 @@ describe("<Tabs />", () => {
       options: {
         key0: {
           listKey: "testListKey0",
-          element: "<div>test0</div>"
+          element: "<div>test0</div>",
         },
         key1: {
           listKey: "testListKey1",
-          element: "<div>test1</div>"
-        }
+          element: "<div>test1</div>",
+        },
       },
       onChange: jest.fn(),
-      selectedKey: undefined
+      selectedKey: undefined,
     };
 
     const wrapper = shallow(<Tabs {...props} />);

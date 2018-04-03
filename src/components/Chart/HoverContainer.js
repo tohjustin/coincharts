@@ -9,12 +9,12 @@ const HoverContainer = ({ position, label, visible, x }) => {
   const containerClass = classNames({
     HoverContainer: true,
     hidden: !visible,
-    show: visible
+    show: visible,
   });
 
   const contentClass = classNames({
     content: true,
-    invertColor: position === "top"
+    invertColor: position === "top",
   });
 
   return (
@@ -22,7 +22,7 @@ const HoverContainer = ({ position, label, visible, x }) => {
       className={containerClass}
       style={{
         [position]: VERTICAL_OFFSET,
-        left: x - HOVER_CONTAINER_WIDTH / 2
+        left: x - HOVER_CONTAINER_WIDTH / 2,
       }}
     >
       <div className={contentClass}>{label}</div>
@@ -34,11 +34,11 @@ HoverContainer.propTypes = {
   position: PROPTYPES.HOVER_CONTAINER_POSITION.isRequired,
   visible: PropTypes.bool.isRequired,
   x: PropTypes.number.isRequired,
-  label: PropTypes.string
+  label: PropTypes.string,
 };
 
 HoverContainer.defaultProps = {
-  label: ""
+  label: "",
 };
 
 export default HoverContainer;

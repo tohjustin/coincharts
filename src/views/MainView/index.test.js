@@ -6,7 +6,7 @@ import { UnconnectedMainView } from "./index";
 describe("<MainView/>", () => {
   it("renders without crashing", () => {
     const props = {
-      requestPriceData: () => {}
+      requestPriceData: () => {},
     };
 
     const wrapper = shallow(<UnconnectedMainView {...props} />);
@@ -19,7 +19,7 @@ describe("<MainView/>", () => {
 
     it("starts polling for price data when rendered", () => {
       const props = {
-        requestPriceData: jest.fn()
+        requestPriceData: jest.fn(),
       };
 
       shallow(<UnconnectedMainView {...props} />);
@@ -34,7 +34,7 @@ describe("<MainView/>", () => {
 
     it("stops polling for price data when `clearPriceDataPolling()` is called", () => {
       const props = {
-        requestPriceData: jest.fn()
+        requestPriceData: jest.fn(),
       };
 
       const wrapper = shallow(<UnconnectedMainView {...props} />);
@@ -52,7 +52,7 @@ describe("<MainView/>", () => {
 
     it("resumes polling for price data when `startPriceDataPolling()` is called", () => {
       const props = {
-        requestPriceData: jest.fn()
+        requestPriceData: jest.fn(),
       };
 
       const wrapper = shallow(<UnconnectedMainView {...props} />);
@@ -73,7 +73,7 @@ describe("<MainView/>", () => {
 
     it("calls `clearPriceDataPolling()` when unmounted", () => {
       const props = {
-        requestPriceData: () => {}
+        requestPriceData: () => {},
       };
       const mockedClearPriceDataPolling = jest.fn();
 

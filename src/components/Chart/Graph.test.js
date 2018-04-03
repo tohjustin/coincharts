@@ -8,11 +8,11 @@ describe("<Graph />", () => {
     const props = {
       color: {
         fill: "#333",
-        stroke: "#666"
+        stroke: "#666",
       },
       data: [],
       height: 1,
-      width: 1
+      width: 1,
     };
 
     const wrapper = mount(<Graph {...props} />);
@@ -23,11 +23,11 @@ describe("<Graph />", () => {
     const props = {
       color: {
         fill: "#333",
-        stroke: "#666"
+        stroke: "#666",
       },
       data: [],
       height: 1,
-      width: 1
+      width: 1,
     };
 
     const wrapper = mount(<Graph {...props} />);
@@ -41,20 +41,20 @@ describe("<Graph />", () => {
     const props0 = {
       color: {
         fill: "#333",
-        stroke: "#666"
+        stroke: "#666",
       },
       data: [],
       height: 1,
-      width: 1
+      width: 1,
     };
     const props1 = {
       color: {
         fill: "#666",
-        stroke: "#333"
+        stroke: "#333",
       },
       data: [],
       height: 2,
-      width: 2
+      width: 2,
     };
 
     const wrapper = mount(<Graph {...props0} />);
@@ -74,25 +74,25 @@ describe("<Graph />", () => {
     const props0 = {
       color: {
         fill: "#333",
-        stroke: "#666"
+        stroke: "#666",
       },
       data: [],
       height: 1,
-      width: 1
+      width: 1,
     };
     const props1 = {
       color: {
         fill: "#333",
-        stroke: "#666"
+        stroke: "#666",
       },
       data: [
         { price: 1, time: new Date(1000) },
         { price: 2, time: new Date(2000) },
         { price: 3, time: new Date(3000) },
-        { price: 4, time: new Date(4000) }
+        { price: 4, time: new Date(4000) },
       ],
       height: 1,
-      width: 1
+      width: 1,
     };
 
     const wrapper = mount(<Graph {...props0} />);

@@ -13,7 +13,7 @@ const PriceTableMobile = ({
   priceDifference,
   spotPrice,
   selectedCryptocurrency,
-  selectedCurrency
+  selectedCurrency,
 }) => {
   const cryptocurrencies = CRYPTOCURRENCY_LIST.filter(e => e.key);
 
@@ -32,13 +32,11 @@ const PriceTableMobile = ({
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    handleCryptocurrencyChange: cryptocurrencyKey => {
-      dispatch(SettingsActions.selectCryptocurrency(cryptocurrencyKey));
-    }
-  };
-};
+const mapDispatchToProps = dispatch => ({
+  handleCryptocurrencyChange: cryptocurrencyKey => {
+    dispatch(SettingsActions.selectCryptocurrency(cryptocurrencyKey));
+  },
+});
 
 function mapStateToProps(state) {
   const percentDifference = PriceSelectors.getSelectedPercentDifference(state);
@@ -52,7 +50,7 @@ function mapStateToProps(state) {
     priceDifference,
     spotPrice,
     selectedCryptocurrency,
-    selectedCurrency
+    selectedCurrency,
   };
 }
 
@@ -62,7 +60,7 @@ PriceTableMobile.propTypes = {
   priceDifference: PropTypes.number,
   spotPrice: PropTypes.number,
   selectedCryptocurrency: PROPTYPES.CRYPTOCURRENCY,
-  selectedCurrency: PROPTYPES.CURRENCY
+  selectedCurrency: PROPTYPES.CURRENCY,
 };
 
 PriceTableMobile.defaultProps = {
@@ -70,7 +68,7 @@ PriceTableMobile.defaultProps = {
   priceDifference: 0,
   spotPrice: 0,
   selectedCryptocurrency: DEFAULT_PROPS.CRYPTOCURRENCY,
-  selectedCurrency: DEFAULT_PROPS.CURRENCY
+  selectedCurrency: DEFAULT_PROPS.CURRENCY,
 };
 
 // Use named export for tests

@@ -14,9 +14,9 @@ describe("<VerticalAxis />", () => {
         { price: 5, time: new Date(5000) },
         { price: 6, time: new Date(6000) },
         { price: 9, time: new Date(9000) },
-        { price: 10, time: new Date(10000) }
+        { price: 10, time: new Date(10000) },
       ],
-      textAlign: "left"
+      textAlign: "left",
     };
 
     const wrapper = shallow(<VerticalAxis {...props} />);
@@ -27,7 +27,7 @@ describe("<VerticalAxis />", () => {
     const props = {
       currency: "USD",
       data: [],
-      textAlign: "left"
+      textAlign: "left",
     };
 
     const wrapper = shallow(<VerticalAxis {...props} />);
@@ -44,9 +44,9 @@ describe("<VerticalAxis />", () => {
         { price: 5, time: new Date(5000) },
         { price: 6, time: new Date(6000) },
         { price: 9, time: new Date(9000) },
-        { price: 10, time: new Date(10000) }
+        { price: 10, time: new Date(10000) },
       ],
-      textAlign: "left"
+      textAlign: "left",
     };
 
     const wrapper = shallow(<VerticalAxis {...props} />);

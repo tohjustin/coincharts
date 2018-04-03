@@ -16,7 +16,6 @@ class TableMobile extends Component {
 
   handleOnSelectChange(event) {
     const { onCryptocurrencyChange } = this.props;
-    console.log(event.target.value);
     onCryptocurrencyChange(event.target.value);
   }
 
@@ -34,26 +33,26 @@ class TableMobile extends Component {
       <div className="TableMobile">
         <div>
           <BigAmount type="currency" currency={currency} value={spotPrice} />
-          <PriceDetails
-            currency={currency}
-            priceDifference={priceDifference}
-            percentDifference={percentDifference}
-          />
+          <PriceDetails currency={currency} priceDifference={priceDifference} percentDifference={percentDifference} />
         </div>
         <select className="Dropdown" value={selectedCryptocurrency} onChange={this.handleOnSelectChange}>
-          {cryptocurrencies.map(crypto => (<option key={crypto.key}>{crypto.key}</option>))}
+          {cryptocurrencies.map(crypto => <option key={crypto.key}>{crypto.key}</option>)}
         </select>
       </div>
     );
   }
-};
+}
 
 TableMobile.propTypes = {
   percentDifference: PropTypes.number.isRequired,
   priceDifference: PropTypes.number.isRequired,
   spotPrice: PropTypes.number.isRequired,
   currency: PropTypes.string.isRequired,
-  cryptocurrencies: PropTypes.array.isRequired,
+  cryptocurrencies: PropTypes.arrayOf(
+    PropTypes.shape({
+      key: PropTypes.string,
+    }),
+  ).isRequired,
   selectedCryptocurrency: PROPTYPES.CRYPTOCURRENCY.isRequired,
   onCryptocurrencyChange: PropTypes.func.isRequired,
 };
