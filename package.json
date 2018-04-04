@@ -8,6 +8,7 @@
     "build": "source .env && react-scripts build",
     "check": "npm run stylelint && npm run lint",
     "deploy": "scripts/deploy.sh",
+    "downloadPriceData": "scripts/downloadPriceData.sh ./public/priceData",
     "eject": "react-scripts eject",
     "lint": "eslint src",
     "precommit": "npm run lint && lint-staged",
@@ -16,8 +17,7 @@
     "stylelint": "stylelint --color -- \"src/**/*.css\"",
     "test": "CI=true react-scripts test --env=jsdom",
     "test:coverage": "npm run test -- --coverage --verbose",
-    "test:watch": "react-scripts test --env=jsdom",
-    "updatePriceData": "scripts/updatePriceData.sh ./public/priceData"
+    "test:watch": "react-scripts test --env=jsdom"
   },
   "dependencies": {
     "axios": "0.18.0",
