@@ -1,13 +1,13 @@
 {
   "name": "coincharts",
-  "version": "2.0.0",
+  "version": "2.0.0-development",
   "description": "Cryptocurrency price chart, powered by Coinbase API",
   "repository": "tohjustin/coincharts",
   "license": "MIT",
   "scripts": {
-    "build": "source .env && react-scripts build && rm build/static/**/*.map",
+    "build": "source .env && react-scripts build",
     "check": "npm run stylelint && npm run lint",
-    "deploy": "npm run check && npm run build && cp now.json ./build && now ./build --public && now alias",
+    "deploy": "scripts/deploy.sh",
     "eject": "react-scripts eject",
     "lint": "eslint src",
     "precommit": "npm run lint && lint-staged",

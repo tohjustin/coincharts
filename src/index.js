@@ -13,7 +13,9 @@ import "./reset.css";
 import "./index.css";
 
 if (process.env.NODE_ENV === "production") {
-  Raven.config(process.env.REACT_APP_RAVEN_PUBLIC_DSN).install();
+  Raven.config(process.env.REACT_APP_RAVEN_PUBLIC_DSN, {
+    release: process.env.REACT_APP_VERSION,
+  }).install();
 }
 
 const { store } = configureStore();
