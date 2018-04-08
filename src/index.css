@@ -27,3 +27,8 @@ body {
   height: 100vh;
   justify-content: center;
 }
+
+.Footer {
+  height: 0;
+  line-height: 4em;
+}
