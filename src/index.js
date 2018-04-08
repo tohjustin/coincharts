@@ -5,6 +5,7 @@ import Raven from "raven-js";
 
 import DocumentHead from "./containers/DocumentHead";
 import Footer from "./components/Footer";
+import GithubCorner from "./components/GithubCorner";
 import MainView from "./views/MainView";
 import configureStore from "./store/configureStore";
 import registerServiceWorker from "./registerServiceWorker";
@@ -24,6 +25,7 @@ ReactDOM.render(
   <Provider store={store}>
     <div>
       <DocumentHead />
+      <GithubCorner />
       <MainView />
       <Footer />
     </div>
