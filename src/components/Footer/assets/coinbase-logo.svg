@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <svg width="579px" height="126px" viewBox="0 0 579 126" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-    <!-- Generator: Sketch 43.1 (39012) - http://www.bohemiancoding.com/sketch -->
-    <title>coinbase_logo</title>
-    <desc>Created with Sketch.</desc>
-    <defs></defs>
-    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-        <g id="iPhone-6-Plus" fill-rule="nonzero" fill="#FFFFFF">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g fill-rule="nonzero" fill="#FFFFFF">
             <g id="coinbase_logo">
                 <path d="M37.752,125.873 C18.824,125.873 0.369,112.307 0.369,81.549 C0.369,50.79 18.824,37.382 37.752,37.382 C47.059,37.382 54.315,39.749 59.52,43.219 L53.841,55.68 C50.371,53.156 45.166,51.579 39.961,51.579 C28.604,51.579 18.193,60.57 18.193,81.391 C18.193,102.212 28.919,111.361 39.961,111.361 C45.166,111.361 50.371,109.783 53.841,107.26 L59.52,120.036 C54.157,123.664 47.059,125.873 37.752,125.873" id="Fill-1"></path>
                 <path d="M102.898,125.873 C78.765,125.873 65.515,106.786 65.515,81.549 C65.515,56.311 78.765,37.382 102.898,37.382 C127.032,37.382 140.282,56.311 140.282,81.549 C140.282,106.786 127.032,125.873 102.898,125.873 L102.898,125.873 Z M102.898,51.105 C89.491,51.105 82.866,63.093 82.866,81.391 C82.866,99.688 89.491,111.834 102.898,111.834 C116.306,111.834 122.931,99.688 122.931,81.391 C122.931,63.093 116.306,51.105 102.898,51.105 L102.898,51.105 Z" id="Fill-2"></path>

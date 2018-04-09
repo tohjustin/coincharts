@@ -1,15 +1,28 @@
 import React from "react";
+import styled from "styled-components";
 
-import logo from "./assets/logo.svg";
-import "./index.css";
+import coinbaseLogo from "./assets/coinbase-logo.svg";
+import { color, fontFamily, fontSize, fontWeight, size } from "../../styles/constants";
 
-const Footer = () => (
-  <div className="Footer">
+const StyledFooter = styled.div`
+  color: ${color.white};
+  font-family: ${fontFamily.regular};
+  font-size: ${fontSize.medium};
+  font-weight: ${fontWeight.medium};
+  text-align: center;
+`;
+
+const Image = styled.img`
+  height: ${size.large};
+`;
+
+const Footer = props => (
+  <StyledFooter {...props}>
     <span>Powered by </span>
     <a href="https://developers.coinbase.com/api/v2" target="_blank" rel="noopener noreferrer">
-      <img src={logo} className="logo" alt="coinbase" />
+      <Image src={coinbaseLogo} alt="coinbase-logo" />
     </a>
-  </div>
+  </StyledFooter>
 );
 
 export default Footer;

@@ -27,7 +27,7 @@ ReactDOM.render(
       <DocumentHead />
       <GithubCorner />
       <MainView />
-      <Footer />
+      <Footer className="Footer" />
     </div>
   </Provider>,
   document.getElementById("root"),
