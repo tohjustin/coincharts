@@ -1,11 +1,54 @@
 import React from "react";
+import styled from "styled-components";
 
-import "./index.css";
-
+const BANNER_SIZE = "80px";
+const MAX_BANNER_SIZE = "15vw";
 const REPOSITORY_URL = process.env.REACT_APP_REPOSITORY_URL;
 
-const GithubCorner = () => (
-  <svg className="github-corner" viewBox="0 0 250 250" aria-hidden="true">
+const StyledBanner = styled.svg`
+  position: absolute;
+  top: 0;
+  border: 0;
+  right: 0;
+  width: ${MAX_BANNER_SIZE};
+  height: ${MAX_BANNER_SIZE};
+  max-width: ${BANNER_SIZE};
+  max-height: ${BANNER_SIZE};
+
+  a {
+    fill: #fff;
+  }
+
+  a:hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
+
+  &:hover .octo-arm {
+    transform-origin: 130px 106px;
+    animation: octocat-wave 560ms ease-in-out;
+  }
+
+  @keyframes octocat-wave {
+    0%,
+    100% {
+      transform: rotate(0);
+    }
+
+    20%,
+    60% {
+      transform: rotate(-25deg);
+    }
+
+    40%,
+    80% {
+      transform: rotate(10deg);
+    }
+  }
+`;
+
+const GithubBanner = () => (
+  <StyledBanner className="github-corner" viewBox="0 0 250 250" aria-hidden="true">
     <defs>
       <mask id="hole" fill="#000">
         <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z" mask="url(#hole)" fill="#fff" />
@@ -22,7 +65,7 @@ const GithubCorner = () => (
     <a href={REPOSITORY_URL} target="_blank" aria-label="View source on Github">
       <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z" mask="url(#hole)" />
     </a>
-  </svg>
+  </StyledBanner>
 );
 
-export default GithubCorner;
+export default GithubBanner;
