@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import { extent } from "d3-array";
 import { scaleLinear } from "d3-scale";
 import MediaQuery from "react-responsive";
+import currencyFormatter from "currency-formatter";
 
 import { DEFAULT_PROPS, PROPTYPES, MOBILE_WIDTH } from "../../constants";
-import { formatCurrency } from "../../utils";
 import Graph from "./Graph";
 import { GRAPH_PADDING_TOP, TICK_COUNT_DESKTOP, TICK_COUNT_MOBILE } from "./constants";
 import Cursor from "./Cursor";
@@ -78,7 +78,7 @@ class Chart extends Component {
       const index = Math.round(hoverX / dimensions.width * (data.length - 1));
       const hoveredDatapoint = data[index] || {};
       const hoveredValue = {
-        price: hoveredDatapoint.price && formatCurrency(hoveredDatapoint.price, currency),
+        price: hoveredDatapoint.price && currencyFormatter.format(hoveredDatapoint.price, { code: currency }),
         time: hoveredDatapoint.time && hoveredDatapoint.time.toLocaleString(),
       };
 

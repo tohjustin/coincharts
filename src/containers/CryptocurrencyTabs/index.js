@@ -2,16 +2,16 @@
 import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
+import currencyFormatter from "currency-formatter";
 
 import Tabs from "../../components/Tabs";
 import { CRYPTOCURRENCY_LIST, DEFAULT_PROPS, PROPTYPES } from "../../constants";
 import { PriceSelectors } from "../../store/price";
 import { SettingsActions, SettingsSelectors } from "../../store/settings";
-import { formatCurrency } from "../../utils";
 
 const CryptocurrencyTabs = ({ handleCryptocurrencyChange, selectedCryptocurrency, selectedCurrency, spotPrices }) => {
   const options = CRYPTOCURRENCY_LIST.reduce((accumulator, { key, name }) => {
-    const price = formatCurrency(spotPrices[key], selectedCurrency);
+    const price = currencyFormatter.format(spotPrices[key], { code: selectedCurrency });
     accumulator[key] = {
       listKey: `${name}-${price}`,
       element: (

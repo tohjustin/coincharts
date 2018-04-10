@@ -2,16 +2,16 @@ import PropTypes from "prop-types";
 import React from "react";
 import Helmet from "react-helmet";
 import { connect } from "react-redux";
+import currencyFormatter from "currency-formatter";
 
 import { PROPTYPES } from "../../constants";
 import { PriceSelectors } from "../../store/price";
 import { SettingsSelectors } from "../../store/settings";
-import { formatCurrency } from "../../utils";
 
 const DocumentHead = ({ selectedCryptocurrency, selectedCurrency, spotPrice }) => {
   const cryptocurrencySymbol = selectedCryptocurrency.toUpperCase();
   const iconPath = `${process.env.PUBLIC_URL}/icons/icon-${selectedCryptocurrency}.png`;
-  const priceText = formatCurrency(spotPrice, selectedCurrency) || "";
+  const priceText = currencyFormatter.format(spotPrice, { code: selectedCurrency }) || "";
 
   return (
     <Helmet>
