@@ -70,8 +70,9 @@
   },
   "jest": {
     "collectCoverageFrom": [
-      "src/**/*.{js,jsx}",
-      "!<rootDir>/node_modules/"
+      "!<rootDir>/node_modules/",
+      "!src/registerServiceWorker.js",
+      "src/**/*.{js,jsx}"
     ]
   },
   "prettier": {
