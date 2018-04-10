@@ -11,14 +11,14 @@ const Table = ({ cryptocurrencyLabel, durationLabel, percentDifference, priceDif
     <div className="Table">
       <div className="TableCell">
         <div className="value">
-          <BigAmount type="currency" currency={currency} value={spotPrice} />
+          <BigAmount type="currency" value={spotPrice} currency={currency} />
         </div>
         <div className="label">{cryptocurrencyLabel} price</div>
       </div>
       {showOtherCells && (
         <div className="TableCell">
           <div className="value">
-            <BigAmount showNumberSign type="currency" currency={currency} value={priceDifference} />
+            <BigAmount type="currency" value={priceDifference} currency={currency} showPlusMinusSymbol />
           </div>
           <div className="label">
             {durationLabel} ({currency})
@@ -28,7 +28,7 @@ const Table = ({ cryptocurrencyLabel, durationLabel, percentDifference, priceDif
       {showOtherCells && (
         <div className="TableCell">
           <div className="value">
-            <BigAmount showNumberSign type="percentage" value={percentDifference} />
+            <BigAmount type="percentage" value={percentDifference} showPlusMinusSymbol />
           </div>
           <div className="label">{durationLabel} (%)</div>
         </div>

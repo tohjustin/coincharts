@@ -1,0 +1,49 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<BigAmount /> renders without crashing (type: currency) 1`] = `
+<div
+  class="sc-bdVaJa jlxkRb"
+>
+  <span
+    color="#4E5C6E"
+    class="sc-bwzfXH fbCOIX"
+  >
+    $
+  </span>
+  <span>
+    99
+  </span>
+  <span
+    color="#4E5C6E"
+    class="sc-bwzfXH fbCOIX"
+  >
+    .99
+  </span>
+</div>
+`;
+
+exports[`<BigAmount /> renders without crashing (type: percentage) 1`] = `
+<div
+  class="sc-bdVaJa jlxkRb"
+>
+  <span>
+    99.99
+  </span>
+  <span
+    color="#4E5C6E"
+    class="sc-bwzfXH fbCOIX"
+  >
+    %
+  </span>
+</div>
+`;
+
+exports[`<BigAmount /> renders without crashing 1`] = `
+<div
+  class="sc-bdVaJa jlxkRb"
+>
+  <span>
+    99.99
+  </span>
+</div>
+`;
