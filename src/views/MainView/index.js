@@ -10,7 +10,7 @@ import CryptocurrencyTabs from "../../containers/CryptocurrencyTabs";
 import DurationTabs from "../../containers/DurationTabs";
 import PriceChart from "../../containers/PriceChart";
 import PriceTable from "../../containers/PriceTable";
-import PriceTableMobile from "../../containers/PriceTableMobile";
+import PriceTableCompact from "../../containers/PriceTableCompact";
 
 import "./index.css";
 
@@ -46,7 +46,7 @@ class MainView extends Component {
           <div className="tabs-header">Price Chart</div>
           {<DurationTabs />}
         </div>
-        {<PriceTableMobile />}
+        {<PriceTableCompact />}
         {<PriceChart />}
       </div>
     );

@@ -2,12 +2,12 @@ import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
 
-import TableMobile from "../../components/TableMobile";
+import TableCompact from "../../components/TableCompact";
 import { CRYPTOCURRENCY_LIST, DEFAULT_PROPS, PROPTYPES } from "../../constants";
 import { PriceSelectors } from "../../store/price";
 import { SettingsActions, SettingsSelectors } from "../../store/settings";
 
-const PriceTableMobile = ({
+const PriceTableCompact = ({
   handleCryptocurrencyChange,
   percentDifference,
   priceDifference,
@@ -19,7 +19,7 @@ const PriceTableMobile = ({
 
   return (
     <div className="table">
-      <TableMobile
+      <TableCompact
         currency={selectedCurrency}
         spotPrice={spotPrice}
         priceDifference={priceDifference}
@@ -54,7 +54,7 @@ function mapStateToProps(state) {
   };
 }
 
-PriceTableMobile.propTypes = {
+PriceTableCompact.propTypes = {
   handleCryptocurrencyChange: PropTypes.func.isRequired,
   percentDifference: PropTypes.number,
   priceDifference: PropTypes.number,
@@ -63,7 +63,7 @@ PriceTableMobile.propTypes = {
   selectedCurrency: PROPTYPES.CURRENCY,
 };
 
-PriceTableMobile.defaultProps = {
+PriceTableCompact.defaultProps = {
   percentDifference: 0,
   priceDifference: 0,
   spotPrice: 0,
@@ -72,6 +72,6 @@ PriceTableMobile.defaultProps = {
 };
 
 // Use named export for tests
-export { PriceTableMobile as UnconnectedPriceTableMobile, mapStateToProps, mapDispatchToProps };
+export { PriceTableCompact as UnconnectedPriceTableCompact, mapStateToProps, mapDispatchToProps };
 
-export default connect(mapStateToProps, mapDispatchToProps)(PriceTableMobile);
+export default connect(mapStateToProps, mapDispatchToProps)(PriceTableCompact);

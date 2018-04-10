@@ -35,7 +35,7 @@ describe("<Tabs />", () => {
     expect(container.querySelector("div[aria-selected='true']").textContent).toEqual(selectedKey);
   });
 
-  it("changes selected tab when being clicked", async () => {
+  it("triggers `props.onChange` callback when tab is clicked", async () => {
     const initialSelectedKey = "a";
     const selectedKey = "b";
     const props = {
