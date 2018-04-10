@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { combineReducers } from "redux";
 
 import { DEFAULT_PROPS } from "../../constants";
@@ -80,6 +79,8 @@ function priceSpot(state = initialState.spot, action) {
       return action.payload.spotPrices.reduce((spotPrices, e) => {
         const key = e.base.toLowerCase();
         const value = Number(e.amount);
+
+        // eslint-disable-next-line no-param-reassign
         spotPrices[key] = value;
         return spotPrices;
       }, {});

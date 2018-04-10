@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
@@ -9,6 +8,7 @@ import { SettingsActions, SettingsSelectors } from "../../store/settings";
 
 const DurationTabs = ({ handleDurationChange, selectedDuration }) => {
   const options = DURATION_LIST.reduce((accumulator, { key, codename }) => {
+    // eslint-disable-next-line no-param-reassign
     accumulator[key] = {
       listKey: codename,
       element: <span>{codename}</span>,

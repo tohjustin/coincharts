@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
@@ -12,6 +11,8 @@ import { SettingsActions, SettingsSelectors } from "../../store/settings";
 const CryptocurrencyTabs = ({ handleCryptocurrencyChange, selectedCryptocurrency, selectedCurrency, spotPrices }) => {
   const options = CRYPTOCURRENCY_LIST.reduce((accumulator, { key, name }) => {
     const price = currencyFormatter.format(spotPrices[key], { code: selectedCurrency });
+
+    // eslint-disable-next-line no-param-reassign
     accumulator[key] = {
       listKey: `${name}-${price}`,
       element: (
