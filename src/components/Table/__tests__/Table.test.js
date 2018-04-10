@@ -1,7 +1,7 @@
 import React from "react";
-import { shallow } from "enzyme";
+import { render } from "react-testing-library";
 
-import Table from "./Table";
+import Table from "../";
 
 describe("<Table />", () => {
   it("renders without crashing", () => {
@@ -14,8 +14,9 @@ describe("<Table />", () => {
       spotPrice: 0,
     };
 
-    const wrapper = shallow(<Table {...props} />);
-    expect(wrapper.find(".Table")).toHaveLength(1);
+    const { container } = render(<Table {...props} />);
+    expect(container.firstChild).not.toBeNull();
+    expect(container.firstChild).toMatchSnapshot();
   });
 
   it("renders 3 Table Cells when `props.durationLabel` is defined", () => {
@@ -28,8 +29,8 @@ describe("<Table />", () => {
       spotPrice: 0,
     };
 
-    const wrapper = shallow(<Table {...props} />);
-    expect(wrapper.find(".TableCell")).toHaveLength(3);
+    const { container } = render(<Table {...props} />);
+    expect(container.firstChild.children).toHaveLength(3);
   });
 
   it("renders only 1 Table Cell when `props.durationLabel` is undefined", () => {
@@ -42,7 +43,7 @@ describe("<Table />", () => {
       spotPrice: 0,
     };
 
-    const wrapper = shallow(<Table {...props} />);
-    expect(wrapper.find(".TableCell")).toHaveLength(1);
+    const { container } = render(<Table {...props} />);
+    expect(container.firstChild.children).toHaveLength(1);
   });
 });

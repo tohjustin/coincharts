@@ -1,39 +1,56 @@
 import React from "react";
 import PropTypes from "prop-types";
+import styled from "styled-components";
 
 import BigAmount from "../BigAmount";
-import "./index.css";
+import Flex from "../Flex";
+import { color, fontSize, fontWeight } from "../../styles/constants";
+
+const StyledTable = styled(Flex)`
+  box-sizing: border-box;
+  text-align: center;
+`;
+
+const TableCell = styled(Flex)`
+  color: ${color.slateDark};
+  font-size: ${fontSize.mega};
+  width: 100%;
+
+  &:not(:first-child) {
+    border-left: 1px solid ${color.slateLight};
+  }
+`;
+
+const Label = styled.div`
+  color: ${color.coinchartsGray};
+  font-size: ${fontSize.small};
+  font-weight: ${fontWeight.medium};
+  letter-spacing: 2px;
+  text-transform: uppercase;
+`;
 
 const Table = ({ cryptocurrencyLabel, durationLabel, percentDifference, priceDifference, spotPrice, currency }) => {
   const showOtherCells = Boolean(durationLabel);
 
   return (
-    <div className="Table">
-      <div className="TableCell">
-        <div className="value">
-          <BigAmount type="currency" value={spotPrice} currency={currency} />
-        </div>
-        <div className="label">{cryptocurrencyLabel} price</div>
-      </div>
+    <StyledTable justify="space-around">
+      <TableCell column justify="center">
+        <BigAmount type="currency" value={spotPrice} currency={currency} />
+        <Label>{cryptocurrencyLabel} price</Label>
+      </TableCell>
       {showOtherCells && (
-        <div className="TableCell">
-          <div className="value">
-            <BigAmount type="currency" value={priceDifference} currency={currency} showPlusMinusSymbol />
-          </div>
-          <div className="label">
-            {durationLabel} ({currency})
-          </div>
-        </div>
+        <TableCell column justify="center">
+          <BigAmount type="currency" value={priceDifference} currency={currency} showPlusMinusSymbol />
+          <Label>{`${durationLabel} (${currency})`}</Label>
+        </TableCell>
       )}
       {showOtherCells && (
-        <div className="TableCell">
-          <div className="value">
-            <BigAmount type="percentage" value={percentDifference} showPlusMinusSymbol />
-          </div>
-          <div className="label">{durationLabel} (%)</div>
-        </div>
+        <TableCell column justify="center">
+          <BigAmount type="percentage" value={percentDifference} showPlusMinusSymbol />
+          <Label>{durationLabel} (%)</Label>
+        </TableCell>
       )}
-    </div>
+    </StyledTable>
   );
 };
 
