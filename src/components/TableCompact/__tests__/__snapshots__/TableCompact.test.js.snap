@@ -58,9 +58,9 @@ exports[`<TableCompact /> renders without crashing 1`] = `
     class="sc-ifAKCX dKuzaW"
   >
     <option
-      value="btc"
+      value="BTC"
     >
-      btc
+      BTC
     </option>
     <option
       value="bch"

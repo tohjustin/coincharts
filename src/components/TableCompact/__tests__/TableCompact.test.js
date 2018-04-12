@@ -8,8 +8,8 @@ describe("<TableCompact />", () => {
   it("renders without crashing", () => {
     const props = {
       onCryptocurrencyChange: jest.fn,
-      selectedCryptocurrency: "btc",
-      cryptocurrencies: [{ key: "btc" }, { key: "bch" }, { key: "eth" }, { key: "ltc" }],
+      selectedCryptocurrency: "BTC",
+      cryptocurrencies: [{ key: "BTC" }, { key: "bch" }, { key: "eth" }, { key: "ltc" }],
       currency: "USD",
       percentDifference: 9.99,
       priceDifference: 99.99,
@@ -24,8 +24,8 @@ describe("<TableCompact />", () => {
   it("renders negative differences correctly", () => {
     const props = {
       onCryptocurrencyChange: jest.fn,
-      selectedCryptocurrency: "btc",
-      cryptocurrencies: [{ key: "btc" }, { key: "bch" }, { key: "eth" }, { key: "ltc" }],
+      selectedCryptocurrency: "BTC",
+      cryptocurrencies: [{ key: "BTC" }, { key: "BCH" }, { key: "ETH" }, { key: "LTC" }],
       currency: "USD",
       percentDifference: -9.99,
       priceDifference: -99.99,
@@ -40,8 +40,8 @@ describe("<TableCompact />", () => {
   it("renders positive differences correctly", () => {
     const props = {
       onCryptocurrencyChange: jest.fn,
-      selectedCryptocurrency: "btc",
-      cryptocurrencies: [{ key: "btc" }, { key: "bch" }, { key: "eth" }, { key: "ltc" }],
+      selectedCryptocurrency: "BTC",
+      cryptocurrencies: [{ key: "BTC" }, { key: "BCH" }, { key: "ETH" }, { key: "LTC" }],
       currency: "USD",
       percentDifference: 9.99,
       priceDifference: 99.99,
@@ -55,12 +55,12 @@ describe("<TableCompact />", () => {
 
   // TODO: Switch to "react-testing-library" once https://github.com/kentcdodds/react-testing-library/pull/48 is merged
   it("triggers `props.onChange` callback when option is selected", () => {
-    const initialSelectedOption = "btc";
+    const initialSelectedOption = "BTC";
     const selectedOption = "ltc";
     const props = {
       onCryptocurrencyChange: jest.fn(),
       selectedCryptocurrency: initialSelectedOption,
-      cryptocurrencies: [{ key: "btc" }, { key: "bch" }, { key: "eth" }, { key: "ltc" }],
+      cryptocurrencies: [{ key: "BTC" }, { key: "bch" }, { key: "eth" }, { key: "ltc" }],
       currency: "USD",
       percentDifference: 9.99,
       priceDifference: 99.99,

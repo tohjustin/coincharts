@@ -13,9 +13,14 @@ const DocumentHead = ({ selectedCryptocurrency, selectedCurrency, spotPrice }) =
   const iconPath = `${process.env.PUBLIC_URL}/icons/icon-${selectedCryptocurrency}.png`;
   const priceText = currencyFormatter.format(spotPrice, { code: selectedCurrency }) || "";
 
-  return (
+  return spotPrice >= 0 ? (
     <Helmet>
       <title>{`${cryptocurrencySymbol}: ${priceText}`}</title>
+      <link rel="icon" href={iconPath} />
+    </Helmet>
+  ) : (
+    <Helmet>
+      <title>{process.env.REACT_APP_NAME}</title>
       <link rel="icon" href={iconPath} />
     </Helmet>
   );

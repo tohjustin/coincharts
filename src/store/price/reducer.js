@@ -14,22 +14,22 @@ import { PriceActionTypes } from "./actions";
  *        error: null
  *      },
  *      history: {
- *        'btc-day': [
+ *        'BTC-day': [
  *          { price: XXX, time: "ISO-STRING" },
  *          { price: XXX, time: "ISO-STRING" },
  *          ...
  *        ],
- *        'ltc-week': [
+ *        'LTC-week': [
  *          { price: YYY, time: "ISO-STRING" },
  *          { price: YYY, time: "ISO-STRING" },
  *          ...
  *        ]
  *      },
  *      spot: {
- *        'btc': WWW,
- *        'bch': XXX,
- *        'eth': YYY,
- *        'ltc': ZZZ,
+ *        'BTC': WWW,
+ *        'BCH': XXX,
+ *        'ETH': YYY,
+ *        'LTC': ZZZ,
  *      }
  *    }
  * }
@@ -37,8 +37,8 @@ import { PriceActionTypes } from "./actions";
  */
 
 const initialState = {
-  status: DEFAULT_PROPS.STATUS,
-  history: DEFAULT_PROPS.PRICE_DATA,
+  status: DEFAULT_PROPS.PRICE_STATUS,
+  history: {},
   spot: DEFAULT_PROPS.SPOT_PRICES,
 };
 
@@ -77,7 +77,7 @@ function priceSpot(state = initialState.spot, action) {
   switch (action.type) {
     case PriceActionTypes.REQUEST_SUCCESS:
       return action.payload.spotPrices.reduce((spotPrices, e) => {
-        const key = e.base.toLowerCase();
+        const key = e.base;
         const value = Number(e.amount);
 
         // eslint-disable-next-line no-param-reassign

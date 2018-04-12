@@ -9,7 +9,7 @@ import { SettingsActionTypes } from "./actions";
  * ```
  * {
  *    settings: {
- *      selectedCryptocurrency: "btc",
+ *      selectedCryptocurrency: "BTC",
  *      selectedCurrency: "USD",
  *      selectedDuration: "day",
  *    }
