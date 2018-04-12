@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<VerticalAxis /> does not render ticks when \`props.data\` is [] 1`] = `
+<div
+  class="sc-bwzfXH hYXZTS sc-bdVaJa ivjahH"
+  data-testid="VerticalAxis"
+/>
+`;
+
+exports[`<VerticalAxis /> renders without crashing 1`] = `
+<div
+  class="sc-bwzfXH hYXZTS sc-bdVaJa ivjahH"
+  data-testid="VerticalAxis"
+>
+  <div
+    class="sc-htpNat eZyXfs sc-bdVaJa cAcgKX"
+  >
+    $999
+  </div>
+  <div
+    class="sc-htpNat eZyXfs sc-bdVaJa cAcgKX"
+  >
+    $1
+  </div>
+</div>
+`;

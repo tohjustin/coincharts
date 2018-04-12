@@ -80,7 +80,7 @@ const PROPTYPES = {
     eth: PropTypes.number.isRequired,
     ltc: PropTypes.number.isRequired,
   }),
-  TEXT_ALIGNMENT: PropTypes.oneOf(["left", "right"]),
+  ALIGNMENT: PropTypes.oneOf(["left", "right"]),
   HOVER_CONTAINER_POSITION: PropTypes.oneOf(["top", "bottom"]),
   BIG_AMOUNT_TYPE: PropTypes.oneOf(["currency", "percentage"]),
 };
@@ -105,7 +105,7 @@ const DEFAULT_PROPS = {
     eth: 0,
     ltc: 0,
   },
-  TEXT_ALIGNMENT: "left",
+  ALIGNMENT: "left",
 };
 
 export {

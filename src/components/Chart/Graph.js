@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import isEqual from "lodash.isequal";
+import styled from "styled-components";
 import { area as d3Area, line as d3Line } from "d3-shape";
 import { extent } from "d3-array";
 import { interpolatePath } from "d3-interpolate-path";
@@ -10,6 +11,22 @@ import "d3-transition";
 
 import { PROPTYPES } from "../../constants";
 import { GRAPH_PADDING_TOP, TRANSITION } from "./constants";
+
+const StyledGraph = styled.svg`
+  height: 100%;
+  width: 100%;
+
+  .area {
+    pointer-events: none;
+    stroke: none;
+  }
+
+  .line {
+    fill: none;
+    pointer-events: none;
+    stroke-width: 2;
+  }
+`;
 
 const INITIAL_STATE = {
   previousColor: undefined,
@@ -64,15 +81,12 @@ class Graph extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    const { data, height, width } = this.props;
-    const { data: nextData, height: nextHeight, width: nextWidth } = nextProps;
-
     // Don't update if next set of data is not ready
-    if (nextData === undefined || nextData.length === 0) {
+    if (nextProps.data === undefined || nextProps.data.length === 0) {
       return false;
     }
 
-    return !isEqual(data, nextData) || !isEqual(height, nextHeight) || !isEqual(width, nextWidth);
+    return !isEqual(this.props, nextProps);
   }
 
   componentDidUpdate() {
@@ -98,33 +112,36 @@ class Graph extends Component {
 
     graph
       .append("path")
-      .attr("class", "Graph-area")
+      .attr("class", "area")
       .attr("d", previousAreaGraph)
       .style("fill", previousColor.fill)
       .transition()
       .duration(transitionDuration)
       .ease(TRANSITION.ease)
-      .attrTween("d", () => interpolatePath(previousAreaGraph, areaGraph))
+      .attrTween("d", interpolatePath.bind(null, previousAreaGraph, areaGraph))
       .style("fill", color.fill);
 
     graph
       .append("path")
-      .attr("class", "Graph-line")
+      .attr("class", "line")
       .attr("d", previousLineGraph)
       .style("stroke", previousColor.stroke)
       .transition()
       .duration(transitionDuration)
       .ease(TRANSITION.ease)
-      .attrTween("d", () => interpolatePath(previousLineGraph, lineGraph))
+      .attrTween("d", interpolatePath.bind(null, previousLineGraph, lineGraph))
       .style("stroke", color.stroke);
   }
 
   render() {
-    const nodeRef = node => {
+    const svgRef = node => {
       this.svgNode = node;
     };
-
-    return <g ref={nodeRef} className="Graph" />;
+    return (
+      <StyledGraph data-testid="Graph">
+        <g ref={svgRef} />
+      </StyledGraph>
+    );
   }
 }
 

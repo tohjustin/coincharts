@@ -123,6 +123,7 @@ export const boxShadow = {
 
 export const animation = {
   default: "all 0.25s ease",
+  speed: "0.25s ease",
 };
 
 export default {

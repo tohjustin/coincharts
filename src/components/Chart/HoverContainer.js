@@ -1,34 +1,45 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
+import styled from "styled-components";
 
+import Flex from "../Flex";
 import { PROPTYPES } from "../../constants";
+import { animation, border, color, fontSize, fontWeight } from "../../styles/constants";
 import { HOVER_CONTAINER_WIDTH, VERTICAL_OFFSET } from "./constants";
 
-const HoverContainer = ({ position, label, visible, x }) => {
-  const containerClass = classNames({
-    HoverContainer: true,
-    hidden: !visible,
-    show: visible,
-  });
+const StyledHoverContainer = styled(Flex).attrs({
+  style: ({ left, position, visible }) => ({
+    bottom: position === "bottom" ? `${VERTICAL_OFFSET}px` : undefined,
+    top: position === "top" ? `${VERTICAL_OFFSET}px` : undefined,
+    left: `${left - HOVER_CONTAINER_WIDTH / 2}px`,
+    opacity: visible ? 1 : 0,
+  }),
+})`
+  position: absolute;
+  transition: opacity ${animation.speed};
+  width: 200px;
+  z-index: 10;
+`;
 
-  const contentClass = classNames({
-    content: true,
-    invertColor: position === "top",
-  });
+const Label = styled.div.attrs({
+  background: props => (props.invertColor ? color.coinchartsGray : color.white),
+  border: props => (props.invertColor ? "none" : border.border),
+  color: props => (props.invertColor ? color.white : color.coinchartsGray),
+})`
+  background: ${props => props.background};
+  border-radius: ${border.radius};
+  border: ${props => props.border};
+  color: ${props => props.color};
+  font-size: ${fontSize.small};
+  font-weight: ${fontWeight.medium}
+  padding: 1px 6px;;
+`;
 
-  return (
-    <div
-      className={containerClass}
-      style={{
-        [position]: VERTICAL_OFFSET,
-        left: x - HOVER_CONTAINER_WIDTH / 2,
-      }}
-    >
-      <div className={contentClass}>{label}</div>
-    </div>
-  );
-};
+const HoverContainer = ({ position, label, visible, x }) => (
+  <StyledHoverContainer data-testid="HoverContainer" justify="center" left={x} position={position} visible={visible}>
+    <Label invertColor={position === "top"}>{label}</Label>
+  </StyledHoverContainer>
+);
 
 HoverContainer.propTypes = {
   position: PROPTYPES.HOVER_CONTAINER_POSITION.isRequired,

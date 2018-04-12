@@ -1,0 +1,198 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Chart/> [DESKTOP] renders without crashing 1`] = `
+<div
+  class="chart"
+>
+  <div
+    class="topSection"
+  >
+    <div
+      class="sc-dnqmqq eWTArw sc-ifAKCX dXWDCq"
+      data-testid="VerticalAxis"
+    >
+      <div
+        class="sc-iwsKbI iGIseO sc-ifAKCX gJUcVC"
+      >
+        $50
+      </div>
+      <div
+        class="sc-iwsKbI iGIseO sc-ifAKCX gJUcVC"
+      >
+        $20
+      </div>
+    </div>
+    <div
+      class="sc-gZMcBi jANtVc"
+      data-testid="HoverRegion"
+    >
+      <svg
+        class="sc-bxivhb jhkhYY"
+        data-testid="Graph"
+      >
+        <g />
+      </svg>
+      <svg
+        style="opacity: 0;"
+        class="sc-bdVaJa ltcOW"
+        data-testid="Cursor"
+      >
+        <line
+          class="sc-htpNat jVvTZn"
+          x1="-1"
+          x2="-1"
+          y1="0"
+          y2="0"
+        />
+        <circle
+          class="sc-bwzfXH dKjhyo"
+          cx="-1"
+          cy="-1"
+          r="4"
+        />
+      </svg>
+      <div
+        class="sc-gzVnrw gCvPsj sc-ifAKCX iGsEFG"
+        style="top: -12px; left: -101px; opacity: 0;"
+        data-testid="HoverContainer"
+      >
+        <div
+          background="#7D95B6"
+          border="none"
+          color="#FFFFFF"
+          class="sc-htoDjs hptRiM"
+        />
+      </div>
+      <div
+        class="sc-gzVnrw gCvPsj sc-ifAKCX iGsEFG"
+        style="bottom: -12px; left: -101px; opacity: 0;"
+        data-testid="HoverContainer"
+      >
+        <div
+          background="#FFFFFF"
+          border="1px solid #DAE1E9"
+          color="#7D95B6"
+          class="sc-htoDjs RdJKU"
+        />
+      </div>
+    </div>
+    <div
+      class="sc-dnqmqq fzzfzp sc-ifAKCX jatQOt"
+      data-testid="VerticalAxis"
+    >
+      <div
+        class="sc-iwsKbI iGIseO sc-ifAKCX gJUcVC"
+      >
+        $50
+      </div>
+      <div
+        class="sc-iwsKbI iGIseO sc-ifAKCX gJUcVC"
+      >
+        $20
+      </div>
+    </div>
+  </div>
+  <div
+    class="sc-EHOje iyegAS sc-ifAKCX leslRF"
+    data-testid="HorizontalAxis"
+  >
+    <div
+      class="tick sc-bZQynM itqFyr"
+    >
+      02:00 AM
+    </div>
+    <div
+      class="tick sc-bZQynM itqFyr"
+    >
+      02:00 AM
+    </div>
+    <div
+      class="tick sc-bZQynM itqFyr"
+    >
+      02:01 AM
+    </div>
+    <div
+      class="tick sc-bZQynM itqFyr"
+    >
+      02:01 AM
+    </div>
+    <div
+      class="tick sc-bZQynM itqFyr"
+    >
+      02:02 AM
+    </div>
+    <div
+      class="tick sc-bZQynM itqFyr"
+    >
+      02:02 AM
+    </div>
+    <div
+      class="tick sc-bZQynM itqFyr"
+    >
+      02:03 AM
+    </div>
+  </div>
+</div>
+`;
+
+exports[`<Chart/> [MOBILE] renders without crashing 1`] = `
+<div
+  class="chart"
+>
+  <div
+    class="topSection"
+  >
+    <div
+      class="sc-dnqmqq eWTArw sc-ifAKCX dXWDCq"
+      data-testid="VerticalAxis"
+    >
+      <div
+        class="sc-iwsKbI iGIseO sc-ifAKCX gJUcVC"
+      >
+        $50
+      </div>
+      <div
+        class="sc-iwsKbI iGIseO sc-ifAKCX gJUcVC"
+      >
+        $20
+      </div>
+    </div>
+    <div
+      class="sc-gZMcBi jANtVc"
+      data-testid="HoverRegion"
+    >
+      <svg
+        class="sc-bxivhb jhkhYY"
+        data-testid="Graph"
+      >
+        <g />
+      </svg>
+    </div>
+  </div>
+  <div
+    class="sc-EHOje kylqwJ sc-ifAKCX leslRF"
+    data-testid="HorizontalAxis"
+  >
+    <div
+      class="tick sc-bZQynM itqFyr"
+    >
+      02:00 AM
+    </div>
+    <div
+      class="tick sc-bZQynM itqFyr"
+    >
+      02:01 AM
+    </div>
+    <div
+      class="tick sc-bZQynM itqFyr"
+    >
+      02:02 AM
+    </div>
+    <div
+      class="tick sc-bZQynM itqFyr"
+    >
+      02:03 AM
+    </div>
+  </div>
+</div>
+`;

@@ -1,18 +1,30 @@
 import React, { Component } from "react";
+import MediaQuery from "react-responsive";
 import { extent } from "d3-array";
 import { scaleLinear } from "d3-scale";
-import MediaQuery from "react-responsive";
 import currencyFormatter from "currency-formatter";
+import styled from "styled-components";
 
 import { DEFAULT_PROPS, PROPTYPES, MOBILE_WIDTH } from "../../constants";
-import Graph from "./Graph";
 import { GRAPH_PADDING_TOP, TICK_COUNT_DESKTOP, TICK_COUNT_MOBILE } from "./constants";
 import Cursor from "./Cursor";
+import Graph from "./Graph";
 import HorizontalAxis from "./HorizontalAxis";
 import HoverContainer from "./HoverContainer";
 import VerticalAxis from "./VerticalAxis";
 
-import "./index.css";
+const StyledChart = styled.div`
+  cursor: crosshair;
+  height: 100%;
+  width: 100%;
+  position: relative;
+
+  svg {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+`;
 
 const INITIAL_STATE = {
   dimensions: {
@@ -96,65 +108,41 @@ class Chart extends Component {
     });
   }
 
-  renderMobile() {
-    const { dimensions } = this.state;
-    const { color, currency, data, durationType } = this.props;
-    const svgRef = node => {
-      this.chartSvgComponent = node;
-    };
-
-    return (
-      <div className="chart mobile">
-        <div className="topSection">
-          <VerticalAxis data={data} currency={currency} textAlign="left" />
-          <div className="Chart">
-            <svg ref={svgRef}>
-              <Graph height={dimensions.height} width={dimensions.width} data={data} color={color} />
-            </svg>
-          </div>
-        </div>
-        <HorizontalAxis data={data} duration={durationType} tickCount={TICK_COUNT_MOBILE} />
-      </div>
-    );
-  }
-
-  renderDesktop() {
-    const { dimensions, hoveredValue, hoverX, hoverY, hovered } = this.state;
-    const { color, currency, data, durationType } = this.props;
-    const svgRef = node => {
-      this.chartSvgComponent = node;
-    };
-
-    return (
-      <div className="chart">
-        <div className="topSection">
-          <VerticalAxis data={data} currency={currency} textAlign="left" />
-          <div className="Chart">
-            <div>
-              <HoverContainer position="top" label={hoveredValue.price} visible={hovered} x={hoverX} />
-              <HoverContainer position="bottom" label={hoveredValue.time} visible={hovered} x={hoverX} />
-            </div>
-            <svg
-              ref={svgRef}
-              onMouseEnter={this.handleMouseEnter}
-              onMouseLeave={this.handleMouseLeave}
-              onMouseMove={this.handleMouseMove}
-            >
-              <Graph height={dimensions.height} width={dimensions.width} data={data} color={color} />
-              <Cursor height={dimensions.height} visible={hovered} x={hoverX} y={hoverY} />
-            </svg>
-          </div>
-          <VerticalAxis data={data} currency={currency} textAlign="right" />
-        </div>
-        <HorizontalAxis data={data} duration={durationType} tickCount={TICK_COUNT_DESKTOP} />
-      </div>
-    );
-  }
-
   render() {
+    const { dimensions, hoveredValue: { price, time }, hoverX, hoverY, hovered } = this.state;
+    const { color, currency, data, durationType } = this.props;
+    const svgRef = node => {
+      this.chartSvgComponent = node;
+    };
+
     return (
-      <MediaQuery maxWidth={MOBILE_WIDTH}>
-        {matches => (matches ? this.renderMobile() : this.renderDesktop())}
+      <MediaQuery minWidth={MOBILE_WIDTH}>
+        {isDesktopView => (
+          <div className="chart">
+            <div className="topSection">
+              <VerticalAxis data={data} currency={currency} align="left" />
+              <StyledChart
+                data-testid="HoverRegion"
+                innerRef={svgRef}
+                onMouseEnter={this.handleMouseEnter}
+                onMouseLeave={this.handleMouseLeave}
+                onMouseMove={this.handleMouseMove}
+              >
+                <Graph color={color} data={data} height={dimensions.height} width={dimensions.width} />
+                {isDesktopView && <Cursor height={dimensions.height} visible={hovered} x={hoverX} y={hoverY} />}
+                {isDesktopView && <HoverContainer position="top" label={price} visible={hovered} x={hoverX} />}
+                {isDesktopView && <HoverContainer position="bottom" label={time} visible={hovered} x={hoverX} />}
+              </StyledChart>
+              {isDesktopView && <VerticalAxis data={data} currency={currency} align="right" />}
+            </div>
+            <HorizontalAxis
+              data={data}
+              duration={durationType}
+              hideRightMargin={!isDesktopView}
+              tickCount={isDesktopView ? TICK_COUNT_DESKTOP : TICK_COUNT_MOBILE}
+            />
+          </div>
+        )}
       </MediaQuery>
     );
   }

@@ -1,23 +1,37 @@
 import React from "react";
 import PropTypes from "prop-types";
-import classNames from "classnames";
+import styled from "styled-components";
 
+import { animation, color } from "../../styles/constants";
 import { CURSOR_RADIUS_SIZE } from "./constants";
 
-const Cursor = ({ height, visible, x, y }) => {
-  const cursorClass = classNames({
-    Cursor: true,
-    hidden: !visible,
-    show: visible,
-  });
+const StyledCursor = styled.svg.attrs({
+  style: ({ visible }) => ({
+    opacity: visible ? 1 : 0,
+  }),
+})`
+  height: 100%;
+  width: 100%;
+  transition: opacity ${animation.speed};
+`;
 
-  return (
-    <g className={cursorClass}>
-      <line className="line" x1={x} x2={x} y1={0} y2={height} />
-      <circle className="circle" cx={x} cy={y} r={CURSOR_RADIUS_SIZE} />
-    </g>
-  );
-};
+const Circle = styled.circle`
+  fill: ${color.white};
+  stroke: ${color.coinchartsGray};
+  stroke-width: 2;
+`;
+
+const Line = styled.line`
+  stroke: ${color.coinchartsGray};
+  stroke-width: 1;
+`;
+
+const Cursor = ({ height, visible, x, y }) => (
+  <StyledCursor data-testid="Cursor" visible={visible}>
+    <Line x1={x} x2={x} y1={0} y2={height} />
+    <Circle cx={x} cy={y} r={CURSOR_RADIUS_SIZE} />
+  </StyledCursor>
+);
 
 Cursor.propTypes = {
   height: PropTypes.number.isRequired,
