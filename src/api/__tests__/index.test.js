@@ -1,13 +1,13 @@
 import check from "check-types";
 
-import { CRYPTOCURRENCY_LIST } from "../constants";
-import { getPriceHistoryUrl, getSpotPriceUrl, fetchPriceHistory, fetchSpotPrices } from "./index";
+import { CRYPTOCURRENCY_LIST } from "../../constants";
+import { getPriceHistoryUrl, getSpotPriceUrl, fetchPriceHistory, fetchSpotPrices } from "../";
 
 describe("api", () => {
   let INITIAL_NODE_ENV;
 
   beforeEach(() => {
-    jest.mock("./__mocks__/axios");
+    jest.mock("../__mocks__/axios");
     INITIAL_NODE_ENV = process.env.NODE_ENV;
   });
 
