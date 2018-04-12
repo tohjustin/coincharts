@@ -1,1 +1,0 @@
-{"data":[{"base":"BTC","currency":"USD","amount":"13159.59"},{"base":"BCH","currency":"USD","amount":"2316.23"},{"base":"ETH","currency":"USD","amount":"719.30"},{"base":"LTC","currency":"USD","amount":"218.61"}],"warnings":[{"id":"missing_version","message":"Please supply API version (YYYY-MM-DD) as CB-VERSION header","url":"https://developers.coinbase.com/api#versioning"}]}
