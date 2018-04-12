@@ -22,31 +22,14 @@ const TEST_PROPS = {
 };
 
 describe("<Chart/>", () => {
-  it("[MOBILE] renders without crashing", () => {
+  it("renders without crashing", () => {
     global.innerWidth = MOBILE_TEST_WIDTH;
     const { container } = render(<Chart {...TEST_PROPS} />);
     expect(container.firstChild).not.toBeNull();
     expect(container.firstChild).toMatchSnapshot();
   });
 
-  it("[MOBILE] renders child components correctly", () => {
-    global.innerWidth = MOBILE_TEST_WIDTH;
-    const { queryByTestId } = render(<Chart {...TEST_PROPS} />);
-    expect(queryByTestId("Graph")).not.toBeNull();
-    expect(queryByTestId("HorizontalAxis")).not.toBeNull();
-    expect(queryByTestId("VerticalAxis")).not.toBeNull();
-    expect(queryByTestId("Cursor")).toBeNull();
-    expect(queryByTestId("HoverContainer")).toBeNull();
-  });
-
-  it("[DESKTOP] renders without crashing", () => {
-    global.innerWidth = DESKTOP_TEST_WIDTH;
-    const { container } = render(<Chart {...TEST_PROPS} />);
-    expect(container.firstChild).not.toBeNull();
-    expect(container.firstChild).toMatchSnapshot();
-  });
-
-  it("[DESKTOP] renders child components correctly", () => {
+  it("renders child components correctly", () => {
     global.innerWidth = DESKTOP_TEST_WIDTH;
     const { queryByTestId } = render(<Chart {...TEST_PROPS} />);
     expect(queryByTestId("Graph")).not.toBeNull();
@@ -54,6 +37,16 @@ describe("<Chart/>", () => {
     expect(queryByTestId("VerticalAxis")).not.toBeNull();
     expect(queryByTestId("Cursor")).not.toBeNull();
     expect(queryByTestId("HoverContainer")).not.toBeNull();
+  });
+
+  it("renders child components correctly when `props.disableCursor` is true", () => {
+    global.innerWidth = MOBILE_TEST_WIDTH;
+    const { queryByTestId } = render(<Chart {...TEST_PROPS} disableCursor />);
+    expect(queryByTestId("Graph")).not.toBeNull();
+    expect(queryByTestId("HorizontalAxis")).not.toBeNull();
+    expect(queryByTestId("VerticalAxis")).not.toBeNull();
+    expect(queryByTestId("Cursor")).toBeNull();
+    expect(queryByTestId("HoverContainer")).toBeNull();
   });
 
   it("[DESKTOP] displays <HoverContainers/> when mouse is hovered over SVG chart", () => {

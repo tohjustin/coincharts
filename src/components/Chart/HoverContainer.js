@@ -5,7 +5,9 @@ import styled from "styled-components";
 import Flex from "../Flex";
 import { PROPTYPES } from "../../constants";
 import { animation, border, color, fontSize, fontWeight } from "../../styles/constants";
-import { HOVER_CONTAINER_WIDTH, VERTICAL_OFFSET } from "./constants";
+
+const HOVER_CONTAINER_WIDTH = 200;
+export const VERTICAL_OFFSET = -12;
 
 const StyledHoverContainer = styled(Flex).attrs({
   style: ({ left, position, visible }) => ({
@@ -17,7 +19,7 @@ const StyledHoverContainer = styled(Flex).attrs({
 })`
   position: absolute;
   transition: opacity ${animation.speed};
-  width: 200px;
+  width: ${`${HOVER_CONTAINER_WIDTH}px`};
   z-index: 10;
 `;
 

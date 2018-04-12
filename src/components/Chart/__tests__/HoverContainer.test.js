@@ -1,8 +1,7 @@
 import React from "react";
 import { render } from "react-testing-library";
 
-import HoverContainer from "../HoverContainer";
-import { VERTICAL_OFFSET } from "../constants";
+import HoverContainer, { VERTICAL_OFFSET } from "../HoverContainer";
 
 const TEST_PROPS = {
   position: "top",

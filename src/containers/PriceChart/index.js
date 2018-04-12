@@ -6,7 +6,7 @@ import { CRYPTOCURRENCY_LIST, DEFAULT_PROPS, PROPTYPES } from "../../constants";
 import { PriceSelectors } from "../../store/price";
 import { SettingsSelectors } from "../../store/settings";
 
-const PriceChart = ({ priceData, selectedCryptocurrency, selectedCurrency, selectedDuration }) => {
+const PriceChart = ({ priceData, selectedCryptocurrency, selectedCurrency, selectedDuration, ...props }) => {
   const cryptocurrency = CRYPTOCURRENCY_LIST.filter(e => e.key === selectedCryptocurrency)[0];
 
   return (
@@ -20,6 +20,7 @@ const PriceChart = ({ priceData, selectedCryptocurrency, selectedCurrency, selec
           stroke: cryptocurrency.strokeColor,
         }
       }
+      {...props}
     />
   );
 };

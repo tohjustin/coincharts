@@ -18,6 +18,7 @@ const TEST_PROPS = {
   ],
   duration: "month",
   tickCount: 3,
+  hideRightMargin: false,
 };
 
 describe("<HorizontalAxis />", () => {

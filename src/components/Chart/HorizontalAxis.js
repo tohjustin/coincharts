@@ -10,7 +10,7 @@ import { DURATION, PROPTYPES } from "../../constants";
 import { color, fontSize, fontWeight } from "../../styles/constants";
 
 const StyledHorizontalAxis = styled(Flex).attrs({
-  margin: props => (props.hideRightMargin ? "10px 0 10px 20px" : "0.5em 2.5em 1.5em"),
+  margin: props => (props.hideRightMargin ? "10px 0 0 20px" : "10px 20px 0 20px"),
 })`
   margin: ${props => props.margin};
 `;
@@ -96,11 +96,7 @@ HorizontalAxis.propTypes = {
   data: PROPTYPES.PRICE_DATA.isRequired,
   duration: PROPTYPES.DURATION.isRequired,
   tickCount: PropTypes.number.isRequired,
-  hideRightMargin: PropTypes.bool,
-};
-
-HorizontalAxis.defaultProps = {
-  hideRightMargin: false,
+  hideRightMargin: PropTypes.bool.isRequired,
 };
 
 export default HorizontalAxis;

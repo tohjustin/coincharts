@@ -1,23 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Chart/> [DESKTOP] renders without crashing 1`] = `
-<div
-  class="chart"
->
+exports[`<Chart/> renders without crashing 1`] = `
+<div>
   <div
-    class="topSection"
+    class="sc-gqjmRU kTfRCk sc-bdVaJa cAcgKX"
   >
     <div
-      class="sc-dnqmqq eWTArw sc-ifAKCX dXWDCq"
+      class="sc-dnqmqq eWTArw sc-bdVaJa ivjahH"
       data-testid="VerticalAxis"
     >
       <div
-        class="sc-iwsKbI iGIseO sc-ifAKCX gJUcVC"
+        class="sc-iwsKbI iGIseO sc-bdVaJa cAcgKX"
       >
         $50
       </div>
       <div
-        class="sc-iwsKbI iGIseO sc-ifAKCX gJUcVC"
+        class="sc-iwsKbI iGIseO sc-bdVaJa cAcgKX"
       >
         $20
       </div>
@@ -27,32 +25,31 @@ exports[`<Chart/> [DESKTOP] renders without crashing 1`] = `
       data-testid="HoverRegion"
     >
       <svg
-        class="sc-bxivhb jhkhYY"
+        class="sc-ifAKCX dCYFNS"
         data-testid="Graph"
       >
         <g />
       </svg>
       <svg
         style="opacity: 0;"
-        class="sc-bdVaJa ltcOW"
+        class="sc-bwzfXH cZdfWA"
         data-testid="Cursor"
       >
         <line
-          class="sc-htpNat jVvTZn"
+          class="sc-bxivhb ftbvBS"
           x1="-1"
           x2="-1"
           y1="0"
           y2="0"
         />
         <circle
-          class="sc-bwzfXH dKjhyo"
+          class="sc-htpNat hKELQN"
           cx="-1"
           cy="-1"
-          r="4"
         />
       </svg>
       <div
-        class="sc-gzVnrw gCvPsj sc-ifAKCX iGsEFG"
+        class="sc-gzVnrw gCvPsj sc-bdVaJa epQZNM"
         style="top: -12px; left: -101px; opacity: 0;"
         data-testid="HoverContainer"
       >
@@ -64,7 +61,7 @@ exports[`<Chart/> [DESKTOP] renders without crashing 1`] = `
         />
       </div>
       <div
-        class="sc-gzVnrw gCvPsj sc-ifAKCX iGsEFG"
+        class="sc-gzVnrw gCvPsj sc-bdVaJa epQZNM"
         style="bottom: -12px; left: -101px; opacity: 0;"
         data-testid="HoverContainer"
       >
@@ -77,23 +74,23 @@ exports[`<Chart/> [DESKTOP] renders without crashing 1`] = `
       </div>
     </div>
     <div
-      class="sc-dnqmqq fzzfzp sc-ifAKCX jatQOt"
+      class="sc-dnqmqq fzzfzp sc-bdVaJa kAcxML"
       data-testid="VerticalAxis"
     >
       <div
-        class="sc-iwsKbI iGIseO sc-ifAKCX gJUcVC"
+        class="sc-iwsKbI iGIseO sc-bdVaJa cAcgKX"
       >
         $50
       </div>
       <div
-        class="sc-iwsKbI iGIseO sc-ifAKCX gJUcVC"
+        class="sc-iwsKbI iGIseO sc-bdVaJa cAcgKX"
       >
         $20
       </div>
     </div>
   </div>
   <div
-    class="sc-EHOje iyegAS sc-ifAKCX leslRF"
+    class="sc-EHOje hVdXPV sc-bdVaJa bJonzb"
     data-testid="HorizontalAxis"
   >
     <div
@@ -120,68 +117,6 @@ exports[`<Chart/> [DESKTOP] renders without crashing 1`] = `
       class="tick sc-bZQynM itqFyr"
     >
       02:02 AM
-    </div>
-    <div
-      class="tick sc-bZQynM itqFyr"
-    >
-      02:02 AM
-    </div>
-    <div
-      class="tick sc-bZQynM itqFyr"
-    >
-      02:03 AM
-    </div>
-  </div>
-</div>
-`;
-
-exports[`<Chart/> [MOBILE] renders without crashing 1`] = `
-<div
-  class="chart"
->
-  <div
-    class="topSection"
-  >
-    <div
-      class="sc-dnqmqq eWTArw sc-ifAKCX dXWDCq"
-      data-testid="VerticalAxis"
-    >
-      <div
-        class="sc-iwsKbI iGIseO sc-ifAKCX gJUcVC"
-      >
-        $50
-      </div>
-      <div
-        class="sc-iwsKbI iGIseO sc-ifAKCX gJUcVC"
-      >
-        $20
-      </div>
-    </div>
-    <div
-      class="sc-gZMcBi jANtVc"
-      data-testid="HoverRegion"
-    >
-      <svg
-        class="sc-bxivhb jhkhYY"
-        data-testid="Graph"
-      >
-        <g />
-      </svg>
-    </div>
-  </div>
-  <div
-    class="sc-EHOje kylqwJ sc-ifAKCX leslRF"
-    data-testid="HorizontalAxis"
-  >
-    <div
-      class="tick sc-bZQynM itqFyr"
-    >
-      02:00 AM
-    </div>
-    <div
-      class="tick sc-bZQynM itqFyr"
-    >
-      02:01 AM
     </div>
     <div
       class="tick sc-bZQynM itqFyr"

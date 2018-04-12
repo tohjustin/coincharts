@@ -2,8 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
-import { animation, color } from "../../styles/constants";
-import { CURSOR_RADIUS_SIZE } from "./constants";
+import { animation, color, size } from "../../styles/constants";
 
 const StyledCursor = styled.svg.attrs({
   style: ({ visible }) => ({
@@ -16,6 +15,7 @@ const StyledCursor = styled.svg.attrs({
 `;
 
 const Circle = styled.circle`
+  r: ${size.small};
   fill: ${color.white};
   stroke: ${color.coinchartsGray};
   stroke-width: 2;
@@ -29,7 +29,7 @@ const Line = styled.line`
 const Cursor = ({ height, visible, x, y }) => (
   <StyledCursor data-testid="Cursor" visible={visible}>
     <Line x1={x} x2={x} y1={0} y2={height} />
-    <Circle cx={x} cy={y} r={CURSOR_RADIUS_SIZE} />
+    <Circle cx={x} cy={y} />
   </StyledCursor>
 );
 

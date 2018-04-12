@@ -47,7 +47,7 @@ class MainView extends Component {
           {<DurationTabs />}
         </div>
         {<PriceTableCompact />}
-        {<PriceChart />}
+        {<PriceChart disableCursor hideRightVerticalAxi horizontalAxisTickCount={4} />}
       </div>
     );
   }

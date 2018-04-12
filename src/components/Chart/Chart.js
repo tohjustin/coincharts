@@ -1,17 +1,30 @@
 import React, { Component } from "react";
-import MediaQuery from "react-responsive";
+import PropTypes from "prop-types";
 import { extent } from "d3-array";
 import { scaleLinear } from "d3-scale";
 import currencyFormatter from "currency-formatter";
 import styled from "styled-components";
 
-import { DEFAULT_PROPS, PROPTYPES, MOBILE_WIDTH } from "../../constants";
-import { GRAPH_PADDING_TOP, TICK_COUNT_DESKTOP, TICK_COUNT_MOBILE } from "./constants";
+import { border } from "../../styles/constants";
+import { PROPTYPES } from "../../constants";
+import Flex from "../Flex";
 import Cursor from "./Cursor";
-import Graph from "./Graph";
+import Graph, { GRAPH_PADDING_BOTTOM, GRAPH_PADDING_TOP } from "./Graph";
 import HorizontalAxis from "./HorizontalAxis";
 import HoverContainer from "./HoverContainer";
 import VerticalAxis from "./VerticalAxis";
+
+const DEFAULT_TICK_COUNT = 7;
+const INITIAL_STATE = {
+  dimensions: {
+    height: 0,
+    width: 0,
+  },
+  hovered: false,
+  hoveredValue: {},
+  hoverX: -1,
+  hoverY: -1,
+};
 
 const StyledChart = styled.div`
   cursor: crosshair;
@@ -26,16 +39,10 @@ const StyledChart = styled.div`
   }
 `;
 
-const INITIAL_STATE = {
-  dimensions: {
-    height: 0,
-    width: 0,
-  },
-  hovered: false,
-  hoveredValue: {},
-  hoverX: -1,
-  hoverY: -1,
-};
+const StyledChartWithVerticalAxis = styled(Flex)`
+  border-bottom: ${border.border};
+  height: 225px;
+`;
 
 class Chart extends Component {
   constructor(props) {
@@ -95,7 +102,7 @@ class Chart extends Component {
       };
 
       const scalePriceToY = scaleLinear()
-        .range([dimensions.height, GRAPH_PADDING_TOP])
+        .range([dimensions.height - GRAPH_PADDING_BOTTOM, GRAPH_PADDING_TOP])
         .domain(extent(data, d => d.price));
       const hoverY = scalePriceToY(hoveredDatapoint.price) || 0;
 
@@ -110,53 +117,62 @@ class Chart extends Component {
 
   render() {
     const { dimensions, hoveredValue: { price, time }, hoverX, hoverY, hovered } = this.state;
-    const { color, currency, data, durationType } = this.props;
+    const {
+      color,
+      currency,
+      data,
+      durationType,
+      disableCursor,
+      hideRightVerticalAxis,
+      horizontalAxisTickCount,
+    } = this.props;
     const svgRef = node => {
       this.chartSvgComponent = node;
     };
 
     return (
-      <MediaQuery minWidth={MOBILE_WIDTH}>
-        {isDesktopView => (
-          <div className="chart">
-            <div className="topSection">
-              <VerticalAxis data={data} currency={currency} align="left" />
-              <StyledChart
-                data-testid="HoverRegion"
-                innerRef={svgRef}
-                onMouseEnter={this.handleMouseEnter}
-                onMouseLeave={this.handleMouseLeave}
-                onMouseMove={this.handleMouseMove}
-              >
-                <Graph color={color} data={data} height={dimensions.height} width={dimensions.width} />
-                {isDesktopView && <Cursor height={dimensions.height} visible={hovered} x={hoverX} y={hoverY} />}
-                {isDesktopView && <HoverContainer position="top" label={price} visible={hovered} x={hoverX} />}
-                {isDesktopView && <HoverContainer position="bottom" label={time} visible={hovered} x={hoverX} />}
-              </StyledChart>
-              {isDesktopView && <VerticalAxis data={data} currency={currency} align="right" />}
-            </div>
-            <HorizontalAxis
-              data={data}
-              duration={durationType}
-              hideRightMargin={!isDesktopView}
-              tickCount={isDesktopView ? TICK_COUNT_DESKTOP : TICK_COUNT_MOBILE}
-            />
-          </div>
-        )}
-      </MediaQuery>
+      <div>
+        <StyledChartWithVerticalAxis>
+          <VerticalAxis data={data} currency={currency} align="left" />
+          <StyledChart
+            data-testid="HoverRegion"
+            innerRef={svgRef}
+            onMouseEnter={this.handleMouseEnter}
+            onMouseLeave={this.handleMouseLeave}
+            onMouseMove={this.handleMouseMove}
+          >
+            <Graph color={color} data={data} height={dimensions.height} width={dimensions.width} />
+            {!disableCursor && <Cursor height={dimensions.height} visible={hovered} x={hoverX} y={hoverY} />}
+            {!disableCursor && <HoverContainer position="top" label={price} visible={hovered} x={hoverX} />}
+            {!disableCursor && <HoverContainer position="bottom" label={time} visible={hovered} x={hoverX} />}
+          </StyledChart>
+          {!hideRightVerticalAxis && <VerticalAxis data={data} currency={currency} align="right" />}
+        </StyledChartWithVerticalAxis>
+        <HorizontalAxis
+          data={data}
+          duration={durationType}
+          hideRightMargin={hideRightVerticalAxis}
+          tickCount={horizontalAxisTickCount}
+        />
+      </div>
     );
   }
 }
 
 Chart.propTypes = {
+  color: PROPTYPES.COLOR.isRequired,
   currency: PROPTYPES.CURRENCY.isRequired,
   data: PROPTYPES.PRICE_DATA.isRequired,
   durationType: PROPTYPES.DURATION.isRequired,
-  color: PROPTYPES.COLOR,
+  disableCursor: PropTypes.bool,
+  hideRightVerticalAxis: PropTypes.bool,
+  horizontalAxisTickCount: PropTypes.number,
 };
 
 Chart.defaultProps = {
-  color: DEFAULT_PROPS.COLOR,
+  disableCursor: false,
+  hideRightVerticalAxis: false,
+  horizontalAxisTickCount: DEFAULT_TICK_COUNT,
 };
 
 export default Chart;

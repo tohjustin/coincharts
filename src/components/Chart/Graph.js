@@ -4,13 +4,23 @@ import isEqual from "lodash.isequal";
 import styled from "styled-components";
 import { area as d3Area, line as d3Line } from "d3-shape";
 import { extent } from "d3-array";
+import { easeCubicOut } from "d3-ease";
 import { interpolatePath } from "d3-interpolate-path";
 import { scaleLinear, scaleTime } from "d3-scale";
 import { select } from "d3-selection";
 import "d3-transition";
 
 import { PROPTYPES } from "../../constants";
-import { GRAPH_PADDING_TOP, TRANSITION } from "./constants";
+
+export const GRAPH_PADDING_BOTTOM = 15; // spacing between lowest datum & border
+export const GRAPH_PADDING_TOP = 15; // spacing between highest datum & border
+const INITIAL_STATE = {
+  previousColor: undefined,
+  previousScaledData: [],
+  scaledData: [],
+  skipTransition: false,
+};
+const TRANSITION = { duration: 500, ease: easeCubicOut };
 
 const StyledGraph = styled.svg`
   height: 100%;
@@ -28,17 +38,10 @@ const StyledGraph = styled.svg`
   }
 `;
 
-const INITIAL_STATE = {
-  previousColor: undefined,
-  previousScaledData: [],
-  scaledData: [],
-  skipTransition: false,
-};
-
 class Graph extends Component {
   static scaleData(data, height, width) {
     const scalePriceToY = scaleLinear()
-      .range([height, GRAPH_PADDING_TOP])
+      .range([height - GRAPH_PADDING_BOTTOM, GRAPH_PADDING_TOP])
       .domain(extent(data, d => d.price));
 
     const scaleTimeToX = scaleTime()

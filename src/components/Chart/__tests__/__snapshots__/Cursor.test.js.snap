@@ -14,10 +14,9 @@ exports[`<Cursor /> hides component when \`props.visible\` is false 1`] = `
     y2="5"
   />
   <circle
-    class="sc-bwzfXH dKjhyo"
+    class="sc-bwzfXH byisMI"
     cx="10"
     cy="15"
-    r="4"
   />
 </svg>
 `;
@@ -36,10 +35,9 @@ exports[`<Cursor /> renders without crashing 1`] = `
     y2="5"
   />
   <circle
-    class="sc-bwzfXH dKjhyo"
+    class="sc-bwzfXH byisMI"
     cx="10"
     cy="15"
-    r="4"
   />
 </svg>
 `;
@@ -58,10 +56,9 @@ exports[`<Cursor /> shows component when \`props.visible\` is true 1`] = `
     y2="5"
   />
   <circle
-    class="sc-bwzfXH dKjhyo"
+    class="sc-bwzfXH byisMI"
     cx="10"
     cy="15"
-    r="4"
   />
 </svg>
 `;

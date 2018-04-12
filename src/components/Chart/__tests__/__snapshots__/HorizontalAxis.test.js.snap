@@ -2,14 +2,14 @@
 
 exports[`<HorizontalAxis /> does not render ticks when \`TEST_PROPS.data\` is [] 1`] = `
 <div
-  class="sc-bwzfXH jCAOBG sc-bdVaJa bJonzb"
+  class="sc-bwzfXH dPUqxH sc-bdVaJa bJonzb"
   data-testid="HorizontalAxis"
 />
 `;
 
 exports[`<HorizontalAxis /> does not update when \`props.data\` is changed to [] 1`] = `
 <div
-  class="sc-bwzfXH jCAOBG sc-bdVaJa bJonzb"
+  class="sc-bwzfXH dPUqxH sc-bdVaJa bJonzb"
   data-testid="HorizontalAxis"
 >
   <div
@@ -32,7 +32,7 @@ exports[`<HorizontalAxis /> does not update when \`props.data\` is changed to []
 
 exports[`<HorizontalAxis /> does not update when \`props.data\`, \`props.tickCount\` does not change & other props changes 1`] = `
 <div
-  class="sc-bwzfXH jCAOBG sc-bdVaJa bJonzb"
+  class="sc-bwzfXH dPUqxH sc-bdVaJa bJonzb"
   data-testid="HorizontalAxis"
 >
   <div
@@ -55,7 +55,7 @@ exports[`<HorizontalAxis /> does not update when \`props.data\`, \`props.tickCou
 
 exports[`<HorizontalAxis /> renders without crashing 1`] = `
 <div
-  class="sc-bwzfXH jCAOBG sc-bdVaJa bJonzb"
+  class="sc-bwzfXH dPUqxH sc-bdVaJa bJonzb"
   data-testid="HorizontalAxis"
 >
   <div
@@ -78,7 +78,7 @@ exports[`<HorizontalAxis /> renders without crashing 1`] = `
 
 exports[`<HorizontalAxis /> updates when \`props.tickCount\` changes 1`] = `
 <div
-  class="sc-bwzfXH jCAOBG sc-bdVaJa bJonzb"
+  class="sc-bwzfXH dPUqxH sc-bdVaJa bJonzb"
   data-testid="HorizontalAxis"
 >
   <div
