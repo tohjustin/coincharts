@@ -4,11 +4,13 @@ import styled from "styled-components";
 
 import BigAmount from "../BigAmount";
 import Flex from "../Flex";
-import { color, fontSize, fontWeight } from "../../styles/constants";
+import { border, color, fontSize, fontWeight, size } from "../../styles/constants";
 
 const StyledTable = styled(Flex)`
   box-sizing: border-box;
   text-align: center;
+  padding: ${size.large} 0;
+  border-bottom: ${border.border};
 `;
 
 const TableCell = styled(Flex)`
@@ -17,7 +19,7 @@ const TableCell = styled(Flex)`
   width: 100%;
 
   &:not(:first-child) {
-    border-left: 1px solid ${color.slateLight};
+    border-left: ${border.border};
   }
 `;
 
@@ -25,7 +27,7 @@ const Label = styled.div`
   color: ${color.coinchartsGray};
   font-size: ${fontSize.small};
   font-weight: ${fontWeight.medium};
-  letter-spacing: 2px;
+  letter-spacing: ${size.tiny};
   text-transform: uppercase;
 `;
 

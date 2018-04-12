@@ -19,16 +19,14 @@ const PriceTable = ({
   const durationLabel = DURATION_LIST.filter(e => e.key === selectedDuration)[0].humanize;
 
   return (
-    <div className="table">
-      <Table
-        cryptocurrencyLabel={cryptocurrencyLabel}
-        durationLabel={durationLabel}
-        currency={selectedCurrency}
-        spotPrice={spotPrice}
-        priceDifference={priceDifference}
-        percentDifference={percentDifference}
-      />
-    </div>
+    <Table
+      cryptocurrencyLabel={cryptocurrencyLabel}
+      durationLabel={durationLabel}
+      currency={selectedCurrency}
+      spotPrice={spotPrice}
+      priceDifference={priceDifference}
+      percentDifference={percentDifference}
+    />
   );
 };
 

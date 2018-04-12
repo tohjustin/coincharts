@@ -49,7 +49,7 @@ const StyledTab = styled(Flex).attrs({
 `;
 
 const Tabs = ({ options, onChange, selectedKey }) => (
-  <StyledTabs className="Tabs" role="tabpanel">
+  <StyledTabs role="tabpanel">
     {Object.keys(options).map(key => (
       <StyledTab
         align="center"

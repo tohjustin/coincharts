@@ -99,6 +99,7 @@ export const color = {
   /* Misc. */
   white: "#FFFFFF",
   black: "#000000",
+  dark: "#202B33",
   mask: "rgba(26,54,80,0.7)",
 
   /* Label colors */
@@ -118,7 +119,7 @@ export const border = {
 };
 
 export const boxShadow = {
-  default: "0 1px 2px 0 rgba(0, 0, 0, 0.05)",
+  default: "0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23)",
 };
 
 export const animation = {

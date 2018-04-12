@@ -2,11 +2,22 @@ import PropTypes from "prop-types";
 import React from "react";
 import { connect } from "react-redux";
 import currencyFormatter from "currency-formatter";
+import styled from "styled-components";
 
-import Tabs from "../../components/Tabs";
+import { fontSize, fontWeight } from "../../styles/constants";
 import { CRYPTOCURRENCY_LIST, DEFAULT_PROPS, PROPTYPES } from "../../constants";
 import { PriceSelectors } from "../../store/price";
 import { SettingsActions, SettingsSelectors } from "../../store/settings";
+import Tabs from "../../components/Tabs";
+
+const StyledCryptocurrencyTabs = styled.span`
+  font-size: ${fontSize.large};
+  font-weight: ${fontWeight.medium};
+
+  span + span::before {
+    content: " · ";
+  }
+`;
 
 const CryptocurrencyTabs = ({ handleCryptocurrencyChange, selectedCryptocurrency, selectedCurrency, spotPrices }) => {
   const options = CRYPTOCURRENCY_LIST.reduce((accumulator, { key, name }) => {
@@ -16,10 +27,10 @@ const CryptocurrencyTabs = ({ handleCryptocurrencyChange, selectedCryptocurrency
     accumulator[key] = {
       listKey: `${name}-${price}`,
       element: (
-        <span className="cryptocurrency">
+        <StyledCryptocurrencyTabs>
           <span>{name}</span>
           <span>{price}</span>
-        </span>
+        </StyledCryptocurrencyTabs>
       ),
     };
     return accumulator;

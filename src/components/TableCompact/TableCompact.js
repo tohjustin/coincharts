@@ -6,7 +6,7 @@ import currencyFormatter from "currency-formatter";
 import BigAmount from "../BigAmount";
 import Flex from "../Flex";
 import { PROPTYPES } from "../../constants";
-import { animation, border, color, fontFamily, fontSize, fontWeight } from "../../styles/constants";
+import { animation, border, color, fontFamily, fontSize, fontWeight, size } from "../../styles/constants";
 import arrowIcon from "./assets/arrow-icon.png";
 
 const DOWN_ARROW_DESCRIPTION = "Arrow pointing downwards";
@@ -15,6 +15,8 @@ const UP_ARROW_DESCRIPTION = "Arrow pointing upwards";
 const StyledTableCompact = styled(Flex)`
   box-sizing: border-box;
   color: ${color.slateDark};
+  padding: ${size.large} 0;
+  height: 140px;
 `;
 
 const Dropdown = styled.select`

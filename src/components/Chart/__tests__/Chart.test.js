@@ -2,10 +2,7 @@ import React from "react";
 import { render, Simulate } from "react-testing-library";
 
 import Chart from "../";
-import { MOBILE_WIDTH } from "../../../constants";
 
-const DESKTOP_TEST_WIDTH = MOBILE_WIDTH + 1;
-const MOBILE_TEST_WIDTH = MOBILE_WIDTH - 1;
 const TEST_PROPS = {
   currency: "USD",
   data: [
@@ -23,14 +20,12 @@ const TEST_PROPS = {
 
 describe("<Chart/>", () => {
   it("renders without crashing", () => {
-    global.innerWidth = MOBILE_TEST_WIDTH;
     const { container } = render(<Chart {...TEST_PROPS} />);
     expect(container.firstChild).not.toBeNull();
     expect(container.firstChild).toMatchSnapshot();
   });
 
   it("renders child components correctly", () => {
-    global.innerWidth = DESKTOP_TEST_WIDTH;
     const { queryByTestId } = render(<Chart {...TEST_PROPS} />);
     expect(queryByTestId("Graph")).not.toBeNull();
     expect(queryByTestId("HorizontalAxis")).not.toBeNull();
@@ -40,7 +35,6 @@ describe("<Chart/>", () => {
   });
 
   it("renders child components correctly when `props.disableCursor` is true", () => {
-    global.innerWidth = MOBILE_TEST_WIDTH;
     const { queryByTestId } = render(<Chart {...TEST_PROPS} disableCursor />);
     expect(queryByTestId("Graph")).not.toBeNull();
     expect(queryByTestId("HorizontalAxis")).not.toBeNull();
@@ -50,7 +44,6 @@ describe("<Chart/>", () => {
   });
 
   it("[DESKTOP] displays <HoverContainers/> when mouse is hovered over SVG chart", () => {
-    global.innerWidth = DESKTOP_TEST_WIDTH;
     const { getByTestId } = render(<Chart {...TEST_PROPS} />);
 
     // Simulate hovering (mouse entering chart)

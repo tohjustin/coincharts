@@ -2,7 +2,7 @@
 
 exports[`<Tabs /> renders without crashing 1`] = `
 <div
-  class="Tabs sc-bwzfXH cqtslC sc-bdVaJa cAcgKX"
+  class="sc-bwzfXH cqtslC sc-bdVaJa cAcgKX"
   role="tabpanel"
 >
   <div

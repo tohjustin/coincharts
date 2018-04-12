@@ -18,17 +18,15 @@ const PriceTableCompact = ({
   const cryptocurrencies = CRYPTOCURRENCY_LIST.filter(e => e.key);
 
   return (
-    <div className="table">
-      <TableCompact
-        currency={selectedCurrency}
-        spotPrice={spotPrice}
-        priceDifference={priceDifference}
-        percentDifference={percentDifference}
-        cryptocurrencies={cryptocurrencies}
-        selectedCryptocurrency={selectedCryptocurrency}
-        onCryptocurrencyChange={handleCryptocurrencyChange}
-      />
-    </div>
+    <TableCompact
+      currency={selectedCurrency}
+      spotPrice={spotPrice}
+      priceDifference={priceDifference}
+      percentDifference={percentDifference}
+      cryptocurrencies={cryptocurrencies}
+      selectedCryptocurrency={selectedCryptocurrency}
+      onCryptocurrencyChange={handleCryptocurrencyChange}
+    />
   );
 };
 
