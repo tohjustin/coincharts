@@ -1,0 +1,86 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<HoverContainer /> has \`style.bottom\` defined when \`prop.position\` is \`bottom\` 1`] = `
+<div
+  class="sc-bwzfXH ogNWx sc-bdVaJa epQZNM"
+  style="bottom: -12px; left: -100px; opacity: 1;"
+  data-testid="HoverContainer"
+>
+  <div
+    background="#FFFFFF"
+    border="1px solid #DAE1E9"
+    color="#7D95B6"
+    class="sc-htpNat jaGnAe"
+  >
+    test-label
+  </div>
+</div>
+`;
+
+exports[`<HoverContainer /> has \`style.top\` defined when \`prop.position\` is \`top\` 1`] = `
+<div
+  class="sc-bwzfXH ogNWx sc-bdVaJa epQZNM"
+  style="top: -12px; left: -100px; opacity: 1;"
+  data-testid="HoverContainer"
+>
+  <div
+    background="#7D95B6"
+    border="none"
+    color="#FFFFFF"
+    class="sc-htpNat cufbqD"
+  >
+    test-label
+  </div>
+</div>
+`;
+
+exports[`<HoverContainer /> hides component when \`props.visible\` is false 1`] = `
+<div
+  class="sc-bwzfXH ogNWx sc-bdVaJa epQZNM"
+  style="top: -12px; left: -100px; opacity: 0;"
+  data-testid="HoverContainer"
+>
+  <div
+    background="#7D95B6"
+    border="none"
+    color="#FFFFFF"
+    class="sc-htpNat cufbqD"
+  >
+    test-label
+  </div>
+</div>
+`;
+
+exports[`<HoverContainer /> renders without crashing 1`] = `
+<div
+  class="sc-bwzfXH ogNWx sc-bdVaJa epQZNM"
+  style="top: -12px; left: -100px; opacity: 1;"
+  data-testid="HoverContainer"
+>
+  <div
+    background="#7D95B6"
+    border="none"
+    color="#FFFFFF"
+    class="sc-htpNat cufbqD"
+  >
+    test-label
+  </div>
+</div>
+`;
+
+exports[`<HoverContainer /> shows component when \`props.visible\` is true 1`] = `
+<div
+  class="sc-bwzfXH ogNWx sc-bdVaJa epQZNM"
+  style="top: -12px; left: -100px; opacity: 1;"
+  data-testid="HoverContainer"
+>
+  <div
+    background="#7D95B6"
+    border="none"
+    color="#FFFFFF"
+    class="sc-htpNat cufbqD"
+  >
+    test-label
+  </div>
+</div>
+`;

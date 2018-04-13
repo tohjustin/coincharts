@@ -1,0 +1,88 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Table /> renders without crashing 1`] = `
+<div
+  class="sc-bxivhb kNEjoy sc-htpNat bJzcAl"
+>
+  <div
+    class="sc-ifAKCX fhHsZd sc-htpNat Ldmto"
+  >
+    <div
+      class="sc-bdVaJa jlxkRb"
+    >
+      <span
+        color="#4E5C6E"
+        class="sc-bwzfXH fbCOIX"
+      >
+        $
+      </span>
+      <span>
+        0
+      </span>
+      <span
+        color="#4E5C6E"
+        class="sc-bwzfXH fbCOIX"
+      >
+        .00
+      </span>
+    </div>
+    <div
+      class="sc-EHOje eDVoFS"
+    >
+      testCryptocurrencyLabel
+      price
+    </div>
+  </div>
+  <div
+    class="sc-ifAKCX fhHsZd sc-htpNat Ldmto"
+  >
+    <div
+      class="sc-bdVaJa jlxkRb"
+    >
+      <span
+        color="#4E5C6E"
+        class="sc-bwzfXH fbCOIX"
+      >
+        $
+      </span>
+      <span>
+        0
+      </span>
+      <span
+        color="#4E5C6E"
+        class="sc-bwzfXH fbCOIX"
+      >
+        .00
+      </span>
+    </div>
+    <div
+      class="sc-EHOje eDVoFS"
+    >
+      testDurationLabel (USD)
+    </div>
+  </div>
+  <div
+    class="sc-ifAKCX fhHsZd sc-htpNat Ldmto"
+  >
+    <div
+      class="sc-bdVaJa jlxkRb"
+    >
+      <span>
+        0.00
+      </span>
+      <span
+        color="#4E5C6E"
+        class="sc-bwzfXH fbCOIX"
+      >
+        %
+      </span>
+    </div>
+    <div
+      class="sc-EHOje eDVoFS"
+    >
+      testDurationLabel
+      (%)
+    </div>
+  </div>
+</div>
+`;

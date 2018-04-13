@@ -1,48 +1,78 @@
 {
   "name": "coincharts",
-  "version": "1.1.0",
-  "description": "Cryptocurrency price chart, powered by Coinbase",
+  "version": "2.0.0",
+  "description": "Cryptocurrency price chart, powered by Coinbase API",
+  "repository": "tohjustin/coincharts",
   "license": "MIT",
   "scripts": {
-    "build": "react-scripts build && rm build/static/**/*.map",
-    "check": "npm run stylelint && npm run eslint",
-    "deploy": "npm run check && npm run build && cp now.json ./build && now ./build --public && now alias",
+    "build": "source .env && react-scripts build",
+    "deploy": "scripts/deploy.sh",
+    "downloadPriceData": "scripts/downloadPriceData.sh ./public/priceData",
     "eject": "react-scripts eject",
-    "eslint": "eslint --color -- \"src/**/*.js\"",
-    "serve": "npm run build && serve ./build",
+    "lint": "eslint src",
+    "precommit": "npm run lint && lint-staged",
     "start": "react-scripts start",
-    "stylelint": "stylelint --color -- \"src/**/*.css\"",
-    "test": "react-scripts test --env=jsdom",
-    "updatePriceData": "scripts/updatePriceData.sh ./public/priceData"
+    "test": "TZ=America/Vancouver CI=true react-scripts test --env=jsdom",
+    "test:coverage": "npm run test -- --coverage --verbose",
+    "test:watch": "TZ=America/Vancouver react-scripts test --env=jsdom"
   },
   "dependencies": {
-    "axios": "0.16.2",
-    "classnames": "2.2.5",
-    "currency-formatter": "1.3.0",
+    "axios": "0.18.0",
+    "currency-formatter": "1.4.2",
     "d3-array": "1.2.1",
     "d3-ease": "1.0.3",
-    "d3-interpolate-path": "2.0.0",
-    "d3-scale": "1.0.6",
-    "d3-selection": "1.1.0",
+    "d3-interpolate-path": "2.0.1",
+    "d3-scale": "2.0.0",
+    "d3-selection": "1.3.0",
     "d3-shape": "1.2.0",
-    "d3-time-format": "2.0.5",
-    "d3-transition": "1.1.0",
+    "d3-time-format": "2.1.1",
+    "d3-transition": "1.1.1",
     "lodash.get": "4.4.2",
     "lodash.isequal": "4.5.0",
-    "prop-types": "15.6.0",
-    "react": "16.0.0",
-    "react-dom": "16.0.0",
+    "prop-types": "15.6.1",
+    "raven-js": "3.24.1",
+    "react": "16.3.1",
+    "react-dom": "16.3.1",
     "react-helmet": "5.2.0",
-    "react-scripts": "1.0.10",
-    "serve": "6.1.0"
+    "react-redux": "5.0.7",
+    "react-responsive": "4.1.0",
+    "react-scripts": "1.1.4",
+    "redux": "3.7.2",
+    "redux-saga": "0.16.0",
+    "reselect": "3.0.1",
+    "styled-components": "^3.2.5"
   },
   "devDependencies": {
-    "eslint": "3.19.0",
-    "eslint-config-airbnb": "15.1.0",
-    "eslint-plugin-import": "2.7.0",
-    "eslint-plugin-jsx-a11y": "5.1.1",
-    "eslint-plugin-react": "7.1.0",
-    "stylelint": "8.0.0",
-    "stylelint-config-standard": "17.0.0"
+    "check-types": "7.3.0",
+    "codecov": "3.0.0",
+    "enzyme": "3.3.0",
+    "enzyme-adapter-react-16": "1.1.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-plugin-prettier": "^2.6.0",
+    "eslint-plugin-react": "^7.7.0",
+    "husky": "0.14.3",
+    "jest-enzyme": "6.0.0",
+    "lint-staged": "7.0.4",
+    "prettier": "1.12.0",
+    "react-testing-library": "^2.0.0"
+  },
+  "lint-staged": {
+    "*.js": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "!<rootDir>/node_modules/",
+      "!src/registerServiceWorker.js",
+      "!src/index.js",
+      "src/**/*.{js,jsx}"
+    ]
+  },
+  "prettier": {
+    "printWidth": 120,
+    "trailingComma": "all"
   }
 }

@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Footer /> renders without crashing 1`] = `
+<div
+  class="sc-bdVaJa jDdYLM"
+>
+  <span>
+    Powered by 
+  </span>
+  <a
+    href="https://developers.coinbase.com/api/v2"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <img
+      class="sc-bwzfXH cJoRuk"
+      src="coinbase-logo.svg"
+      alt="coinbase-logo"
+    />
+  </a>
+</div>
+`;

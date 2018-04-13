@@ -1,19 +1,19 @@
-import axios from 'axios';
-import get from 'lodash.get';
+import axios from "axios";
+import get from "lodash.get";
 
-import { LOCAL_JSON_DATA_DIR } from '../constants';
+import { LOCAL_JSON_DATA_DIR } from "../constants";
 
 function getPriceHistoryUrl(cryptocurrency, currency, durationType) {
-  if (process.env.NODE_ENV !== 'production') {
-    return `${LOCAL_JSON_DATA_DIR}/${cryptocurrency}-${currency}_${durationType}.json`;
+  if (process.env.NODE_ENV !== "production") {
+    return `${LOCAL_JSON_DATA_DIR}/${cryptocurrency}-${currency}-${durationType}.json`;
   }
 
   return `https://www.coinbase.com/api/v2/prices/${cryptocurrency}-${currency}/historic?period=${durationType}`;
 }
 
 function getSpotPriceUrl(currency) {
-  if (process.env.NODE_ENV !== 'production') {
-    return `${LOCAL_JSON_DATA_DIR}/${currency}_spot.json`;
+  if (process.env.NODE_ENV !== "production") {
+    return `${LOCAL_JSON_DATA_DIR}/${currency}-spot.json`;
   }
 
   return `https://api.coinbase.com/v2/prices/${currency}/spot?`;
@@ -25,14 +25,14 @@ function fetchPriceHistory(cryptocurrency, currency, durationType) {
   return new Promise((resolve, reject) => {
     axios
       .get(url)
-      .then((response) => {
-        const priceHistory = get(response, ['data', 'data', 'prices'], []);
+      .then(response => {
+        const priceHistory = get(response, ["data", "data", "prices"], []);
         const formattedPriceHistory = priceHistory
           .sort((a, b) => new Date(a.time) - new Date(b.time))
-          .map(e => ({ price: +e.price, time: new Date(e.time) }));
+          .map(e => ({ price: Number(e.price), time: new Date(e.time) }));
         resolve(formattedPriceHistory);
       })
-      .catch(err => reject(err));
+      .catch(reject);
   });
 }
 
@@ -42,15 +42,16 @@ function fetchSpotPrices(currency) {
   return new Promise((resolve, reject) => {
     axios
       .get(url)
-      .then((response) => {
-        const spotPrices = get(response, ['data', 'data'], []);
-        const formattedSpotPrices = spotPrices
-          .filter(e => ['BTC', 'BCH', 'ETH', 'LTC'].indexOf(e.base) >= 0)
-          .map(e => ({ ...e, amount: +e.amount }));
+      .then(response => {
+        const spotPrices = get(response, ["data", "data"], []);
+        const formattedSpotPrices = spotPrices.map(e => ({
+          ...e,
+          amount: Number(e.amount),
+        }));
         resolve(formattedSpotPrices);
       })
-      .catch(err => reject(err));
+      .catch(reject);
   });
 }
 
-export { fetchPriceHistory, fetchSpotPrices };
+export { getPriceHistoryUrl, getSpotPriceUrl, fetchPriceHistory, fetchSpotPrices };

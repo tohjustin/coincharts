@@ -1,0 +1,33 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Tabs /> renders without crashing 1`] = `
+<div
+  class="sc-bwzfXH cqtslC sc-bdVaJa cAcgKX"
+  role="tabpanel"
+>
+  <div
+    class="sc-htpNat czjRRp sc-bdVaJa dyxdRy"
+    color="#0667D0"
+    aria-labelledby="listKey_a"
+    aria-selected="true"
+    role="tab"
+    tabindex="-1"
+  >
+    <div>
+      a
+    </div>
+  </div>
+  <div
+    class="sc-htpNat lgKbrQ sc-bdVaJa dyxdRy"
+    color="#7D95B6"
+    aria-labelledby="listKey_b"
+    aria-selected="false"
+    role="tab"
+    tabindex="-1"
+  >
+    <div>
+      b
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,48 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Graph /> does not render SVG <path/>'s when \`props.data\` does not change & other props changes 1`] = `
+<svg
+  class="sc-bdVaJa frmpus"
+  data-testid="Graph"
+>
+  <g />
+</svg>
+`;
+
+exports[`<Graph /> does not render SVG <path/>'s when \`props.data\` is [] 1`] = `
+<svg
+  class="sc-bdVaJa frmpus"
+  data-testid="Graph"
+>
+  <g />
+</svg>
+`;
+
+exports[`<Graph /> renders SVG SVG <path/>'s when \`props.data\` is not empty 1`] = `
+<svg
+  class="sc-bdVaJa frmpus"
+  data-testid="Graph"
+>
+  <g>
+    <path
+      class="area"
+      d="M0,1L0.3333333333333333,1L0.6666666666666666,1L1,1L1,1L0.6666666666666666,1L0.3333333333333333,1L0,1Z"
+      style="fill: #333;"
+    />
+    <path
+      class="line"
+      d="M0,1L0.3333333333333333,1L0.6666666666666666,1L1,1"
+      style="stroke: #666;"
+    />
+  </g>
+</svg>
+`;
+
+exports[`<Graph /> renders without crashing 1`] = `
+<svg
+  class="sc-bdVaJa frmpus"
+  data-testid="Graph"
+>
+  <g />
+</svg>
+`;

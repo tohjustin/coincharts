@@ -1,0 +1,82 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<TableCompact /> renders without crashing 1`] = `
+<div
+  class="sc-bxivhb kPYCRu sc-htpNat izTaYc"
+>
+  <div>
+    <div
+      class="sc-bdVaJa jlxkRb"
+    >
+      <span
+        color="#4E5C6E"
+        class="sc-bwzfXH fbCOIX"
+      >
+        $
+      </span>
+      <span>
+        1,999
+      </span>
+      <span
+        color="#4E5C6E"
+        class="sc-bwzfXH fbCOIX"
+      >
+        .99
+      </span>
+    </div>
+    <div
+      color="#61CA00"
+      transform="rotate(0deg)"
+      class="sc-EHOje dqfVBA"
+    >
+      <svg
+        height="12"
+        width="12"
+        viewBox="8135 12432 15 15"
+        version="1.1"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <title>
+          Arrow
+        </title>
+        <desc>
+          Arrow pointing upwards
+        </desc>
+        <path
+          fill-rule="evenodd"
+          d="M8149.72 12439.36l-7.36-7.36-7.36 7.36 1 1 5.64-5.64v11.82h1.4v-11.87l5.68 5.69z"
+        />
+      </svg>
+      <span
+        data-testid="price-details"
+      >
+        $99.99 (9.99%)
+      </span>
+    </div>
+  </div>
+  <select
+    class="sc-ifAKCX dKuzaW"
+  >
+    <option
+      value="BTC"
+    >
+      BTC
+    </option>
+    <option
+      value="bch"
+    >
+      bch
+    </option>
+    <option
+      value="eth"
+    >
+      eth
+    </option>
+    <option
+      value="ltc"
+    >
+      ltc
+    </option>
+  </select>
+</div>
+`;

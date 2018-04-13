@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Chart/> renders without crashing 1`] = `
+<div>
+  <div
+    class="sc-gqjmRU kTfRCk sc-bdVaJa cAcgKX"
+  >
+    <div
+      class="sc-dnqmqq eWTArw sc-bdVaJa ivjahH"
+      data-testid="VerticalAxis"
+    >
+      <div
+        class="sc-iwsKbI iGIseO sc-bdVaJa cAcgKX"
+      >
+        $50
+      </div>
+      <div
+        class="sc-iwsKbI iGIseO sc-bdVaJa cAcgKX"
+      >
+        $20
+      </div>
+    </div>
+    <div
+      class="sc-gZMcBi jANtVc"
+      data-testid="HoverRegion"
+    >
+      <svg
+        class="sc-ifAKCX dCYFNS"
+        data-testid="Graph"
+      >
+        <g />
+      </svg>
+      <svg
+        style="opacity: 0;"
+        class="sc-bwzfXH cZdfWA"
+        data-testid="Cursor"
+      >
+        <line
+          class="sc-bxivhb ftbvBS"
+          x1="-1"
+          x2="-1"
+          y1="0"
+          y2="0"
+        />
+        <circle
+          class="sc-htpNat hKELQN"
+          cx="-1"
+          cy="-1"
+        />
+      </svg>
+      <div
+        class="sc-gzVnrw gCvPsj sc-bdVaJa epQZNM"
+        style="top: -12px; left: -101px; opacity: 0;"
+        data-testid="HoverContainer"
+      >
+        <div
+          background="#7D95B6"
+          border="none"
+          color="#FFFFFF"
+          class="sc-htoDjs hptRiM"
+        />
+      </div>
+      <div
+        class="sc-gzVnrw gCvPsj sc-bdVaJa epQZNM"
+        style="bottom: -12px; left: -101px; opacity: 0;"
+        data-testid="HoverContainer"
+      >
+        <div
+          background="#FFFFFF"
+          border="1px solid #DAE1E9"
+          color="#7D95B6"
+          class="sc-htoDjs RdJKU"
+        />
+      </div>
+    </div>
+    <div
+      class="sc-dnqmqq fzzfzp sc-bdVaJa kAcxML"
+      data-testid="VerticalAxis"
+    >
+      <div
+        class="sc-iwsKbI iGIseO sc-bdVaJa cAcgKX"
+      >
+        $50
+      </div>
+      <div
+        class="sc-iwsKbI iGIseO sc-bdVaJa cAcgKX"
+      >
+        $20
+      </div>
+    </div>
+  </div>
+  <div
+    class="sc-EHOje hVdXPV sc-bdVaJa bJonzb"
+    data-testid="HorizontalAxis"
+  >
+    <div
+      class="tick sc-bZQynM itqFyr"
+    >
+      04:16 PM
+    </div>
+    <div
+      class="tick sc-bZQynM itqFyr"
+    >
+      04:25 PM
+    </div>
+    <div
+      class="tick sc-bZQynM itqFyr"
+    >
+      04:33 PM
+    </div>
+    <div
+      class="tick sc-bZQynM itqFyr"
+    >
+      04:41 PM
+    </div>
+    <div
+      class="tick sc-bZQynM itqFyr"
+    >
+      04:50 PM
+    </div>
+    <div
+      class="tick sc-bZQynM itqFyr"
+    >
+      04:58 PM
+    </div>
+    <div
+      class="tick sc-bZQynM itqFyr"
+    >
+      05:06 PM
+    </div>
+  </div>
+</div>
+`;

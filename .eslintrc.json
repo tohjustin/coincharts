@@ -1,0 +1,25 @@
+{
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "extends": [
+    "airbnb",
+    "plugin:react/recommended",
+    "prettier/react",
+    "prettier"
+  ],
+  "parser": "babel-eslint",
+  "plugins": [
+    "import",
+    "jsx-a11y",
+    "prettier",
+    "react"
+  ],
+  "rules": {
+    "no-underscore-dangle": 0,
+    "prettier/prettier": "error",
+    "react/jsx-filename-extension": 0,
+    "react/no-typos": 0
+  }
+}
