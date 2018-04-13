@@ -1,6 +1,6 @@
 {
   "name": "coincharts",
-  "version": "2.0.0-development",
+  "version": "2.0.0",
   "description": "Cryptocurrency price chart, powered by Coinbase API",
   "repository": "tohjustin/coincharts",
   "license": "MIT",
