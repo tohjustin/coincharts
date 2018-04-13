@@ -10,7 +10,7 @@ import { PriceActionTypes } from "./actions";
  * {
  *    price: {
  *      status: {
- *        pricePending: false,
+ *        loading: false,
  *        error: null
  *      },
  *      history: {
@@ -46,14 +46,14 @@ function priceStatus(state = initialState.status, action) {
   switch (action.type) {
     case PriceActionTypes.SEND_REQUEST:
       return {
-        pricePending: true,
+        loading: true,
         error: null,
       };
     case PriceActionTypes.REQUEST_SUCCESS:
       return initialState.status;
     case PriceActionTypes.REQUEST_FAILURE:
       return {
-        pricePending: false,
+        loading: false,
         error: action.payload.error,
       };
     default:

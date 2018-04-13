@@ -41,7 +41,7 @@ export const DEFAULT_PROPS = {
   DURATION: DURATION_DEFAULT,
   PRICE_DATA: [],
   PRICE_STATUS: {
-    pricePending: false,
+    loading: false,
     error: null,
   },
   SPOT_PRICES: {

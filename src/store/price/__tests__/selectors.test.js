@@ -11,7 +11,7 @@ import {
 
 const TEST_STATE_PRICE = {
   status: {
-    pricePending: false,
+    loading: false,
     error: null,
   },
   history: {

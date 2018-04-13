@@ -12,6 +12,7 @@ export const getPrice = state => state.price;
  * Price Fetching Status
  */
 export const getPriceStatus = createSelector(getPrice, price => price.status);
+export const getPriceLoadingStatus = createSelector(getPrice, price => price.status.loading);
 
 /**
  * Price History
