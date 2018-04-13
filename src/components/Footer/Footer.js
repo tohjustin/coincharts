@@ -9,9 +9,9 @@ const StyledFooter = styled.div`
   font-family: ${fontFamily.regular};
   font-size: ${fontSize.medium};
   font-weight: ${fontWeight.medium};
-  text-align: center;
   height: 0;
   line-height: 4em;
+  text-align: center;
 `;
 
 const Image = styled.img`

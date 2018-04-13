@@ -1,11 +1,11 @@
 import React from "react";
 
 import { renderWithReduxStore } from "../../../utils/tests";
-import { MOBILE_WIDTH } from "../../../constants";
+import { width } from "../../../styles/constants";
 import { UnconnectedMainView } from "../";
 
-const DESKTOP_TEST_WIDTH = MOBILE_WIDTH + 1;
-const MOBILE_TEST_WIDTH = MOBILE_WIDTH - 1;
+const DESKTOP_TEST_WIDTH = width.desktopMin + 100;
+const MOBILE_TEST_WIDTH = width.desktopMin - 100;
 const TEST_PROPS = {
   requestPriceData: () => {},
 };

@@ -7,6 +7,9 @@ import MainView from "./views/MainView";
 import configureStore from "./store/configureStore";
 import registerServiceWorker from "./registerServiceWorker";
 
+import "./styles/reset.css";
+import "./styles/base.css";
+
 if (process.env.NODE_ENV === "production") {
   Raven.config(process.env.REACT_APP_RAVEN_PUBLIC_DSN, {
     release: process.env.REACT_APP_VERSION,

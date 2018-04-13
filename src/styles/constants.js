@@ -99,7 +99,6 @@ export const color = {
   /* Misc. */
   white: "#FFFFFF",
   black: "#000000",
-  dark: "#202B33",
   mask: "rgba(26,54,80,0.7)",
 
   /* Label colors */
@@ -127,6 +126,15 @@ export const animation = {
   speed: "0.25s ease",
 };
 
+export const height = {
+  dashboard: "450px",
+};
+
+export const width = {
+  desktopMax: "1500px",
+  desktopMin: "980px",
+};
+
 export default {
   ...color,
   ...border,
@@ -134,6 +142,10 @@ export default {
   ...fontSize,
   ...font,
   ...size,
+
+  /* Dimensions */
+  height,
+  width,
 
   /* Shadow */
   boxShadow: boxShadow.default,

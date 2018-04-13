@@ -3,9 +3,6 @@ import { CURRENCY, CURRENCY_KEYS, CURRENCY_LIST } from "./currency";
 import { DURATION, DURATION_KEYS, DURATION_LIST } from "./duration";
 import { DEFAULT_PROPS, PROPTYPES } from "./proptypes";
 
-// Breakpoints for responsive layout
-const MOBILE_WIDTH = 1024;
-
 // Directory where price data (.json files) are stored
 const LOCAL_JSON_DATA_DIR = "./priceData";
 
@@ -22,7 +19,6 @@ export {
   DURATION,
   DURATION_KEYS,
   DURATION_LIST,
-  MOBILE_WIDTH,
   DEFAULT_PROPS,
   LOCAL_JSON_DATA_DIR,
   POLL_FREQUENCY,
