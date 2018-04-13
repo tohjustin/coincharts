@@ -13,17 +13,17 @@ exports[`<HorizontalAxis /> does not update when \`props.data\` is changed to []
   data-testid="HorizontalAxis"
 >
   <div
-    class="tick sc-htpNat cghrJv"
+    class="sc-htpNat cghrJv"
   >
     04:16 PM
   </div>
   <div
-    class="tick sc-htpNat cghrJv"
+    class="sc-htpNat cghrJv"
   >
     05:15 PM
   </div>
   <div
-    class="tick sc-htpNat cghrJv"
+    class="sc-htpNat cghrJv"
   >
     06:13 PM
   </div>
@@ -36,17 +36,17 @@ exports[`<HorizontalAxis /> does not update when \`props.data\`, \`props.tickCou
   data-testid="HorizontalAxis"
 >
   <div
-    class="tick sc-htpNat cghrJv"
+    class="sc-htpNat cghrJv"
   >
     04:16 PM
   </div>
   <div
-    class="tick sc-htpNat cghrJv"
+    class="sc-htpNat cghrJv"
   >
     05:15 PM
   </div>
   <div
-    class="tick sc-htpNat cghrJv"
+    class="sc-htpNat cghrJv"
   >
     06:13 PM
   </div>
@@ -59,17 +59,17 @@ exports[`<HorizontalAxis /> renders without crashing 1`] = `
   data-testid="HorizontalAxis"
 >
   <div
-    class="tick sc-htpNat cghrJv"
+    class="sc-htpNat cghrJv"
   >
     04:16 PM
   </div>
   <div
-    class="tick sc-htpNat cghrJv"
+    class="sc-htpNat cghrJv"
   >
     05:15 PM
   </div>
   <div
-    class="tick sc-htpNat cghrJv"
+    class="sc-htpNat cghrJv"
   >
     06:13 PM
   </div>
@@ -82,52 +82,52 @@ exports[`<HorizontalAxis /> updates when \`props.tickCount\` changes 1`] = `
   data-testid="HorizontalAxis"
 >
   <div
-    class="tick sc-htpNat cghrJv"
+    class="sc-htpNat cghrJv"
   >
     04:16 PM
   </div>
   <div
-    class="tick sc-htpNat cghrJv"
+    class="sc-htpNat cghrJv"
   >
     04:29 PM
   </div>
   <div
-    class="tick sc-htpNat cghrJv"
+    class="sc-htpNat cghrJv"
   >
     04:42 PM
   </div>
   <div
-    class="tick sc-htpNat cghrJv"
+    class="sc-htpNat cghrJv"
   >
     04:55 PM
   </div>
   <div
-    class="tick sc-htpNat cghrJv"
+    class="sc-htpNat cghrJv"
   >
     05:08 PM
   </div>
   <div
-    class="tick sc-htpNat cghrJv"
+    class="sc-htpNat cghrJv"
   >
     05:21 PM
   </div>
   <div
-    class="tick sc-htpNat cghrJv"
+    class="sc-htpNat cghrJv"
   >
     05:34 PM
   </div>
   <div
-    class="tick sc-htpNat cghrJv"
+    class="sc-htpNat cghrJv"
   >
     05:47 PM
   </div>
   <div
-    class="tick sc-htpNat cghrJv"
+    class="sc-htpNat cghrJv"
   >
     06:00 PM
   </div>
   <div
-    class="tick sc-htpNat cghrJv"
+    class="sc-htpNat cghrJv"
   >
     06:13 PM
   </div>

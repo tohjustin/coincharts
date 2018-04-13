@@ -94,37 +94,37 @@ exports[`<Chart/> renders without crashing 1`] = `
     data-testid="HorizontalAxis"
   >
     <div
-      class="tick sc-bZQynM itqFyr"
+      class="sc-bZQynM itqFyr"
     >
       04:16 PM
     </div>
     <div
-      class="tick sc-bZQynM itqFyr"
+      class="sc-bZQynM itqFyr"
     >
       04:25 PM
     </div>
     <div
-      class="tick sc-bZQynM itqFyr"
+      class="sc-bZQynM itqFyr"
     >
       04:33 PM
     </div>
     <div
-      class="tick sc-bZQynM itqFyr"
+      class="sc-bZQynM itqFyr"
     >
       04:41 PM
     </div>
     <div
-      class="tick sc-bZQynM itqFyr"
+      class="sc-bZQynM itqFyr"
     >
       04:50 PM
     </div>
     <div
-      class="tick sc-bZQynM itqFyr"
+      class="sc-bZQynM itqFyr"
     >
       04:58 PM
     </div>
     <div
-      class="tick sc-bZQynM itqFyr"
+      class="sc-bZQynM itqFyr"
     >
       05:06 PM
     </div>

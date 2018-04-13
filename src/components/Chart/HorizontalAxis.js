@@ -81,12 +81,7 @@ class HorizontalAxis extends Component {
 
     return (
       <StyledHorizontalAxis data-testid="HorizontalAxis" justify="space-between" hideRightMargin={hideRightMargin}>
-        {axisTicks &&
-          axisTicks.map(({ timestamp, label }) => (
-            <Tick key={timestamp} className="tick">
-              {label}
-            </Tick>
-          ))}
+        {axisTicks && axisTicks.map(({ timestamp, label }) => <Tick key={timestamp}>{label}</Tick>)}
       </StyledHorizontalAxis>
     );
   }
