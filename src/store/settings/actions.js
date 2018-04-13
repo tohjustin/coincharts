@@ -8,7 +8,7 @@ const SELECT_DURATION = "SETTINGS:SELECT_DURATION";
 /**
  * Helper Functions
  */
-function generateActionCreator(type, payload = {}) {
+export function generateActionCreator(type, payload = {}) {
   return { type, payload: { ...payload } };
 }
 

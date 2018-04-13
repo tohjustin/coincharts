@@ -8,7 +8,7 @@ const REQUEST_FAILURE = "PRICE:REQUEST_FAILURE";
 /**
  * Helper Functions
  */
-function generateActionCreator(type, payload = {}) {
+export function generateActionCreator(type, payload = {}) {
   return { type, payload: { ...payload } };
 }
 
@@ -26,16 +26,14 @@ export const PriceActionTypes = {
  */
 export const PriceActions = {
   request: () => generateActionCreator(PriceActionTypes.SEND_REQUEST),
-  success: (cryptocurrency, duration, response) =>
+  success: (cryptocurrency, duration, priceHistory, spotPrices) =>
     generateActionCreator(PriceActionTypes.REQUEST_SUCCESS, {
-      cryptocurrency,
-      duration,
-      response,
+      key: `${cryptocurrency}-${duration}`,
+      priceData: priceHistory,
+      spotPrices,
     }),
-  failure: (cryptocurrency, duration, error) =>
+  failure: error =>
     generateActionCreator(PriceActionTypes.REQUEST_FAILURE, {
-      cryptocurrency,
-      duration,
       error,
     }),
 };
