@@ -2,11 +2,11 @@ import { runSaga } from "redux-saga";
 
 import { fetchPriceHistory, fetchSpotPrices } from "../../../api";
 import { PriceActions } from "../actions";
-import { fetchPrice } from "../saga";
+import { fetchPrice, sendRequest } from "../saga";
 
 const TEST_STATE_PRICE = {
   status: {
-    pricePending: false,
+    loading: false,
     error: null,
   },
   history: {
@@ -71,6 +71,21 @@ describe("[Price] Saga", () => {
         getState: () => TEST_STATE,
       },
       fetchPrice,
+    ).done;
+
+    expect(dispatchedActions).toEqual(expectedActions);
+  });
+
+  it('*sendRequest should dispatch a "SEND_REQUEST" action', async () => {
+    const dispatchedActions = [];
+    const expectedActions = [PriceActions.request()];
+
+    await runSaga(
+      {
+        dispatch: action => dispatchedActions.push(action),
+        getState: () => TEST_STATE,
+      },
+      sendRequest,
     ).done;
 
     expect(dispatchedActions).toEqual(expectedActions);
