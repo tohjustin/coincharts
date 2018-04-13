@@ -4,13 +4,15 @@
 [![codecov](https://codecov.io/gh/tohjustin/coincharts/branch/master/graph/badge.svg)](https://codecov.io/gh/tohjustin/coincharts)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-A cryptocurrency price chart built with [React.js](https://facebook.github.io/react/), [D3.js](https://d3js.org/) & [Coinbase API](https://developers.coinbase.com/api/v2).
+A cryptocurrency price chart based off [https://www.coinbase.com/charts](https://www.coinbase.com/charts)
 
-- Bootstrapped with [create-react-app](https://github.com/facebookincubator/create-react-app)
-- UI design based off [https://www.coinbase.com/charts](https://www.coinbase.com/charts)
+* Bootstrapped with [create-react-app](https://github.com/facebookincubator/create-react-app)
+* Built with [React.js](https://facebook.github.io/react/), [Redux](https://redux.js.org/), [Redux-Saga](https://redux-saga.js.org/), [styled-components](https://www.styled-components.com/), [D3.js](https://d3js.org/)
+* Prices retrieved from [Coinbase API](https://developers.coinbase.com/api/v2)
+* Deployed with [Now](https://zeit.co/now)
 
 <p align="center">
-  <img src="./readme/screenshot.png">
+  <img src="./docs/screenshot.png">
 </p>
 
 ## Installation
@@ -20,6 +22,11 @@ Prerequisites: [Node](https://nodejs.org/en/download/) & [npm](https://docs.npmj
 ``` bash
 git clone https://github.com/tohjustin/coincharts.git && cd ./coincharts
 npm install
+```
+
+You might also want to install [Now](https://zeit.co/now) for deployment
+``` bash
+npm install now-cli -g
 ```
 
 ## Getting Started
