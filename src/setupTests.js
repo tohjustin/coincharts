@@ -3,8 +3,11 @@ import { configure } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import "jest-enzyme";
 
-// We have to rename window to `mockWindow` so that `jest.mock` doesn't
-// complain.
+configure({ adapter: new Adapter() });
+
+/*
+ * React-responsive
+ */
 const mockWindow = window;
 
 jest.mock("react-responsive", () => {
@@ -22,5 +25,3 @@ jest.mock("react-responsive", () => {
 
   return MockMediaQuery;
 });
-
-configure({ adapter: new Adapter() });

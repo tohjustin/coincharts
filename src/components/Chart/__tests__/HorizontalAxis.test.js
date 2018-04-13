@@ -3,20 +3,20 @@ import { render } from "react-testing-library";
 
 import HorizontalAxis from "../HorizontalAxis";
 
-const MAX_DATE = 8000;
-const MIN_DATE = 1000;
+const MAX_DATE = 8000000;
+const MIN_DATE = 1000000;
 const TEST_PROPS = {
   data: [
     { price: 10, time: new Date(MIN_DATE) },
-    { price: 20, time: new Date(2000) },
-    { price: 30, time: new Date(3000) },
-    { price: 40, time: new Date(4000) },
-    { price: 50, time: new Date(5000) },
-    { price: 60, time: new Date(6000) },
-    { price: 70, time: new Date(7000) },
+    { price: 20, time: new Date(2000000) },
+    { price: 30, time: new Date(3000000) },
+    { price: 40, time: new Date(4000000) },
+    { price: 50, time: new Date(5000000) },
+    { price: 60, time: new Date(6000000) },
+    { price: 70, time: new Date(7000000) },
     { price: 80, time: new Date(MAX_DATE) },
   ],
-  duration: "month",
+  duration: "day",
   tickCount: 3,
   hideRightMargin: false,
 };
@@ -112,20 +112,20 @@ describe("<HorizontalAxis />", () => {
 
   describe("generateTicks()", () => {
     const data = [
-      { price: 1, time: new Date(1000) },
-      { price: 2, time: new Date(2000) },
-      { price: 2, time: new Date(3000) },
-      { price: 2, time: new Date(5000) },
-      { price: 2, time: new Date(6000) },
-      { price: 2, time: new Date(9000) },
-      { price: 2, time: new Date(10000) },
+      { price: 1, time: new Date(1000000) },
+      { price: 2, time: new Date(2000000) },
+      { price: 2, time: new Date(3000000) },
+      { price: 2, time: new Date(5000000) },
+      { price: 2, time: new Date(6000000) },
+      { price: 2, time: new Date(9000000) },
+      { price: 2, time: new Date(10000000) },
     ];
 
     it("generates a sequence of ticks based on `tickCounts`", () => {
-      expect(HorizontalAxis.generateTicks(data, 2)).toEqual([1000, 10000]);
-      expect(HorizontalAxis.generateTicks(data, 3)).toEqual([1000, 5500, 10000]);
-      expect(HorizontalAxis.generateTicks(data, 4)).toEqual([1000, 4000, 7000, 10000]);
-      expect(HorizontalAxis.generateTicks(data, 5)).toEqual([1000, 3250, 5500, 7750, 10000]);
+      expect(HorizontalAxis.generateTicks(data, 2)).toEqual([1000000, 10000000]);
+      expect(HorizontalAxis.generateTicks(data, 3)).toEqual([1000000, 5500000, 10000000]);
+      expect(HorizontalAxis.generateTicks(data, 4)).toEqual([1000000, 4000000, 7000000, 10000000]);
+      expect(HorizontalAxis.generateTicks(data, 5)).toEqual([1000000, 3250000, 5500000, 7750000, 10000000]);
     });
 
     it("returns [] when `tickCount` is invalid (1, 0, negative number)", () => {

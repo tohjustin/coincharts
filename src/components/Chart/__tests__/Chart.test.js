@@ -6,10 +6,10 @@ import Chart from "../";
 const TEST_PROPS = {
   currency: "USD",
   data: [
-    { price: 19.99, time: new Date("Wed Apr 11 2018 01:00:00 GMT-0800 (PST)") },
-    { price: 29.99, time: new Date("Wed Apr 11 2018 01:01:00 GMT-0800 (PST)") },
-    { price: 39.99, time: new Date("Wed Apr 11 2018 01:02:00 GMT-0800 (PST)") },
-    { price: 49.99, time: new Date("Wed Apr 11 2018 01:03:00 GMT-0800 (PST)") },
+    { price: 19.99, time: new Date(1000000) },
+    { price: 29.99, time: new Date(2000000) },
+    { price: 39.99, time: new Date(3000000) },
+    { price: 49.99, time: new Date(4000000) },
   ],
   color: {
     fill: "#333",

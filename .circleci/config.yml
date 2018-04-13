@@ -32,7 +32,7 @@ jobs:
           paths:
             - node_modules
           key: v2.0.0-dependencies-{{ checksum "package.json" }}
-        
+
       - run: 
           name: Run Test Suite
           command: npm run test:coverage

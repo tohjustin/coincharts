@@ -8,14 +8,14 @@ const MIN_PRICE = 1;
 const TEST_PROPS = {
   currency: "USD",
   data: [
-    { price: 10, time: new Date(1000) },
-    { price: 20, time: new Date(2000) },
-    { price: 30, time: new Date(3000) },
-    { price: 40, time: new Date(4000) },
-    { price: 50, time: new Date(5000) },
-    { price: 60, time: new Date(6000) },
-    { price: MAX_PRICE, time: new Date(7000) },
-    { price: MIN_PRICE, time: new Date(8000) },
+    { price: 10, time: new Date(1000000) },
+    { price: 20, time: new Date(2000000) },
+    { price: 30, time: new Date(3000000) },
+    { price: 40, time: new Date(4000000) },
+    { price: 50, time: new Date(5000000) },
+    { price: 60, time: new Date(6000000) },
+    { price: MAX_PRICE, time: new Date(7000000) },
+    { price: MIN_PRICE, time: new Date(8000000) },
   ],
   align: "left",
 };

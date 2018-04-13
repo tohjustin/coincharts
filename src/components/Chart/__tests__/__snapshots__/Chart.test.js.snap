@@ -96,37 +96,37 @@ exports[`<Chart/> renders without crashing 1`] = `
     <div
       class="tick sc-bZQynM itqFyr"
     >
-      02:00 AM
+      04:16 PM
     </div>
     <div
       class="tick sc-bZQynM itqFyr"
     >
-      02:00 AM
+      04:25 PM
     </div>
     <div
       class="tick sc-bZQynM itqFyr"
     >
-      02:01 AM
+      04:33 PM
     </div>
     <div
       class="tick sc-bZQynM itqFyr"
     >
-      02:01 AM
+      04:41 PM
     </div>
     <div
       class="tick sc-bZQynM itqFyr"
     >
-      02:02 AM
+      04:50 PM
     </div>
     <div
       class="tick sc-bZQynM itqFyr"
     >
-      02:02 AM
+      04:58 PM
     </div>
     <div
       class="tick sc-bZQynM itqFyr"
     >
-      02:03 AM
+      05:06 PM
     </div>
   </div>
 </div>

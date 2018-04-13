@@ -14,9 +14,9 @@
     "precommit": "npm run lint && lint-staged",
     "start": "react-scripts start",
     "stylelint": "stylelint --color -- \"src/**/*.css\"",
-    "test": "CI=true react-scripts test --env=jsdom",
+    "test": "TZ=America/Vancouver CI=true react-scripts test --env=jsdom",
     "test:coverage": "npm run test -- --coverage --verbose",
-    "test:watch": "react-scripts test --env=jsdom"
+    "test:watch": "TZ=America/Vancouver react-scripts test --env=jsdom"
   },
   "dependencies": {
     "axios": "0.18.0",
