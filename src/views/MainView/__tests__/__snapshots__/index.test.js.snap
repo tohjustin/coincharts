@@ -5,7 +5,7 @@ exports[`<MainView/> [DESKTOP] renders without crashing 1`] = `
   class="sc-jWBwVP jIipSk sc-bdVaJa kiEYim"
 >
   <svg
-    class="sc-ifAKCX fPmSPW"
+    class="sc-ifAKCX fWKbFX"
     viewBox="0 0 250 250"
     aria-hidden="true"
   >
@@ -41,7 +41,7 @@ exports[`<MainView/> [DESKTOP] renders without crashing 1`] = `
     </a>
   </svg>
   <div
-    class="sc-kkGfuU KdrOW sc-bdVaJa hHhwCB"
+    class="sc-kkGfuU iOEVQQ sc-bdVaJa hHhwCB"
   >
     <div
       class="sc-cvbbAY bHDGhx sc-bdVaJa bJonzb"
@@ -272,7 +272,7 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
   class="sc-jWBwVP jIipSk sc-bdVaJa kiEYim"
 >
   <svg
-    class="sc-ifAKCX fPmSPW"
+    class="sc-ifAKCX fWKbFX"
     viewBox="0 0 250 250"
     aria-hidden="true"
   >
@@ -308,7 +308,7 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
     </a>
   </svg>
   <div
-    class="sc-iAyFgw cPwqga sc-kkGfuU KdrOW sc-bdVaJa hHhwCB"
+    class="sc-iAyFgw cPwqga sc-kkGfuU iOEVQQ sc-bdVaJa hHhwCB"
   >
     <div
       class="sc-cvbbAY bHDGhx sc-bdVaJa bJonzb"

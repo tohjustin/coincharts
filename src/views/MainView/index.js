@@ -22,6 +22,7 @@ const Dashboard = styled(Flex)`
   background-color: ${color.white};
   min-height: ${height.dashboard};
   width: 100vw;
+  z-index: 10;
 `;
 
 const DashboardDesktop = styled(Dashboard)`

@@ -32,7 +32,6 @@ const StyledBanner = styled.svg`
   height: ${MAX_BANNER_SIZE};
   max-width: ${BANNER_SIZE};
   max-height: ${BANNER_SIZE};
-  z-index: -10;
 
   &:hover ${OctocatArm} {
     transform-origin: 130px 106px;
