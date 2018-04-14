@@ -1,11 +1,10 @@
 import React from "react";
-import { mount } from "enzyme";
-import { render } from "react-testing-library";
+import { render, Simulate } from "react-testing-library";
 
 import TableCompact from "../";
 
 const TEST_PROPS = {
-  onCryptocurrencyChange: jest.fn(),
+  onCryptocurrencyChange: () => {},
   selectedCryptocurrency: "BTC",
   cryptocurrencies: [{ key: "BTC" }, { key: "BCH" }, { key: "ETH" }, { key: "LTC" }],
   currency: "USD",
@@ -54,17 +53,20 @@ describe("<TableCompact />", () => {
     expect(container.firstChild.textContent).not.toEqual(textContent);
   });
 
-  // TODO: Switch to "react-testing-library" once https://github.com/kentcdodds/react-testing-library/pull/48 is merged
   it("triggers `props.onChange` callback when option is selected", () => {
     const initialSelectedOption = "BTC";
     const selectedOption = "LTC";
     const props = {
       ...TEST_PROPS,
+      onCryptocurrencyChange: jest.fn(),
       selectedCryptocurrency: initialSelectedOption,
     };
 
-    const wrapper = mount(<TableCompact {...props} />);
-    wrapper.find("select").simulate("change", { target: { value: selectedOption } });
-    expect(props.onCryptocurrencyChange.mock.calls[0][0]).toEqual(selectedOption);
+    const { container } = render(<TableCompact {...props} />);
+    expect(props.onCryptocurrencyChange).toHaveBeenCalledTimes(0);
+
+    Simulate.change(container.querySelector("select"), { target: { value: selectedOption } });
+    expect(props.onCryptocurrencyChange).toHaveBeenCalledTimes(1);
+    expect(props.onCryptocurrencyChange).lastCalledWith(selectedOption);
   });
 });

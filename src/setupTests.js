@@ -1,12 +1,7 @@
-/* eslint-disable import/no-extraneous-dependencies, global-require, react/prop-types */
-import { configure } from "enzyme";
-import Adapter from "enzyme-adapter-react-16";
-import "jest-enzyme";
-
-configure({ adapter: new Adapter() });
+/* eslint-disable global-require, react/prop-types */
 
 /*
- * React-responsive
+ * For testing components using React-responsive
  */
 const mockWindow = window;
 
