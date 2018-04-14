@@ -3,10 +3,8 @@ import get from "lodash.get";
 
 import { LOCAL_JSON_DATA_DIR } from "../constants";
 
-function getPriceHistoryUrl(cryptocurrency, currency, durationType) {
-  if (process.env.NODE_ENV !== "production") {
-    return `${LOCAL_JSON_DATA_DIR}/${cryptocurrency}-${currency}-${durationType}.json`;
-  }
+// Specify config defaults that will be applied to every request.
+axios.defaults.headers["CB-VERSION"] = process.env.REACT_APP_COINBASE_API_CB_VERSION || "2018-04-13";
 
   return `https://www.coinbase.com/api/v2/prices/${cryptocurrency}-${currency}/historic?period=${durationType}`;
 }
