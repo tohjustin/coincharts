@@ -6,32 +6,35 @@ import { CRYPTOCURRENCY_LIST, DEFAULT_PROPS, PROPTYPES } from "../../constants";
 import { PriceSelectors } from "../../store/price";
 import { SettingsSelectors } from "../../store/settings";
 
-const PriceChart = ({ priceData, selectedCryptocurrency, selectedCurrency, selectedDuration, ...props }) => {
+const PriceChart = ({ isLoading, priceData, selectedCryptocurrency, selectedCurrency, selectedDuration, ...props }) => {
   const cryptocurrency = CRYPTOCURRENCY_LIST.filter(e => e.key === selectedCryptocurrency)[0];
 
   return (
     <Chart
       currency={selectedCurrency}
-      data={priceData}
-      durationType={selectedDuration}
       color={
         cryptocurrency && {
           fill: cryptocurrency.fillColor,
           stroke: cryptocurrency.strokeColor,
         }
       }
+      data={priceData}
+      durationType={selectedDuration}
+      isLoading={isLoading}
       {...props}
     />
   );
 };
 
 function mapStateToProps(state) {
+  const isLoading = PriceSelectors.getPriceLoadingStatus(state);
   const priceData = PriceSelectors.getSelectedPriceHistory(state);
   const selectedCryptocurrency = SettingsSelectors.getSelectedCryptocurrency(state);
   const selectedCurrency = SettingsSelectors.getSelectedCurrency(state);
   const selectedDuration = SettingsSelectors.getSelectedDuration(state);
 
   return {
+    isLoading,
     priceData,
     selectedCryptocurrency,
     selectedCurrency,
@@ -40,6 +43,7 @@ function mapStateToProps(state) {
 }
 
 PriceChart.propTypes = {
+  isLoading: PROPTYPES.PRICE_STATUS.loading,
   priceData: PROPTYPES.PRICE_DATA,
   selectedCryptocurrency: PROPTYPES.CRYPTOCURRENCY,
   selectedCurrency: PROPTYPES.CURRENCY,
@@ -47,6 +51,7 @@ PriceChart.propTypes = {
 };
 
 PriceChart.defaultProps = {
+  isLoading: DEFAULT_PROPS.PRICE_STATUS.loading,
   priceData: DEFAULT_PROPS.PRICE_DATA,
   selectedCryptocurrency: DEFAULT_PROPS.CRYPTOCURRENCY,
   selectedCurrency: DEFAULT_PROPS.CURRENCY,

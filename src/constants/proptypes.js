@@ -19,6 +19,10 @@ export const PROPTYPES = {
       time: PropTypes.instanceOf(Date).isRequired,
     }).isRequired,
   ),
+  PRICE_STATUS: {
+    loading: PropTypes.bool,
+    error: PropTypes.object,
+  },
   SPOT_PRICES: PropTypes.shape({
     BTC: PropTypes.number.isRequired,
     BCH: PropTypes.number.isRequired,

@@ -226,7 +226,16 @@ exports[`<MainView/> [DESKTOP] renders without crashing 1`] = `
               class="sc-gqjmRU hyAmY"
               data-testid="Graph"
             >
-              <g />
+              <g>
+                <path
+                  class="area"
+                  style="fill: #FFEBC5;"
+                />
+                <path
+                  class="line"
+                  style="stroke: #FFB119;"
+                />
+              </g>
             </svg>
           </div>
         </div>
@@ -566,7 +575,16 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
               class="sc-gqjmRU hyAmY"
               data-testid="Graph"
             >
-              <g />
+              <g>
+                <path
+                  class="area"
+                  style="fill: #FFEBC5;"
+                />
+                <path
+                  class="line"
+                  style="stroke: #FFB119;"
+                />
+              </g>
             </svg>
             <svg
               style="opacity: 0;"

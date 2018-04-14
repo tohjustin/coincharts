@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import isEqual from "lodash.isequal";
 import styled from "styled-components";
 import { area as d3Area, line as d3Line } from "d3-shape";
 import { extent } from "d3-array";
@@ -81,15 +80,6 @@ class Graph extends Component {
         scaledData: nextScaledData,
       };
     });
-  }
-
-  shouldComponentUpdate(nextProps) {
-    // Don't update if next set of data is not ready
-    if (nextProps.data === undefined || nextProps.data.length === 0) {
-      return false;
-    }
-
-    return !isEqual(this.props, nextProps);
   }
 
   componentDidUpdate() {
