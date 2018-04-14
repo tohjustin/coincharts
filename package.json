@@ -1,20 +1,20 @@
 {
   "name": "coincharts",
   "version": "2.0.0",
-  "description": "Cryptocurrency price chart, powered by Coinbase API",
+  "description": "Cryptocurrency Price Chart (GDAX)",
   "repository": "tohjustin/coincharts",
   "license": "MIT",
   "scripts": {
     "build": "source .env && react-scripts build",
-    "deploy": "scripts/deploy.sh",
-    "downloadPriceData": "scripts/downloadPriceData.sh ./public/priceData",
     "eject": "react-scripts eject",
     "lint": "eslint src",
     "precommit": "npm run lint && lint-staged",
+    "script:deploy": "scripts/deploy.sh",
+    "script:downloadPriceData": "scripts/downloadPriceData.sh ./public/priceData",
     "start": "react-scripts start",
-    "test": "TZ=America/Vancouver CI=true react-scripts test --env=jsdom",
     "test:coverage": "npm run test -- --coverage --verbose",
-    "test:watch": "TZ=America/Vancouver react-scripts test --env=jsdom"
+    "test:watch": "TZ=America/Vancouver react-scripts test --env=jsdom",
+    "test": "TZ=America/Vancouver CI=true react-scripts test --env=jsdom"
   },
   "dependencies": {
     "axios": "0.18.0",
