@@ -63,19 +63,19 @@ exports[`<TableCompact /> renders without crashing 1`] = `
       BTC
     </option>
     <option
-      value="bch"
+      value="BCH"
     >
-      bch
+      BCH
     </option>
     <option
-      value="eth"
+      value="ETH"
     >
-      eth
+      ETH
     </option>
     <option
-      value="ltc"
+      value="LTC"
     >
-      ltc
+      LTC
     </option>
   </select>
 </div>
