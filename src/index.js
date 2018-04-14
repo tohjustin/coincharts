@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 import Raven from "raven-js";
 
+import ErrorBoundary from "./components/ErrorBoundary";
 import MainView from "./views/MainView";
 import configureStore from "./store/configureStore";
 import registerServiceWorker from "./registerServiceWorker";
@@ -10,18 +11,19 @@ import registerServiceWorker from "./registerServiceWorker";
 import "./styles/reset.css";
 import "./styles/base.css";
 
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production" && process.env.REACT_APP_RAVEN_PUBLIC_DSN) {
   Raven.config(process.env.REACT_APP_RAVEN_PUBLIC_DSN, {
     release: process.env.REACT_APP_VERSION,
   }).install();
 }
 
-const { store } = configureStore();
-
 ReactDOM.render(
-  <Provider store={store}>
-    <MainView />
-  </Provider>,
+  <ErrorBoundary>
+    <Provider store={configureStore().store}>
+      <MainView />
+    </Provider>
+  </ErrorBoundary>,
   document.getElementById("root"),
 );
+
 registerServiceWorker();
