@@ -16,6 +16,7 @@ const TEST_PROPS = {
     stroke: "#666",
   },
   durationType: "day",
+  isLoading: false,
 };
 
 describe("<Chart/>", () => {
@@ -23,6 +24,19 @@ describe("<Chart/>", () => {
     const { container } = render(<Chart {...TEST_PROPS} />);
     expect(container.firstChild).not.toBeNull();
     expect(container.firstChild).toMatchSnapshot();
+  });
+
+  it("does not rerender when `props.isLoading` is true", () => {
+    const { container } = render(<Chart {...TEST_PROPS} />);
+    const { textContent } = container.firstChild;
+
+    // Component should not rerender
+    render(<Chart {...TEST_PROPS} durationType="month" isLoading />, { container });
+    expect(container.firstChild.textContent).toEqual(textContent);
+
+    // Component should rerender
+    render(<Chart {...TEST_PROPS} durationType="month" />, { container });
+    expect(container.firstChild.textContent).not.toEqual(textContent);
   });
 
   it("renders child components correctly", () => {

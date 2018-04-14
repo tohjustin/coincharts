@@ -24,11 +24,15 @@ export function* fetchPrice() {
   }
 }
 
+export function* sendRequest() {
+  yield put(PriceActions.request());
+}
+
 export default function* priceSaga() {
   yield all([
+    takeLatest(SettingsActionTypes.SELECT_CRYPTOCURRENCY, sendRequest),
+    takeLatest(SettingsActionTypes.SELECT_CURRENCY, sendRequest),
+    takeLatest(SettingsActionTypes.SELECT_DURATION, sendRequest),
     takeLatest(PriceActionTypes.SEND_REQUEST, fetchPrice),
-    takeLatest(SettingsActionTypes.SELECT_CRYPTOCURRENCY, fetchPrice),
-    takeLatest(SettingsActionTypes.SELECT_CURRENCY, fetchPrice),
-    takeLatest(SettingsActionTypes.SELECT_DURATION, fetchPrice),
   ]);
 }

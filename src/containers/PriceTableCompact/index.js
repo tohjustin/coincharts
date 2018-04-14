@@ -9,6 +9,7 @@ import { SettingsActions, SettingsSelectors } from "../../store/settings";
 
 const PriceTableCompact = ({
   handleCryptocurrencyChange,
+  isLoading,
   percentDifference,
   priceDifference,
   spotPrice,
@@ -20,6 +21,7 @@ const PriceTableCompact = ({
   return (
     <TableCompact
       currency={selectedCurrency}
+      isLoading={isLoading}
       spotPrice={spotPrice}
       priceDifference={priceDifference}
       percentDifference={percentDifference}
@@ -37,6 +39,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 function mapStateToProps(state) {
+  const isLoading = PriceSelectors.getPriceLoadingStatus(state);
   const percentDifference = PriceSelectors.getSelectedPercentDifference(state);
   const priceDifference = PriceSelectors.getSelectedPriceDifference(state);
   const spotPrice = PriceSelectors.getSelectedSpotPrice(state);
@@ -44,6 +47,7 @@ function mapStateToProps(state) {
   const selectedCurrency = SettingsSelectors.getSelectedCurrency(state);
 
   return {
+    isLoading,
     percentDifference,
     priceDifference,
     spotPrice,
@@ -54,6 +58,7 @@ function mapStateToProps(state) {
 
 PriceTableCompact.propTypes = {
   handleCryptocurrencyChange: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool,
   percentDifference: PropTypes.number,
   priceDifference: PropTypes.number,
   spotPrice: PropTypes.number,
@@ -62,6 +67,7 @@ PriceTableCompact.propTypes = {
 };
 
 PriceTableCompact.defaultProps = {
+  isLoading: false,
   percentDifference: 0,
   priceDifference: 0,
   spotPrice: 0,

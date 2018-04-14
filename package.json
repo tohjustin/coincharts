@@ -1,20 +1,20 @@
 {
   "name": "coincharts",
-  "version": "2.0.0",
-  "description": "Cryptocurrency price chart, powered by Coinbase API",
+  "version": "2.1.0",
+  "description": "Cryptocurrency Price Chart (GDAX)",
   "repository": "tohjustin/coincharts",
   "license": "MIT",
   "scripts": {
     "build": "source .env && react-scripts build",
-    "deploy": "scripts/deploy.sh",
-    "downloadPriceData": "scripts/downloadPriceData.sh ./public/priceData",
     "eject": "react-scripts eject",
     "lint": "eslint src",
     "precommit": "npm run lint && lint-staged",
+    "script:deploy": "scripts/deploy.sh",
+    "script:downloadPriceData": "scripts/downloadPriceData.sh ./public/priceData",
     "start": "react-scripts start",
-    "test": "TZ=America/Vancouver CI=true react-scripts test --env=jsdom",
     "test:coverage": "npm run test -- --coverage --verbose",
-    "test:watch": "TZ=America/Vancouver react-scripts test --env=jsdom"
+    "test:watch": "TZ=America/Vancouver react-scripts test --env=jsdom",
+    "test": "TZ=America/Vancouver CI=true react-scripts test --env=jsdom"
   },
   "dependencies": {
     "axios": "0.18.0",
@@ -28,7 +28,6 @@
     "d3-time-format": "2.1.1",
     "d3-transition": "1.1.1",
     "lodash.get": "4.4.2",
-    "lodash.isequal": "4.5.0",
     "prop-types": "15.6.1",
     "raven-js": "3.24.1",
     "react": "16.3.1",
@@ -45,17 +44,14 @@
   "devDependencies": {
     "check-types": "7.3.0",
     "codecov": "3.0.0",
-    "enzyme": "3.3.0",
-    "enzyme-adapter-react-16": "1.1.1",
-    "eslint-config-airbnb": "^16.1.0",
-    "eslint-config-prettier": "^2.9.0",
-    "eslint-plugin-prettier": "^2.6.0",
-    "eslint-plugin-react": "^7.7.0",
+    "eslint-config-airbnb": "16.1.0",
+    "eslint-config-prettier": "2.9.0",
+    "eslint-plugin-prettier": "2.6.0",
+    "eslint-plugin-react": "7.7.0",
     "husky": "0.14.3",
-    "jest-enzyme": "6.0.0",
     "lint-staged": "7.0.4",
     "prettier": "1.12.0",
-    "react-testing-library": "^2.0.0"
+    "react-testing-library": "2.1.1"
   },
   "lint-staged": {
     "*.js": [

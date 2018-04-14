@@ -3,7 +3,7 @@ import PriceReducer from "../reducer";
 
 const INITIAL_PRICE_STATE = {
   status: {
-    pricePending: false,
+    loading: false,
     error: null,
   },
   history: {
@@ -42,7 +42,7 @@ describe("[Price] Reducer", () => {
     const nextState = PriceReducer(INITIAL_PRICE_STATE, action);
 
     expect(nextState.status).toEqual({
-      pricePending: true,
+      loading: true,
       error: null,
     });
     expect(nextState.price).toEqual(INITIAL_PRICE_STATE.price);
@@ -70,7 +70,7 @@ describe("[Price] Reducer", () => {
     const nextState = PriceReducer(INITIAL_PRICE_STATE, action);
 
     expect(nextState.status).toEqual({
-      pricePending: false,
+      loading: false,
       error: "Network Error",
     });
     expect(nextState.price).toEqual(INITIAL_PRICE_STATE.price);

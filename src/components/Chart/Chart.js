@@ -61,6 +61,11 @@ class Chart extends Component {
     this.handleResize();
   }
 
+  shouldComponentUpdate(nextProps) {
+    const { isLoading } = nextProps;
+    return !isLoading;
+  }
+
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleResize);
   }
@@ -116,7 +121,13 @@ class Chart extends Component {
   }
 
   render() {
-    const { dimensions, hoveredValue: { price, time }, hoverX, hoverY, hovered } = this.state;
+    const {
+      dimensions,
+      hoveredValue: { price, time },
+      hoverX,
+      hoverY,
+      hovered,
+    } = this.state;
     const {
       color,
       currency,
@@ -164,6 +175,7 @@ Chart.propTypes = {
   currency: PROPTYPES.CURRENCY.isRequired,
   data: PROPTYPES.PRICE_DATA.isRequired,
   durationType: PROPTYPES.DURATION.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   disableCursor: PropTypes.bool,
   hideRightVerticalAxis: PropTypes.bool,
   horizontalAxisTickCount: PropTypes.number,

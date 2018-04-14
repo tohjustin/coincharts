@@ -1,14 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`<Graph /> does not render SVG <path/>'s when \`props.data\` does not change & other props changes 1`] = `
-<svg
-  class="sc-bdVaJa frmpus"
-  data-testid="Graph"
->
-  <g />
-</svg>
-`;
-
 exports[`<Graph /> does not render SVG <path/>'s when \`props.data\` is [] 1`] = `
 <svg
   class="sc-bdVaJa frmpus"

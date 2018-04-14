@@ -8,6 +8,7 @@ import { PriceSelectors } from "../../store/price";
 import { SettingsSelectors } from "../../store/settings";
 
 const PriceTable = ({
+  isLoading,
   percentDifference,
   priceDifference,
   spotPrice,
@@ -23,6 +24,7 @@ const PriceTable = ({
       cryptocurrencyLabel={cryptocurrencyLabel}
       durationLabel={durationLabel}
       currency={selectedCurrency}
+      isLoading={isLoading}
       spotPrice={spotPrice}
       priceDifference={priceDifference}
       percentDifference={percentDifference}
@@ -31,6 +33,7 @@ const PriceTable = ({
 };
 
 function mapStateToProps(state) {
+  const isLoading = PriceSelectors.getPriceLoadingStatus(state);
   const percentDifference = PriceSelectors.getSelectedPercentDifference(state);
   const priceDifference = PriceSelectors.getSelectedPriceDifference(state);
   const spotPrice = PriceSelectors.getSelectedSpotPrice(state);
@@ -39,6 +42,7 @@ function mapStateToProps(state) {
   const selectedDuration = SettingsSelectors.getSelectedDuration(state);
 
   return {
+    isLoading,
     percentDifference,
     priceDifference,
     spotPrice,
@@ -49,6 +53,7 @@ function mapStateToProps(state) {
 }
 
 PriceTable.propTypes = {
+  isLoading: PropTypes.bool,
   percentDifference: PropTypes.number,
   priceDifference: PropTypes.number,
   spotPrice: PropTypes.number,
@@ -58,6 +63,7 @@ PriceTable.propTypes = {
 };
 
 PriceTable.defaultProps = {
+  isLoading: false,
   percentDifference: 0,
   priceDifference: 0,
   spotPrice: 0,

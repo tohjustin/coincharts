@@ -39,13 +39,4 @@ describe("<Graph />", () => {
     expect(container.firstChild.querySelectorAll("path")).toHaveLength(0);
     expect(container.firstChild).toMatchSnapshot();
   });
-
-  it("does not render SVG <path/>'s when `props.data` does not change & other props changes", () => {
-    // Set <Graph/> to be initially empty & update props after initial render
-    const { container } = render(<Graph {...TEST_PROPS} data={[]} />);
-    render(<Graph {...TEST_PROPS} data={[]} color={{ fill: "red", stroke: "red" }} />, { container });
-
-    expect(container.firstChild.querySelectorAll("path")).toHaveLength(0);
-    expect(container.firstChild).toMatchSnapshot();
-  });
 });

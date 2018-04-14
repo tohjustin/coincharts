@@ -74,6 +74,11 @@ class TableCompact extends Component {
     this.handleOnSelectChange = this.handleOnSelectChange.bind(this);
   }
 
+  shouldComponentUpdate(nextProps) {
+    const { isLoading } = nextProps;
+    return !isLoading;
+  }
+
   handleOnSelectChange(event) {
     const { onCryptocurrencyChange } = this.props;
     onCryptocurrencyChange(event.target.value);
@@ -113,6 +118,7 @@ class TableCompact extends Component {
 }
 
 TableCompact.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
   percentDifference: PropTypes.number.isRequired,
   priceDifference: PropTypes.number.isRequired,
   spotPrice: PropTypes.number.isRequired,

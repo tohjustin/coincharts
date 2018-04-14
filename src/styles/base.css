@@ -1,0 +1,15 @@
+body {
+  background-image: linear-gradient(to bottom, #202B33, #4E5C6E);
+  background-attachment: fixed;
+  height: 100vh;
+  line-height: 1.4;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}

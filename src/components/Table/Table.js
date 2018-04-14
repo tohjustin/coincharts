@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 
@@ -31,34 +31,43 @@ const Label = styled.div`
   text-transform: uppercase;
 `;
 
-const Table = ({ cryptocurrencyLabel, durationLabel, percentDifference, priceDifference, spotPrice, currency }) => {
-  const showOtherCells = Boolean(durationLabel);
+class Table extends Component {
+  shouldComponentUpdate(nextProps) {
+    const { isLoading } = nextProps;
+    return !isLoading;
+  }
 
-  return (
-    <StyledTable justify="space-around">
-      <TableCell column justify="center">
-        <BigAmount type="currency" value={spotPrice} currency={currency} />
-        <Label>{cryptocurrencyLabel} price</Label>
-      </TableCell>
-      {showOtherCells && (
+  render() {
+    const { cryptocurrencyLabel, durationLabel, percentDifference, priceDifference, spotPrice, currency } = this.props;
+    const showOtherCells = Boolean(durationLabel);
+
+    return (
+      <StyledTable justify="space-around">
         <TableCell column justify="center">
-          <BigAmount type="currency" value={priceDifference} currency={currency} showPlusMinusSymbol />
-          <Label>{`${durationLabel} (${currency})`}</Label>
+          <BigAmount type="currency" value={spotPrice} currency={currency} />
+          <Label>{cryptocurrencyLabel} price</Label>
         </TableCell>
-      )}
-      {showOtherCells && (
-        <TableCell column justify="center">
-          <BigAmount type="percentage" value={percentDifference} showPlusMinusSymbol />
-          <Label>{durationLabel} (%)</Label>
-        </TableCell>
-      )}
-    </StyledTable>
-  );
-};
+        {showOtherCells && (
+          <TableCell column justify="center">
+            <BigAmount type="currency" value={priceDifference} currency={currency} showPlusMinusSymbol />
+            <Label>{`${durationLabel} (${currency})`}</Label>
+          </TableCell>
+        )}
+        {showOtherCells && (
+          <TableCell column justify="center">
+            <BigAmount type="percentage" value={percentDifference} showPlusMinusSymbol />
+            <Label>{durationLabel} (%)</Label>
+          </TableCell>
+        )}
+      </StyledTable>
+    );
+  }
+}
 
 Table.propTypes = {
   cryptocurrencyLabel: PropTypes.string.isRequired,
   durationLabel: PropTypes.string.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   percentDifference: PropTypes.number.isRequired,
   priceDifference: PropTypes.number.isRequired,
   spotPrice: PropTypes.number.isRequired,

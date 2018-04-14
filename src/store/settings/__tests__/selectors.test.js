@@ -2,7 +2,7 @@ import { getSelectedCryptocurrency, getSelectedCurrency, getSelectedDuration } f
 
 const TEST_STATE_PRICE = {
   status: {
-    pricePending: false,
+    loading: false,
     error: null,
   },
   history: {

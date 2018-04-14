@@ -5,8 +5,8 @@ import { connect } from "react-redux";
 import MediaQuery from "react-responsive";
 import styled from "styled-components";
 
-import { POLL_FREQUENCY, MOBILE_WIDTH } from "../../constants";
-import { border, boxShadow, color, font, fontSize, fontWeight } from "../../styles/constants";
+import { POLL_FREQUENCY } from "../../constants";
+import { border, boxShadow, color, font, fontSize, fontWeight, height, width } from "../../styles/constants";
 import { PriceActions } from "../../store/price";
 import Flex from "../../components/Flex";
 import Footer from "../../components/Footer";
@@ -20,15 +20,17 @@ import PriceTableCompact from "../../containers/PriceTableCompact";
 
 const Dashboard = styled(Flex)`
   background-color: ${color.white};
+  min-height: ${height.dashboard};
   width: 100vw;
+  z-index: 10;
 `;
 
 const DashboardDesktop = styled(Dashboard)`
   background-color: ${color.white};
   border-radius: ${border.borderRadius};
   box-shadow: ${boxShadow.default};
-  max-width: 1500px;
-  min-width: 960px;
+  max-width: ${width.desktopMax};
+  min-width: ${width.desktopMin};
   width: 90vw;
 `;
 
@@ -49,13 +51,8 @@ const StyledHeader = styled(Flex)`
 `;
 
 const StyledMainView = styled(Flex)`
-  background-image: linear-gradient(to bottom, ${color.dark}, ${color.slateDark});
   font-family: ${font.fontFamily};
-  height: 100vh;
-  line-height: 1.4;
-  text-rendering: optimizeLegibility;
-  -moz-osx-font-smoothing: grayscale;
-  -webkit-font-smoothing: antialiased;
+  margin: auto;
 `;
 
 class MainView extends Component {
@@ -118,7 +115,7 @@ class MainView extends Component {
       <StyledMainView center column>
         <DocumentHead />
         <GithubBanner />
-        <MediaQuery maxWidth={MOBILE_WIDTH}>
+        <MediaQuery maxWidth={width.desktopMin}>
           {matches => (matches ? this.renderMobile() : this.renderDesktop())}
         </MediaQuery>
         <Footer />

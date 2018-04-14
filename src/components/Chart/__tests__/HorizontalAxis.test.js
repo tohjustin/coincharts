@@ -39,42 +39,6 @@ describe("<HorizontalAxis />", () => {
     expect(container.firstChild).toMatchSnapshot();
   });
 
-  it("does not update when `props.data`, `props.tickCount` does not change & other props changes", () => {
-    const { container } = render(<HorizontalAxis {...TEST_PROPS} />);
-    const initialTextContent = container.firstChild.textContent;
-    expect(initialTextContent).toBeDefined();
-
-    // Change `props.duration`
-    render(<HorizontalAxis {...TEST_PROPS} duration="day" />, { container });
-    expect(container.firstChild.children).toHaveLength(TEST_PROPS.tickCount);
-    expect(container.firstChild.textContent).toEqual(initialTextContent);
-    expect(container.firstChild).toMatchSnapshot();
-  });
-
-  it("updates when `props.tickCount` changes", () => {
-    const { container } = render(<HorizontalAxis {...TEST_PROPS} />);
-    const initialTextContent = container.firstChild.textContent;
-    expect(initialTextContent).toBeDefined();
-
-    // Change `props.tickCount`
-    render(<HorizontalAxis {...TEST_PROPS} tickCount={10} />, { container });
-    expect(container.firstChild.children).toHaveLength(10);
-    expect(container.firstChild.textContent).not.toEqual(initialTextContent);
-    expect(container.firstChild).toMatchSnapshot();
-  });
-
-  it("does not update when `props.data` is changed to []", () => {
-    const { container } = render(<HorizontalAxis {...TEST_PROPS} />);
-    const initialTextContent = container.firstChild.textContent;
-    expect(initialTextContent).toBeDefined();
-
-    // Change `props.data` to []
-    render(<HorizontalAxis {...TEST_PROPS} data={[]} />, { container });
-    expect(container.firstChild.children).toHaveLength(TEST_PROPS.tickCount);
-    expect(container.firstChild.textContent).toEqual(initialTextContent);
-    expect(container.firstChild).toMatchSnapshot();
-  });
-
   describe("formatTime()", () => {
     const timestamp0 = Date.parse("Sun, 31 Dec 2017 12:00:00");
     const timestamp1 = Date.parse("Mon, 01 Jan 2018 00:00:00");

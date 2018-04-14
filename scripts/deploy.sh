@@ -5,7 +5,7 @@ BUILD_DIRECTORY=./build
 DEPLOY_DIRECTORY=./deploy
 
 # Run tests & create production build
-npm run check
+npm run lint
 npm run build
 
 # Copy bundled files into `deploy` directory

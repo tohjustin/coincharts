@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import isEqual from "lodash.isequal";
 import { extent } from "d3-array";
 import { timeFormat } from "d3-time-format";
 import styled from "styled-components";
@@ -53,24 +52,6 @@ class HorizontalAxis extends Component {
     return generatedTicks;
   }
 
-  // Only update when we receive new data (delay changing labels until price data is ready)
-  shouldComponentUpdate(nextProps) {
-    const { data, tickCount } = this.props;
-    const { data: nextData, tickCount: nextTickCount } = nextProps;
-
-    // Always update when tickCount changes
-    if (tickCount !== nextTickCount) {
-      return true;
-    }
-
-    // Don't update if next set of data is not ready
-    if (nextData.length === 0) {
-      return false;
-    }
-
-    return !isEqual(data, nextData);
-  }
-
   render() {
     const { data, duration, tickCount, hideRightMargin } = this.props;
     const durationTicks = HorizontalAxis.generateTicks(data, tickCount);
@@ -81,12 +62,7 @@ class HorizontalAxis extends Component {
 
     return (
       <StyledHorizontalAxis data-testid="HorizontalAxis" justify="space-between" hideRightMargin={hideRightMargin}>
-        {axisTicks &&
-          axisTicks.map(({ timestamp, label }) => (
-            <Tick key={timestamp} className="tick">
-              {label}
-            </Tick>
-          ))}
+        {axisTicks && axisTicks.map(({ timestamp, label }) => <Tick key={timestamp}>{label}</Tick>)}
       </StyledHorizontalAxis>
     );
   }

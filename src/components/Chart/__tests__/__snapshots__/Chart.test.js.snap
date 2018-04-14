@@ -28,7 +28,18 @@ exports[`<Chart/> renders without crashing 1`] = `
         class="sc-ifAKCX dCYFNS"
         data-testid="Graph"
       >
-        <g />
+        <g>
+          <path
+            class="area"
+            d="M0,0L0,0L0,0L0,0L0,0L0,0L0,0L0,0Z"
+            style="fill: #333;"
+          />
+          <path
+            class="line"
+            d="M0,0L0,0L0,0L0,0"
+            style="stroke: #666;"
+          />
+        </g>
       </svg>
       <svg
         style="opacity: 0;"
@@ -94,37 +105,37 @@ exports[`<Chart/> renders without crashing 1`] = `
     data-testid="HorizontalAxis"
   >
     <div
-      class="tick sc-bZQynM itqFyr"
+      class="sc-bZQynM itqFyr"
     >
       04:16 PM
     </div>
     <div
-      class="tick sc-bZQynM itqFyr"
+      class="sc-bZQynM itqFyr"
     >
       04:25 PM
     </div>
     <div
-      class="tick sc-bZQynM itqFyr"
+      class="sc-bZQynM itqFyr"
     >
       04:33 PM
     </div>
     <div
-      class="tick sc-bZQynM itqFyr"
+      class="sc-bZQynM itqFyr"
     >
       04:41 PM
     </div>
     <div
-      class="tick sc-bZQynM itqFyr"
+      class="sc-bZQynM itqFyr"
     >
       04:50 PM
     </div>
     <div
-      class="tick sc-bZQynM itqFyr"
+      class="sc-bZQynM itqFyr"
     >
       04:58 PM
     </div>
     <div
-      class="tick sc-bZQynM itqFyr"
+      class="sc-bZQynM itqFyr"
     >
       05:06 PM
     </div>
