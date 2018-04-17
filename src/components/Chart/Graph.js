@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import isEqual from "lodash.isequal";
 import { area as d3Area, line as d3Line } from "d3-shape";
 import { extent } from "d3-array";
 import { easeCubicOut } from "d3-ease";
@@ -80,6 +81,12 @@ class Graph extends Component {
         scaledData: nextScaledData,
       };
     });
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const { data: nextData } = nextProps;
+    const { data } = this.props;
+    return nextData.length !== data.length || !isEqual(nextData, data);
   }
 
   componentDidUpdate() {
