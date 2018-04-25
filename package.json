@@ -1,6 +1,6 @@
 {
   "name": "coincharts",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Cryptocurrency Price Chart (GDAX)",
   "repository": "tohjustin/coincharts",
   "license": "MIT",
