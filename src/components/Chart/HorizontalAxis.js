@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { PureComponent } from "react";
 import PropTypes from "prop-types";
 import { extent } from "d3-array";
 import { timeFormat } from "d3-time-format";
@@ -20,7 +20,7 @@ const Tick = styled.div`
   font-weight: ${fontWeight.medium};
 `;
 
-class HorizontalAxis extends Component {
+class HorizontalAxis extends PureComponent {
   static formatTime(timestamp, duration) {
     switch (duration) {
       case DURATION.ALL.key:

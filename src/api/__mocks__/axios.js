@@ -26,6 +26,9 @@ const MOCK_PRICE_DATA = {
 };
 
 const mockAxios = {
+  defaults: {
+    headers: {},
+  },
   get(url) {
     return new Promise((resolve, reject) => {
       switch (true) {
