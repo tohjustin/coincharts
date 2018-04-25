@@ -57,8 +57,10 @@ const StyledMainView = styled(Flex)`
 
 class MainView extends Component {
   componentDidMount() {
-    this.fetchPriceData();
-    this.startPriceDataPolling();
+    this.initialTimeout = setTimeout(() => {
+      this.fetchPriceData();
+      this.startPriceDataPolling();
+    }, 100);
   }
 
   componentWillUnmount() {
@@ -72,6 +74,7 @@ class MainView extends Component {
   }
 
   clearPriceDataPolling() {
+    clearTimeout(this.initialTimeout);
     clearInterval(this.pollingId);
   }
 

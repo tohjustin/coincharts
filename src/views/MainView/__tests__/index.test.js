@@ -35,6 +35,9 @@ describe("<MainView/>", () => {
       };
 
       renderWithReduxStore(<UnconnectedMainView {...props} />);
+      expect(props.requestPriceData).toHaveBeenCalledTimes(0);
+
+      jest.runOnlyPendingTimers();
       expect(props.requestPriceData).toHaveBeenCalledTimes(1);
 
       jest.runOnlyPendingTimers();
@@ -50,6 +53,9 @@ describe("<MainView/>", () => {
       };
 
       const { unmount } = renderWithReduxStore(<UnconnectedMainView {...props} />);
+      expect(props.requestPriceData).toHaveBeenCalledTimes(0);
+
+      jest.runOnlyPendingTimers();
       expect(props.requestPriceData).toHaveBeenCalledTimes(1);
       unmount();
 
