@@ -84,9 +84,7 @@ class Graph extends Component {
   }
 
   shouldComponentUpdate(nextProps) {
-    const { data: nextData } = nextProps;
-    const { data } = this.props;
-    return nextData.length !== data.length || !isEqual(nextData, data);
+    return !isEqual(nextProps, this.props);
   }
 
   componentDidUpdate() {
