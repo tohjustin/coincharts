@@ -2,7 +2,7 @@
 
 exports[`<MainView/> [DESKTOP] renders without crashing 1`] = `
 <div
-  class="sc-jWBwVP jIipSk sc-bdVaJa kiEYim"
+  class="sc-jWBwVP elYRdX sc-bdVaJa kiEYim"
 >
   <svg
     class="sc-ifAKCX fWKbFX"
@@ -186,7 +186,7 @@ exports[`<MainView/> [DESKTOP] renders without crashing 1`] = `
           </div>
         </div>
         <select
-          class="sc-hMqMXs iOLeJY"
+          class="sc-hMqMXs gaOMyA"
         >
           <option
             value="BTC"
@@ -238,7 +238,7 @@ exports[`<MainView/> [DESKTOP] renders without crashing 1`] = `
     </div>
   </div>
   <div
-    class="sc-bwzfXH jIYfKf"
+    class="sc-bwzfXH YTSlM"
   >
     <span>
       Powered by 
@@ -260,7 +260,7 @@ exports[`<MainView/> [DESKTOP] renders without crashing 1`] = `
 
 exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
 <div
-  class="sc-jWBwVP jIipSk sc-bdVaJa kiEYim"
+  class="sc-jWBwVP elYRdX sc-bdVaJa kiEYim"
 >
   <svg
     class="sc-ifAKCX fWKbFX"
@@ -624,7 +624,7 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
     </div>
   </div>
   <div
-    class="sc-bwzfXH jIYfKf"
+    class="sc-bwzfXH YTSlM"
   >
     <span>
       Powered by 

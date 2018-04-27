@@ -30,12 +30,12 @@ export const fontWeight = {
 export const font = {
   fontFamily: `
   "Avenir Next",
+  "Ubuntu",
   -apple-system,
   BlinkMacSystemFont,
   "Segoe UI",
   "Roboto",
   "Oxygen",
-  "Ubuntu",
   "Cantarell",
   "Fira Sans",
   "Droid Sans",
@@ -157,19 +157,6 @@ export default {
   zIndexDropdown: 100,
   zIndexBackdrop: -10,
 
-  fontFamily: `"Avenir Next",
-    -apple-system,
-    BlinkMacSystemFont,
-    "Segoe UI",
-    "Roboto",
-    "Oxygen",
-    "Ubuntu",
-    "Cantarell",
-    "Fira Sans",
-    "Droid Sans",
-    "Helvetica Neue",
-    sans-serif;`,
-
-  monospaceFontFamily: `
-    monospace;`,
+  fontFamily: fontFamily.regular,
+  monospaceFontFamily: fontFamily.monospace,
 };
