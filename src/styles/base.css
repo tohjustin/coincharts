@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "Ubuntu";
+  src: url("https://fonts.googleapis.com/css?family=Ubuntu");
+}
+
 body {
   background-image: linear-gradient(to bottom, #202B33, #4E5C6E);
   background-attachment: fixed;
