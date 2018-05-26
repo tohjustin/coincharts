@@ -20,6 +20,7 @@ if (process.env.NODE_ENV === "production" && process.env.REACT_APP_RAVEN_PUBLIC_
 
 if (process.env.NODE_ENV === "production" && process.env.REACT_APP_GA_TRACKING_ID) {
   ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID);
+  ReactGA.ga("set", "anonymizeIp", true);
   ReactGA.pageview(window.location.pathname + window.location.search);
 }
 
