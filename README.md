@@ -3,6 +3,7 @@
 [![CircleCI](https://circleci.com/gh/tohjustin/coincharts/tree/master.svg?style=shield&circle-token=3fd04aa6997f211630fc7d4f45931bef1953a97b)](https://circleci.com/gh/tohjustin/coincharts/tree/master)
 [![codecov](https://codecov.io/gh/tohjustin/coincharts/branch/master/graph/badge.svg)](https://codecov.io/gh/tohjustin/coincharts)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftohjustin%2Fcoincharts.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftohjustin%2Fcoincharts?ref=badge_shield)
 
 <p align="center">
   <img src="./docs/screenshot.png">
@@ -52,3 +53,7 @@ npm run script:deploy
 # Takes a snapshot of responses from coinbase API & saves them into JSON files in `public/priceData` (for offline development)
 npm run script:downloadPriceData
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Ftohjustin%2Fcoincharts.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Ftohjustin%2Fcoincharts?ref=badge_large)
