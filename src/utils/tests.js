@@ -1,6 +1,6 @@
 import React from "react";
 import { Provider } from "react-redux";
-import { render } from "react-testing-library"; // eslint-disable-line import/no-extraneous-dependencies
+import { render } from "@testing-library/react";
 import configureStore from "../store/configureStore";
 
 export function renderWithReduxStore(ui, { store = configureStore().store } = {}) {

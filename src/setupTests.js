@@ -1,4 +1,6 @@
-/* eslint-disable global-require, react/prop-types */
+/* eslint-disable global-require, react/prop-types, react/destructuring-assignment */
+import "@testing-library/jest-dom";
+import "@testing-library/jest-dom/extend-expect";
 
 /*
  * For testing components using React-responsive

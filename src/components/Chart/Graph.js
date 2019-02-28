@@ -57,9 +57,10 @@ class Graph extends Component {
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
+    this.svgRef = React.createRef();
   }
 
-  componentWillReceiveProps(nextProps) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { data: nextData, height: nextHeight, width: nextWidth } = nextProps;
     const { color, width } = this.props;
 
@@ -90,7 +91,7 @@ class Graph extends Component {
   componentDidUpdate() {
     const { color, height } = this.props;
     const { previousColor = color, previousScaledData, scaledData, skipTransition } = this.state;
-    const graph = select(this.svgNode);
+    const graph = select(this.svgRef.current);
     const transitionDuration = skipTransition ? 0 : TRANSITION.duration;
 
     const area = d3Area()
@@ -132,12 +133,9 @@ class Graph extends Component {
   }
 
   render() {
-    const svgRef = node => {
-      this.svgNode = node;
-    };
     return (
       <StyledGraph data-testid="Graph">
-        <g ref={svgRef} />
+        <g ref={this.svgRef} />
       </StyledGraph>
     );
   }

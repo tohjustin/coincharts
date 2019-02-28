@@ -2,14 +2,14 @@
 
 exports[`<HorizontalAxis /> does not render ticks when \`TEST_PROPS.data\` is [] 1`] = `
 <div
-  class="sc-bwzfXH dPUqxH sc-bdVaJa bJonzb"
+  class="sc-bdVaJa sc-bwzfXH efsMjw"
   data-testid="HorizontalAxis"
 />
 `;
 
 exports[`<HorizontalAxis /> renders without crashing 1`] = `
 <div
-  class="sc-bwzfXH dPUqxH sc-bdVaJa bJonzb"
+  class="sc-bdVaJa sc-bwzfXH efsMjw"
   data-testid="HorizontalAxis"
 >
   <div

@@ -7,9 +7,9 @@ import Flex from "../Flex";
 import { color, fontSize, fontWeight } from "../../styles/constants";
 import { PROPTYPES } from "../../constants";
 
-const StyledVerticalAxis = styled(Flex).attrs({
-  alignItems: props => (props.align === "right" ? "flex-end" : "flex-start"),
-})`
+const StyledVerticalAxis = styled(Flex).attrs(props => ({
+  alignItems: props.align === "right" ? "flex-end" : "flex-start",
+}))`
   background-color: transparent;
   align-items: ${props => props.alignItems};
   flex: 0 0 3em;

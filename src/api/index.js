@@ -19,45 +19,45 @@ function getSpotPriceUrl(currency) {
     : `https://api.coinbase.com/v2/prices/${currency}/spot?`;
 }
 
-function fetchPriceHistory(cryptocurrency, currency, durationType) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const url = getPriceHistoryUrl(cryptocurrency, currency, durationType);
-      const response = await axios.get(url);
+async function fetchPriceHistory(cryptocurrency, currency, durationType) {
+  const url = getPriceHistoryUrl(cryptocurrency, currency, durationType);
 
-      // Format response
-      const priceHistory = get(response, ["data", "data", "prices"], []);
-      const formattedPriceHistory = priceHistory
-        .sort((a, b) => new Date(a.time) - new Date(b.time))
-        .map(e => ({ price: Number(e.price), time: new Date(e.time) }));
+  let response;
+  try {
+    response = await axios.get(url);
+  } catch (error) {
+    Raven.captureException(error);
+    throw error;
+  }
 
-      resolve(formattedPriceHistory);
-    } catch (error) {
-      Raven.captureException(error);
-      reject(error);
-    }
-  });
+  // Format response
+  const priceHistory = get(response, ["data", "data", "prices"], []);
+  const formattedPriceHistory = priceHistory
+    .sort((a, b) => new Date(a.time) - new Date(b.time))
+    .map(e => ({ price: Number(e.price), time: new Date(e.time) }));
+
+  return formattedPriceHistory;
 }
 
-function fetchSpotPrices(currency) {
-  return new Promise(async (resolve, reject) => {
-    try {
-      const url = getSpotPriceUrl(currency);
-      const response = await axios.get(url);
+async function fetchSpotPrices(currency) {
+  const url = getSpotPriceUrl(currency);
 
-      // Format response
-      const spotPrices = get(response, ["data", "data"], []);
-      const formattedSpotPrices = spotPrices.map(e => ({
-        ...e,
-        amount: Number(e.amount),
-      }));
+  let response;
+  try {
+    response = await axios.get(url);
+  } catch (error) {
+    Raven.captureException(error);
+    throw error;
+  }
 
-      resolve(formattedSpotPrices);
-    } catch (error) {
-      Raven.captureException(error);
-      reject(error);
-    }
-  });
+  // Format response
+  const spotPrices = get(response, ["data", "data"], []);
+  const formattedSpotPrices = spotPrices.map(e => ({
+    ...e,
+    amount: Number(e.amount),
+  }));
+
+  return formattedSpotPrices;
 }
 
 export { getPriceHistoryUrl, getSpotPriceUrl, fetchPriceHistory, fetchSpotPrices };

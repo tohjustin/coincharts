@@ -2,23 +2,23 @@
 
 exports[`<VerticalAxis /> does not render ticks when \`props.data\` is [] 1`] = `
 <div
-  class="sc-bwzfXH hYXZTS sc-bdVaJa ivjahH"
+  class="sc-bdVaJa sc-bwzfXH gkdRtA"
   data-testid="VerticalAxis"
 />
 `;
 
 exports[`<VerticalAxis /> renders without crashing 1`] = `
 <div
-  class="sc-bwzfXH hYXZTS sc-bdVaJa ivjahH"
+  class="sc-bdVaJa sc-bwzfXH gkdRtA"
   data-testid="VerticalAxis"
 >
   <div
-    class="sc-htpNat eZyXfs sc-bdVaJa cAcgKX"
+    class="sc-bdVaJa sc-htpNat dLMfcP"
   >
     $999
   </div>
   <div
-    class="sc-htpNat eZyXfs sc-bdVaJa cAcgKX"
+    class="sc-bdVaJa sc-htpNat dLMfcP"
   >
     $1
   </div>

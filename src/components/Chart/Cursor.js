@@ -4,11 +4,12 @@ import styled from "styled-components";
 
 import { animation, color, size } from "../../styles/constants";
 
-const StyledCursor = styled.svg.attrs({
-  style: ({ visible }) => ({
-    opacity: visible ? 1 : 0,
-  }),
-})`
+const StyledCursor = styled.svg.attrs(props => ({
+  // opacity: props.visible ? 1 : 0,
+  style: {
+    opacity: props.visible ? 1 : 0,
+  },
+}))`
   height: 100%;
   width: 100%;
   transition: opacity ${animation.speed};

@@ -1,7 +1,7 @@
 import React from "react";
-import { render } from "react-testing-library";
+import { render } from "@testing-library/react";
 
-import Table from "../";
+import Table from "..";
 
 const TEST_PROPS = {
   cryptocurrencyLabel: "testCryptocurrencyLabel",

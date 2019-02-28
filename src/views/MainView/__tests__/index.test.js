@@ -2,7 +2,7 @@ import React from "react";
 
 import { renderWithReduxStore } from "../../../utils/tests";
 import { width } from "../../../styles/constants";
-import { UnconnectedMainView } from "../";
+import { UnconnectedMainView } from "..";
 
 const DESKTOP_TEST_WIDTH = width.desktopMin + 100;
 const MOBILE_TEST_WIDTH = width.desktopMin - 100;

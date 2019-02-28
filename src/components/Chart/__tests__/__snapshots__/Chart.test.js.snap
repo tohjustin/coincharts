@@ -3,19 +3,19 @@
 exports[`<Chart/> renders without crashing 1`] = `
 <div>
   <div
-    class="sc-gqjmRU kTfRCk sc-bdVaJa cAcgKX"
+    class="sc-bdVaJa sc-gqjmRU jdskBh"
   >
     <div
-      class="sc-dnqmqq eWTArw sc-bdVaJa ivjahH"
+      class="sc-bdVaJa sc-dnqmqq fxpCkU"
       data-testid="VerticalAxis"
     >
       <div
-        class="sc-iwsKbI iGIseO sc-bdVaJa cAcgKX"
+        class="sc-bdVaJa sc-iwsKbI fzvQgT"
       >
         $50
       </div>
       <div
-        class="sc-iwsKbI iGIseO sc-bdVaJa cAcgKX"
+        class="sc-bdVaJa sc-iwsKbI fzvQgT"
       >
         $20
       </div>
@@ -31,9 +31,9 @@ exports[`<Chart/> renders without crashing 1`] = `
         <g />
       </svg>
       <svg
-        style="opacity: 0;"
         class="sc-bwzfXH cZdfWA"
         data-testid="Cursor"
+        style="opacity: 0;"
       >
         <line
           class="sc-bxivhb ftbvBS"
@@ -49,48 +49,44 @@ exports[`<Chart/> renders without crashing 1`] = `
         />
       </svg>
       <div
-        class="sc-gzVnrw gCvPsj sc-bdVaJa epQZNM"
-        style="top: -12px; left: -101px; opacity: 0;"
+        class="sc-bdVaJa sc-gzVnrw cNZTUB"
         data-testid="HoverContainer"
+        style="top: -12px; left: -101px; opacity: 0;"
       >
         <div
-          background="#7D95B6"
-          border="none"
-          color="#FFFFFF"
           class="sc-htoDjs hptRiM"
+          color="#FFFFFF"
         />
       </div>
       <div
-        class="sc-gzVnrw gCvPsj sc-bdVaJa epQZNM"
-        style="bottom: -12px; left: -101px; opacity: 0;"
+        class="sc-bdVaJa sc-gzVnrw cNZTUB"
         data-testid="HoverContainer"
+        style="bottom: -12px; left: -101px; opacity: 0;"
       >
         <div
-          background="#FFFFFF"
-          border="1px solid #DAE1E9"
-          color="#7D95B6"
           class="sc-htoDjs RdJKU"
+          color="#7D95B6"
         />
       </div>
     </div>
     <div
-      class="sc-dnqmqq fzzfzp sc-bdVaJa kAcxML"
+      class="sc-bdVaJa sc-dnqmqq iHdDJu"
       data-testid="VerticalAxis"
     >
       <div
-        class="sc-iwsKbI iGIseO sc-bdVaJa cAcgKX"
+        class="sc-bdVaJa sc-iwsKbI fzvQgT"
       >
         $50
       </div>
       <div
-        class="sc-iwsKbI iGIseO sc-bdVaJa cAcgKX"
+        class="sc-bdVaJa sc-iwsKbI fzvQgT"
       >
         $20
       </div>
     </div>
   </div>
   <div
-    class="sc-EHOje hVdXPV sc-bdVaJa bJonzb"
+    class="sc-bdVaJa sc-EHOje hnadrI"
     data-testid="HorizontalAxis"
   >
     <div

@@ -29,13 +29,16 @@ class ErrorBoundary extends Component {
   }
 
   render() {
-    return this.state.hasError ? (
+    const { hasError } = this.state;
+    const { children } = this.props;
+
+    return hasError ? (
       <StyledErrorBoundary center>
         <GithubBanner />
         <div center>{ERROR_MESSAGE_TEXT}</div>
       </StyledErrorBoundary>
     ) : (
-      this.props.children
+      children
     );
   }
 }

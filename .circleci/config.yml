@@ -1,42 +1,26 @@
-# Javascript Node CircleCI 2.0 configuration file
-#
-# Check https://circleci.com/docs/2.0/language-javascript/ for more details
-#
-version: 2
+version: 2.1
 jobs:
   build:
-    docker:
-      # specify the version you desire here
-      - image: circleci/node:8.11.1
-      
-      # Specify service dependencies here if necessary
-      # CircleCI maintains a library of pre-built images
-      # documented at https://circleci.com/docs/2.0/circleci-images/
-      # - image: circleci/mongo:3.4.4
-
     working_directory: ~/repo
-
+    docker:
+      - image: circleci/node:lts
     steps:
       - checkout
-
-      # Download and cache dependencies
       - restore_cache:
+          name: Restore Yarn Package Cache
           keys:
-          - v2.0.0-dependencies-{{ checksum "package.json" }}
-          # fallback to using the latest cache if no exact match is found
-          # - v2-dependencies-
-
-      - run: npm install
-
+            - yarn-packages-{{ checksum "yarn.lock" }}
+      - run:
+          name: Install Dependencies
+          command: yarn install --frozen-lockfile
       - save_cache:
+          name: Save Yarn Package Cache
+          key: yarn-packages-{{ checksum "yarn.lock" }}
           paths:
-            - node_modules
-          key: v2.0.0-dependencies-{{ checksum "package.json" }}
-
-      - run: 
+            - ~/.cache/yarn
+      - run:
           name: Run Test Suite
           command: npm run test:coverage
-
-      - run: 
+      - run:
           name: Upload Test Coverage Report
           command: ./node_modules/.bin/codecov

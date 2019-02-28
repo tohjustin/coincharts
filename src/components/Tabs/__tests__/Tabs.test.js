@@ -1,7 +1,7 @@
 import React from "react";
-import { render, Simulate } from "react-testing-library";
+import { fireEvent, render } from "@testing-library/react";
 
-import Tabs from "../";
+import Tabs from "..";
 
 describe("<Tabs />", () => {
   it("renders without crashing", () => {
@@ -50,7 +50,7 @@ describe("<Tabs />", () => {
     const { container } = render(<Tabs {...props} />);
 
     props.onChange.mockClear();
-    Simulate.click(container.querySelectorAll("div[role='tab']")[1]);
+    fireEvent.click(container.querySelectorAll("div[role='tab']")[1]);
 
     // Check if the 1st argument (of the 1st invocation) matches what we clicked on
     expect(props.onChange).toHaveBeenCalledTimes(1);

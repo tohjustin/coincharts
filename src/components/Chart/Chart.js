@@ -48,6 +48,7 @@ class Chart extends Component {
   constructor(props) {
     super(props);
     this.state = INITIAL_STATE;
+    this.chartRef = React.createRef();
 
     // Bind event-handlers
     this.handleResize = this.handleResize.bind(this);
@@ -71,7 +72,7 @@ class Chart extends Component {
   }
 
   handleResize() {
-    const { height, width } = this.chartSvgComponent.getBoundingClientRect();
+    const { height, width } = this.chartRef.current.getBoundingClientRect();
     const dimensions = {
       height: Math.round(height),
       width: Math.round(width),
@@ -95,11 +96,11 @@ class Chart extends Component {
     const { data, currency } = this.props;
 
     // Find closest data point to the x-coordinates of where the user's mouse is hovering
-    const hoverX = e.nativeEvent.clientX - this.chartSvgComponent.getBoundingClientRect().left;
+    const hoverX = e.nativeEvent.clientX - this.chartRef.current.getBoundingClientRect().left;
 
     this.setState(prevState => {
       const { dimensions } = prevState;
-      const index = Math.round(hoverX / dimensions.width * (data.length - 1));
+      const index = Math.round((hoverX / dimensions.width) * (data.length - 1));
       const hoveredDatapoint = data[index] || {};
       const hoveredValue = {
         price: hoveredDatapoint.price && currencyFormatter.format(hoveredDatapoint.price, { code: currency }),
@@ -137,9 +138,6 @@ class Chart extends Component {
       hideRightVerticalAxis,
       horizontalAxisTickCount,
     } = this.props;
-    const svgRef = node => {
-      this.chartSvgComponent = node;
-    };
 
     return (
       <div>
@@ -147,10 +145,10 @@ class Chart extends Component {
           <VerticalAxis data={data} currency={currency} align="left" />
           <StyledChart
             data-testid="HoverRegion"
-            innerRef={svgRef}
             onMouseEnter={this.handleMouseEnter}
             onMouseLeave={this.handleMouseLeave}
             onMouseMove={this.handleMouseMove}
+            ref={this.chartRef}
           >
             <Graph color={color} data={data} height={dimensions.height} width={dimensions.width} />
             {!disableCursor && <Cursor height={dimensions.height} visible={hovered} x={hoverX} y={hoverY} />}

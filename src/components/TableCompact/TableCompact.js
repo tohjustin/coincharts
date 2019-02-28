@@ -25,7 +25,7 @@ const Dropdown = styled.select`
   background: url(${arrowIcon}) right 8px center / 8px no-repeat ${color.white};
   border-image: initial;
   border-radius: ${border.radius};
-  border: ${border.border}
+  border: ${border.border};
   color: ${color.slateDark};
   cursor: pointer;
   flex: 1 1 0%;
@@ -39,11 +39,10 @@ const Dropdown = styled.select`
   transition: ${animation.default};
 `;
 
-const PriceDetails = styled.div.attrs({
-  color: props => (props.positive ? color.positive : color.slateDark),
-  transform: props => (props.positive ? "rotate(0deg)" : "rotate(180deg)"),
-})`
-  color: ${props => props.color};
+const PriceDetails = styled.div.attrs(props => ({
+  color: props.positive ? color.positive : color.slateDark,
+  transform: props.positive ? "rotate(0deg)" : "rotate(180deg)",
+}))`
   font-size: ${fontSize.small};
   font-weight: ${fontWeight.medium};
 

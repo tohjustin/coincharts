@@ -1,7 +1,7 @@
 import React from "react";
-import { render, Simulate } from "react-testing-library";
+import { fireEvent, render } from "@testing-library/react";
 
-import Chart from "../";
+import Chart from "..";
 
 const TEST_PROPS = {
   currency: "USD",
@@ -40,19 +40,19 @@ describe("<Chart/>", () => {
   });
 
   it("renders child components correctly", () => {
-    const { queryByTestId } = render(<Chart {...TEST_PROPS} />);
+    const { queryByTestId, queryAllByTestId } = render(<Chart {...TEST_PROPS} />);
     expect(queryByTestId("Graph")).not.toBeNull();
     expect(queryByTestId("HorizontalAxis")).not.toBeNull();
-    expect(queryByTestId("VerticalAxis")).not.toBeNull();
+    expect(queryAllByTestId("VerticalAxis")).not.toBeNull();
     expect(queryByTestId("Cursor")).not.toBeNull();
     expect(queryByTestId("HoverContainer")).not.toBeNull();
   });
 
-  it("renders child components correctly when `props.disableCursor` is true", () => {
-    const { queryByTestId } = render(<Chart {...TEST_PROPS} disableCursor />);
+  it.only("renders child components correctly when `props.disableCursor` is true", () => {
+    const { queryByTestId, queryAllByTestId } = render(<Chart {...{ ...TEST_PROPS, disableCursor: true }} />);
     expect(queryByTestId("Graph")).not.toBeNull();
     expect(queryByTestId("HorizontalAxis")).not.toBeNull();
-    expect(queryByTestId("VerticalAxis")).not.toBeNull();
+    expect(queryAllByTestId("VerticalAxis")).not.toBeNull();
     expect(queryByTestId("Cursor")).toBeNull();
     expect(queryByTestId("HoverContainer")).toBeNull();
   });
@@ -61,11 +61,11 @@ describe("<Chart/>", () => {
     const { getByTestId } = render(<Chart {...TEST_PROPS} />);
 
     // Simulate hovering (mouse entering chart)
-    Simulate.mouseEnter(getByTestId("HoverRegion"));
+    fireEvent.mouseEnter(getByTestId("HoverRegion"));
     expect(getByTestId("HoverContainer").style.opacity).toEqual("1");
 
     // Simulate hovering (mouse leaving chart)
-    Simulate.mouseLeave(getByTestId("HoverRegion"));
+    fireEvent.mouseLeave(getByTestId("HoverRegion"));
     expect(getByTestId("HoverContainer").style.opacity).toEqual("0");
   });
 });

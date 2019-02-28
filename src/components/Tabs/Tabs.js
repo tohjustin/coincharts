@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-no-bind */
 import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
@@ -11,10 +10,10 @@ const StyledTabs = styled(Flex)`
   font-weight: ${fontWeight.medium};
 `;
 
-const StyledTab = styled(Flex).attrs({
-  color: props => (props.selected ? color.coincharts : color.coinchartsGray),
-  border: props => (props.selected ? `1px solid ${color.coincharts}` : border.border),
-})`
+const StyledTab = styled(Flex).attrs(props => ({
+  color: props.selected ? color.coincharts : color.coinchartsGray,
+  border: props.selected ? `1px solid ${color.coincharts}` : border.border,
+}))`
   color: ${props => props.color};
   height: inherit;
   margin: 0 0.5em;

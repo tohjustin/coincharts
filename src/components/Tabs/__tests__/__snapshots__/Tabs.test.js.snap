@@ -2,14 +2,14 @@
 
 exports[`<Tabs /> renders without crashing 1`] = `
 <div
-  class="sc-bwzfXH cqtslC sc-bdVaJa cAcgKX"
+  class="sc-bdVaJa sc-bwzfXH fnZCNC"
   role="tabpanel"
 >
   <div
-    class="sc-htpNat czjRRp sc-bdVaJa dyxdRy"
-    color="#0667D0"
     aria-labelledby="listKey_a"
     aria-selected="true"
+    class="sc-bdVaJa sc-htpNat cdoHFm"
+    color="#0667D0"
     role="tab"
     tabindex="-1"
   >
@@ -18,10 +18,10 @@ exports[`<Tabs /> renders without crashing 1`] = `
     </div>
   </div>
   <div
-    class="sc-htpNat lgKbrQ sc-bdVaJa dyxdRy"
-    color="#7D95B6"
     aria-labelledby="listKey_b"
     aria-selected="false"
+    class="sc-bdVaJa sc-htpNat gHdpYx"
+    color="#7D95B6"
     role="tab"
     tabindex="-1"
   >
