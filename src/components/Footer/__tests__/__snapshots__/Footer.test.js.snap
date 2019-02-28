@@ -9,13 +9,13 @@ exports[`<Footer /> renders without crashing 1`] = `
   </span>
   <a
     href="https://developers.coinbase.com/api/v2"
-    target="_blank"
     rel="noopener noreferrer"
+    target="_blank"
   >
     <img
+      alt="coinbase-logo"
       class="sc-bwzfXH cJoRuk"
       src="coinbase-logo.svg"
-      alt="coinbase-logo"
     />
   </a>
 </div>

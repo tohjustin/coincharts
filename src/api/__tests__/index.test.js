@@ -1,7 +1,7 @@
 import check from "check-types";
 
 import { CRYPTOCURRENCY_LIST } from "../../constants";
-import { getPriceHistoryUrl, getSpotPriceUrl, fetchPriceHistory, fetchSpotPrices } from "../";
+import { getPriceHistoryUrl, getSpotPriceUrl, fetchPriceHistory, fetchSpotPrices } from "..";
 
 describe("api", () => {
   let INITIAL_NODE_ENV;

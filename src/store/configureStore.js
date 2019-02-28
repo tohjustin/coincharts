@@ -1,8 +1,8 @@
 import { applyMiddleware, combineReducers, compose, createStore } from "redux";
 import createSagaMiddleware from "redux-saga";
 
-import { PriceReducer, PriceSaga } from "../store/price";
-import { SettingsReducer } from "../store/settings";
+import { PriceReducer, PriceSaga } from "./price";
+import { SettingsReducer } from "./settings";
 
 export default (initialState = {}) => {
   // Consolidate all reducers

@@ -1,7 +1,7 @@
 import React from "react";
-import { render } from "react-testing-library";
+import { render } from "@testing-library/react";
 
-import BigAmount from "../";
+import BigAmount from "..";
 import { MINUS_SYMBOL, PLUS_SYMBOL } from "../BigAmount";
 
 describe("<BigAmount />", () => {

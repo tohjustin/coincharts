@@ -9,32 +9,32 @@ import { animation, border, color, fontSize, fontWeight } from "../../styles/con
 const HOVER_CONTAINER_WIDTH = 200;
 export const VERTICAL_OFFSET = -12;
 
-const StyledHoverContainer = styled(Flex).attrs({
-  style: ({ left, position, visible }) => ({
-    bottom: position === "bottom" ? `${VERTICAL_OFFSET}px` : undefined,
-    top: position === "top" ? `${VERTICAL_OFFSET}px` : undefined,
-    left: `${left - HOVER_CONTAINER_WIDTH / 2}px`,
-    opacity: visible ? 1 : 0,
-  }),
-})`
+const StyledHoverContainer = styled(Flex).attrs(props => ({
+  style: {
+    bottom: props.position === "bottom" ? `${VERTICAL_OFFSET}px` : undefined,
+    top: props.position === "top" ? `${VERTICAL_OFFSET}px` : undefined,
+    left: `${props.left - HOVER_CONTAINER_WIDTH / 2}px`,
+    opacity: props.visible ? 1 : 0,
+  },
+}))`
   position: absolute;
   transition: opacity ${animation.speed};
   width: ${`${HOVER_CONTAINER_WIDTH}px`};
   z-index: 10;
 `;
 
-const Label = styled.div.attrs({
-  background: props => (props.invertColor ? color.coinchartsGray : color.white),
-  border: props => (props.invertColor ? "none" : border.border),
-  color: props => (props.invertColor ? color.white : color.coinchartsGray),
-})`
+const Label = styled.div.attrs(props => ({
+  background: props.invertColor ? color.coinchartsGray : color.white,
+  border: props.invertColor ? "none" : border.border,
+  color: props.invertColor ? color.white : color.coinchartsGray,
+}))`
   background: ${props => props.background};
   border-radius: ${border.radius};
   border: ${props => props.border};
   color: ${props => props.color};
   font-size: ${fontSize.small};
-  font-weight: ${fontWeight.medium}
-  padding: 1px 6px;;
+  font-weight: ${fontWeight.medium};
+  padding: 1px 6px;
 `;
 
 const HoverContainer = ({ position, label, visible, x }) => (

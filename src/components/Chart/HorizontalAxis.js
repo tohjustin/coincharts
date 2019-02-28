@@ -8,9 +8,9 @@ import Flex from "../Flex";
 import { DURATION, PROPTYPES } from "../../constants";
 import { color, fontSize, fontWeight } from "../../styles/constants";
 
-const StyledHorizontalAxis = styled(Flex).attrs({
-  margin: props => (props.hideRightMargin ? "10px 0 0 20px" : "10px 20px 0 20px"),
-})`
+const StyledHorizontalAxis = styled(Flex).attrs(props => ({
+  margin: props.hideRightMargin ? "10px 0 0 20px" : "10px 20px 0 20px",
+}))`
   margin: ${props => props.margin};
 `;
 

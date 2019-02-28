@@ -5,8 +5,8 @@ exports[`<BigAmount /> renders without crashing (type: currency) 1`] = `
   class="sc-bdVaJa jlxkRb"
 >
   <span
+    class="sc-bwzfXH kwYOPm"
     color="#4E5C6E"
-    class="sc-bwzfXH fbCOIX"
   >
     $
   </span>
@@ -14,8 +14,8 @@ exports[`<BigAmount /> renders without crashing (type: currency) 1`] = `
     99
   </span>
   <span
+    class="sc-bwzfXH kwYOPm"
     color="#4E5C6E"
-    class="sc-bwzfXH fbCOIX"
   >
     .99
   </span>
@@ -30,8 +30,8 @@ exports[`<BigAmount /> renders without crashing (type: percentage) 1`] = `
     99.99
   </span>
   <span
+    class="sc-bwzfXH kwYOPm"
     color="#4E5C6E"
-    class="sc-bwzfXH fbCOIX"
   >
     %
   </span>

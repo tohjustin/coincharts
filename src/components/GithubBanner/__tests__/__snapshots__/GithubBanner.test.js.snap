@@ -2,19 +2,19 @@
 
 exports[`<GithubBanner /> renders without crashing 1`] = `
 <svg
+  aria-hidden="true"
   class="sc-bwzfXH jUZJtt"
   viewBox="0 0 250 250"
-  aria-hidden="true"
 >
   <defs>
     <mask
-      id="hole"
       fill="#000"
+      id="hole"
     >
       <path
         d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"
-        mask="url(#hole)"
         fill="#fff"
+        mask="url(#hole)"
       />
       <path
         class="sc-bdVaJa bDWFJH"
@@ -26,10 +26,10 @@ exports[`<GithubBanner /> renders without crashing 1`] = `
     </mask>
   </defs>
   <a
+    aria-label="View source on Github"
     class="sc-htpNat cUzcgM"
     href="https://github.com/test-user/test-project"
     target="_blank"
-    aria-label="View source on Github"
   >
     <path
       d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"

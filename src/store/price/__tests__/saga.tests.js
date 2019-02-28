@@ -71,7 +71,7 @@ describe("[Price] Saga", () => {
         getState: () => TEST_STATE,
       },
       fetchPrice,
-    ).done;
+    ).toPromise();
 
     expect(dispatchedActions).toEqual(expectedActions);
   });
@@ -86,7 +86,7 @@ describe("[Price] Saga", () => {
         getState: () => TEST_STATE,
       },
       sendRequest,
-    ).done;
+    ).toPromise();
 
     expect(dispatchedActions).toEqual(expectedActions);
   });

@@ -2,9 +2,9 @@
 
 exports[`<Cursor /> hides component when \`props.visible\` is false 1`] = `
 <svg
-  style="opacity: 0;"
   class="sc-bdVaJa ltcOW"
   data-testid="Cursor"
+  style="opacity: 0;"
 >
   <line
     class="sc-htpNat jVvTZn"
@@ -23,9 +23,9 @@ exports[`<Cursor /> hides component when \`props.visible\` is false 1`] = `
 
 exports[`<Cursor /> renders without crashing 1`] = `
 <svg
-  style="opacity: 1;"
   class="sc-bdVaJa ltcOW"
   data-testid="Cursor"
+  style="opacity: 1;"
 >
   <line
     class="sc-htpNat jVvTZn"
@@ -44,9 +44,9 @@ exports[`<Cursor /> renders without crashing 1`] = `
 
 exports[`<Cursor /> shows component when \`props.visible\` is true 1`] = `
 <svg
-  style="opacity: 1;"
   class="sc-bdVaJa ltcOW"
   data-testid="Cursor"
+  style="opacity: 1;"
 >
   <line
     class="sc-htpNat jVvTZn"

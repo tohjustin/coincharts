@@ -1,7 +1,7 @@
 import React from "react";
-import { render } from "react-testing-library";
+import { render } from "@testing-library/react";
 
-import GithubBanner from "../";
+import GithubBanner from "..";
 
 const REPOSITORY_URL = process.env.REACT_APP_REPOSITORY_URL;
 
@@ -14,6 +14,6 @@ describe("<GithubBanner />", () => {
 
   it("contains anchor tag to project's Github project page", () => {
     const { container } = render(<GithubBanner />);
-    expect(container.querySelector("a").href).toEqual(REPOSITORY_URL);
+    expect(container.querySelector("a").getAttribute("href")).toEqual(REPOSITORY_URL);
   });
 });

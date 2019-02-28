@@ -1,7 +1,7 @@
 import React from "react";
-import { render, Simulate } from "react-testing-library";
+import { fireEvent, render } from "@testing-library/react";
 
-import TableCompact from "../";
+import TableCompact from "..";
 
 const TEST_PROPS = {
   onCryptocurrencyChange: () => {},
@@ -65,7 +65,7 @@ describe("<TableCompact />", () => {
     const { container } = render(<TableCompact {...props} />);
     expect(props.onCryptocurrencyChange).toHaveBeenCalledTimes(0);
 
-    Simulate.change(container.querySelector("select"), { target: { value: selectedOption } });
+    fireEvent.change(container.querySelector("select"), { target: { value: selectedOption } });
     expect(props.onCryptocurrencyChange).toHaveBeenCalledTimes(1);
     expect(props.onCryptocurrencyChange).lastCalledWith(selectedOption);
   });

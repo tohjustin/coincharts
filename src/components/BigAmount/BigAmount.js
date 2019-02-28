@@ -15,10 +15,9 @@ const StyledBigAmount = styled.div`
   font-weight: ${fontWeight.regular};
 `;
 
-const Superscript = styled.span.attrs({
-  color: props => props.color || color.slateDark,
-})`
-  color: ${props => props.color};
+const Superscript = styled.span.attrs(props => ({
+  color: props.color || color.slateDark,
+}))`
   font-size: 30px;
   font-weight: ${fontWeight.medium};
   position: relative;

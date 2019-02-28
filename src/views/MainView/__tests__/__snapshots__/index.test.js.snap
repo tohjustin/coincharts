@@ -2,22 +2,22 @@
 
 exports[`<MainView/> [DESKTOP] renders without crashing 1`] = `
 <div
-  class="sc-jWBwVP elYRdX sc-bdVaJa kiEYim"
+  class="sc-bdVaJa sc-jWBwVP mFCoX"
 >
   <svg
+    aria-hidden="true"
     class="sc-ifAKCX fWKbFX"
     viewBox="0 0 250 250"
-    aria-hidden="true"
   >
     <defs>
       <mask
-        id="hole"
         fill="#000"
+        id="hole"
       >
         <path
           d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"
-          mask="url(#hole)"
           fill="#fff"
+          mask="url(#hole)"
         />
         <path
           class="sc-bxivhb bUZGRr"
@@ -29,10 +29,10 @@ exports[`<MainView/> [DESKTOP] renders without crashing 1`] = `
       </mask>
     </defs>
     <a
+      aria-label="View source on Github"
       class="sc-EHOje cKGmQE"
       href="https://github.com/test-user/test-project"
       target="_blank"
-      aria-label="View source on Github"
     >
       <path
         d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"
@@ -41,278 +41,20 @@ exports[`<MainView/> [DESKTOP] renders without crashing 1`] = `
     </a>
   </svg>
   <div
-    class="sc-kkGfuU iOEVQQ sc-bdVaJa hHhwCB"
+    class="sc-bdVaJa sc-kkGfuU sc-iAyFgw epsMiG"
   >
     <div
-      class="sc-cvbbAY bHDGhx sc-bdVaJa bJonzb"
+      class="sc-bdVaJa sc-cvbbAY bJllzC"
     >
       <div
-        class="sc-hSdWYo igXijG sc-bdVaJa kDHipt"
-      >
-        Coincharts
-      </div>
-      <div
-        class="sc-bZQynM foTJIu sc-bdVaJa cAcgKX"
+        class="sc-bdVaJa sc-bZQynM bTDQOx"
         role="tabpanel"
       >
         <div
-          class="sc-gzVnrw jRDvTs sc-bdVaJa dyxdRy"
-          color="#7D95B6"
-          aria-labelledby="1H"
-          aria-selected="false"
-          role="tab"
-          tabindex="-1"
-        >
-          <span>
-            1H
-          </span>
-        </div>
-        <div
-          class="sc-gzVnrw kOMeBY sc-bdVaJa dyxdRy"
-          color="#0667D0"
-          aria-labelledby="1D"
-          aria-selected="true"
-          role="tab"
-          tabindex="-1"
-        >
-          <span>
-            1D
-          </span>
-        </div>
-        <div
-          class="sc-gzVnrw jRDvTs sc-bdVaJa dyxdRy"
-          color="#7D95B6"
-          aria-labelledby="1W"
-          aria-selected="false"
-          role="tab"
-          tabindex="-1"
-        >
-          <span>
-            1W
-          </span>
-        </div>
-        <div
-          class="sc-gzVnrw jRDvTs sc-bdVaJa dyxdRy"
-          color="#7D95B6"
-          aria-labelledby="1M"
-          aria-selected="false"
-          role="tab"
-          tabindex="-1"
-        >
-          <span>
-            1M
-          </span>
-        </div>
-        <div
-          class="sc-gzVnrw jRDvTs sc-bdVaJa dyxdRy"
-          color="#7D95B6"
-          aria-labelledby="1Y"
-          aria-selected="false"
-          role="tab"
-          tabindex="-1"
-        >
-          <span>
-            1Y
-          </span>
-        </div>
-        <div
-          class="sc-gzVnrw jRDvTs sc-bdVaJa dyxdRy"
-          color="#7D95B6"
-          aria-labelledby="ALL"
-          aria-selected="false"
-          role="tab"
-          tabindex="-1"
-        >
-          <span>
-            ALL
-          </span>
-        </div>
-      </div>
-    </div>
-    <div
-      class="sc-eHgmQL AEESZ"
-    >
-      <div
-        class="sc-eNQAEJ hiCQLY sc-bdVaJa hpOpwR"
-      >
-        <div>
-          <div
-            class="sc-kGXeez iIWYYw"
-          >
-            <span
-              color="#4E5C6E"
-              class="sc-kpOJdX kdHsge"
-            >
-              $
-            </span>
-            <span>
-              0
-            </span>
-            <span
-              color="#4E5C6E"
-              class="sc-kpOJdX kdHsge"
-            >
-              .00
-            </span>
-          </div>
-          <div
-            color="#4E5C6E"
-            transform="rotate(180deg)"
-            class="sc-kEYyzF lkEVfq"
-          >
-            <svg
-              height="12"
-              width="12"
-              viewBox="8135 12432 15 15"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <title>
-                Arrow
-              </title>
-              <desc>
-                Arrow pointing downwards
-              </desc>
-              <path
-                fill-rule="evenodd"
-                d="M8149.72 12439.36l-7.36-7.36-7.36 7.36 1 1 5.64-5.64v11.82h1.4v-11.87l5.68 5.69z"
-              />
-            </svg>
-            <span
-              data-testid="price-details"
-            >
-              $0.00 (0.00%)
-            </span>
-          </div>
-        </div>
-        <select
-          class="sc-hMqMXs gaOMyA"
-        >
-          <option
-            value="BTC"
-          >
-            BTC
-          </option>
-          <option
-            value="BCH"
-          >
-            BCH
-          </option>
-          <option
-            value="ETH"
-          >
-            ETH
-          </option>
-          <option
-            value="LTC"
-          >
-            LTC
-          </option>
-        </select>
-      </div>
-      <div>
-        <div
-          class="sc-kgoBCf jfrcOa sc-bdVaJa cAcgKX"
-        >
-          <div
-            class="sc-cSHVUG kQaYsT sc-bdVaJa ivjahH"
-            data-testid="VerticalAxis"
-          />
-          <div
-            class="sc-chPdSV cklyAr"
-            data-testid="HoverRegion"
-          >
-            <svg
-              class="sc-gqjmRU hyAmY"
-              data-testid="Graph"
-            >
-              <g />
-            </svg>
-          </div>
-        </div>
-        <div
-          class="sc-VigVT cYFHMG sc-bdVaJa bJonzb"
-          data-testid="HorizontalAxis"
-        />
-      </div>
-    </div>
-  </div>
-  <div
-    class="sc-bwzfXH YTSlM"
-  >
-    <span>
-      Powered by 
-    </span>
-    <a
-      href="https://developers.coinbase.com/api/v2"
-      target="_blank"
-      rel="noopener noreferrer"
-    >
-      <img
-        class="sc-htpNat pSHAW"
-        src="coinbase-logo.svg"
-        alt="coinbase-logo"
-      />
-    </a>
-  </div>
-</div>
-`;
-
-exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
-<div
-  class="sc-jWBwVP elYRdX sc-bdVaJa kiEYim"
->
-  <svg
-    class="sc-ifAKCX fWKbFX"
-    viewBox="0 0 250 250"
-    aria-hidden="true"
-  >
-    <defs>
-      <mask
-        id="hole"
-        fill="#000"
-      >
-        <path
-          d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"
-          mask="url(#hole)"
-          fill="#fff"
-        />
-        <path
-          class="sc-bxivhb bUZGRr"
-          d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
-        />
-        <path
-          d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
-        />
-      </mask>
-    </defs>
-    <a
-      class="sc-EHOje cKGmQE"
-      href="https://github.com/test-user/test-project"
-      target="_blank"
-      aria-label="View source on Github"
-    >
-      <path
-        d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"
-        mask="url(#hole)"
-      />
-    </a>
-  </svg>
-  <div
-    class="sc-iAyFgw cPwqga sc-kkGfuU iOEVQQ sc-bdVaJa hHhwCB"
-  >
-    <div
-      class="sc-cvbbAY bHDGhx sc-bdVaJa bJonzb"
-    >
-      <div
-        class="sc-bZQynM foTJIu sc-bdVaJa cAcgKX"
-        role="tabpanel"
-      >
-        <div
-          class="sc-gzVnrw kOMeBY sc-bdVaJa dyxdRy"
-          color="#0667D0"
           aria-labelledby="Bitcoin-$0.00"
           aria-selected="true"
+          class="sc-bdVaJa sc-gzVnrw btvgwD"
+          color="#0667D0"
           role="tab"
           tabindex="-1"
         >
@@ -328,10 +70,10 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
           </span>
         </div>
         <div
-          class="sc-gzVnrw jRDvTs sc-bdVaJa dyxdRy"
-          color="#7D95B6"
           aria-labelledby="Bitcoin Cash-$0.00"
           aria-selected="false"
+          class="sc-bdVaJa sc-gzVnrw epHkgl"
+          color="#7D95B6"
           role="tab"
           tabindex="-1"
         >
@@ -347,10 +89,10 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
           </span>
         </div>
         <div
-          class="sc-gzVnrw jRDvTs sc-bdVaJa dyxdRy"
-          color="#7D95B6"
           aria-labelledby="Ethereum-$0.00"
           aria-selected="false"
+          class="sc-bdVaJa sc-gzVnrw epHkgl"
+          color="#7D95B6"
           role="tab"
           tabindex="-1"
         >
@@ -366,10 +108,10 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
           </span>
         </div>
         <div
-          class="sc-gzVnrw jRDvTs sc-bdVaJa dyxdRy"
-          color="#7D95B6"
           aria-labelledby="Litecoin-$0.00"
           aria-selected="false"
+          class="sc-bdVaJa sc-gzVnrw epHkgl"
+          color="#7D95B6"
           role="tab"
           tabindex="-1"
         >
@@ -386,14 +128,14 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
         </div>
       </div>
       <div
-        class="sc-bZQynM foTJIu sc-bdVaJa cAcgKX"
+        class="sc-bdVaJa sc-bZQynM bTDQOx"
         role="tabpanel"
       >
         <div
-          class="sc-gzVnrw jRDvTs sc-bdVaJa dyxdRy"
-          color="#7D95B6"
           aria-labelledby="1H"
           aria-selected="false"
+          class="sc-bdVaJa sc-gzVnrw epHkgl"
+          color="#7D95B6"
           role="tab"
           tabindex="-1"
         >
@@ -402,10 +144,10 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
           </span>
         </div>
         <div
-          class="sc-gzVnrw kOMeBY sc-bdVaJa dyxdRy"
-          color="#0667D0"
           aria-labelledby="1D"
           aria-selected="true"
+          class="sc-bdVaJa sc-gzVnrw btvgwD"
+          color="#0667D0"
           role="tab"
           tabindex="-1"
         >
@@ -414,10 +156,10 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
           </span>
         </div>
         <div
-          class="sc-gzVnrw jRDvTs sc-bdVaJa dyxdRy"
-          color="#7D95B6"
           aria-labelledby="1W"
           aria-selected="false"
+          class="sc-bdVaJa sc-gzVnrw epHkgl"
+          color="#7D95B6"
           role="tab"
           tabindex="-1"
         >
@@ -426,10 +168,10 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
           </span>
         </div>
         <div
-          class="sc-gzVnrw jRDvTs sc-bdVaJa dyxdRy"
-          color="#7D95B6"
           aria-labelledby="1M"
           aria-selected="false"
+          class="sc-bdVaJa sc-gzVnrw epHkgl"
+          color="#7D95B6"
           role="tab"
           tabindex="-1"
         >
@@ -438,10 +180,10 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
           </span>
         </div>
         <div
-          class="sc-gzVnrw jRDvTs sc-bdVaJa dyxdRy"
-          color="#7D95B6"
           aria-labelledby="1Y"
           aria-selected="false"
+          class="sc-bdVaJa sc-gzVnrw epHkgl"
+          color="#7D95B6"
           role="tab"
           tabindex="-1"
         >
@@ -450,10 +192,10 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
           </span>
         </div>
         <div
-          class="sc-gzVnrw jRDvTs sc-bdVaJa dyxdRy"
-          color="#7D95B6"
           aria-labelledby="ALL"
           aria-selected="false"
+          class="sc-bdVaJa sc-gzVnrw epHkgl"
+          color="#7D95B6"
           role="tab"
           tabindex="-1"
         >
@@ -467,17 +209,17 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
       class="sc-eHgmQL AEESZ"
     >
       <div
-        class="sc-dxgOiQ iqvuHD sc-bdVaJa gObvDU"
+        class="sc-bdVaJa sc-dxgOiQ kNIxXh"
       >
         <div
-          class="sc-ckVGcZ jNkpwx sc-bdVaJa ZqsgD"
+          class="sc-bdVaJa sc-ckVGcZ lmljzy"
         >
           <div
             class="sc-kGXeez iIWYYw"
           >
             <span
+              class="sc-kpOJdX gjaMPA"
               color="#4E5C6E"
-              class="sc-kpOJdX kdHsge"
             >
               $
             </span>
@@ -485,8 +227,8 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
               0
             </span>
             <span
+              class="sc-kpOJdX gjaMPA"
               color="#4E5C6E"
-              class="sc-kpOJdX kdHsge"
             >
               .00
             </span>
@@ -495,18 +237,18 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
             class="sc-jKJlTe dkUzDh"
           >
             Bitcoin
-            price
+             price
           </div>
         </div>
         <div
-          class="sc-ckVGcZ jNkpwx sc-bdVaJa ZqsgD"
+          class="sc-bdVaJa sc-ckVGcZ lmljzy"
         >
           <div
             class="sc-kGXeez iIWYYw"
           >
             <span
+              class="sc-kpOJdX gjaMPA"
               color="#4E5C6E"
-              class="sc-kpOJdX kdHsge"
             >
               $
             </span>
@@ -514,8 +256,8 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
               0
             </span>
             <span
+              class="sc-kpOJdX gjaMPA"
               color="#4E5C6E"
-              class="sc-kpOJdX kdHsge"
             >
               .00
             </span>
@@ -527,7 +269,7 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
           </div>
         </div>
         <div
-          class="sc-ckVGcZ jNkpwx sc-bdVaJa ZqsgD"
+          class="sc-bdVaJa sc-ckVGcZ lmljzy"
         >
           <div
             class="sc-kGXeez iIWYYw"
@@ -536,8 +278,8 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
               0.00
             </span>
             <span
+              class="sc-kpOJdX gjaMPA"
               color="#4E5C6E"
-              class="sc-kpOJdX kdHsge"
             >
               %
             </span>
@@ -546,16 +288,16 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
             class="sc-jKJlTe dkUzDh"
           >
             since yesterday
-            (%)
+             (%)
           </div>
         </div>
       </div>
       <div>
         <div
-          class="sc-kgoBCf jfrcOa sc-bdVaJa cAcgKX"
+          class="sc-bdVaJa sc-kgoBCf fwHApb"
         >
           <div
-            class="sc-cSHVUG kQaYsT sc-bdVaJa ivjahH"
+            class="sc-bdVaJa sc-cSHVUG bKXNlr"
             data-testid="VerticalAxis"
           />
           <div
@@ -569,9 +311,9 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
               <g />
             </svg>
             <svg
-              style="opacity: 0;"
               class="sc-dnqmqq dVvouu"
               data-testid="Cursor"
+              style="opacity: 0;"
             >
               <line
                 class="sc-gZMcBi eeKCXY"
@@ -587,37 +329,33 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
               />
             </svg>
             <div
-              class="sc-fjdhpX guKSnK sc-bdVaJa epQZNM"
-              style="top: -12px; left: -101px; opacity: 0;"
+              class="sc-bdVaJa sc-fjdhpX eRAWjW"
               data-testid="HoverContainer"
+              style="top: -12px; left: -101px; opacity: 0;"
             >
               <div
-                background="#7D95B6"
-                border="none"
+                class="sc-jzJRlG eNabjD"
                 color="#FFFFFF"
-                class="sc-jzJRlG etfxMZ"
               />
             </div>
             <div
-              class="sc-fjdhpX guKSnK sc-bdVaJa epQZNM"
-              style="bottom: -12px; left: -101px; opacity: 0;"
+              class="sc-bdVaJa sc-fjdhpX eRAWjW"
               data-testid="HoverContainer"
+              style="bottom: -12px; left: -101px; opacity: 0;"
             >
               <div
-                background="#FFFFFF"
-                border="1px solid #DAE1E9"
+                class="sc-jzJRlG dGbGvG"
                 color="#7D95B6"
-                class="sc-jzJRlG iJCuCR"
               />
             </div>
           </div>
           <div
-            class="sc-cSHVUG hbWElG sc-bdVaJa kAcxML"
+            class="sc-bdVaJa sc-cSHVUG iXVDMe"
             data-testid="VerticalAxis"
           />
         </div>
         <div
-          class="sc-VigVT qQVXw sc-bdVaJa bJonzb"
+          class="sc-bdVaJa sc-VigVT ksYdUz"
           data-testid="HorizontalAxis"
         />
       </div>
@@ -631,13 +369,395 @@ exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
     </span>
     <a
       href="https://developers.coinbase.com/api/v2"
-      target="_blank"
       rel="noopener noreferrer"
+      target="_blank"
     >
       <img
+        alt="coinbase-logo"
         class="sc-htpNat pSHAW"
         src="coinbase-logo.svg"
+      />
+    </a>
+  </div>
+</div>
+`;
+
+exports[`<MainView/> [MOBILE] renders without crashing 1`] = `
+<div
+  class="sc-bdVaJa sc-jWBwVP mFCoX"
+>
+  <svg
+    aria-hidden="true"
+    class="sc-ifAKCX fWKbFX"
+    viewBox="0 0 250 250"
+  >
+    <defs>
+      <mask
+        fill="#000"
+        id="hole"
+      >
+        <path
+          d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"
+          fill="#fff"
+          mask="url(#hole)"
+        />
+        <path
+          class="sc-bxivhb bUZGRr"
+          d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2"
+        />
+        <path
+          d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z"
+        />
+      </mask>
+    </defs>
+    <a
+      aria-label="View source on Github"
+      class="sc-EHOje cKGmQE"
+      href="https://github.com/test-user/test-project"
+      target="_blank"
+    >
+      <path
+        d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"
+        mask="url(#hole)"
+      />
+    </a>
+  </svg>
+  <div
+    class="sc-bdVaJa sc-kkGfuU sc-iAyFgw epsMiG"
+  >
+    <div
+      class="sc-bdVaJa sc-cvbbAY bJllzC"
+    >
+      <div
+        class="sc-bdVaJa sc-bZQynM bTDQOx"
+        role="tabpanel"
+      >
+        <div
+          aria-labelledby="Bitcoin-$0.00"
+          aria-selected="true"
+          class="sc-bdVaJa sc-gzVnrw btvgwD"
+          color="#0667D0"
+          role="tab"
+          tabindex="-1"
+        >
+          <span
+            class="sc-htoDjs kegmoF"
+          >
+            <span>
+              Bitcoin
+            </span>
+            <span>
+              $0.00
+            </span>
+          </span>
+        </div>
+        <div
+          aria-labelledby="Bitcoin Cash-$0.00"
+          aria-selected="false"
+          class="sc-bdVaJa sc-gzVnrw epHkgl"
+          color="#7D95B6"
+          role="tab"
+          tabindex="-1"
+        >
+          <span
+            class="sc-htoDjs kegmoF"
+          >
+            <span>
+              Bitcoin Cash
+            </span>
+            <span>
+              $0.00
+            </span>
+          </span>
+        </div>
+        <div
+          aria-labelledby="Ethereum-$0.00"
+          aria-selected="false"
+          class="sc-bdVaJa sc-gzVnrw epHkgl"
+          color="#7D95B6"
+          role="tab"
+          tabindex="-1"
+        >
+          <span
+            class="sc-htoDjs kegmoF"
+          >
+            <span>
+              Ethereum
+            </span>
+            <span>
+              $0.00
+            </span>
+          </span>
+        </div>
+        <div
+          aria-labelledby="Litecoin-$0.00"
+          aria-selected="false"
+          class="sc-bdVaJa sc-gzVnrw epHkgl"
+          color="#7D95B6"
+          role="tab"
+          tabindex="-1"
+        >
+          <span
+            class="sc-htoDjs kegmoF"
+          >
+            <span>
+              Litecoin
+            </span>
+            <span>
+              $0.00
+            </span>
+          </span>
+        </div>
+      </div>
+      <div
+        class="sc-bdVaJa sc-bZQynM bTDQOx"
+        role="tabpanel"
+      >
+        <div
+          aria-labelledby="1H"
+          aria-selected="false"
+          class="sc-bdVaJa sc-gzVnrw epHkgl"
+          color="#7D95B6"
+          role="tab"
+          tabindex="-1"
+        >
+          <span>
+            1H
+          </span>
+        </div>
+        <div
+          aria-labelledby="1D"
+          aria-selected="true"
+          class="sc-bdVaJa sc-gzVnrw btvgwD"
+          color="#0667D0"
+          role="tab"
+          tabindex="-1"
+        >
+          <span>
+            1D
+          </span>
+        </div>
+        <div
+          aria-labelledby="1W"
+          aria-selected="false"
+          class="sc-bdVaJa sc-gzVnrw epHkgl"
+          color="#7D95B6"
+          role="tab"
+          tabindex="-1"
+        >
+          <span>
+            1W
+          </span>
+        </div>
+        <div
+          aria-labelledby="1M"
+          aria-selected="false"
+          class="sc-bdVaJa sc-gzVnrw epHkgl"
+          color="#7D95B6"
+          role="tab"
+          tabindex="-1"
+        >
+          <span>
+            1M
+          </span>
+        </div>
+        <div
+          aria-labelledby="1Y"
+          aria-selected="false"
+          class="sc-bdVaJa sc-gzVnrw epHkgl"
+          color="#7D95B6"
+          role="tab"
+          tabindex="-1"
+        >
+          <span>
+            1Y
+          </span>
+        </div>
+        <div
+          aria-labelledby="ALL"
+          aria-selected="false"
+          class="sc-bdVaJa sc-gzVnrw epHkgl"
+          color="#7D95B6"
+          role="tab"
+          tabindex="-1"
+        >
+          <span>
+            ALL
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="sc-eHgmQL AEESZ"
+    >
+      <div
+        class="sc-bdVaJa sc-dxgOiQ kNIxXh"
+      >
+        <div
+          class="sc-bdVaJa sc-ckVGcZ lmljzy"
+        >
+          <div
+            class="sc-kGXeez iIWYYw"
+          >
+            <span
+              class="sc-kpOJdX gjaMPA"
+              color="#4E5C6E"
+            >
+              $
+            </span>
+            <span>
+              0
+            </span>
+            <span
+              class="sc-kpOJdX gjaMPA"
+              color="#4E5C6E"
+            >
+              .00
+            </span>
+          </div>
+          <div
+            class="sc-jKJlTe dkUzDh"
+          >
+            Bitcoin
+             price
+          </div>
+        </div>
+        <div
+          class="sc-bdVaJa sc-ckVGcZ lmljzy"
+        >
+          <div
+            class="sc-kGXeez iIWYYw"
+          >
+            <span
+              class="sc-kpOJdX gjaMPA"
+              color="#4E5C6E"
+            >
+              $
+            </span>
+            <span>
+              0
+            </span>
+            <span
+              class="sc-kpOJdX gjaMPA"
+              color="#4E5C6E"
+            >
+              .00
+            </span>
+          </div>
+          <div
+            class="sc-jKJlTe dkUzDh"
+          >
+            since yesterday (USD)
+          </div>
+        </div>
+        <div
+          class="sc-bdVaJa sc-ckVGcZ lmljzy"
+        >
+          <div
+            class="sc-kGXeez iIWYYw"
+          >
+            <span>
+              0.00
+            </span>
+            <span
+              class="sc-kpOJdX gjaMPA"
+              color="#4E5C6E"
+            >
+              %
+            </span>
+          </div>
+          <div
+            class="sc-jKJlTe dkUzDh"
+          >
+            since yesterday
+             (%)
+          </div>
+        </div>
+      </div>
+      <div>
+        <div
+          class="sc-bdVaJa sc-kgoBCf fwHApb"
+        >
+          <div
+            class="sc-bdVaJa sc-cSHVUG bKXNlr"
+            data-testid="VerticalAxis"
+          />
+          <div
+            class="sc-chPdSV cklyAr"
+            data-testid="HoverRegion"
+          >
+            <svg
+              class="sc-gqjmRU hyAmY"
+              data-testid="Graph"
+            >
+              <g />
+            </svg>
+            <svg
+              class="sc-dnqmqq dVvouu"
+              data-testid="Cursor"
+              style="opacity: 0;"
+            >
+              <line
+                class="sc-gZMcBi eeKCXY"
+                x1="-1"
+                x2="-1"
+                y1="0"
+                y2="0"
+              />
+              <circle
+                class="sc-iwsKbI fAKhyv"
+                cx="-1"
+                cy="-1"
+              />
+            </svg>
+            <div
+              class="sc-bdVaJa sc-fjdhpX eRAWjW"
+              data-testid="HoverContainer"
+              style="top: -12px; left: -101px; opacity: 0;"
+            >
+              <div
+                class="sc-jzJRlG eNabjD"
+                color="#FFFFFF"
+              />
+            </div>
+            <div
+              class="sc-bdVaJa sc-fjdhpX eRAWjW"
+              data-testid="HoverContainer"
+              style="bottom: -12px; left: -101px; opacity: 0;"
+            >
+              <div
+                class="sc-jzJRlG dGbGvG"
+                color="#7D95B6"
+              />
+            </div>
+          </div>
+          <div
+            class="sc-bdVaJa sc-cSHVUG iXVDMe"
+            data-testid="VerticalAxis"
+          />
+        </div>
+        <div
+          class="sc-bdVaJa sc-VigVT ksYdUz"
+          data-testid="HorizontalAxis"
+        />
+      </div>
+    </div>
+  </div>
+  <div
+    class="sc-bwzfXH YTSlM"
+  >
+    <span>
+      Powered by 
+    </span>
+    <a
+      href="https://developers.coinbase.com/api/v2"
+      rel="noopener noreferrer"
+      target="_blank"
+    >
+      <img
         alt="coinbase-logo"
+        class="sc-htpNat pSHAW"
+        src="coinbase-logo.svg"
       />
     </a>
   </div>

@@ -2,15 +2,13 @@
 
 exports[`<HoverContainer /> has \`style.bottom\` defined when \`prop.position\` is \`bottom\` 1`] = `
 <div
-  class="sc-bwzfXH ogNWx sc-bdVaJa epQZNM"
-  style="bottom: -12px; left: -100px; opacity: 1;"
+  class="sc-bdVaJa sc-bwzfXH qqkjm"
   data-testid="HoverContainer"
+  style="bottom: -12px; left: -100px; opacity: 1;"
 >
   <div
-    background="#FFFFFF"
-    border="1px solid #DAE1E9"
+    class="sc-htpNat jLMZYD"
     color="#7D95B6"
-    class="sc-htpNat jaGnAe"
   >
     test-label
   </div>
@@ -19,15 +17,13 @@ exports[`<HoverContainer /> has \`style.bottom\` defined when \`prop.position\` 
 
 exports[`<HoverContainer /> has \`style.top\` defined when \`prop.position\` is \`top\` 1`] = `
 <div
-  class="sc-bwzfXH ogNWx sc-bdVaJa epQZNM"
-  style="top: -12px; left: -100px; opacity: 1;"
+  class="sc-bdVaJa sc-bwzfXH qqkjm"
   data-testid="HoverContainer"
+  style="top: -12px; left: -100px; opacity: 1;"
 >
   <div
-    background="#7D95B6"
-    border="none"
+    class="sc-htpNat eMVyCK"
     color="#FFFFFF"
-    class="sc-htpNat cufbqD"
   >
     test-label
   </div>
@@ -36,15 +32,13 @@ exports[`<HoverContainer /> has \`style.top\` defined when \`prop.position\` is 
 
 exports[`<HoverContainer /> hides component when \`props.visible\` is false 1`] = `
 <div
-  class="sc-bwzfXH ogNWx sc-bdVaJa epQZNM"
-  style="top: -12px; left: -100px; opacity: 0;"
+  class="sc-bdVaJa sc-bwzfXH qqkjm"
   data-testid="HoverContainer"
+  style="top: -12px; left: -100px; opacity: 0;"
 >
   <div
-    background="#7D95B6"
-    border="none"
+    class="sc-htpNat eMVyCK"
     color="#FFFFFF"
-    class="sc-htpNat cufbqD"
   >
     test-label
   </div>
@@ -53,15 +47,13 @@ exports[`<HoverContainer /> hides component when \`props.visible\` is false 1`] 
 
 exports[`<HoverContainer /> renders without crashing 1`] = `
 <div
-  class="sc-bwzfXH ogNWx sc-bdVaJa epQZNM"
-  style="top: -12px; left: -100px; opacity: 1;"
+  class="sc-bdVaJa sc-bwzfXH qqkjm"
   data-testid="HoverContainer"
+  style="top: -12px; left: -100px; opacity: 1;"
 >
   <div
-    background="#7D95B6"
-    border="none"
+    class="sc-htpNat eMVyCK"
     color="#FFFFFF"
-    class="sc-htpNat cufbqD"
   >
     test-label
   </div>
@@ -70,15 +62,13 @@ exports[`<HoverContainer /> renders without crashing 1`] = `
 
 exports[`<HoverContainer /> shows component when \`props.visible\` is true 1`] = `
 <div
-  class="sc-bwzfXH ogNWx sc-bdVaJa epQZNM"
-  style="top: -12px; left: -100px; opacity: 1;"
+  class="sc-bdVaJa sc-bwzfXH qqkjm"
   data-testid="HoverContainer"
+  style="top: -12px; left: -100px; opacity: 1;"
 >
   <div
-    background="#7D95B6"
-    border="none"
+    class="sc-htpNat eMVyCK"
     color="#FFFFFF"
-    class="sc-htpNat cufbqD"
   >
     test-label
   </div>

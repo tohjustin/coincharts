@@ -2,17 +2,17 @@
 
 exports[`<Table /> renders without crashing 1`] = `
 <div
-  class="sc-bxivhb kNEjoy sc-htpNat bJzcAl"
+  class="sc-htpNat sc-bxivhb jqhHGN"
 >
   <div
-    class="sc-ifAKCX fhHsZd sc-htpNat Ldmto"
+    class="sc-htpNat sc-ifAKCX gVGGRZ"
   >
     <div
       class="sc-bdVaJa jlxkRb"
     >
       <span
+        class="sc-bwzfXH kwYOPm"
         color="#4E5C6E"
-        class="sc-bwzfXH fbCOIX"
       >
         $
       </span>
@@ -20,8 +20,8 @@ exports[`<Table /> renders without crashing 1`] = `
         0
       </span>
       <span
+        class="sc-bwzfXH kwYOPm"
         color="#4E5C6E"
-        class="sc-bwzfXH fbCOIX"
       >
         .00
       </span>
@@ -30,18 +30,18 @@ exports[`<Table /> renders without crashing 1`] = `
       class="sc-EHOje eDVoFS"
     >
       testCryptocurrencyLabel
-      price
+       price
     </div>
   </div>
   <div
-    class="sc-ifAKCX fhHsZd sc-htpNat Ldmto"
+    class="sc-htpNat sc-ifAKCX gVGGRZ"
   >
     <div
       class="sc-bdVaJa jlxkRb"
     >
       <span
+        class="sc-bwzfXH kwYOPm"
         color="#4E5C6E"
-        class="sc-bwzfXH fbCOIX"
       >
         $
       </span>
@@ -49,8 +49,8 @@ exports[`<Table /> renders without crashing 1`] = `
         0
       </span>
       <span
+        class="sc-bwzfXH kwYOPm"
         color="#4E5C6E"
-        class="sc-bwzfXH fbCOIX"
       >
         .00
       </span>
@@ -62,7 +62,7 @@ exports[`<Table /> renders without crashing 1`] = `
     </div>
   </div>
   <div
-    class="sc-ifAKCX fhHsZd sc-htpNat Ldmto"
+    class="sc-htpNat sc-ifAKCX gVGGRZ"
   >
     <div
       class="sc-bdVaJa jlxkRb"
@@ -71,8 +71,8 @@ exports[`<Table /> renders without crashing 1`] = `
         0.00
       </span>
       <span
+        class="sc-bwzfXH kwYOPm"
         color="#4E5C6E"
-        class="sc-bwzfXH fbCOIX"
       >
         %
       </span>
@@ -81,7 +81,7 @@ exports[`<Table /> renders without crashing 1`] = `
       class="sc-EHOje eDVoFS"
     >
       testDurationLabel
-      (%)
+       (%)
     </div>
   </div>
 </div>

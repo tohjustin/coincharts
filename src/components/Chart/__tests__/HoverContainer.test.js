@@ -1,5 +1,5 @@
 import React from "react";
-import { render } from "react-testing-library";
+import { render } from "@testing-library/react";
 
 import HoverContainer, { VERTICAL_OFFSET } from "../HoverContainer";
 
@@ -23,7 +23,7 @@ describe("<HoverContainer />", () => {
   });
 
   it("shows component when `props.visible` is true", () => {
-    const { container } = render(<HoverContainer {...TEST_PROPS} visible />);
+    const { container } = render(<HoverContainer {...{ ...TEST_PROPS, visible: true }} />);
     expect(container.firstChild.style.opacity).toEqual("1");
     expect(container.firstChild).toMatchSnapshot();
   });

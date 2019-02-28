@@ -2,15 +2,15 @@
 
 exports[`<TableCompact /> renders without crashing 1`] = `
 <div
-  class="sc-bxivhb kPYCRu sc-htpNat izTaYc"
+  class="sc-htpNat sc-bxivhb hvBkFo"
 >
   <div>
     <div
       class="sc-bdVaJa jlxkRb"
     >
       <span
+        class="sc-bwzfXH kwYOPm"
         color="#4E5C6E"
-        class="sc-bwzfXH fbCOIX"
       >
         $
       </span>
@@ -18,22 +18,22 @@ exports[`<TableCompact /> renders without crashing 1`] = `
         1,999
       </span>
       <span
+        class="sc-bwzfXH kwYOPm"
         color="#4E5C6E"
-        class="sc-bwzfXH fbCOIX"
       >
         .99
       </span>
     </div>
     <div
+      class="sc-EHOje fyhRKv"
       color="#61CA00"
       transform="rotate(0deg)"
-      class="sc-EHOje dqfVBA"
     >
       <svg
         height="12"
-        width="12"
-        viewBox="8135 12432 15 15"
         version="1.1"
+        viewBox="8135 12432 15 15"
+        width="12"
         xmlns="http://www.w3.org/2000/svg"
       >
         <title>
@@ -43,8 +43,8 @@ exports[`<TableCompact /> renders without crashing 1`] = `
           Arrow pointing upwards
         </desc>
         <path
-          fill-rule="evenodd"
           d="M8149.72 12439.36l-7.36-7.36-7.36 7.36 1 1 5.64-5.64v11.82h1.4v-11.87l5.68 5.69z"
+          fill-rule="evenodd"
         />
       </svg>
       <span
@@ -55,7 +55,7 @@ exports[`<TableCompact /> renders without crashing 1`] = `
     </div>
   </div>
   <select
-    class="sc-ifAKCX dHqgrp"
+    class="sc-ifAKCX cXFYLN"
   >
     <option
       value="BTC"
