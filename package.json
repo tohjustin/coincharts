@@ -14,7 +14,9 @@
     "start": "react-scripts start",
     "test:coverage": "npm run test -- --coverage --verbose",
     "test:watch": "TZ=America/Vancouver react-scripts test --env=jsdom",
-    "test": "TZ=America/Vancouver CI=true react-scripts test --env=jsdom"
+    "test": "TZ=America/Vancouver CI=true react-scripts test --env=jsdom",
+    "snyk-protect": "snyk protect",
+    "prepare": "npm run snyk-protect"
   },
   "dependencies": {
     "axios": "0.18.0",
@@ -41,7 +43,8 @@
     "redux": "4.0.0",
     "redux-saga": "0.16.0",
     "reselect": "3.0.1",
-    "styled-components": "3.2.6"
+    "styled-components": "3.2.6",
+    "snyk": "^1.161.1"
   },
   "devDependencies": {
     "check-types": "7.3.0",
@@ -72,5 +75,6 @@
   "prettier": {
     "printWidth": 120,
     "trailingComma": "all"
-  }
+  },
+  "snyk": true
 }
