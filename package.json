@@ -81,7 +81,7 @@
   "jest": {
     "collectCoverageFrom": [
       "!<rootDir>/node_modules/",
-      "!src/registerServiceWorker.js",
+      "!src/serviceWorker.js",
       "!src/index.js",
       "src/**/*.js"
     ]
