@@ -7,7 +7,7 @@ import ReactGA from "react-ga";
 import ErrorBoundary from "./components/ErrorBoundary";
 import MainView from "./views/MainView";
 import configureStore from "./store/configureStore";
-import registerServiceWorker from "./registerServiceWorker";
+import * as serviceWorker from "./serviceWorker";
 
 import "./styles/reset.css";
 import "./styles/base.css";
@@ -33,4 +33,4 @@ ReactDOM.render(
   document.getElementById("root"),
 );
 
-registerServiceWorker();
+serviceWorker.register();
