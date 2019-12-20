@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/tohjustin/coincharts/tree/master.svg?style=shield)](https://circleci.com/gh/tohjustin/coincharts/tree/master)
 [![Codecov](https://codecov.io/gh/tohjustin/coincharts/branch/master/graph/badge.svg)](https://codecov.io/gh/tohjustin/coincharts)
-[![Release](https://badge-service.appspot.com/static?subject=release&status=v2.2.1)](https://github.com/tohjustin/coincharts/releases)
+[![Release](https://badge-service.appspot.com/static?subject=release&status=v2.3.0)](https://github.com/tohjustin/coincharts/releases)
 [![License](https://badge-service.appspot.com/static?subject=license&status=MIT)](https://opensource.org/licenses/MIT)
 
 Coincharts is a cryptocurrency price chart based off [Coinbase](https://www.coinbase.com/)'s original price chart on [https://www.coinbase.com/charts](https://web.archive.org/web/20190331085909/https://www.coinbase.com/charts)
