@@ -20,7 +20,7 @@
     "script:deploy": "scripts/deploy.sh",
     "script:downloadPriceData": "scripts/downloadPriceData.sh ./public/priceData",
     "test": "cross-env TZ=America/Vancouver react-scripts test",
-    "test:ci": "cross-env CI=true npm run test --coverage",
+    "test:ci": "cross-env CI=true npm run test -- --coverage",
     "test:debug": "cross-env TZ=America/Vancouver react-scripts --inspect-brk test --no-cache --runInBand --watchAll"
   },
   "husky": {
