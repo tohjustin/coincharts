@@ -16,7 +16,7 @@ cp now.json ${DEPLOY_DIRECTORY}
 rm ${DEPLOY_DIRECTORY}/static/**/*.map
 
 # Deploy files in `deploy` directory
-now ${DEPLOY_DIRECTORY} --public
+now ${DEPLOY_DIRECTORY} --public --prod
 now alias
 
 # Upload sourcemaps to sentry
