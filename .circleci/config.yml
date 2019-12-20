@@ -22,8 +22,8 @@ jobs:
           name: Run Linter & Prettier
           command: yarn run check
       - run:
-          name: Run Test Suite
-          command: npm run test:coverage
+          name: Run Unit Test Suite
+          command: npm run test:ci
       - run:
-          name: Upload Test Coverage Report
+          name: Upload Unit Test Coverage Report
           command: ./node_modules/.bin/codecov

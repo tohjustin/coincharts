@@ -19,9 +19,9 @@
     "prettier:fix": "prettier --write './src/**/*.js'",
     "script:deploy": "scripts/deploy.sh",
     "script:downloadPriceData": "scripts/downloadPriceData.sh ./public/priceData",
-    "test": "TZ=America/Vancouver CI=true react-scripts test",
-    "test:coverage": "npm run test -- --coverage --verbose",
-    "test:watch": "TZ=America/Vancouver react-scripts test"
+    "test": "cross-env TZ=America/Vancouver react-scripts test",
+    "test:ci": "cross-env CI=true npm run test --coverage",
+    "test:debug": "cross-env TZ=America/Vancouver react-scripts --inspect-brk test --no-cache --runInBand --watchAll"
   },
   "husky": {
     "hooks": {
@@ -69,6 +69,7 @@
     "@testing-library/user-event": "7.2.1",
     "check-types": "11.0.0",
     "codecov": "3.6.1",
+    "cross-env": "6.0.3",
     "eslint": "6.7.2",
     "eslint-config-prettier": "6.7.0",
     "eslint-plugin-import": "2.19.1",
