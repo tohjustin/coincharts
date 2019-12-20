@@ -1,5 +1,6 @@
 {
+  "version": 2,
   "name": "coincharts",
-  "public": true,
-  "alias": "coincharts"
+  "alias": "coincharts",
+  "public": true
 }
