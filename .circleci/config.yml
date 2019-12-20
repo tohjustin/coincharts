@@ -19,6 +19,9 @@ jobs:
           paths:
             - ~/.cache/yarn
       - run:
+          name: Run Linter & Prettier
+          command: yarn run check
+      - run:
           name: Run Test Suite
           command: npm run test:coverage
       - run:
