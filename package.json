@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "source .env && react-scripts build",
+    "build": "react-scripts build",
     "eject": "react-scripts eject",
     "check": "npm run lint && npm run prettier",
     "lint": "eslint './src/**/*.js'",

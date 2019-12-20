@@ -72,6 +72,8 @@ yarn test:ci
 
 ### Packaging
 
+> __NOTE__: Make sure you have updated `.env.build` before proceeding
+
 Create a production build of the application & output the bundle into `/build`
 
 ```shell
@@ -82,7 +84,10 @@ yarn build
 
 #### Deploy application with __ZIET Now__
 
-> __NOTE__: Make sure you create a `.env` file before proceeding on (see [.env.example](./.env.example) for list of environment variables to populate)
+> __NOTE__: Make sure you have created `.env` & updated `now.json` before proceeding
+>
+> * see [.env.example](./.env.example) for list of environment variables to populate
+> * see [https://zeit.co/docs/configuration](https://zeit.co/docs/configuration) for list of configs to populate
 
 ```shell
 yarn script:deploy

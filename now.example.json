@@ -1,0 +1,6 @@
+{
+  "version": 2,
+  "name": "<NOW_DOMAIN_NAME>",
+  "alias": "<NOW_DOMAIN_ALIAS>",
+  "public": true
+}
