@@ -9,7 +9,7 @@ import MainView from "./views/MainView";
 import configureStore from "./store/configureStore";
 import * as serviceWorker from "./serviceWorker";
 
-import "./styles/reset.css";
+import "./styles/normalize.css";
 import "./styles/base.css";
 
 if (process.env.NODE_ENV === "production" && process.env.REACT_APP_RAVEN_PUBLIC_DSN) {
