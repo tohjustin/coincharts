@@ -1,12 +1,12 @@
 #/usr/bin/env bash
 # Bash script for deploying CRA to now.sh & uploading sourcemaps to sentry
-source .env
 BUILD_DIRECTORY=./build
 DEPLOY_DIRECTORY=./deploy
 
-# Run tests & create production build
-npm run lint
-npm run build
+# Run checks & create production build
+yarn run check
+yarn test:ci
+yarn build
 
 # Copy bundled files into `deploy` directory
 # - exclude sourcemaps due to free tier's file size limit (1MB)

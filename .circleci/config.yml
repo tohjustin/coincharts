@@ -23,7 +23,10 @@ jobs:
           command: yarn run check
       - run:
           name: Run Unit Test Suite
-          command: npm run test:ci
+          command: yarn test:ci
+      - run:
+          name: Build
+          command: yarn build
       - run:
           name: Upload Unit Test Coverage Report
           command: ./node_modules/.bin/codecov
