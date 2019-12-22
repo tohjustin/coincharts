@@ -11,11 +11,11 @@ Coincharts is a cryptocurrency price chart based off [Coinbase](https://www.coin
   <img src="./docs/screenshot.png">
 </p>
 
-* Bootstrapped with [create-react-app](https://github.com/facebookincubator/create-react-app)
-* Built with [React.js](https://facebook.github.io/react/), [Redux](https://redux.js.org/)\*\*, [Redux-Saga](https://redux-saga.js.org/)\*\*, [styled-components](https://www.styled-components.com/), [D3.js](https://d3js.org/)
+* Bootstrapped with [create-react-app](https://github.com/facebook/create-react-app)
+* Built with [React.js](https://reactjs.org/), [Redux](https://redux.js.org/)\*\*, [Redux-Saga](https://redux-saga.js.org/)\*\*, [styled-components](https://www.styled-components.com/), [D3.js](https://d3js.org/)
 * Prices retrieved from [Coinbase API](https://developers.coinbase.com/api/v2)
-* Deployed with [ZIET Now](https://zeit.co/now)
-* Error logging with [Sentry + Raven.js](https://github.com/getsentry/raven-js)
+* Deployed with [ZIET Now](https://zeit.co/home)
+* Error logging with [Sentry + Raven.js](https://github.com/getsentry/sentry-javascript)
 * Optional page-view tracking with [Google Analytics + react-ga](https://github.com/react-ga/react-ga)
 
 _\*\* [Redux](https://redux.js.org/), [Redux-Saga](https://redux-saga.js.org/) is used for learning purposes (slight overkill for this simple app)_
