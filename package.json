@@ -21,7 +21,9 @@
     "script:downloadPriceData": "scripts/downloadPriceData.sh ./public/priceData",
     "test": "cross-env TZ=America/Vancouver react-scripts test",
     "test:ci": "cross-env CI=true npm run test -- --coverage",
-    "test:debug": "cross-env TZ=America/Vancouver react-scripts --inspect-brk test --no-cache --runInBand --watchAll"
+    "test:debug": "cross-env TZ=America/Vancouver react-scripts --inspect-brk test --no-cache --runInBand --watchAll",
+    "prepublish": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "husky": {
     "hooks": {
@@ -59,7 +61,8 @@
     "redux": "4.0.4",
     "redux-saga": "1.1.3",
     "reselect": "4.0.0",
-    "styled-components": "4.4.1"
+    "styled-components": "4.4.1",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "@sentry/cli": "1.49.0",
@@ -90,5 +93,6 @@
   "prettier": {
     "printWidth": 120,
     "trailingComma": "all"
-  }
+  },
+  "snyk": true
 }
